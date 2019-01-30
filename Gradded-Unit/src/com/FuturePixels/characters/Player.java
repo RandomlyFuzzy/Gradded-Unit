@@ -21,7 +21,7 @@ import jdk.nashorn.internal.objects.NativeArray;
  *
  * @author Liam Woolley 1748910
  */
-public class Player {
+public class Player extends IMovable implements IMoveableInterface{
 
     //Vectors to represent the character's current position 
     //and movement from the current position
@@ -32,20 +32,15 @@ public class Player {
     private BufferedImage[] sprites = new BufferedImage[7];
     private float ind = 0;
     private boolean Stop = true;
+    private int Scale = 1;
     //This variable stores the width of the image  
-    private int spriteWidth, Scale = 1;
 
-    //This variable stores the height of the image 
-    private int spriteHeight;
     //A score value – this could be a health or other appropriate value
-
     private long score;
     private long now;
 
-    ILevel from;
-
     public Player(ILevel From) {
-        from = From;
+        super(From);
         position = new Vector(100, 100);
         veclocity = new Vector(100, 100);
         displacement = new Vector(0, 0);
@@ -54,12 +49,12 @@ public class Player {
 
     }
 
-    private void init() {
+    public void init() {
         try {
             for (int i = 0; i < sprites.length; i++) {
                 sprites[i] = ImageIO.read(getClass().getResource("/Images/Player/sprite_" + i + ".png"));
-                spriteWidth = sprites[i].getWidth();
-                spriteHeight = sprites[i].getHeight();
+                setSpriteWidth(sprites[i].getWidth());
+                setSpriteHeight(sprites[i].getHeight());
             }
             now = System.nanoTime() / 1000000000;
         } catch (Exception ex) {
@@ -99,23 +94,10 @@ public class Player {
 
     public void draw(Graphics g) {
 
-//        addGravity();
         ind += Stop ? -ind : 0.1f;
         ind = ind % sprites.length;
-        g.drawImage(getSprite(), (int) position.getX() - (spriteWidth / 2 * (int) Scale), (int) position.getY(), spriteWidth * (int) Scale, spriteHeight, null);
+        g.drawImage(getSprite(), (int) position.getX() - (getSpriteWidth() / 2 * (int) Scale), (int) position.getY(), getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
         g.drawString("Score:" + score, 0, 20);
-    }
-
-    public Vector getPosition() {
-        return position;
-    }
-
-    public void setPosition(Vector position) {
-        this.position = position;
-    }
-
-    public int getSpriteWidth() {
-        return spriteWidth;
     }
 
     public void addGravity() {
@@ -127,18 +109,6 @@ public class Player {
 
         System.out.println("com.FuturePixels.characters.Player.addGravity() " + Game.g.getDelta());
         this.displacement.add(new Vector(0, 9.81f * (float) Game.g.getDelta()));
-    }
-
-    public void setSpriteWidth(int spriteWidth) {
-        this.spriteWidth = spriteWidth;
-    }
-
-    public int getSpriteHeight() {
-        return spriteHeight;
-    }
-
-    public void setSpriteHeight(int spriteHeight) {
-        this.spriteHeight = spriteHeight;
     }
 
     public long getScore() {
@@ -158,17 +128,18 @@ public class Player {
         veclocity.mult(new Vector(0.44f, 0.44f));
     }
 
-    public Rectangle getBounds() {
-        Rectangle objectRect = new Rectangle((int) position.getX(), (int) position.getY(), spriteWidth, spriteHeight);
-        return objectRect;
-    }
+ 
 
     public boolean checkCollision(Cookie t) {
         if (t.getBounds().intersects(getBounds())) {
             if (t.IsVisible() == true) {
                 score += t.getScore();
                 t.setVisible(false);
-                from.play(getClass().getResourceAsStream("/sounds/music.wav"));
+                try{
+                From().play(getClass().getResourceAsStream("/sounds/music.wav"));
+                }catch(Exception e){
+                    System.err.println(" error playing sound");
+                }
             }
             LeaderBoard.AddTime(System.nanoTime());
             return true;

@@ -7,6 +7,7 @@ package com.FuturePixels.characters;
 
 import com.FuturePixels.game.Game;
 import com.FuturePixels.game.Vector;
+import com.FuturePixels.levels.SetClasses.ILevel;
 import com.sun.javafx.geom.Vec2d;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -20,11 +21,8 @@ import javax.swing.Timer;
  *
  * @author Liam Woolley 1748910
  */
-public class Cookie {
+public class Cookie extends IMovable implements IMoveableInterface {
 
-    private Vector position;
-    private int spriteWidth;
-    private int spriteHeight;
     private boolean isVisible;
     private boolean Stop = false;
     private BufferedImage sprite;
@@ -35,15 +33,15 @@ public class Cookie {
     private Vector acceration;
     private float speed = 3;
 
-    public Cookie() {
+    public Cookie(ILevel from) {
+        super(from);
         acceration = new Vector(0, 0);
         score = 10;
         isVisible = true;
         try {
             sprite = ImageIO.read(getClass().getResource("/Images/Cookie.png"));
-            spriteWidth = sprite.getWidth()/2;
-            spriteHeight = sprite.getHeight()/2;
-            SetRandomPos();
+            setSpriteWidth(sprite.getWidth()/2);
+            setSpriteWidth(sprite.getHeight()/2);
         } catch (Exception ex) {
             System.err.println("Error loading treasure sprite");
         }
@@ -51,35 +49,15 @@ public class Cookie {
 
     public void draw(Graphics g) {
         if (isVisible == true) {
-            g.drawImage(sprite, (int) position.getX() - spriteWidth / 2, (int) position.getY() - spriteHeight / 2, spriteWidth, spriteHeight, null);
+            g.drawImage(sprite, 
+                    (int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteWidth() / 2, getSpriteWidth(), getSpriteHeight(), null);
 //            g.drawRect((int) position.getX()-spriteWidth/2, (int) position.getY()-spriteHeight/2, spriteWidth, spriteHeight);
         }
 
     }
 
     public void doMove() {
-        if (System.nanoTime() / 1000000 > timedelay + timeadded) {
-            reCaculateendpos();
-        }
         addPosition(acceration);
-    }
-
-    public void reCaculateendpos() {
-        if (Stop) {
-            acceration = new Vector(0, 0);
-            return;
-        }
-
-        endpoint = new Vector((float)Math.random() * Game.g.getWindowWidth() - spriteWidth, (float)(Math.random() * Game.g.getWindowWidth() - spriteHeight * 1.75f) + spriteHeight / 2);
-        float x   = endpoint.getX() - position.getX(),
-              y   = endpoint.getY() - position.getY(),
-              C   = (float)Math.sqrt(x * x + y * y);
-        acceration = new Vector(((x) / C) * speed, ((y) / C) * speed);
-        timedelay = (System.nanoTime() / 1000000);
-    }
-
-    public void SetRandomPos() {
-        position = new Vector((float)(Math.random() * (Game.g.getWindowHeight() - spriteWidth)), (float)(Math.random() * (Game.g.getWindowHeight()- spriteHeight * 1.75f)) + spriteHeight / 2);
     }
 
     public boolean IsVisible() {
@@ -89,47 +67,30 @@ public class Cookie {
     public void setVisible(boolean isVisible) {
         this.isVisible = isVisible;
         if (isVisible == false) {
-            SetRandomPos();
             setVisible(true);
         }
-
     }
 
-    public Rectangle getBounds() {
-        Rectangle objectRect = new Rectangle((int) position.getX() - spriteWidth / 2, (int) position.getY() - spriteHeight / 2, (int) (spriteWidth * 1.5f), (int) (spriteHeight * 2.5f));
-        return objectRect;
-    }
-
-    public Vector getPosition() {
-        return position;
-    }
-
-    public void setPosition(Vector position) {
-        this.position = position;
-    }
+   
+  
 
     public void addPosition(Vector acc) {
 
-        if ((this.position.getX() - spriteWidth / 2 + acc.getX()) <= 0) {
-            this.reCaculateendpos();
+        if ((this.getPosition().getX() - getSpriteWidth() / 2 + acc.getX()) <= 0) {
             acc.setX(0);
-            this.position.setX(spriteWidth/2);
-        } else if ((this.position.getX() + spriteWidth + acc.getX()) >= (Game.g.getWindowWidth())) {
-            this.reCaculateendpos();
+            this.getPosition().setX(getSpriteWidth()/2);
+        } else if ((this.getPosition().getX() + getSpriteWidth() + acc.getX()) >= (Game.g.getWindowWidth())) {
             acc.setX(0);
-            this.position.setX((Game.g.getWindowWidth())- spriteWidth);
-        } else if ((this.position.getY() - spriteHeight / 2 + acc.getY()) <= 0) {
-            this.reCaculateendpos();
+            this.getPosition().setX((Game.g.getWindowWidth())- getSpriteWidth());
+        } else if ((this.getPosition().getY() - getSpriteHeight() / 2 + acc.getY()) <= 0) {
             acc.setY(0);
-            this.position.setY(spriteHeight/2);
-        } else if ((this.position.getY() + spriteHeight * 1.75f + acc.getY()) >= (Game.g.getWindowHeight())) {
-
-            this.reCaculateendpos();
+            this.getPosition().setY(getSpriteHeight()/2);
+        } else if ((this.getPosition().getY() + getSpriteHeight()* 1.75f + acc.getY()) >= (Game.g.getWindowHeight())) {
             acc.setY(0);
-            this.position.setY(Game.g.getWindowHeight() - (spriteHeight * 1.75f));
+            this.getPosition().setY(Game.g.getWindowHeight() - ( getSpriteHeight() * 1.75f));
         }
 
-        this.position = new Vector(this.position.getX() + acc.getX(), this.position.getY() + acc.getY());
+        this.setPosition(new Vector(this.getPosition().getX() + acc.getX(), this.getPosition().getY() + acc.getY()));
     }
 
     public int getScore() {

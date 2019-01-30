@@ -40,7 +40,7 @@ public class level1 extends ILevel implements ILevelInterface {
         init();
         System.out.println("com.game.levels.level1.<init>()");
         thePlayer = new Player(this);
-        theTreasure = new Cookie();
+        theTreasure = new Cookie(this);
     }
 
     public void actionPerformed(ActionEvent ae) {
