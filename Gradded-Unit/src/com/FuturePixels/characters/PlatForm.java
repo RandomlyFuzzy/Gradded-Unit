@@ -5,7 +5,7 @@
  */
 package com.FuturePixels.characters;
 
-import com.FuturePixels.characters.SetClasses.IMovable;
+import com.FuturePixels.characters.SetClasses.IMoveable;
 import com.FuturePixels.characters.SetClasses.IMoveableInterface;
 import com.FuturePixels.game.Game;
 import com.FuturePixels.levels.SetClasses.ILevel;
@@ -17,7 +17,7 @@ import java.awt.geom.AffineTransform;
  *
  * @author RandomlyFuzzy
  */
-public class PlatForm extends IMovable implements IMoveableInterface{
+public class PlatForm extends IMoveable implements IMoveableInterface{
         
     private float Rad = 0f;
     
@@ -49,6 +49,15 @@ public class PlatForm extends IMovable implements IMoveableInterface{
 
         //pop matrix
         g2d.setTransform(old);
+    }
+
+    @Override
+    public void doMove() {
+    }
+
+    @Override
+    public void onCollison(IMoveable im) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

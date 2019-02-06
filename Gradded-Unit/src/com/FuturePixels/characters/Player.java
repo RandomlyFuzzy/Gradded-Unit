@@ -6,7 +6,7 @@
 package com.FuturePixels.characters;
 
 import com.FuturePixels.characters.SetClasses.IMoveableInterface;
-import com.FuturePixels.characters.SetClasses.IMovable;
+import com.FuturePixels.characters.SetClasses.IMoveable;
 import com.FuturePixels.game.Game;
 import com.FuturePixels.game.Vector;
 import com.FuturePixels.levels.LeaderBoard;
@@ -25,14 +25,13 @@ import jdk.nashorn.internal.objects.NativeArray;
  *
  * @author Liam Woolley 1748910
  */
-public class Player extends IMovable implements IMoveableInterface {
+public class Player extends IMoveable implements IMoveableInterface {
 
     //Vectors to represent the character's current position 
     //and movement from the current position
     private Vector veclocity;
     private Vector displacement;
     //This image represents the character
-    private BufferedImage[] sprites = new BufferedImage[7];
     private float ind = 0;
     private boolean Stop = true, canJump = false, hasJumped;
     private int Scale = 1;
@@ -53,7 +52,7 @@ public class Player extends IMovable implements IMoveableInterface {
     }
 
     public void init() {
-        for (int i = 0; i < sprites.length; i++) {
+        for (int i = 0; i < 7; i++) {
             GetSprite("/Images/Player/sprite_" + i + ".png");
         }
         now = System.nanoTime() / 1000000000;
@@ -105,7 +104,7 @@ public class Player extends IMovable implements IMoveableInterface {
         movePlayer(moveDir);
         addGravity(true);
         ind += Stop ? -ind : 0.1f;
-        ind = ind % sprites.length;
+        ind = ind % 7;
 
         //push matrix
         AffineTransform old = g2d.getTransform();
@@ -142,30 +141,25 @@ public class Player extends IMovable implements IMoveableInterface {
         this.score = score;
     }
 
-    public BufferedImage getSprite() {
-        return sprites[(int) Math.floor(ind)];
-    }
-
     public void doMove() {
         getPosition().add(veclocity.add(displacement));
         veclocity.mult(new Vector(0.96f, 0.96f));
     }
 
-    public boolean checkCollision(Cookie t) {
-        if (t.getBounds().intersects(getBounds())) {
-            if (t.IsVisible() == true) {
-                score += t.getScore();
-                t.setVisible(false);
-                try {
-                    From().play(getClass().getResourceAsStream("/sounds/music.wav"));
-                } catch (Exception e) {
-                    System.err.println(" error playing sound");
-                }
+    @Override
+    public void onCollison(IMoveable im) {
+        if (im == null) {
+            return;
+        }
+
+        if (im instanceof Cookie) {
+            score += ((Cookie) im).getScore();
+            im.SetVisible(false);
+            try {
+                From().play(getClass().getResourceAsStream("/sounds/music.wav"));
+            } catch (Exception e) {
+                System.err.println(" error playing sound");
             }
-            LeaderBoard.AddTime(System.nanoTime());
-            return true;
-        } else {
-            return false;
         }
     }
 }

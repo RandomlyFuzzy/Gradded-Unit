@@ -6,7 +6,7 @@
 package com.FuturePixels.characters;
 
 import com.FuturePixels.characters.SetClasses.IMoveableInterface;
-import com.FuturePixels.characters.SetClasses.IMovable;
+import com.FuturePixels.characters.SetClasses.IMoveable;
 import com.FuturePixels.game.Game;
 import com.FuturePixels.game.Vector;
 import com.FuturePixels.levels.SetClasses.ILevel;
@@ -23,7 +23,7 @@ import javax.swing.Timer;
  *
  * @author Liam Woolley 1748910
  */
-public class Cookie extends IMovable implements IMoveableInterface {
+public class Cookie extends IMoveable implements IMoveableInterface {
 
     private boolean isVisible;
     private boolean Stop = false;
@@ -96,6 +96,11 @@ public class Cookie extends IMovable implements IMoveableInterface {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public void onCollison(IMoveable im) {
+        
     }
 
 }

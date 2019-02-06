@@ -9,6 +9,7 @@ import com.FuturePixels.levels.SetClasses.ILevel;
 import com.FuturePixels.levels.SetClasses.ILevelInterface;
 import com.FuturePixels.characters.Player;
 import com.FuturePixels.characters.Cookie;
+import com.FuturePixels.characters.SetClasses.IMoveable;
 import com.FuturePixels.game.Game;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -29,38 +30,31 @@ import javax.swing.Timer;
  */
 public class Level1 extends ILevel implements ILevelInterface {
 
-    private Game game;
     Image background;
-    private Player thePlayer;
-    private Cookie theTreasure;
+    private int move = 0;
+    boolean Pressed = false, p2 = false;
+    IMoveable player;
 
     public Level1(Game theGame) {
-        game = theGame;
+        super(theGame);
         init();
         System.out.println("com.game.levels.level1.<init>()");
-        thePlayer = new Player(this);
-
-        theTreasure = new Cookie(this);
+        player = new Player(this);
+        Add(player);
+        Add(new Cookie(this));
     }
 
     public void actionPerformed(ActionEvent ae) {
-//        System.out.println("com.game.levels.Level1.actionPerformed()");
+        super.actionPerformed(ae);
         checkCollisions();
         movement();
 
-//        if (LeaderBoard.CheckForFinish()) {
-//            stop();
-//            game.ShowLeaderBoard();
-//        }
         this.repaint();
-        game.SetDelta();
-
     }
 
     public void init() {
-        addKeyListener(new TAdapter());
-        setFocusable(true);
-        setDoubleBuffered(true);
+        super.init();
+
         try {
             background = ImageIO.read(getClass().getResource("/Images/background.png"));
         } catch (Exception ex) {
@@ -70,79 +64,68 @@ public class Level1 extends ILevel implements ILevelInterface {
         LeaderBoard.AddTime(System.nanoTime());
     }
 
-    private void movement() {
-        thePlayer.doMove();
-        theTreasure.doMove();
+    public void movement() {
+        super.movement();
     }
 
     private void checkCollisions() {
-        thePlayer.checkCollision(theTreasure);
+        super.checkCollionsions();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        System.out.println("com.game.levels.Level1.paintComponent()");
         g.drawImage(background, 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
-        thePlayer.draw(g);
-        theTreasure.draw(g);
+//        System.out.println("com.game.levels.Level1.paintComponent()");
+        DrawObjs(g);
         g.dispose();
     }
 
-    private class TAdapter extends KeyAdapter {
+    public void DrawObjs(Graphics g){
+        super.DrawObjs(g);
+    }
+    @Override
+    public void keyPress(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_SPACE:
+                Pressed = true;
+                move |= 1;
+                break;
+            case KeyEvent.VK_DOWN:
+                move |= 2;
+                break;
+            case KeyEvent.VK_LEFT:
+                move |= 4;
+                break;
+            case KeyEvent.VK_RIGHT:
+                move |= 8;
+                break;
+        }
+        ((Player) player).move(move);
+        if (Pressed) {
+        }
+    }
 
-        private int move = 0;
-        boolean Pressed = false, p2 = false;
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_SPACE:
-                    Pressed = true;
-                    move |= 1;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    move |= 2;
-                    break;
-                case KeyEvent.VK_LEFT:
-                    move |= 4;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    move |= 8;
-                    break;
-            }
-            thePlayer.move(move);
-            if (Pressed) {
-            }
+    @Override
+    public void keyRelease(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_SPACE:
+                move -= 1;
+                Pressed = false;
+                break;
+            case KeyEvent.VK_DOWN:
+                move -= 2;
+                break;
+            case KeyEvent.VK_LEFT:
+                move -= 4;
+                break;
+            case KeyEvent.VK_RIGHT:
+                move -= 8;
+                break;
         }
 
-        @Override
-        public void keyReleased(KeyEvent e) {
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_SPACE:
-                    move -= 1;
-                    Pressed = false;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    move -= 2;
-                    break;
-                case KeyEvent.VK_LEFT:
-                    move -= 4;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    move -= 8;
-                    break;
-            }
-//            if (e.getKeyCode() == KeyEvent.VK_P) {
-//                timer.stop();
-////                game.DeleteGame();
-////                game.playGame();
-//                game.ShowLeaderBoard();
-//            }
-            System.out.println("com.game.levels.level1.TAdapter.keyReleased() " + move);
-            thePlayer.move(move);
-            // thePlayer.stop();
-        }
+        System.out.println("com.game.levels.level1.TAdapter.keyReleased() " + move);
+        ((Player) player).move(move);
     }
 
 }

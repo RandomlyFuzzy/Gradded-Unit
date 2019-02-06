@@ -23,50 +23,37 @@ import javax.swing.JPanel;
  *
  * @author Liam Woolley 1748910
  */
-public class StartGamePanel extends ILevel implements ILevelInterface  {
+public class StartGamePanel extends ILevel implements ILevelInterface {
 
     private Game game; // this is a link back to the game's main window. private BufferedImage backgroundImage = null;
     private Image backgroundImage;
 
     public StartGamePanel(Game theGame) {
-        super();
+        super(theGame);
         game = theGame;
         init();
-        addKeyListener(new TAdapter());
     }
 
     @Override
     public void init() {
-
-        try {
-            backgroundImage = ImageIO.read(getClass().getResource("/Images/background.png"));
-        } catch (Exception ex) {
-            System.err.println("Error Loading Image");
-        } finally {
-        }
-        setFocusable(true);
+        super.init();
     }
-
 
     @Override
     public void paintComponent(Graphics g) {
-       // Call the paintComponent method on the superclass to initialise drawing 
+        // Call the paintComponent method on the superclass to initialise drawing 
         super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0,(Game.g.getWindowWidth()),(Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
     }
 
+    @Override
+    public void keyPress(KeyEvent e) {
+    }
 
-    private class TAdapter extends KeyAdapter {
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_P) {
-                Game.SetLevelActive("Level1");
-            }
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
+    @Override
+    public void keyRelease(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_P) {
+            Game.SetLevelActive("Level1");
         }
     }
 

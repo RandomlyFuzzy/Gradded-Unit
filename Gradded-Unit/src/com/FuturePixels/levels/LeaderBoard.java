@@ -29,14 +29,13 @@ import javax.swing.Timer;
  */
 public class LeaderBoard extends ILevel implements ILevelInterface {
 
-    private Game game;
     private Timer timer;
     Image background;
     private static long[] CollectionTimes = new long[6];
     private static int ind = 0;
 
     public LeaderBoard(Game theGame) {
-        game = theGame;
+        super(theGame);
         init();
         System.out.println("com.game.levels.LeaderBoard.<init>()");
 
@@ -48,14 +47,8 @@ public class LeaderBoard extends ILevel implements ILevelInterface {
     }
 
     public void init() {
-        addKeyListener(new TAdapter());
-        setFocusable(true);
-        setDoubleBuffered(true);
-        try {
-            background = ImageIO.read(getClass().getResource("/Images/background.png"));
-        } catch (Exception ex) {
-            System.err.println("Error loading background image");
-        }
+        super.init();
+
         timer = new Timer(10, this);
 
     }
@@ -69,7 +62,7 @@ public class LeaderBoard extends ILevel implements ILevelInterface {
         super.paintComponent(g);
 
 //        System.out.println("com.game.levels.level1.paintComponent()");
-        g.drawImage(background, Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
         for (int i = 1; i < 6; i++) {
             g.drawString("" + ((CollectionTimes[i] - CollectionTimes[0]) / 1000000000f + " Seconds"), 20, (i * 30) + Game.g.getWindowHeight() / 3);
         }
@@ -93,20 +86,15 @@ public class LeaderBoard extends ILevel implements ILevelInterface {
     public void stop() {
     }
 
-    private class TAdapter extends KeyAdapter {
+    @Override
+    public void keyPress(KeyEvent e) {
+    }
 
-        @Override
-        public void keyPressed(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-            if (e.getKeyCode() == KeyEvent.VK_P) {
-                timer.stop();
-                Game.SetLevelActive("ShowStartScreen");
-            }
+    @Override
+    public void keyRelease(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_P) {
+            timer.stop();
+            Game.SetLevelActive("ShowStartScreen");
         }
     }
 

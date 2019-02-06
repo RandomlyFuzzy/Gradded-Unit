@@ -7,6 +7,7 @@ package com.FuturePixels.characters.SetClasses;
 
 import com.FuturePixels.Utils.imageUtils;
 import com.FuturePixels.game.Vector;
+import com.FuturePixels.levels.LeaderBoard;
 import com.FuturePixels.levels.SetClasses.ILevel;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -19,15 +20,16 @@ import javax.imageio.ImageIO;
  *
  * @author RandomlyFuzzy
  */
-public abstract class IMovable {
+public abstract class IMoveable {
 
     private Vector position;
     private ILevel from;
     private HashMap<String, Image> Sprites = new HashMap<String, Image>();
     private int spriteWidth;
     private int spriteHeight;
+    private boolean Enabled = true;
 
-    public IMovable(ILevel From) {
+    public IMoveable(ILevel From) {
         from = From;
         position = new Vector(0, 0);
     }
@@ -41,6 +43,8 @@ public abstract class IMovable {
     }
 
     public abstract void init();
+
+    public abstract void doMove();
 
     public abstract void draw(Graphics g);
 
@@ -78,4 +82,29 @@ public abstract class IMovable {
         return getClass().toString() + " at " + getPosition().getX() + " ," + getPosition().getY();
     }
 
+    public boolean IsVisible() {
+        return Enabled;
+    }
+
+    public void SetVisible(boolean vis) {
+        Enabled = vis;
+    }
+
+    
+    
+    
+    
+    
+    public boolean CheckCollions(IMoveable t) {
+        if (t.getBounds().intersects(getBounds())) {
+            if (t.IsVisible() == true) {
+                onCollison(t);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public abstract void onCollison(IMoveable im);
 }
