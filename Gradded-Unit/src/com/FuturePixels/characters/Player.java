@@ -111,7 +111,7 @@ public class Player extends IMoveable implements IMoveableInterface {
 
         //scale -> translate -> rotate
         g2d.translate((int) getPosition().getX(), (int) getPosition().getY() + (getSpriteHeight() * 1.5));
-        g2d.rotate(deg);
+//        g2d.rotate(deg);
 
         g2d.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
 
