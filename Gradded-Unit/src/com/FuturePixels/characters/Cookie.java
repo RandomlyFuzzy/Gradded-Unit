@@ -5,6 +5,8 @@
  */
 package com.FuturePixels.characters;
 
+import com.FuturePixels.characters.SetClasses.IMoveableInterface;
+import com.FuturePixels.characters.SetClasses.IMovable;
 import com.FuturePixels.game.Game;
 import com.FuturePixels.game.Vector;
 import com.FuturePixels.levels.SetClasses.ILevel;
@@ -38,20 +40,18 @@ public class Cookie extends IMovable implements IMoveableInterface {
         acceration = new Vector(0, 0);
         score = 10;
         isVisible = true;
-        try {
-            sprite = ImageIO.read(getClass().getResource("/Images/Cookie.png"));
-            setSpriteWidth(sprite.getWidth()/2);
-            setSpriteWidth(sprite.getHeight()/2);
-        } catch (Exception ex) {
-            System.err.println("Error loading treasure sprite");
-        }
     }
 
+    @Override
+    public void init() {
+        this.setPosition(new Vector(Game.g.getWindowWidth()/2,Game.g.getWindowHeight()/2));
+    }
+
+    @Override
     public void draw(Graphics g) {
         if (isVisible == true) {
-            g.drawImage(sprite, 
-                    (int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteWidth() / 2, getSpriteWidth(), getSpriteHeight(), null);
-//            g.drawRect((int) position.getX()-spriteWidth/2, (int) position.getY()-spriteHeight/2, spriteWidth, spriteHeight);
+            g.drawImage(GetSprite("/Images/Cookie.png"), (int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteWidth() / 2, getSpriteWidth(), getSpriteHeight(), null);
+            g.drawRect((int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
         }
 
     }
@@ -71,23 +71,20 @@ public class Cookie extends IMovable implements IMoveableInterface {
         }
     }
 
-   
-  
-
     public void addPosition(Vector acc) {
 
         if ((this.getPosition().getX() - getSpriteWidth() / 2 + acc.getX()) <= 0) {
             acc.setX(0);
-            this.getPosition().setX(getSpriteWidth()/2);
+            this.getPosition().setX(getSpriteWidth() / 2);
         } else if ((this.getPosition().getX() + getSpriteWidth() + acc.getX()) >= (Game.g.getWindowWidth())) {
             acc.setX(0);
-            this.getPosition().setX((Game.g.getWindowWidth())- getSpriteWidth());
+            this.getPosition().setX((Game.g.getWindowWidth()) - getSpriteWidth());
         } else if ((this.getPosition().getY() - getSpriteHeight() / 2 + acc.getY()) <= 0) {
             acc.setY(0);
-            this.getPosition().setY(getSpriteHeight()/2);
-        } else if ((this.getPosition().getY() + getSpriteHeight()* 1.75f + acc.getY()) >= (Game.g.getWindowHeight())) {
+            this.getPosition().setY(getSpriteHeight() / 2);
+        } else if ((this.getPosition().getY() + getSpriteHeight() * 1.75f + acc.getY()) >= (Game.g.getWindowHeight())) {
             acc.setY(0);
-            this.getPosition().setY(Game.g.getWindowHeight() - ( getSpriteHeight() * 1.75f));
+            this.getPosition().setY(Game.g.getWindowHeight() - (getSpriteHeight() * 1.75f));
         }
 
         this.setPosition(new Vector(this.getPosition().getX() + acc.getX(), this.getPosition().getY() + acc.getY()));
@@ -100,4 +97,5 @@ public class Cookie extends IMovable implements IMoveableInterface {
     public void setScore(int score) {
         this.score = score;
     }
+
 }

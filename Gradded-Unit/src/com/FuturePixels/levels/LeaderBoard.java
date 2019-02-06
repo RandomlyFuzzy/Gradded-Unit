@@ -105,7 +105,7 @@ public class LeaderBoard extends ILevel implements ILevelInterface {
 
             if (e.getKeyCode() == KeyEvent.VK_P) {
                 timer.stop();
-                game.showStartScreen();
+                Game.SetLevelActive("ShowStartScreen");
             }
         }
     }

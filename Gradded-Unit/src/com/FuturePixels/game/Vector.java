@@ -48,6 +48,14 @@ public class Vector {
         this.x = x;
     }
 
+    public void addY(float y) {
+        this.y += y;
+    }
+
+    public void addX(float x) {
+        this.x += x;
+    }
+
     public float getY() {
         return y;
     }
@@ -55,4 +63,5 @@ public class Vector {
     public void setY(float y) {
         this.y = y;
     }
+
 }

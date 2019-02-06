@@ -29,6 +29,7 @@ public class StartGamePanel extends ILevel implements ILevelInterface  {
     private Image backgroundImage;
 
     public StartGamePanel(Game theGame) {
+        super();
         game = theGame;
         init();
         addKeyListener(new TAdapter());
@@ -52,7 +53,6 @@ public class StartGamePanel extends ILevel implements ILevelInterface  {
        // Call the paintComponent method on the superclass to initialise drawing 
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0,(Game.g.getWindowWidth()),(Game.g.getWindowHeight()), null);
-        game.playGame();
     }
 
 
@@ -61,7 +61,7 @@ public class StartGamePanel extends ILevel implements ILevelInterface  {
         @Override
         public void keyReleased(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_P) {
-                game.playGame();
+                Game.SetLevelActive("Level1");
             }
         }
 

@@ -23,37 +23,37 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 /**
  *
  * @author Liam Woolley 1748910
  */
-public class level1 extends ILevel implements ILevelInterface {
+public class Level1 extends ILevel implements ILevelInterface {
 
     private Game game;
     Image background;
     private Player thePlayer;
     private Cookie theTreasure;
 
-    public level1(Game theGame) {
+    public Level1(Game theGame) {
         game = theGame;
         init();
         System.out.println("com.game.levels.level1.<init>()");
         thePlayer = new Player(this);
+
         theTreasure = new Cookie(this);
     }
 
     public void actionPerformed(ActionEvent ae) {
-//        System.out.println("com.game.levels.level1.actionPerformed()");
+//        System.out.println("com.game.levels.Level1.actionPerformed()");
         checkCollisions();
-        game.SetDelta();
         movement();
 
-        if (LeaderBoard.CheckForFinish()) {
-            stop();
-            game.ShowLeaderBoard();
-        }
+//        if (LeaderBoard.CheckForFinish()) {
+//            stop();
+//            game.ShowLeaderBoard();
+//        }
         this.repaint();
+        game.SetDelta();
 
     }
 
@@ -82,9 +82,8 @@ public class level1 extends ILevel implements ILevelInterface {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        System.out.println("com.game.levels.level1.paintComponent()");
+//        System.out.println("com.game.levels.Level1.paintComponent()");
         g.drawImage(background, 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
-        thePlayer.doMove();
         thePlayer.draw(g);
         theTreasure.draw(g);
         g.dispose();
@@ -93,11 +92,13 @@ public class level1 extends ILevel implements ILevelInterface {
     private class TAdapter extends KeyAdapter {
 
         private int move = 0;
+        boolean Pressed = false, p2 = false;
 
         @Override
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
+                case KeyEvent.VK_SPACE:
+                    Pressed = true;
                     move |= 1;
                     break;
                 case KeyEvent.VK_DOWN:
@@ -111,13 +112,16 @@ public class level1 extends ILevel implements ILevelInterface {
                     break;
             }
             thePlayer.move(move);
+            if (Pressed) {
+            }
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
+                case KeyEvent.VK_SPACE:
                     move -= 1;
+                    Pressed = false;
                     break;
                 case KeyEvent.VK_DOWN:
                     move -= 2;
@@ -129,24 +133,16 @@ public class level1 extends ILevel implements ILevelInterface {
                     move -= 8;
                     break;
             }
-            if (e.getKeyCode() == KeyEvent.VK_P) {
-                timer.stop();
-//                game.DeleteGame();
-//                game.playGame();
-                game.ShowLeaderBoard();
-            }
+//            if (e.getKeyCode() == KeyEvent.VK_P) {
+//                timer.stop();
+////                game.DeleteGame();
+////                game.playGame();
+//                game.ShowLeaderBoard();
+//            }
             System.out.println("com.game.levels.level1.TAdapter.keyReleased() " + move);
             thePlayer.move(move);
             // thePlayer.stop();
         }
-    }
-
-    public void start() {
-        timer.start();
-    }
-
-    public void stop() {
-        timer.stop();
     }
 
 }

@@ -28,7 +28,7 @@ public class ILevel extends JPanel implements ActionListener {
     public Timer timer;
 
     public ILevel() {
-
+        timer = new Timer(16, this);
     }
 
     public void init() {

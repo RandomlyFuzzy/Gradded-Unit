@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.characters;
+package com.FuturePixels.characters.SetClasses;
 
 import com.FuturePixels.game.Vector;
 import com.FuturePixels.levels.SetClasses.ILevel;
@@ -18,23 +18,15 @@ public interface IMoveableInterface {
 
     public void init();
 
-    public void move(int dir) ;
+    public void draw(Graphics g);
 
-    public void draw(Graphics g) ;
+    public Rectangle getBounds();
 
-    public void doMove() ;
+    public Vector getPosition();
 
-    public Rectangle getBounds() ;
+    public void setPosition(Vector position);
 
-    public Vector getPosition() ;
+    public int getSpriteHeight();
 
-    public void setPosition(Vector position) ;
-
-    public void setSpriteWidth(int spriteWidth) ;
-
-    public int getSpriteHeight() ;
-
-    public void setSpriteHeight(int spriteHeight) ;
-
-    public int getSpriteWidth() ;
+    public int getSpriteWidth();
 }

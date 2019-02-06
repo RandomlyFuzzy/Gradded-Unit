@@ -9,12 +9,14 @@ I certify that this is my own work and I have not used code from any other sourc
  */
 package com.FuturePixels.game;
 
-import com.FuturePixels.levels.LeaderBoard;
-import com.FuturePixels.levels.StartGamePanel;
-import com.FuturePixels.levels.level1;
+import com.FuturePixels.Utils.imageUtils;
+import com.FuturePixels.levels.SetClasses.ILevel;
+import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,11 +30,11 @@ public class Game {
 
     private static final int WINDOW_WIDTH = 600, WINDOW_HEIGHT = 600;
     private static JFrame gameWindow;
-    private StartGamePanel startScreen;
-    level1 lvl1;
-    LeaderBoard lb;
+    static ArrayList<ILevel> Levels = new ArrayList();
+    private static HashMap<String, Integer> LevelFinder = new HashMap<String, Integer>();
     private double DeltaTime = 0;
     private static long deltalong = 0;
+    private static ILevel CurrentLevel;
 
     public void SetDelta() {
         DeltaTime = System.nanoTime() - deltalong;
@@ -40,7 +42,7 @@ public class Game {
     }
 
     public double getDelta() {
-        return DeltaTime / 1000000000.0;
+        return DeltaTime / 5000000000.0;
     }
 
     public int getWindowWidth() {
@@ -56,16 +58,19 @@ public class Game {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new imageUtils();
         Game window = new Game();
         deltalong = System.nanoTime();
-        window.showStartScreen();
-
     }
 
     public Game() {
         this.g = this;
         InitWindow();
-        initScreens();
+        this.AddLevel(new StartGamePanel(this), "StartGamePanel");
+        this.AddLevel(new Level1(this), "Level1");
+        this.AddLevel(new LeaderBoard(this), "LeaderBoard");
+        Game.SetLevelActive("StartGamePanel");
+        
     }
 
     public void InitWindow() {
@@ -79,46 +84,19 @@ public class Game {
         gameWindow.setVisible(true);
     }
 
-    public void initScreens() {
-        startScreen = new StartGamePanel(this);
-        startScreen.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
-        lvl1 = new level1(this);
-        lvl1.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
-        lb = new LeaderBoard(this);
-        lb.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
-        // This will add a start Screen to the Main Window   
-        gameWindow.getContentPane().add(startScreen, "INTRO");
-        gameWindow.getContentPane().add(lvl1, "LVL1");
-        gameWindow.getContentPane().add(lb, "LeaderBoard");
+    public void AddLevel(ILevel level, String Name) {
+        level.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
+        Levels.add(level);
+        LevelFinder.put(Name, Levels.size() - 1);
     }
 
-    public void showStartScreen() {
-        gameWindow.setVisible(true);
-        startScreen.requestFocus();
-    }
-
-    public void DeleteGame() {
-        gameWindow.remove(lvl1);
-        lvl1 = null;
-        gameWindow.revalidate();
-        lvl1 = new level1(this);
-        lvl1.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
-        gameWindow.getContentPane().add(lvl1, "LVL1");
-    }
-
-    public void playGame() {
-        // This method will start the main game    
+    public static void SetLevelActive(String name) {
+        gameWindow.getContentPane().add(Levels.get(LevelFinder.get(name)), name);
         CardLayout cl = (CardLayout) gameWindow.getContentPane().getLayout();
         cl.next(gameWindow.getContentPane());
-        lvl1.requestFocus();
-        lvl1.start();
+        Levels.get(LevelFinder.get(name)).requestFocus();
+        Levels.get(LevelFinder.get(name)).start();
+        CurrentLevel = Levels.get(LevelFinder.get(name));
     }
 
-    public void ShowLeaderBoard() {
-        // This method will start the main game    
-        CardLayout cl = (CardLayout) gameWindow.getContentPane().getLayout();
-        cl.next(gameWindow.getContentPane());
-        lb.requestFocus();
-        lb.start();
-    }
 }
