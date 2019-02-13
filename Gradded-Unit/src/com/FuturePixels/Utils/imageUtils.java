@@ -25,19 +25,25 @@ public class imageUtils {
     private HashMap<String, BufferedImage> Images = new HashMap<String, BufferedImage>();
 
     public BufferedImage GetImage(String URI) {
+        URI = "" + URI;
+        BufferedImage g = null;
         if (Images.containsKey(URI)) {
             return Images.get(URI);
         } else {
             try {
-                BufferedImage g = ImageIO.read(getClass().getResource(URI));
-
+                g = ImageIO.read(getClass().getResourceAsStream(URI));
                 Images.put(URI, g);
-                return g;
+                try {
+                    throw new Exception();
+                } catch (Exception e) {
+                    System.out.println("Image loaded " + URI + " in " + e.getStackTrace()[3].getClassName() );
+                    return g;
+                }
             } catch (Exception e) {
-                System.err.println("error loading " + URI + " in " + e.getStackTrace()[e.getStackTrace().length - 1].getClassName());
+                System.err.println("error loading " + URI + " in " + e.getStackTrace()[3].getClassName());
             }
         }
-        return null;
+        return GetImage("/images/defualt.png");
     }
 
 }

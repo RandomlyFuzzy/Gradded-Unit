@@ -22,12 +22,12 @@ import javax.swing.JPanel;
  *
  * @author Liam Woolley 1748910
  */
-public class StartGamePanel extends ILevel{
+public class MainMenu extends ILevel{
 
     private Game game; // this is a link back to the game's main window. private BufferedImage backgroundImage = null;
     private Image backgroundImage;
 
-    public StartGamePanel(Game theGame) {
+    public MainMenu(Game theGame) {
         super(theGame);
         game = theGame;
     }

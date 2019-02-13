@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.characters.SetClasses;
+package com.FuturePixels.Utils;
 
 import com.FuturePixels.Utils.imageUtils;
+import com.FuturePixels.game.Game;
 import com.FuturePixels.game.Vector;
 import com.FuturePixels.levels.LeaderBoard;
-import com.FuturePixels.levels.SetClasses.ILevel;
+import com.FuturePixels.Utils.ILevel;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -20,41 +21,41 @@ import javax.imageio.ImageIO;
  *
  * @author RandomlyFuzzy
  */
-public abstract class IMoveable {
+public abstract class IDrawable {
 
     private Vector position;
-    private ILevel from;
-    private HashMap<String, Image> Sprites = new HashMap<String, Image>();
     private int spriteWidth;
     private int spriteHeight;
     private boolean Enabled = true;
 
-    public IMoveable(ILevel From) {
-        from = From;
+    //to do
+    //1. add component based logic
+    //2. make collisons work
+    //3. make a prototype of the game 
+    //4. extend and polish that game prototype
+    //5. release everything
+    public IDrawable() {
         position = new Vector(0, 0);
+        CollisonUtils.PossableCols.add(this);
     }
 
-    public ILevel From() throws Exception {
-        if (from == null) {
-            System.err.print("you must Super the constructor");
-            throw new Exception();
-        }
-        return from;
+    public ILevel From() {
+        return Game.GetLevel();
     }
 
-    public abstract void init();
 
-    public abstract void doMove();
-
-    public abstract void draw(Graphics g);
 
     public Rectangle getBounds() {
-        Rectangle objectRect = new Rectangle((int) position.getX(), (int) position.getY(), spriteWidth, spriteHeight);
+        Rectangle objectRect = new Rectangle((int) getPosition().getX() - spriteWidth / 2, (int) getPosition().getY() - spriteHeight / 2, spriteWidth, spriteHeight);
         return objectRect;
     }
 
     public Vector getPosition() {
-        return position;
+        return this.position;
+    }
+
+    public Vector addPosition(Vector v) {
+        return this.position.add(v);
     }
 
     public BufferedImage GetSprite(String URI) {
@@ -90,12 +91,7 @@ public abstract class IMoveable {
         Enabled = vis;
     }
 
-    
-    
-    
-    
-    
-    public boolean CheckCollions(IMoveable t) {
+    public boolean CheckCollions(IDrawable t) {
         if (t.getBounds().intersects(getBounds())) {
             if (t.IsVisible() == true) {
                 onCollison(t);
@@ -105,6 +101,11 @@ public abstract class IMoveable {
             return false;
         }
     }
+    public abstract void init();
 
-    public abstract void onCollison(IMoveable im);
+    public abstract void doMove();
+
+    public abstract void draw(Graphics g);
+
+    public abstract void onCollison(IDrawable im);
 }

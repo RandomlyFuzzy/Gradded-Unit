@@ -5,12 +5,11 @@
  */
 package com.FuturePixels.characters;
 
-import com.FuturePixels.characters.SetClasses.IMoveableInterface;
-import com.FuturePixels.characters.SetClasses.IMoveable;
+import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.game.Game;
 import com.FuturePixels.game.Vector;
 import com.FuturePixels.levels.LeaderBoard;
-import com.FuturePixels.levels.SetClasses.ILevel;
+import com.FuturePixels.Utils.ILevel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -19,31 +18,26 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import javax.imageio.ImageIO;
+import jdk.nashorn.internal.objects.Global;
 import jdk.nashorn.internal.objects.NativeArray;
 
 /**
  *
  * @author Liam Woolley 1748910
  */
-public class Player extends IMoveable implements IMoveableInterface {
+public class Player extends IDrawable {
 
-    //Vectors to represent the character's current position 
-    //and movement from the current position
     private Vector veclocity;
     private Vector displacement;
-    //This image represents the character
     private float ind = 0;
     private boolean Stop = true, canJump = false, hasJumped;
     private int Scale = 1;
-    //This variable stores the width of the image  
-
-    //A score value – this could be a health or other appropriate value
     private long score;
     private long now;
 
-    public Player(ILevel From) {
-        super(From);
-//        setPosition(new Vector(100, 100));
+    public Player() {
+        super();
+        setPosition(new Vector(100, 100));
         veclocity = new Vector(0, 0);
         displacement = new Vector(0, 0);
         score = 0;
@@ -52,6 +46,7 @@ public class Player extends IMoveable implements IMoveableInterface {
     }
 
     public void init() {
+
         for (int i = 0; i < 7; i++) {
             GetSprite("/Images/Player/sprite_" + i + ".png");
         }
@@ -71,6 +66,7 @@ public class Player extends IMoveable implements IMoveableInterface {
 //            displacement.setY(1);
         } else {
 //            displacement.setY(0);
+//            veclocity.mult(new Vector(1, 0.3f));
             one = false;
         }
         displacement.setY((float) Math.max(-0.3, Math.min(displacement.getY(), 0.5f)));
@@ -82,9 +78,13 @@ public class Player extends IMoveable implements IMoveableInterface {
             displacement.addX(1);
         } else {
             displacement.setX(0);
+            veclocity.mult(new Vector(0.93f, 1));
             two = false;
         }
-        displacement.setX((float) Math.max(-0.4, Math.min(displacement.getX(), 0.4)));
+        displacement.setX((float) Math.max(-0.1, Math.min(displacement.getX(), 0.1)));
+
+        veclocity.add(displacement);
+
         Stop = !one && !two;
     }
 
@@ -106,11 +106,18 @@ public class Player extends IMoveable implements IMoveableInterface {
         ind += Stop ? -ind : 0.1f;
         ind = ind % 7;
 
+//        for(int i = 0;i<Game.g.getWindowHeight();i++){
+//            for(int j = 0;j<Game.g.getWindowHeight();j++){
+//                if(getBounds().contains(i, j)){
+//                    g2d.drawRect(i, j, 1,1);
+//                }
+//            }
+//        }
         //push matrix
         AffineTransform old = g2d.getTransform();
 
-        //scale -> translate -> rotate
-        g2d.translate((int) getPosition().getX(), (int) getPosition().getY() + (getSpriteHeight() * 1.5));
+//scale -> translate -> rotate
+        g2d.translate((int) getPosition().getX(), (int) getPosition().getY());
 //        g2d.rotate(deg);
 
         g2d.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
@@ -127,10 +134,10 @@ public class Player extends IMoveable implements IMoveableInterface {
                 this.setPosition(new Vector(this.getPosition().getX(), Game.g.getWindowHeight() / 2));
             }
             return;
+        } else {
+            this.displacement.add(new Vector(0, 9.81f * (float) Game.g.getDelta()));
         }
 
-        System.out.println("com.FuturePixels.characters.Player.addGravity() " + Game.g.getDelta());
-        this.displacement.add(new Vector(0, 9.81f * (float) Game.g.getDelta()));
     }
 
     public long getScore() {
@@ -147,7 +154,7 @@ public class Player extends IMoveable implements IMoveableInterface {
     }
 
     @Override
-    public void onCollison(IMoveable im) {
+    public void onCollison(IDrawable im) {
         if (im == null) {
             return;
         }

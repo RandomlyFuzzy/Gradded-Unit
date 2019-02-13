@@ -5,11 +5,10 @@
  */
 package com.FuturePixels.characters;
 
-import com.FuturePixels.characters.SetClasses.IMoveableInterface;
-import com.FuturePixels.characters.SetClasses.IMoveable;
+import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.game.Game;
 import com.FuturePixels.game.Vector;
-import com.FuturePixels.levels.SetClasses.ILevel;
+import com.FuturePixels.Utils.ILevel;
 import com.sun.javafx.geom.Vec2d;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,25 +17,24 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
+import jdk.nashorn.internal.objects.Global;
 
 /**
  *
  * @author Liam Woolley 1748910
  */
-public class Cookie extends IMoveable implements IMoveableInterface {
+public class Cookie extends IDrawable {
 
     private boolean isVisible;
     private boolean Stop = false;
     private BufferedImage sprite;
     private int score = 10;
-    private long timedelay = 0;
-    private long timeadded = 800;
     private Vector endpoint;
     private Vector acceration;
     private float speed = 3;
 
-    public Cookie(ILevel from) {
-        super(from);
+    public Cookie() {
+        super();
         acceration = new Vector(0, 0);
         score = 10;
         isVisible = true;
@@ -57,7 +55,7 @@ public class Cookie extends IMoveable implements IMoveableInterface {
     }
 
     public void doMove() {
-        addPosition(acceration);
+        addvel(acceration);
     }
 
     public boolean IsVisible() {
@@ -71,7 +69,7 @@ public class Cookie extends IMoveable implements IMoveableInterface {
         }
     }
 
-    public void addPosition(Vector acc) {
+    public void addvel(Vector acc) {
 
         if ((this.getPosition().getX() - getSpriteWidth() / 2 + acc.getX()) <= 0) {
             acc.setX(0);
@@ -99,7 +97,7 @@ public class Cookie extends IMoveable implements IMoveableInterface {
     }
 
     @Override
-    public void onCollison(IMoveable im) {
+    public void onCollison(IDrawable im) {
         
     }
 

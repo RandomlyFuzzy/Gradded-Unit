@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.FuturePixels.levels;
 
-import com.FuturePixels.levels.SetClasses.ILevel;
-import com.FuturePixels.levels.SetClasses.ILevelInterface;
+import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.characters.Player;
 import com.FuturePixels.characters.Cookie;
-import com.FuturePixels.characters.SetClasses.IMoveable;
+import com.FuturePixels.characters.PlatForm;
+import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.game.Game;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -28,20 +23,19 @@ import javax.swing.Timer;
  *
  * @author Liam Woolley 1748910
  */
-public class Level1 extends ILevel implements ILevelInterface {
+public class Level1 extends ILevel {
 
     Image background;
     private int move = 0;
     boolean Pressed = false, p2 = false;
-    IMoveable player;
+    IDrawable player;
 
     public Level1(Game theGame) {
         super(theGame);
-        init();
         System.out.println("com.game.levels.level1.<init>()");
-        player = new Player(this);
+        player = new Player();
         Add(player);
-        Add(new Cookie(this));
+        Add(new PlatForm());
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -55,12 +49,8 @@ public class Level1 extends ILevel implements ILevelInterface {
     public void init() {
         super.init();
 
-        try {
-            background = ImageIO.read(getClass().getResource("/Images/background.png"));
-        } catch (Exception ex) {
-            System.err.println("Error loading background image");
-        }
-        timer = new Timer(10, this);
+        background = GetSprite("/Images/background.png");
+
         LeaderBoard.AddTime(System.nanoTime());
     }
 
@@ -81,9 +71,10 @@ public class Level1 extends ILevel implements ILevelInterface {
         g.dispose();
     }
 
-    public void DrawObjs(Graphics g){
+    public void DrawObjs(Graphics g) {
         super.DrawObjs(g);
     }
+
     @Override
     public void keyPress(KeyEvent e) {
         switch (e.getKeyCode()) {

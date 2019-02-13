@@ -11,6 +11,8 @@ package com.FuturePixels.game;
  */
 public class Vector {
 
+    public static final Vector Zero = new Vector(0, 0), One = new Vector(1, 1);
+
     private float x, y;
 
     public Vector(float x, float y) {
@@ -27,6 +29,13 @@ public class Vector {
         this.x += v.getX();
         this.y += v.getY();
         return this;
+    }
+
+    public Vector addto(Vector v) {
+        Vector v2 = new Vector(this);
+        v2.x += v.getX();
+        v2.y += v.getY();
+        return v2;
     }
 
     public Vector mult(Vector v) {
@@ -64,4 +73,8 @@ public class Vector {
         this.y = y;
     }
 
+    
+    public String toString(){
+        return ""+this.x+","+this.y;
+    }
 }

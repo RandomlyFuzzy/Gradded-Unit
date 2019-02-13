@@ -10,7 +10,7 @@ I certify that this is my own work and I have not used code from any other sourc
 package com.FuturePixels.game;
 
 import com.FuturePixels.Utils.imageUtils;
-import com.FuturePixels.levels.SetClasses.ILevel;
+import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -84,6 +84,9 @@ public class Game {
         gameWindow.setVisible(true);
     }
 
+    public JFrame GetFrame(){
+        return gameWindow;
+    }
     public void AddLevel(ILevel level, String Name) {
         level.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
         Levels.add(level);
@@ -97,6 +100,9 @@ public class Game {
         Levels.get(LevelFinder.get(name)).requestFocus();
         Levels.get(LevelFinder.get(name)).start();
         CurrentLevel = Levels.get(LevelFinder.get(name));
+        CurrentLevel.init();
     }
-
+    public static ILevel GetLevel(){
+        return CurrentLevel;
+    }
 }

@@ -5,10 +5,10 @@
  */
 package com.FuturePixels.characters;
 
-import com.FuturePixels.characters.SetClasses.IMoveable;
-import com.FuturePixels.characters.SetClasses.IMoveableInterface;
+import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.game.Game;
-import com.FuturePixels.levels.SetClasses.ILevel;
+import com.FuturePixels.game.Vector;
+import com.FuturePixels.Utils.ILevel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -17,22 +17,23 @@ import java.awt.geom.AffineTransform;
  *
  * @author RandomlyFuzzy
  */
-public class PlatForm extends IMoveable implements IMoveableInterface{
+public class PlatForm extends IDrawable {
         
     private float Rad = 0f;
     
-    public PlatForm(ILevel From){
-        super(From);
+    public PlatForm(){
+        super();
+        setPosition(new Vector(200,300));
     }
     @Override
     public void init() {
-        GetSprite("/resources/images/Cookie.png");
+        GetSprite("/images/Cookie.png");
     }
 
 
     @Override
     public void draw(Graphics g) {
-//        deg += Game.g.getDelta() * 100;
+        Rad += Game.g.getDelta() * 100;
         Graphics2D g2d = (Graphics2D) g;
 
 
@@ -42,10 +43,10 @@ public class PlatForm extends IMoveable implements IMoveableInterface{
         //scale -> translate -> rotate
         
         
-        g2d.translate((int) getPosition().getX(), (int) getPosition().getY() + (getSpriteHeight() * 1.5));
+        g2d.translate((int) getPosition().getX(), (int) getPosition().getY() );
         g2d.rotate(Rad);
 
-        g2d.drawImage(GetSprite("/resources/images/Cookie.png"), -((getSpriteWidth() / 2) ), -(getSpriteHeight()) / 3, getSpriteWidth() , getSpriteHeight(), null);
+        g2d.drawImage(GetSprite("/images/Cookie.png"), -((getSpriteWidth()/2) ), -(getSpriteHeight()/2), getSpriteWidth() , getSpriteHeight(), null);
 
         //pop matrix
         g2d.setTransform(old);
@@ -53,11 +54,12 @@ public class PlatForm extends IMoveable implements IMoveableInterface{
 
     @Override
     public void doMove() {
+        
     }
 
     @Override
-    public void onCollison(IMoveable im) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void onCollison(IDrawable im) {
+//        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");
     }
 
 }
