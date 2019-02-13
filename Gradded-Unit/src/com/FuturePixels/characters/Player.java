@@ -96,7 +96,7 @@ public class Player extends IDrawable {
     float deg = 0;
 
     @Override
-    public void draw(Graphics g) {
+    public void Update(Graphics g) {
         deg += Game.g.getDelta() * 100;
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawString("Score:" + score, 0, 20);
@@ -106,23 +106,13 @@ public class Player extends IDrawable {
         ind += Stop ? -ind : 0.1f;
         ind = ind % 7;
 
-//        for(int i = 0;i<Game.g.getWindowHeight();i++){
-//            for(int j = 0;j<Game.g.getWindowHeight();j++){
-//                if(getBounds().contains(i, j)){
-//                    g2d.drawRect(i, j, 1,1);
-//                }
-//            }
-//        }
-        //push matrix
+
         AffineTransform old = g2d.getTransform();
 
-//scale -> translate -> rotate
         g2d.translate((int) getPosition().getX(), (int) getPosition().getY());
-//        g2d.rotate(deg);
 
         g2d.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
 
-        //pop matrix
         g2d.setTransform(old);
     }
 
@@ -163,7 +153,7 @@ public class Player extends IDrawable {
             score += ((Cookie) im).getScore();
             im.SetVisible(false);
             try {
-                From().play(getClass().getResourceAsStream("/sounds/music.wav"));
+                Level().play(getClass().getResourceAsStream("/sounds/music.wav"));
             } catch (Exception e) {
                 System.err.println(" error playing sound");
             }

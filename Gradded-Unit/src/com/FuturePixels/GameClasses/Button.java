@@ -27,7 +27,7 @@ public class Button extends IDrawable{
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void Update(Graphics g) {
     }
 
     @Override

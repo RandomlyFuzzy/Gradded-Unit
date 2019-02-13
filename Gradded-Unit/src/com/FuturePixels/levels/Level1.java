@@ -30,28 +30,28 @@ public class Level1 extends ILevel {
     boolean Pressed = false, p2 = false;
     IDrawable player;
 
-    public Level1(Game theGame) {
-        super(theGame);
+    public Level1() {
+        super();
         System.out.println("com.game.levels.level1.<init>()");
         player = new Player();
         Add(player);
         Add(new PlatForm());
     }
 
-    public void actionPerformed(ActionEvent ae) {
-        super.actionPerformed(ae);
+    @Override
+    public void Update(ActionEvent ae) {
         checkCollisions();
         movement();
 
         this.repaint();
     }
 
+    @Override
     public void init() {
-        super.init();
 
         background = GetSprite("/Images/background.png");
-
         LeaderBoard.AddTime(System.nanoTime());
+
     }
 
     public void movement() {
@@ -63,16 +63,9 @@ public class Level1 extends ILevel {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void Draw(Graphics g) {
         g.drawImage(background, 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        System.out.println("com.game.levels.Level1.paintComponent()");
-        DrawObjs(g);
-        g.dispose();
-    }
-
-    public void DrawObjs(Graphics g) {
-        super.DrawObjs(g);
     }
 
     @Override

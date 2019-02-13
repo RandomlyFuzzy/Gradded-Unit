@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -22,25 +23,27 @@ import javax.swing.JPanel;
  *
  * @author Liam Woolley 1748910
  */
-public class MainMenu extends ILevel{
+public class MainMenu extends ILevel {
 
     private Game game; // this is a link back to the game's main window. private BufferedImage backgroundImage = null;
     private Image backgroundImage;
 
-    public MainMenu(Game theGame) {
-        super(theGame);
-        game = theGame;
+    public MainMenu() {
+        super();
     }
 
     @Override
     public void init() {
-        super.init();
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void Update(ActionEvent ae) {
+
+    }
+
+    @Override
+    public void Draw(Graphics g) {
         // Call the paintComponent method on the superclass to initialise drawing 
-        super.paintComponent(g);
         g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
     }
 

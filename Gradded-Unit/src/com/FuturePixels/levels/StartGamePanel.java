@@ -5,12 +5,15 @@
  */
 package com.FuturePixels.levels;
 
+import com.FuturePixels.GameClasses.Button;
+import com.FuturePixels.GameClasses.Mouse;
 import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.game.Game;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -24,23 +27,26 @@ import javax.swing.JPanel;
  */
 public class StartGamePanel extends ILevel{
 
-    private Game game; // this is a link back to the game's main window. private BufferedImage backgroundImage = null;
     private Image backgroundImage;
 
-    public StartGamePanel(Game theGame) {
-        super(theGame);
-        game = theGame;
+    public StartGamePanel() {
+        super();
     }
 
     @Override
     public void init() {
-        super.init();
+        Add(new Mouse());
+        Add(new Button());
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        // Call the paintComponent method on the superclass to initialise drawing 
-        super.paintComponent(g);
+    public void Update(ActionEvent ae){
+    
+    }
+    
+    
+    @Override
+    public void Draw(Graphics g) {
         g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
     }
 

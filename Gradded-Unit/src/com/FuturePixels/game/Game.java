@@ -11,6 +11,7 @@ package com.FuturePixels.game;
 
 import com.FuturePixels.Utils.imageUtils;
 import com.FuturePixels.Utils.ILevel;
+import com.FuturePixels.Utils.UtilManager;
 import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -24,14 +25,15 @@ import javax.swing.JPanel;
  *
  * @author Liam Woolley 1748910
  */
-public class Game {
+public final class Game {
 
-    public static Game g;
+    //Keeps instance to be GC later
+    public static Game g = null;
 
     private static final int WINDOW_WIDTH = 600, WINDOW_HEIGHT = 600;
     private static JFrame gameWindow;
-    static ArrayList<ILevel> Levels = new ArrayList();
     private static HashMap<String, Integer> LevelFinder = new HashMap<String, Integer>();
+    static ArrayList<ILevel> Levels = new ArrayList();
     private double DeltaTime = 0;
     private static long deltalong = 0;
     private static ILevel CurrentLevel;
@@ -58,7 +60,7 @@ public class Game {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        new imageUtils();
+        new UtilManager();
         Game window = new Game();
         deltalong = System.nanoTime();
     }
@@ -66,11 +68,11 @@ public class Game {
     public Game() {
         this.g = this;
         InitWindow();
-        this.AddLevel(new StartGamePanel(this), "StartGamePanel");
-        this.AddLevel(new Level1(this), "Level1");
-        this.AddLevel(new LeaderBoard(this), "LeaderBoard");
+        this.AddLevel(new StartGamePanel(), "StartGamePanel");
+        this.AddLevel(new Level1(), "Level1");
+        this.AddLevel(new LeaderBoard(), "LeaderBoard");
         Game.SetLevelActive("StartGamePanel");
-        
+
     }
 
     public void InitWindow() {
@@ -84,9 +86,10 @@ public class Game {
         gameWindow.setVisible(true);
     }
 
-    public JFrame GetFrame(){
+    public JFrame GetFrame() {
         return gameWindow;
     }
+
     public void AddLevel(ILevel level, String Name) {
         level.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
         Levels.add(level);
@@ -100,9 +103,10 @@ public class Game {
         Levels.get(LevelFinder.get(name)).requestFocus();
         Levels.get(LevelFinder.get(name)).start();
         CurrentLevel = Levels.get(LevelFinder.get(name));
-        CurrentLevel.init();
+        CurrentLevel.OnStart();
     }
-    public static ILevel GetLevel(){
+
+    public static ILevel GetLevel() {
         return CurrentLevel;
     }
 }

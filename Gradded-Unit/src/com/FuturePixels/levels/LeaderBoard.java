@@ -17,33 +17,29 @@ import javax.swing.Timer;
  *
  * @author Liam Woolley 1748910
  */
-public class LeaderBoard extends ILevel{
+public class LeaderBoard extends ILevel {
 
     private Timer timer;
     Image background;
     private static long[] CollectionTimes = new long[6];
     private static int ind = 0;
 
-    public LeaderBoard(Game theGame) {
-        super(theGame);
+    public LeaderBoard() {
+        super();
         System.out.println("com.game.levels.LeaderBoard.<init>()");
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
+    public void Update(ActionEvent ae) {
         this.repaint();
     }
 
+    @Override
     public void init() {
-        super.init();
-        timer = new Timer(10, this);
     }
 
-
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void Draw(Graphics g) {
 
 //        System.out.println("com.game.levels.level1.paintComponent()");
         g.drawImage(GetSprite("p/Images/background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
@@ -51,8 +47,8 @@ public class LeaderBoard extends ILevel{
             g.drawString("" + ((CollectionTimes[i] - CollectionTimes[0]) / 1000000000f + " Seconds"), 20, (i * 30) + Game.g.getWindowHeight() / 3);
         }
 
-        g.dispose();
     }
+
     public static void AddTime(long Time) {
         if (ind >= CollectionTimes.length) {
             return;
@@ -60,11 +56,9 @@ public class LeaderBoard extends ILevel{
         CollectionTimes[ind++] = Time;
     }
 
-  
-
     @Override
     public void keyPress(KeyEvent e) {
-        
+
     }
 
     @Override

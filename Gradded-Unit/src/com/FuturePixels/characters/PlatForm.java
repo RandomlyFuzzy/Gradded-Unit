@@ -18,35 +18,32 @@ import java.awt.geom.AffineTransform;
  * @author RandomlyFuzzy
  */
 public class PlatForm extends IDrawable {
-        
+
     private float Rad = 0f;
-    
-    public PlatForm(){
+
+    public PlatForm() {
         super();
-        setPosition(new Vector(200,300));
+        setPosition(new Vector(200, 300));
     }
+
     @Override
     public void init() {
         GetSprite("/images/Cookie.png");
     }
 
-
     @Override
-    public void draw(Graphics g) {
-        Rad += Game.g.getDelta() * 100;
+    public void Update(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-
+        Rad += Game.g.getDelta() * 100;
 
         //push matrix
         AffineTransform old = g2d.getTransform();
 
         //scale -> translate -> rotate
-        
-        
-        g2d.translate((int) getPosition().getX(), (int) getPosition().getY() );
+        g2d.translate((int) getPosition().getX(), (int) getPosition().getY());
         g2d.rotate(Rad);
 
-        g2d.drawImage(GetSprite("/images/Cookie.png"), -((getSpriteWidth()/2) ), -(getSpriteHeight()/2), getSpriteWidth() , getSpriteHeight(), null);
+        g2d.drawImage(GetSprite("/images/Cookie.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
 
         //pop matrix
         g2d.setTransform(old);
@@ -54,7 +51,7 @@ public class PlatForm extends IDrawable {
 
     @Override
     public void doMove() {
-        
+
     }
 
     @Override

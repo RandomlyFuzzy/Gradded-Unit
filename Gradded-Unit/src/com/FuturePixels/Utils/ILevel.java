@@ -61,21 +61,29 @@ public abstract class ILevel extends JPanel implements ActionListener {
         return MouseButtonPressed.get(ind);
     }
 
-    public ILevel(Game theGame) {
+    public ILevel() {
         timer = new Timer(16, this);
-        game = theGame;
+        game = Game.g;
     }
 
-    public void init() {
+    public void OnStart() {
         setFocusable(true);
         setDoubleBuffered(true);
         inputAdapter = new TAdapter();
         addKeyListener(inputAdapter);
         addMouseListener(inputAdapter);
+        init();
     }
 
-    public void actionPerformed(ActionEvent ae) {
+    public void AddObject(IDrawable Drawable) {
+        gameObjs.add(Drawable);
+        Drawable.init();
+        Drawable.initComponents();
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        Update(ae);
     }
 
     public void movement() {
@@ -86,14 +94,17 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        Draw(g);
+        PostUpdate(g);
     }
 
-    public void DrawObjs(Graphics g) {
+    public void PostUpdate(Graphics g) {
         game.SetDelta();
-        gameObjs.forEach((obj) -> {
-            obj.draw(g);
+        gameObjs.forEach((a) -> {
+            a.Update(g);
+            a.UpdateComponents();
         });
+        g.dispose();
     }
 
     public void start() {
@@ -102,7 +113,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     public void stop() {
         timer.stop();
-
     }
 
     public void Add(IDrawable im) {
@@ -135,6 +145,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     public abstract void keyRelease(KeyEvent e);
 
+   
     private class TAdapter extends InputAdapter {
 
         public TAdapter() {
@@ -175,7 +186,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
                 Integer[] arr = new Integer[MouseButtonPressed.size()];
                 MouseButtonPressed.keySet().toArray(arr);
                 for (Integer a : arr) {
-                    isactiveOne = isactiveOne != ! MouseButtonPressed.get(a)|| isactiveOne;
+                    isactiveOne = isactiveOne != !MouseButtonPressed.get(a) || isactiveOne;
                 }
 
                 IsClicking = isactiveOne;
@@ -186,11 +197,13 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
         @Override
         public void mouseEntered(MouseEvent e) {
+            start();
             IsInside = true;
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
+            stop();
             IsInside = false;
         }
 
@@ -205,19 +218,10 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
     }
 
-    public void mouseClicked(MouseEvent e) {
+    
+    public abstract void init();
 
-    }
+    public abstract void Update(ActionEvent ae);
 
-    public void mousePressed(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
+    public abstract void Draw(Graphics g);
 }
