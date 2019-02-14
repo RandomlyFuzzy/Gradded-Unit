@@ -120,13 +120,12 @@ public abstract class ILevel extends JPanel implements ActionListener {
         for (int i = 0; i < gameObjs.size(); i++) {
             gameObjs.get(i).CoreUpdate(g);
             gameObjs.get(i).setIsColliding(false);
-
         }
         g.dispose();
         System.gc();
     }
 
-    public void start() throws Exception {
+    public void start(){
         if (InputAdapter == null) {
             InputAdapter = new TAdapter();
         }

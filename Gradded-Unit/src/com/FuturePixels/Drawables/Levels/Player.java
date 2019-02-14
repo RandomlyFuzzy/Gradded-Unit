@@ -115,7 +115,6 @@ public class Player extends IDrawable {
     public void doMove() {
         if (!isColliding()) {
             setRotation(0);
-
         }
         movePlayer();
         Velocity.add(Acc);
