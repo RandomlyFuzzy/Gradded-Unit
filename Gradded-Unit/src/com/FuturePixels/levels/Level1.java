@@ -34,25 +34,19 @@ public class Level1 extends ILevel {
 
     @Override
     public void Update(ActionEvent ae) {
-        checkCollisions();
-        movement();
-        if (isClicking()) {
-            player.addPoints(20);
-        }
-        this.repaint();
+      
     }
 
     @Override
     public void init() {
 
+        Game.toggleCursor();
         background = GetSprite("/Images/background.png");
         LeaderBoard.AddTime(System.nanoTime());
 
     }
 
-    private void checkCollisions() {
-        super.checkCollionsions();
-    }
+   
 
     @Override
     public void Draw(Graphics2D g) {

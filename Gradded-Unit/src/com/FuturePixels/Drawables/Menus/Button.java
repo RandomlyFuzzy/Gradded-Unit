@@ -48,8 +48,7 @@ public class Button extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(Game.g.getWindowWidth()*relpos.getX(),Game.g.getWindowHeight()*relpos.getY());
-
+        setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
     }
 
     @Override
@@ -57,17 +56,21 @@ public class Button extends IDrawable {
         DrawLastLoadedImage(g);
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString(Message,-metrics.stringWidth(Message)/2, 0);
+        g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
+    }
+
+    public void DoAction() {
+        if (buttonDelegate != null) {
+            buttonDelegate.OnClick();
+        } else {
+            System.err.println("error no delegate in this button");
+        }
     }
 
     @Override
     public void onCollison(IDrawable im) {
         if (Level().isClicking()) {
-            if (buttonDelegate != null) {
-                buttonDelegate.OnClick();
-            } else {
-                System.err.println("error no delegate in this button");
-            }
+           DoAction();
         }
     }
 

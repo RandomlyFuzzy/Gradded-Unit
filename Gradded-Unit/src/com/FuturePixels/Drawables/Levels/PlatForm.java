@@ -29,24 +29,15 @@ public class PlatForm extends IDrawable {
     @Override
     public void init() {
         GetSprite("/images/Cookie.png");
+        Rad = 200;
     }
 
     @Override
     public void Update(Graphics2D g) {
-        Graphics2D g2d = (Graphics2D) g;
-        Rad += Game.g.getDelta() * 100;
+        setRotation(Rad);
 
-        //push matrix
-        AffineTransform old = g2d.getTransform();
+        g.drawImage(GetSprite("/images/Platform.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
 
-        //scale -> translate -> rotate
-        g2d.translate((int) getPosition().getX(), (int) getPosition().getY());
-        g2d.rotate(Rad);
-
-        g2d.drawImage(GetSprite("/images/Platform.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
-
-        //pop matrix
-        g2d.setTransform(old);
     }
 
     @Override

@@ -49,5 +49,13 @@ public class Transform extends IComponent {
     public void PopTransforms(Graphics2D g) {
         g.setTransform(old);
     }
+    
+        public Vector GetUp() {
+        return new Vector((float) Math.sin(RotationZ + Math.PI / 2), (float) -Math.cos(RotationZ + Math.PI / 2));
+    }
+
+    public Vector GetRight() {
+        return new Vector((float) Math.sin(RotationZ), (float) -Math.cos(RotationZ));
+    }
 
 }

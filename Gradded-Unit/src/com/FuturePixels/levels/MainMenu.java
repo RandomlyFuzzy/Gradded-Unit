@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.levels;
 
+import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.ButtonAbstract;
@@ -39,22 +40,23 @@ public class MainMenu extends ILevel {
 
     @Override
     public void init() {
+        Game.toggleCursor();
         m = new Mouse();
-        AddObject(new Button(new Vector(0.5f,0.3f),"To Game", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.5f, 0.3f), "To Game", new ButtonAbstract() {
             @Override
             public void OnClick() {
                 Game.SetLevelActive("Level1");
 //   System.out.println(".OnClick()");
             }
         }));
-         AddObject(new Button(new Vector(0.5f,0.6f),"To Leaderboard", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.5f, 0.6f), "To Leaderboard", new ButtonAbstract() {
             @Override
             public void OnClick() {
                 Game.SetLevelActive("LeaderBoard");
-//   System.out.println(".OnClick()");
             }
         }));
         AddObject(m);
+        AddObject(new HUD());
     }
 
     @Override

@@ -10,10 +10,13 @@ import com.FuturePixels.Utils.imageUtils;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.levels.LeaderBoard;
 import com.FuturePixels.Utils.ILevel;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
+import java.awt.Polygon;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,10 +33,27 @@ public abstract class IDrawable {
     private int spriteHeight = 0;
     private float Rotation = 0;
     private Vector Scale = Vector.One;
-    private boolean Enabled = true;
+    private boolean Enabled = true, isColliding = false;
+
+    public boolean isColliding() {
+        return isColliding;
+    }
+
+    public void setIsColliding(boolean isColliding) {
+        this.isColliding = isColliding;
+    }
     private BufferedImage LastImage = null;
     private ArrayList<IComponent> Component = new ArrayList<IComponent>();
     private final Transform transform;
+
+    float a1,
+            a2,
+            a3,
+            a4;
+    private Vector v1,
+            v2,
+            v3,
+            v4;
 
     //to do
     //1. add component based logic
@@ -53,6 +73,7 @@ public abstract class IDrawable {
     }
 
     public void setRotation(float Rotation) {
+        UpdateBounds();
         this.Rotation = Rotation;
     }
 
@@ -61,6 +82,7 @@ public abstract class IDrawable {
     }
 
     public void setScale(Vector Scale) {
+        UpdateBounds();
         this.Scale = Scale;
     }
 
@@ -81,14 +103,50 @@ public abstract class IDrawable {
         return Game.GetLevel();
     }
 
-    public Rectangle getBounds() {
-        Rectangle objectRect
-                = new Rectangle(
-                        (int) (getPosition().getX() - (((spriteWidth) / 2f) * Scale.getX())),
-                        (int) (getPosition().getY() - ((spriteHeight / 2f) * Scale.getY())),
-                        (int) ((spriteWidth) * Scale.getX()),
-                        (int) ((spriteHeight) * Scale.getY()));
-        return objectRect;
+    public Vector GetUp() {
+        return transform.GetUp();
+    }
+
+    public Vector GetRight() {
+        return transform.GetRight();
+    }
+
+    public void UpdateBounds() {
+        float hy = (float) Math.sqrt((getSpriteWidth() / 2 * getSpriteWidth() / 2) + (getSpriteHeight() / 2 * getSpriteHeight() / 2));
+        a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2);
+        a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2);
+        a3 = (float) Math.atan2(-getSpriteHeight() / 2, -getSpriteWidth() / 2);
+        a4 = (float) Math.atan2(getSpriteHeight() / 2, -getSpriteWidth() / 2);
+        v1 = new Vector((int) (getPosition().getX() + (float) Math.cos(a1 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a1 - getRotation()) * hy * Scale.getY()));
+        v2 = new Vector((int) (getPosition().getX() + (float) Math.cos(a2 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a2 - getRotation()) * hy * Scale.getY()));
+        v3 = new Vector((int) (getPosition().getX() + (float) Math.cos(a3 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a3 - getRotation()) * hy * Scale.getY()));
+        v4 = new Vector((int) (getPosition().getX() + (float) Math.cos(a4 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a4 - getRotation()) * hy * Scale.getY()));
+    }
+
+    public Polygon getBounds() {
+//        Rectangle objectRect = new Rectangle(
+//                        (int) (getPosition().getX() - (((spriteWidth) / 2f) * Scale.getX())),
+//                        (int) (getPosition().getY() - ((spriteHeight / 2f) * Scale.getY())),
+//                        (int) ((spriteWidth) * Scale.getX()),
+//                        (int) ((spriteHeight) * Scale.getY()));
+
+        Polygon g = new Polygon();
+
+        if (v1 == null) {
+            UpdateBounds();
+        }
+
+        g.addPoint((int) (v1.getX()), (int) (v1.getY()));
+        g.addPoint((int) (v2.getX()), (int) (v2.getY()));
+        g.addPoint((int) (v3.getX()), (int) (v3.getY()));
+        g.addPoint((int) (v4.getX()), (int) (v4.getY()));
+        g.addPoint((int) (v1.getX()), (int) (v1.getY()));
+
+        return g;
+    }
+
+    public boolean checkForIntersections(Polygon g) {
+        return g.contains(v1.getX(), v1.getY()) || g.contains(v2.getX(), v2.getY()) || g.contains(v3.getX(), v3.getY()) || g.contains(v4.getX(), v4.getY());
     }
 
     public Vector getPosition() {
@@ -104,14 +162,16 @@ public abstract class IDrawable {
         if (LastImage != null) {
             this.spriteWidth = LastImage.getWidth();
             this.spriteHeight = LastImage.getHeight();
+            UpdateBounds();
         }
         return LastImage;
     }
 
     //used a memory snap shot and found that this is a big proble for memory usage in this program
-    public void setPosition(float X,float Y) {
+    public void setPosition(float X, float Y) {
         this.position.setX(X);
         this.position.setY(Y);
+        UpdateBounds();
     }
 
     public int getSpriteHeight() {
@@ -136,14 +196,14 @@ public abstract class IDrawable {
     }
 
     public boolean CheckCollions(IDrawable t) {
-        if (t.getBounds().intersects(getBounds())) {
+        if (checkForIntersections(t.getBounds())) {
+            System.out.println("com.FuturePixels.Utils.IDrawable.CheckCollions()");
             if (t.IsVisible() == true) {
                 onCollison(t);
+                return true;
             }
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     void CoreInit() {
@@ -159,6 +219,19 @@ public abstract class IDrawable {
         Update(g);
         UpdateComponents(g);
         transform.PopTransforms(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.red);
+
+        g2d.drawLine((int) getPosition().getX(),
+                (int) getPosition().getY(),
+                (int) (getPosition().getX() + (GetUp().getX()) * 20),
+                (int) (getPosition().getY() + (GetUp().getY()) * 20));
+        g2d.drawLine((int) getPosition().getX(),
+                (int) getPosition().getY(),
+                (int) (getPosition().getX() + (GetRight().getX() * 20)),
+                (int) ((getPosition().getY() + (GetRight().getY() * 20))));
+
     }
 
     void initComponents() {
@@ -190,14 +263,6 @@ public abstract class IDrawable {
         g.drawImage(LastImage, -getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
     }
 
-    public abstract void init();
-
-    public abstract void doMove();
-
-    public abstract void Update(Graphics2D g);
-
-    public abstract void onCollison(IDrawable im);
-
     public void dispose() {
         LastImage = null;
         Component.forEach((a) -> {
@@ -207,4 +272,12 @@ public abstract class IDrawable {
             Component.remove(i);
         }
     }
+
+    public abstract void init();
+
+    public abstract void doMove();
+
+    public abstract void Update(Graphics2D g);
+
+    public abstract void onCollison(IDrawable im);
 }

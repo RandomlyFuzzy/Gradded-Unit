@@ -48,6 +48,12 @@ public class Vector {
         return this;
     }
 
+      public Vector mult(float v) {
+        this.x *= v;
+        this.y *= v;
+        return this;
+    }
+    
     public void setToVector(Vector v) {
         x = v.getX();
         y = v.getY();

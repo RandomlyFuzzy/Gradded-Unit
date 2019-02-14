@@ -16,12 +16,12 @@ public abstract class IComponent {
 
     private IDrawable Parent;
 
-    public IDrawable getParent() {
-        return Parent;
-    }
-
     public IComponent(IDrawable parent) {
         Parent = parent;
+    }
+
+    public IDrawable getParent() {
+        return Parent;
     }
 
     public abstract void Init();

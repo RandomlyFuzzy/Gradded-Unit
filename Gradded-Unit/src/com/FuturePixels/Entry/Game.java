@@ -14,8 +14,15 @@ import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.Utils.UtilManager;
 import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.DisplayMode;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
@@ -37,6 +44,8 @@ public final class Game {
     private double DeltaTime = 0;
     private static long deltalong = 0;
     private static ILevel CurrentLevel;
+
+    private static Cursor Swap;
 
     public void SetDelta() {
         DeltaTime = System.nanoTime() - deltalong;
@@ -61,6 +70,7 @@ public final class Game {
     public static void main(String[] args) {
         // TODO code application logic here
         new UtilManager();
+        Swap = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor");
         Game window = new Game();
         deltalong = System.nanoTime();
     }
@@ -92,7 +102,6 @@ public final class Game {
         this.AddLevel(new Level1(), "Level1");
         this.AddLevel(new LeaderBoard(), "LeaderBoard");
         Game.SetLevelActive("MainMenu");
-
     }
 
     public void InitWindow() {
@@ -106,6 +115,34 @@ public final class Game {
         gameWindow.setVisible(true);
     }
 
+    public static void toggleCursor() {
+        Cursor blankCursor = gameWindow.getContentPane().getCursor();
+        gameWindow.getContentPane().setCursor(Swap);
+        Swap = blankCursor;
+    }
+
+    private static boolean isFullScreen = false;
+
+    public static void FullScreen() {
+        GraphicsDevice graphicalDevices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+        gameWindow.dispose();
+        if (!isFullScreen) {
+            gameWindow.setLocation(0, 0);
+            gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            gameWindow.setUndecorated(true);
+            gameWindow.pack();
+        } else {
+            gameWindow.setLocation(graphicalDevices.getDisplayModes()[0].getWidth() / 2, graphicalDevices.getDisplayModes()[0].getHeight() / 2);
+            gameWindow.setExtendedState(JFrame.NORMAL);
+            gameWindow.setUndecorated(false);
+            gameWindow.pack();
+            gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        }
+        gameWindow.setVisible(true);
+
+        isFullScreen = !isFullScreen;
+    }
+
     public JFrame GetFrame() {
         return gameWindow;
     }
@@ -117,6 +154,7 @@ public final class Game {
     }
 
     public static void SetLevelActive(String name) {
+        System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() "+name+" loading");
         try {
             if (CurrentLevel != null) {
                 gameWindow.getContentPane().removeAll();

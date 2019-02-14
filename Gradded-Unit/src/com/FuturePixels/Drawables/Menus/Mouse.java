@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
+import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.Utils.Vector;
@@ -22,28 +23,40 @@ public class Mouse extends IDrawable {
         super();
 
     }
+    int pos = 0;
 
     @Override
     public void init() {
         GetSprite("/Images/cookie.png");
+        pos = HUD.AddText(""+isColliding(), new Vector(0,10));
+        setScale(new Vector(0.2f,0.2f));
     }
 
     @Override
     public void doMove() {
-        Rad += Game.g.getDelta() * 100;
-        setPosition(Level().getMousePos().getX(),Level().getMousePos().getY());
-        setRotation(Rad);
+//        Rad += Game.g.getDelta() * 100;
+        setPosition(Level().getMousePos().getX(), Level().getMousePos().getY());
+//        setRotation(Rad);
+        HUD.EditText(pos,""+isColliding());
     }
 
     public float Rad = 0;
 
     @Override
     public void Update(Graphics2D g) {
-        g.drawImage(GetSprite("/Images/cookie.png"), (int) -getSpriteWidth() / 2, (int) -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
+//        g.drawImage(GetSprite("/Images/cookie.png"), (int) -getSpriteWidth() / 2, (int) -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
     }
 
     @Override
     public void onCollison(IDrawable im) {
+        if(im == null){
+            return;
+        }
+        
+        if(im instanceof Button&&Level().isClicking()){
+            ((Button) im).DoAction();
+        }
+        
         System.out.println("com.FuturePixels.GameClasses.Mouse.onCollison() with " + im.getClass().toString());
     }
 

@@ -48,7 +48,6 @@ public class HUD extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
-        System.out.println("com.FuturePixels.Drawables.Levels.HUD.Update() " + texts.size());
         for (int i = 0; i < texts.size(); i++) {
             g.drawString(this.texts.get(i), this.textsPos.get(i).getX(), this.textsPos.get(i).getY());
         }
@@ -61,7 +60,7 @@ public class HUD extends IDrawable {
 
     public void dispose() {
         super.dispose();
-        texts = null;
-        textsPos = null;
+        texts = new ArrayList<String>();
+        textsPos = new ArrayList<Vector>();
     }
 }

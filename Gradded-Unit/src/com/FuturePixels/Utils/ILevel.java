@@ -82,8 +82,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         Update(ae);
-        movement();
         checkCollionsions();
+        movement();
         this.repaint();
     }
 
@@ -97,6 +97,21 @@ public abstract class ILevel extends JPanel implements ActionListener {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         Draw(g2d);
+        if (DebugCollisons) {
+            for (int j = 0; j < game.g.getWindowWidth(); j++) {
+                for (int k = 0; k < game.g.getWindowHeight(); k++) {
+                    boolean draw = false;
+                    for (int i = 0; i < gameObjs.size(); i++) {
+                        if (gameObjs.get(i).getBounds().contains(j, k)) {
+                            draw = true;
+                        }
+                    }
+                    if (draw) {
+                        g.drawRect(j, k, 1, 1);
+                    }
+                }
+            }
+        }
         PostUpdate(g2d);
     }
 
@@ -104,6 +119,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
         game.SetDelta();
         for (int i = 0; i < gameObjs.size(); i++) {
             gameObjs.get(i).CoreUpdate(g);
+            gameObjs.get(i).setIsColliding(false);
+
         }
         g.dispose();
         System.gc();
@@ -181,9 +198,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
                 if (a != b) {
                     if (a.CheckCollions(b)) {
                         a.onCollison(b);
+                        a.setIsColliding(true);
                     }
                     if (b.CheckCollions(a)) {
                         b.onCollison(a);
+                        b.setIsColliding(true);
                     }
                 }
             }
@@ -192,6 +211,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
 //        thePlayer.checkCollision(theTreasure);
     }
+
+    public boolean DebugCollisons = false;
 
     private class TAdapter extends InputAdapter {
 
@@ -209,7 +230,14 @@ public abstract class ILevel extends JPanel implements ActionListener {
             if (get() != Game.GetLevel()) {
                 return;
             }
-
+            if (e.getKeyCode() == 120) {
+                DebugCollisons = !DebugCollisons;
+            }
+            if(e.getKeyCode()==10 && e.isAltDown()){
+                Game.FullScreen();
+            }else if(e.getKeyCode()==10 && !e.isAltDown()){
+                Game.toggleCursor();
+            }   
             keyPress(e);
         }
 
