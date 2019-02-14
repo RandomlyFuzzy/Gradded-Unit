@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.characters;
+package com.FuturePixels.Drawables.Levels;
 
 import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.game.Game;
-import com.FuturePixels.game.Vector;
+import com.FuturePixels.Entry.Game;
+import com.FuturePixels.Utils.Vector;
 import com.FuturePixels.Utils.ILevel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -23,7 +23,7 @@ public class PlatForm extends IDrawable {
 
     public PlatForm() {
         super();
-        setPosition(new Vector(200, 300));
+        setPosition(200, 300);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PlatForm extends IDrawable {
     }
 
     @Override
-    public void Update(Graphics g) {
+    public void Update(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) g;
         Rad += Game.g.getDelta() * 100;
 
@@ -43,7 +43,7 @@ public class PlatForm extends IDrawable {
         g2d.translate((int) getPosition().getX(), (int) getPosition().getY());
         g2d.rotate(Rad);
 
-        g2d.drawImage(GetSprite("/images/Cookie.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
+        g2d.drawImage(GetSprite("/images/Platform.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
 
         //pop matrix
         g2d.setTransform(old);

@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.characters;
+package com.FuturePixels.Drawables.Levels;
 
 import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.game.Game;
-import com.FuturePixels.game.Vector;
+import com.FuturePixels.Entry.Game;
+import com.FuturePixels.Utils.Vector;
 import com.FuturePixels.Utils.ILevel;
 import com.sun.javafx.geom.Vec2d;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -42,11 +43,11 @@ public class Cookie extends IDrawable {
 
     @Override
     public void init() {
-        this.setPosition(new Vector(Game.g.getWindowWidth()/2,Game.g.getWindowHeight()/2));
+        this.setPosition(Game.g.getWindowWidth()/2,Game.g.getWindowHeight()/2);
     }
 
     @Override
-    public void Update(Graphics g) {
+    public void Update(Graphics2D g) {
         if (isVisible == true) {
             g.drawImage(GetSprite("/Images/Cookie.png"), (int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteWidth() / 2, getSpriteWidth(), getSpriteHeight(), null);
             g.drawRect((int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
@@ -85,7 +86,7 @@ public class Cookie extends IDrawable {
             this.getPosition().setY(Game.g.getWindowHeight() - (getSpriteHeight() * 1.75f));
         }
 
-        this.setPosition(new Vector(this.getPosition().getX() + acc.getX(), this.getPosition().getY() + acc.getY()));
+        this.setPosition(this.getPosition().getX() + acc.getX(), this.getPosition().getY() + acc.getY());
     }
 
     public int getScore() {

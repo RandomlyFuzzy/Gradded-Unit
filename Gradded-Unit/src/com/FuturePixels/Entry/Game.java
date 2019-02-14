@@ -7,7 +7,7 @@ Liam Woolley 1748910
 
 I certify that this is my own work and I have not used code from any other source.
  */
-package com.FuturePixels.game;
+package com.FuturePixels.Entry;
 
 import com.FuturePixels.Utils.imageUtils;
 import com.FuturePixels.Utils.ILevel;
@@ -65,13 +65,33 @@ public final class Game {
         deltalong = System.nanoTime();
     }
 
+    private static ArrayList<Class> currentThings = new ArrayList<Class>();
+
+    public static <T extends ILevel> void Add(Class<T> obj) {
+        currentThings.add(obj);
+    }
+
+    public static <T extends ILevel> void Remove(Class<T> obj) {
+        currentThings.remove(obj);
+    }
+
+    public static int GetTotal() {
+        return currentThings.size();
+    }
+
+    public static void PrintAllTotal() {
+        currentThings.forEach((a) -> {
+            System.out.println("" + a.getClass().toString());
+        });
+    }
+
     public Game() {
         this.g = this;
         InitWindow();
-        this.AddLevel(new StartGamePanel(), "StartGamePanel");
+        this.AddLevel(new MainMenu(), "MainMenu");
         this.AddLevel(new Level1(), "Level1");
         this.AddLevel(new LeaderBoard(), "LeaderBoard");
-        Game.SetLevelActive("StartGamePanel");
+        Game.SetLevelActive("MainMenu");
 
     }
 
@@ -82,7 +102,7 @@ public final class Game {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.getContentPane().setLayout(new CardLayout());
         gameWindow.setLocationRelativeTo(null);
-        gameWindow.setTitle("Cookie Chaser");
+        gameWindow.setTitle("Gradded unit");
         gameWindow.setVisible(true);
     }
 
@@ -97,13 +117,27 @@ public final class Game {
     }
 
     public static void SetLevelActive(String name) {
-        gameWindow.getContentPane().add(Levels.get(LevelFinder.get(name)), name);
-        CardLayout cl = (CardLayout) gameWindow.getContentPane().getLayout();
-        cl.next(gameWindow.getContentPane());
-        Levels.get(LevelFinder.get(name)).requestFocus();
-        Levels.get(LevelFinder.get(name)).start();
-        CurrentLevel = Levels.get(LevelFinder.get(name));
-        CurrentLevel.OnStart();
+        try {
+            if (CurrentLevel != null) {
+                gameWindow.getContentPane().removeAll();
+                CurrentLevel.removeAll();
+                CurrentLevel.stop();
+                CurrentLevel.dispose();
+                CurrentLevel.setFocusable(false);
+                CurrentLevel.setEnabled(false);
+                CurrentLevel = null;
+                System.gc();
+            }
+            gameWindow.getContentPane().add(Levels.get(LevelFinder.get(name)), name);
+            CardLayout cl = (CardLayout) gameWindow.getContentPane().getLayout();
+            cl.next(gameWindow.getContentPane());
+            Levels.get(LevelFinder.get(name)).requestFocus();
+            CurrentLevel = Levels.get(LevelFinder.get(name));
+            CurrentLevel.OnStart();
+            CurrentLevel.start();
+        } catch (Exception e) {
+
+        }
     }
 
     public static ILevel GetLevel() {

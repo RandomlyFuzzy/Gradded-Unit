@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.game;
+package com.FuturePixels.Utils;
 
 /**
  *
@@ -23,11 +23,13 @@ public class Vector {
     public Vector(Vector v) {
         x = v.getX();
         y = v.getY();
+        v = null;
     }
 
     public Vector add(Vector v) {
         this.x += v.getX();
         this.y += v.getY();
+        v = null;
         return this;
     }
 
@@ -35,12 +37,14 @@ public class Vector {
         Vector v2 = new Vector(this);
         v2.x += v.getX();
         v2.y += v.getY();
+        v = null;
         return v2;
     }
 
     public Vector mult(Vector v) {
         this.x *= v.getX();
         this.y *= v.getY();
+        v =null;
         return this;
     }
 
@@ -73,8 +77,7 @@ public class Vector {
         this.y = y;
     }
 
-    
-    public String toString(){
-        return ""+this.x+","+this.y;
+    public String toString() {
+        return "" + this.x + "," + this.y;
     }
 }

@@ -8,15 +8,13 @@ package com.FuturePixels.Utils;
 import com.FuturePixels.Utils.MusicUtils;
 import com.FuturePixels.Utils.imageUtils;
 import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.game.Game;
-import com.FuturePixels.game.Vector;
+import com.FuturePixels.Entry.Game;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -35,21 +33,21 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private ArrayList<IDrawable> gameObjs = new ArrayList<IDrawable>();
     private Vector MousePos = new Vector(Vector.Zero);
     private boolean IsDragging = false, IsInside = true, IsClicking = false;
-    private TAdapter inputAdapter;
+    public TAdapter InputAdapter = null;
 
     public Vector getMousePos() {
         return MousePos;
     }
 
-    public boolean isIsDragging() {
+    public boolean isDragging() {
         return IsDragging;
     }
 
-    public boolean isIsInside() {
+    public boolean isInside() {
         return IsInside;
     }
 
-    public boolean isIsClicking() {
+    public boolean isClicking() {
         return IsClicking;
     }
     private HashMap<Integer, Boolean> MouseButtonPressed = new HashMap<Integer, Boolean>();
@@ -66,57 +64,96 @@ public abstract class ILevel extends JPanel implements ActionListener {
         game = Game.g;
     }
 
+    private ILevel get() {
+        return this;
+    }
+
     public void OnStart() {
         setFocusable(true);
         setDoubleBuffered(true);
-        inputAdapter = new TAdapter();
-        addKeyListener(inputAdapter);
-        addMouseListener(inputAdapter);
         init();
     }
 
     public void AddObject(IDrawable Drawable) {
         gameObjs.add(Drawable);
-        Drawable.init();
-        Drawable.initComponents();
+        Drawable.CoreInit();
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         Update(ae);
+        movement();
+        checkCollionsions();
+        this.repaint();
     }
 
     public void movement() {
-        gameObjs.forEach((obj) -> {
-            obj.doMove();
-        });
+        for (int i = 0; i < gameObjs.size(); i++) {
+            gameObjs.get(i).doMove();
+        }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Draw(g);
-        PostUpdate(g);
+        Graphics2D g2d = (Graphics2D) g;
+        Draw(g2d);
+        PostUpdate(g2d);
     }
 
-    public void PostUpdate(Graphics g) {
+    public void PostUpdate(Graphics2D g) {
         game.SetDelta();
-        gameObjs.forEach((a) -> {
-            a.Update(g);
-            a.UpdateComponents();
-        });
+        for (int i = 0; i < gameObjs.size(); i++) {
+            gameObjs.get(i).CoreUpdate(g);
+        }
         g.dispose();
+        System.gc();
     }
 
-    public void start() {
+    public void start() throws Exception {
+        if (InputAdapter == null) {
+            InputAdapter = new TAdapter();
+        }
+        if (Game.GetTotal() != 0) {
+            Game.PrintAllTotal();
+        }
         timer.start();
+
+        if (getKeyListeners().length == 0) {
+            addKeyListener(InputAdapter);
+        } else {
+            System.err.println("com.FuturePixels.Utils.ILevel.start() their was a problem disposing of the KeyListener");
+        }
+        if (getMouseListeners().length == 0) {
+            addMouseListener(InputAdapter);
+        } else {
+            System.err.println("com.FuturePixels.Utils.ILevel.start() their was a problem disposing of the MouseListeners");
+        }
+        if (getMouseMotionListeners().length == 0) {
+            addMouseMotionListener(InputAdapter);
+        } else {
+            System.err.println("com.FuturePixels.Utils.ILevel.start() their was a problem disposing of the MouseMotionListeners");
+        }
+        Game.Add(this.getClass());
     }
 
-    public void stop() {
-        timer.stop();
-    }
+    public void stop() throws Exception {
+        if (InputAdapter == null) {
+            throw new Exception("tried to stop it before it even ran");
+        } else {
+            timer.stop();
 
-    public void Add(IDrawable im) {
-        gameObjs.add(im);
+        }
+
+        if (getKeyListeners().length != 0) {
+            removeKeyListener(InputAdapter);
+        }
+        if (getMouseListeners().length != 0) {
+            removeMouseListener(InputAdapter);
+        }
+        if (getMouseMotionListeners().length != 0) {
+            removeMouseMotionListener(InputAdapter);
+        }
+        Game.Remove(this.getClass());
     }
 
     public synchronized void play(InputStream soundResource) {
@@ -130,34 +167,49 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     @SuppressWarnings("this will be amended soon :P")
     public void checkCollionsions() {
-        gameObjs.forEach((a) -> {
-            gameObjs.forEach((b) -> {
-                if (a != b) {
-                    a.CheckCollions(b);
+        if (gameObjs.size() <= 1) {
+            return;
+        }
+
+        for (int i = 0; i < gameObjs.size(); i++) {
+            IDrawable a = gameObjs.get(i);
+            for (int j = 0; j < gameObjs.size(); j++) {
+                if (i == j) {
+                    continue;
                 }
-            });
-        });
+                IDrawable b = gameObjs.get(j);
+                if (a != b) {
+                    if (a.CheckCollions(b)) {
+                        a.onCollison(b);
+                    }
+                    if (b.CheckCollions(a)) {
+                        b.onCollison(a);
+                    }
+                }
+            }
+
+        }
 
 //        thePlayer.checkCollision(theTreasure);
     }
 
-    public abstract void keyPress(KeyEvent e);
-
-    public abstract void keyRelease(KeyEvent e);
-
-   
     private class TAdapter extends InputAdapter {
-
-        public TAdapter() {
-        }
 
         @Override
         public void keyReleased(KeyEvent e) {
+            if (get() != Game.GetLevel()) {
+                return;
+            }
+
             keyRelease(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
+            if (get() != Game.GetLevel()) {
+                return;
+            }
+
             keyPress(e);
         }
 
@@ -167,11 +219,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            IsClicking = true;
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
+            IsClicking = true;
             MouseButtonPressed.put(e.getButton(), true);
         }
 
@@ -186,7 +238,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
                 Integer[] arr = new Integer[MouseButtonPressed.size()];
                 MouseButtonPressed.keySet().toArray(arr);
                 for (Integer a : arr) {
-                    isactiveOne = isactiveOne != !MouseButtonPressed.get(a) || isactiveOne;
+                    isactiveOne = isactiveOne != MouseButtonPressed.get(a) || isactiveOne;
+
                 }
 
                 IsClicking = isactiveOne;
@@ -197,13 +250,13 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            start();
+//            start();
             IsInside = true;
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            stop();
+//            stop();
             IsInside = false;
         }
 
@@ -218,10 +271,24 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
     }
 
-    
+    public void dispose() throws Exception {
+        stop();
+        gameObjs.forEach((a) -> {
+            a.dispose();
+        });
+        for (int i = gameObjs.size() - 1; i > 0; i--) {
+            gameObjs.remove(i);
+        }
+    }
+
     public abstract void init();
 
     public abstract void Update(ActionEvent ae);
 
-    public abstract void Draw(Graphics g);
+    public abstract void Draw(Graphics2D g);
+
+    public abstract void keyPress(KeyEvent e);
+
+    public abstract void keyRelease(KeyEvent e);
+
 }

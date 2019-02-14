@@ -5,7 +5,6 @@
  */
 package com.FuturePixels.Utils;
 
-import com.FuturePixels.game.Vector;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +22,7 @@ public class CollisonUtils {
 
     /**
      * check for line intersections using raycasting or linecasting theory
+     * Somethings are still needed to be done to make this usable 
      */
     public static Collison CheckForLineHits(Vector a, Vector b, Vector c, Vector d) {
 
@@ -42,7 +42,7 @@ public class CollisonUtils {
     }
 
     public static void main(String args[]) {
-        System.out.println(CheckForLineHits(new Vector(0, 0), new Vector(30, 30), new Vector(30, 0), new Vector(0, 30)).hitLocation.toString());
+        System.out.println(CheckForLineHits(new Vector(0, 0), new Vector(30, 30), new Vector(30, 0), new Vector(0, 30)).IsHit);
 
     }
 }

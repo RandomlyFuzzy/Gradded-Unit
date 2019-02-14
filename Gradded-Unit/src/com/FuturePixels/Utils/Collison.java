@@ -5,8 +5,6 @@
  */
 package com.FuturePixels.Utils;
 
-import com.FuturePixels.game.Vector;
-
 /**
  *
  * @author RandomlyFuzzy

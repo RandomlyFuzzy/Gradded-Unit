@@ -6,10 +6,11 @@
 package com.FuturePixels.levels;
 
 import com.FuturePixels.Utils.*;
-import com.FuturePixels.game.Game;
+import com.FuturePixels.Entry.Game;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.Timer;
 
@@ -39,10 +40,10 @@ public class LeaderBoard extends ILevel {
     }
 
     @Override
-    public void Draw(Graphics g) {
+    public void Draw(Graphics2D g) {
 
 //        System.out.println("com.game.levels.level1.paintComponent()");
-        g.drawImage(GetSprite("p/Images/background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
         for (int i = 1; i < 6; i++) {
             g.drawString("" + ((CollectionTimes[i] - CollectionTimes[0]) / 1000000000f + " Seconds"), 20, (i * 30) + Game.g.getWindowHeight() / 3);
         }

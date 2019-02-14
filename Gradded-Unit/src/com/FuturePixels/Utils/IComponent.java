@@ -5,18 +5,32 @@
  */
 package com.FuturePixels.Utils;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 /**
  *
  * @author RandomlyFuzzy
  */
-public class IComponent {
+public abstract class IComponent {
 
-    public void Init() {
+    private IDrawable Parent;
 
+    public IDrawable getParent() {
+        return Parent;
     }
 
-    public void Update() {
+    public IComponent(IDrawable parent) {
+        Parent = parent;
+    }
 
+    public abstract void Init();
+
+    public abstract void Update(Graphics2D g);
+
+    void dispose() {
+        Parent = null;
+        System.gc();
     }
 
 }

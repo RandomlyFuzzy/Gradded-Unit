@@ -1,11 +1,9 @@
 package com.FuturePixels.levels;
 
 import com.FuturePixels.Utils.ILevel;
-import com.FuturePixels.characters.Player;
-import com.FuturePixels.characters.Cookie;
-import com.FuturePixels.characters.PlatForm;
+import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.game.Game;
+import com.FuturePixels.Entry.Game;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,10 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.time.LocalTime;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
  *
@@ -26,23 +20,25 @@ import javax.swing.Timer;
 public class Level1 extends ILevel {
 
     Image background;
-    private int move = 0;
     boolean Pressed = false, p2 = false;
-    IDrawable player;
+    Player player;
 
     public Level1() {
         super();
         System.out.println("com.game.levels.level1.<init>()");
         player = new Player();
-        Add(player);
-        Add(new PlatForm());
+        AddObject(player);
+        AddObject(new PlatForm());
+        AddObject(new HUD());
     }
 
     @Override
     public void Update(ActionEvent ae) {
         checkCollisions();
         movement();
-
+        if (isClicking()) {
+            player.addPoints(20);
+        }
         this.repaint();
     }
 
@@ -54,62 +50,61 @@ public class Level1 extends ILevel {
 
     }
 
-    public void movement() {
-        super.movement();
-    }
-
     private void checkCollisions() {
         super.checkCollionsions();
     }
 
     @Override
-    public void Draw(Graphics g) {
+    public void Draw(Graphics2D g) {
         g.drawImage(background, 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        System.out.println("com.game.levels.Level1.paintComponent()");
     }
 
     @Override
     public void keyPress(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_SPACE:
-                Pressed = true;
-                move |= 1;
-                break;
-            case KeyEvent.VK_DOWN:
-                move |= 2;
-                break;
-            case KeyEvent.VK_LEFT:
-                move |= 4;
-                break;
-            case KeyEvent.VK_RIGHT:
-                move |= 8;
-                break;
-        }
-        ((Player) player).move(move);
-        if (Pressed) {
+        try {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_SPACE:
+                    Pressed = true;
+                    player.setUp(true);
+                    break;
+                case KeyEvent.VK_DOWN:
+                    player.setDown(true);
+                    break;
+                case KeyEvent.VK_LEFT:
+                    player.setLeft(true);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    player.setRight(true);
+                    break;
+            }
+        } catch (Exception ex) {
+
         }
     }
 
     @Override
     public void keyRelease(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_SPACE:
-                move -= 1;
-                Pressed = false;
-                break;
-            case KeyEvent.VK_DOWN:
-                move -= 2;
-                break;
-            case KeyEvent.VK_LEFT:
-                move -= 4;
-                break;
-            case KeyEvent.VK_RIGHT:
-                move -= 8;
-                break;
+        try {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_SPACE:
+                    Pressed = true;
+                    player.setUp(false);
+                    break;
+                case KeyEvent.VK_DOWN:
+                    player.setDown(false);
+                    break;
+                case KeyEvent.VK_LEFT:
+                    player.setLeft(false);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    player.setRight(false);
+                    break;
+            }
+        } catch (Exception ex) {
+
         }
 
-        System.out.println("com.game.levels.level1.TAdapter.keyReleased() " + move);
-        ((Player) player).move(move);
     }
 
 }

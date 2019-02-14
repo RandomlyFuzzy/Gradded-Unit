@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.GameClasses;
+package com.FuturePixels.Drawables.Menus;
 
 import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.game.Game;
+import com.FuturePixels.Entry.Game;
+import com.FuturePixels.Utils.Vector;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -24,32 +25,26 @@ public class Mouse extends IDrawable {
 
     @Override
     public void init() {
+        GetSprite("/Images/cookie.png");
     }
 
     @Override
     public void doMove() {
-
+        Rad += Game.g.getDelta() * 100;
+        setPosition(Level().getMousePos().getX(),Level().getMousePos().getY());
+        setRotation(Rad);
     }
 
     public float Rad = 0;
 
     @Override
-    public void Update(Graphics g) {
-        Rad += Game.g.getDelta() * 100;
-        Graphics2D g2d = (Graphics2D) g;
-
-        AffineTransform old = g2d.getTransform();
-
-//scale -> translate -> rotate
-        g2d.rotate(Rad);
-        g2d.translate((int) Level().getMousePos().getX(), (int) Level().getMousePos().getY());
-        g2d.drawImage(GetSprite("/Images/Cookie.png"), getSpriteWidth(), getSpriteHeight(), null);
-        g2d.setTransform(old);
-
+    public void Update(Graphics2D g) {
+        g.drawImage(GetSprite("/Images/cookie.png"), (int) -getSpriteWidth() / 2, (int) -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
     }
 
     @Override
     public void onCollison(IDrawable im) {
+        System.out.println("com.FuturePixels.GameClasses.Mouse.onCollison() with " + im.getClass().toString());
     }
 
 }

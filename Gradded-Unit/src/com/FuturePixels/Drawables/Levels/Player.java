@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.characters;
+package com.FuturePixels.Drawables.Levels;
 
 import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.game.Game;
-import com.FuturePixels.game.Vector;
+import com.FuturePixels.Entry.Game;
+import com.FuturePixels.Utils.Vector;
 import com.FuturePixels.levels.LeaderBoard;
 import com.FuturePixels.Utils.ILevel;
 import java.awt.Graphics;
@@ -34,15 +34,51 @@ public class Player extends IDrawable {
     private int Scale = 1;
     private long score;
     private long now;
+    private int ScoreInd = 0;
+    private boolean left = false, right = false, up = false, down = false;
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public void setLeft(boolean left) {
+        System.out.println("com.FuturePixels.Drawables.Levels.Player.setLeft()");
+        this.left = left;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public void setRight(boolean right) {
+        System.out.println("com.FuturePixels.Drawables.Levels.Player.setRight()");
+        this.right = right;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public void setUp(boolean up) {
+        System.out.println("com.FuturePixels.Drawables.Levels.Player.setUp()");
+        this.up = up;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public void setDown(boolean down) {
+        System.out.println("com.FuturePixels.Drawables.Levels.Player.setDown()");
+        this.down = down;
+    }
 
     public Player() {
         super();
-        setPosition(new Vector(100, 100));
+        setPosition(100, 100);
         veclocity = new Vector(0, 0);
         displacement = new Vector(0, 0);
         score = 0;
-        init();
-
     }
 
     public void init() {
@@ -51,18 +87,21 @@ public class Player extends IDrawable {
             GetSprite("/Images/Player/sprite_" + i + ".png");
         }
         now = System.nanoTime() / 1000000000;
-    }
-    private int moveDir = 0;
-
-    public void move(int dir) {
-        moveDir = dir;
+        ScoreInd = HUD.AddText("Score:" + score, new Vector(0, 40));
     }
 
-    private void movePlayer(int dir) {
+    public void move(boolean left, boolean right, boolean up, boolean down) {
+        this.left = left;
+        this.right = right;
+        this.up = up;
+        this.down = down;
+    }
+
+    private void movePlayer() {
         boolean one = true, two = true;
-        if ((dir & 1) == 1) {
+        if (up) {
             displacement.addY(-1);
-//        } else if ((dir & 2) == 2) {
+//        } else if (down) {
 //            displacement.setY(1);
         } else {
 //            displacement.setY(0);
@@ -70,10 +109,10 @@ public class Player extends IDrawable {
             one = false;
         }
         displacement.setY((float) Math.max(-0.3, Math.min(displacement.getY(), 0.5f)));
-        if ((dir & 4) == 4) {
+        if (left) {
             Scale = -1;
             displacement.addX(-1);
-        } else if ((dir & 8) == 8) {
+        } else if (right) {
             Scale = 1;
             displacement.addX(1);
         } else {
@@ -96,24 +135,21 @@ public class Player extends IDrawable {
     float deg = 0;
 
     @Override
-    public void Update(Graphics g) {
+    public void Update(Graphics2D g) {
         deg += Game.g.getDelta() * 100;
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawString("Score:" + score, 0, 20);
-
-        movePlayer(moveDir);
+        Graphics g2d = (Graphics) g;
+//        g2d.drawString("Score:" + score, 0, 20);
+        movePlayer();
         addGravity(true);
         ind += Stop ? -ind : 0.1f;
         ind = ind % 7;
+        g.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
 
+    }
 
-        AffineTransform old = g2d.getTransform();
-
-        g2d.translate((int) getPosition().getX(), (int) getPosition().getY());
-
-        g2d.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
-
-        g2d.setTransform(old);
+    public void addPoints(int amt) {
+        System.out.println("com.FuturePixels.Drawables.Levels.Player.addPoints()");
+        setScore(getScore() + amt);
     }
 
     public void addGravity(boolean reset) {
@@ -121,7 +157,7 @@ public class Player extends IDrawable {
         if (this.getPosition().getY() > Game.g.getWindowHeight() / 2) {
             if (reset) {
                 this.veclocity = new Vector(this.veclocity.getX(), 0);
-                this.setPosition(new Vector(this.getPosition().getX(), Game.g.getWindowHeight() / 2));
+                this.setPosition(this.getPosition().getX(), Game.g.getWindowHeight() / 2);
             }
             return;
         } else {
@@ -136,11 +172,17 @@ public class Player extends IDrawable {
 
     public void setScore(long score) {
         this.score = score;
+        try{
+            HUD.EditText(ScoreInd, "Score:" + this.score);
+        }catch(Exception e){
+            System.err.println("error");
+        }
     }
 
     public void doMove() {
         getPosition().add(veclocity.add(displacement));
         veclocity.mult(new Vector(0.96f, 0.96f));
+
     }
 
     @Override
