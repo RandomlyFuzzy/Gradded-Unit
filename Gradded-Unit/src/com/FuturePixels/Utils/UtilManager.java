@@ -23,7 +23,7 @@ public class UtilManager {
         try{
             throw new Exception();
         }catch(Exception e){
-            System.err.println("FindUseClass() "+e.getStackTrace()[depth]);
+            System.err.println("FindUseClass() "+e.getStackTrace()[depth==-1?e.getStackTrace().length-1:depth]);
         }
     }
     

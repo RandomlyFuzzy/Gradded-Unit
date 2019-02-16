@@ -145,7 +145,8 @@ public final class Game {
     }
 
     public static void SetLevelActive(ILevel Level) {
-        System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() " + Level.getName() + " loading");
+        System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() " + Level.getClass().toString()+ " loading");
+        UtilManager.FindUseClass(-1);
         try {
             if (CurrentLevel != null) {
                 gameWindow.getContentPane().removeAll();

@@ -17,7 +17,8 @@ import java.awt.geom.AffineTransform;
  * @author RandomlyFuzzy
  */
 public class Transform extends IComponent {
-
+ 
+    
     private AffineTransform old;
 
     public Vector Scale = Vector.One;

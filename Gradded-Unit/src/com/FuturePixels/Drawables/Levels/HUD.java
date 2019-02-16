@@ -30,6 +30,9 @@ public class HUD extends IDrawable {
     }
 
     public static void EditText(int ind, String Text) {
+        if(texts.size()<=ind||ind<0) return;
+        
+        
         texts.set(ind, Text);
     }
 

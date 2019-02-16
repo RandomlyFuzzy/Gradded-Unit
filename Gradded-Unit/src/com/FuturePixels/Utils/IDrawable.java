@@ -20,6 +20,7 @@ import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -33,23 +34,9 @@ public abstract class IDrawable {
     private int spriteHeight = 0;
     private float Rotation = 0, offset = 0;
 
-    public float getOffset() {
-        return offset;
-    }
-
-    public void setOffset(float offset) {
-        this.offset = offset;
-    }
     private Vector Scale = Vector.One;
     private boolean Enabled = true, isColliding = false;
 
-    public boolean isColliding() {
-        return isColliding;
-    }
-
-    public void setIsColliding(boolean isColliding) {
-        this.isColliding = isColliding;
-    }
     private BufferedImage LastImage = null;
     private ArrayList<IComponent> Component = new ArrayList<IComponent>();
     private final Transform transform;
@@ -73,7 +60,6 @@ public abstract class IDrawable {
 
     public IDrawable() {
         position = new Vector(0, 0);
-        CollisonUtils.PossableCols.add(this);
         transform = new Transform(this);
         AddComponent(transform);
         hasSupered = true;
@@ -203,10 +189,14 @@ public abstract class IDrawable {
         return getClass().toString() + " at " + getPosition().getX() + " ," + getPosition().getY();
     }
 
-    public IComponent getComponent(IComponent g) {
-        IComponent ret = null;
+    public <T extends IComponent> T getComponent(T g) {
+        T ret = null;
+        System.out.println("com.FuturePixels.Utils.IDrawable.getComponent() " + g.getClass().toString());
         for (IComponent t : Component) {
-            return (IComponent) t;
+            if (t.getClass().toString().equals(g.getClass().toString())) {
+                System.out.println("com.FuturePixels.Utils.IDrawable.getComponent()");
+                return (T) t;
+            }
         }
         return ret;
     }
@@ -323,6 +313,22 @@ public abstract class IDrawable {
 
     public Vector[] sideRight() {
         return new Vector[]{v1, v4};
+    }
+
+    public float getOffset() {
+        return offset;
+    }
+
+    public void setOffset(float offset) {
+        this.offset = offset;
+    }
+
+    public boolean isColliding() {
+        return isColliding;
+    }
+
+    public void setIsColliding(boolean isColliding) {
+        this.isColliding = isColliding;
     }
 
     public abstract void init();

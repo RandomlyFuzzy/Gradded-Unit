@@ -1,16 +1,13 @@
 package com.FuturePixels.levels;
 
+import com.FuturePixels.Components.DebugComponent;
 import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.Utils.Vector;
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
@@ -34,6 +31,7 @@ public class Level1 extends ILevel {
         System.out.println("com.game.levels.level1.<init>()");
         AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f));
         AddObject(new PlatForm(new Vector(400, 200), (float) Math.PI * -0.25f / 3f));
+        AddObject(new DebugComponent());
         player = new Player();
         AddObject(player);
         AddObject(new HUD());

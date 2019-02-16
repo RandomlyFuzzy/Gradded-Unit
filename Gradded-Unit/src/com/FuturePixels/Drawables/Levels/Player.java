@@ -5,26 +5,14 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
+import com.FuturePixels.Components.DebugComponent;
 import com.FuturePixels.Components.RigidBody;
-import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.Utils.Collison;
 import com.FuturePixels.Utils.CollisonUtils;
 import com.FuturePixels.Utils.Vector;
-import com.FuturePixels.levels.LeaderBoard;
-import com.FuturePixels.Utils.ILevel;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
-import javax.imageio.ImageIO;
-import jdk.nashorn.internal.objects.Global;
-import jdk.nashorn.internal.objects.NativeArray;
 
 /**
  *
@@ -77,8 +65,10 @@ public class Player extends IDrawable {
 
     public Player() {
         super();
-
+        Velocity = new Vector(0, 0);
+        Acc = new Vector(0, 0);
     }
+    private DebugComponent dComp;
 
     public void init() {
         System.out.println("com.FuturePixels.Drawables.Levels.Player.init()");
@@ -105,21 +95,8 @@ public class Player extends IDrawable {
         ind += Stop ? -ind : 0.3f;
         ind = ind % 8;
         g.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
-
 //        setRotation(getRotation()+(float)(Math.PI/180));
-        getComponent(Transform.class).PopTransforms(g);
-        g.setColor(Color.GREEN);
-        Vector v2 = new Vector(-getSpriteHeight() - 20, (float) -getSpriteHeight() - 20).mult(GetUp()).add(getPosition());
-        g.drawLine(
-                (int)new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())).getX()
-                ,(int)new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())).getY()
-                , (int) v2.getX(), (int) v2.getY());
-        if (_hit != null) {
-            g.fillOval((int) (_hit.getX() - getPosition().getX()) - 5, (int) (_hit.getY() - getPosition().getX()) - 5, 10, 10);
-        }
-        getComponent(Transform.class).PushTransforms(g);
     }
-    Vector v;
 
     public long getScore() {
         return score;
@@ -151,9 +128,9 @@ public class Player extends IDrawable {
         if (up && canJump) {
             Acc.setY(0.01f);
             if (isColliding()) {
-                Velocity.setY(0.1f);
+                Velocity.setY(1.5f);
             }
-//            canJump = false;
+            canJump = false;
         } else if (down) {
             Acc.setY(-0.01f);
             canJump = true;
@@ -175,7 +152,7 @@ public class Player extends IDrawable {
 
         Acc.setX(Acc.getX() > 0.3f ? 0.3f : Acc.getX() < -0.3f ? 0.3f : Acc.getX());
         if (!isColliding()) {
-//            Acc.setY(-9.81f * (float) Game.g.getDelta());
+            Acc.setY(Acc.getY() + (-4.81f * (float) Game.g.getDelta()));
         }
         Stop = !one && !two;
     }
@@ -193,19 +170,33 @@ public class Player extends IDrawable {
             setRotation(im.getRotation());
             //get platfor top line
 
-            _left = new Vector(-getSpriteHeight() - 20, (float) -getSpriteHeight() - 20).mult(GetUp()).add(getPosition());
-            _Top = im.sideRight();
+            _left = new Vector(-getSpriteHeight() + 20, (float) -getSpriteHeight() + 20).mult(GetUp()).add(getPosition());
+            _Top = im.sideLeft();
 
             Collison col = CollisonUtils.CheckForLineHits(new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())), _left, _Top[0], _Top[1]);
 
             if (col.IsHit) {
+                DebugComponent.AddLine(_left, new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())));
+                DebugComponent.AddLine(_Top[0], _Top[1]);
                 _hit = col.hitLocation;
-                
-                float x,y;
-                setPosition(col.hitLocation.getX(), col.hitLocation.getY());
-                Velocity.mult(0);
+
+                float x = new Vector(_left).mult(0f).add(GetUp().mult(getSpriteHeight() * 0.550f)).getX(),
+                        y = new Vector(_left).mult(-0.001f).add(GetUp().mult(getSpriteHeight() * 0.550f)).getY();
+                DebugComponent.AddCirles(new Vector(col.hitLocation.getX() + x, col.hitLocation.getY() + y));
+                setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
+//                Velocity.mult(0);
+                Velocity.mult(new Vector(1, 0));
+                Acc.mult(new Vector(1, 0.5f));
             }
         }
+    }
+
+    public void dispose() {
+        super.dispose();
+        Velocity = Vector.Zero;
+        Acc = Vector.Zero;
+        
+
     }
 
 }

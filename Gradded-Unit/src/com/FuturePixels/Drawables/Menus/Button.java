@@ -5,7 +5,7 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Utils.*;
+import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.Utils.Vector;
 import java.awt.Color;
@@ -21,14 +21,6 @@ import java.awt.Toolkit;
 public class Button extends IDrawable {
 
     private String Message = "";
-
-    public String getMessage() {
-        return Message;
-    }
-
-    public void setMessage(String Message) {
-        this.Message = Message;
-    }
     private Vector relpos = Vector.One;
     ButtonAbstract buttonDelegate;
 
@@ -81,6 +73,14 @@ public class Button extends IDrawable {
             DoAction();
             setScale(Vector.One);
         }
+    }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String Message) {
+        this.Message = Message;
     }
 
 }

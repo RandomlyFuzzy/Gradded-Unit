@@ -5,7 +5,7 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Utils.*;
+import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.Utils.Vector;
 import java.awt.Color;
@@ -13,54 +13,58 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.util.logging.Logger;
 
 /**
  *
  * @author RandomlyFuzzy
  */
-public class DropDownButton extends Button {
+public class DropDownButton extends IDrawable {
 
     private String Message = "";
     private Vector relpos = Vector.One;
     ButtonAbstract buttonDelegate;
-
-    private int[] indexOfSubbuttons;
+    public final int[] indexOfSubbuttons;
     private String[] SubMessage;
     private ButtonAbstract[] LogicForSubButtons;
     private Vector AddVector;
 
+    public DropDownButton() {
+        super();
+        indexOfSubbuttons = new int[0];
+    }
+
     public DropDownButton(Vector relpos, String Message, Vector AddPerButton, String[] SubMessage, ButtonAbstract[] LogicForSubButtons) {
-//        super();
-        super(relpos, Message, new ButtonAbstract() {
+        super();
+        this.Message = Message;
+        this.relpos = relpos;
+        this.AddVector = AddPerButton;
+        this.SubMessage = SubMessage;
+        this.LogicForSubButtons = LogicForSubButtons;
+        indexOfSubbuttons = new int[this.SubMessage.length];
+        for (int i = 0; i < SubMessage.length; i++) {
+            Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i)), SubMessage[i], i + 1 < LogicForSubButtons.length ? LogicForSubButtons[i] : new ButtonAbstract() {
+                @Override
+                public void OnClick(Button b) {
+                    b.setMessage("Button missing input with message");
+                }
+
+            }));
+            indexOfSubbuttons[i] = Level().GetObjectCount() - 1;
+        }
+        buttonDelegate = new ButtonAbstract() {
             @Override
             public void OnClick(DropDownButton b) {
                 for (int i : b.indexOfSubbuttons) {
                     b.Level().GetObject(i).setEnabled(!b.Level().GetObject(i).isEnabled());
                 }
             }
-        });
-        AddVector = AddPerButton;
-        this.SubMessage = SubMessage;
-        this.LogicForSubButtons = LogicForSubButtons;
+        };
     }
 
     @Override
     public void init() {
-        GetSprite("/Images/Button_1.png");
-        indexOfSubbuttons = new int[SubMessage.length];
+        GetSprite("/Images/Button_0.png");
 
-        for (int i = 0; i < SubMessage.length; i++) {
-
-            Level().AddObject(new Button(relpos.add(new Vector(AddVector).mult(i)), SubMessage[i], i + 1 < LogicForSubButtons.length ? LogicForSubButtons[i]:new ButtonAbstract() {
-                 @Override
-                 public void OnClick(Button b){
-                     b.setMessage("Button missing input with message");
-                 }
-            
-            }));
-            indexOfSubbuttons[i] = Level().GetObjectCount() - 1;
-        }
     }
 
     @Override
@@ -70,16 +74,35 @@ public class DropDownButton extends Button {
 
     @Override
     public void Update(Graphics2D g) {
+        System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.Update() "+getPosition().toString());
         DrawLastLoadedImage(g);
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
     }
 
-    public void OnCollison(IDrawable im) {
-        if(Level().isClicking()){
-            DoAction();
+    public void DoAction() {
+        if (buttonDelegate != null) {
+            buttonDelegate.OnClick(this);
+        } else {
+            System.err.println("error no delegate in this button");
         }
+    }
+
+    @Override
+    public void onCollison(IDrawable im) {
+        if (Level().isClicking()) {
+            DoAction();
+            setScale(Vector.One);
+        }
+    }
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String Message) {
+        this.Message = Message;
     }
 
 }

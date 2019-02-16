@@ -5,7 +5,7 @@
  */
 package com.FuturePixels.levels;
 
-import com.FuturePixels.Utils.*;
+import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.Entry.Game;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
