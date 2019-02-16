@@ -44,19 +44,30 @@ public class MainMenu extends ILevel {
         m = new Mouse();
         AddObject(new Button(new Vector(0.5f, 0.3f), "To Game", new ButtonAbstract() {
             @Override
-            public void OnClick() {
-                Game.SetLevelActive("Level1");
-//   System.out.println(".OnClick()");
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new Level1());
             }
         }));
-        AddObject(new Button(new Vector(0.5f, 0.6f), "To Leaderboard", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.5f, 0.5f), "To Leaderboard", new ButtonAbstract() {
             @Override
-            public void OnClick() {
-                Game.SetLevelActive("LeaderBoard");
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new LeaderBoard());
+            }
+        }));
+        AddObject(new Button(new Vector(0.5f, 0.7f), "To Settings", new ButtonAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new Settings());
+            }
+        }));
+        AddObject(new Button(new Vector(0.5f, 0.8f), "Quit", new ButtonAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                System.exit(0);
             }
         }));
         AddObject(m);
-        AddObject(new HUD());
+//        AddObject(new HUD());
     }
 
     @Override

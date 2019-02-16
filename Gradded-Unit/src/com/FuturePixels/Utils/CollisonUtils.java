@@ -21,8 +21,8 @@ public class CollisonUtils {
     }
 
     /**
-     * check for line intersections using raycasting or linecasting theory
-     * Somethings are still needed to be done to make this usable 
+     * check for line intersections using ray-casting or linecasting theory
+     * Some things are still needed to be done to make this usable 
      */
     public static Collison CheckForLineHits(Vector a, Vector b, Vector c, Vector d) {
 
@@ -35,14 +35,23 @@ public class CollisonUtils {
         float t = (((c.getX() - a.getX()) * s.getY()) - ((c.getY() - a.getY()) * s.getX())) / g;
 
         if (0 <= u && u <= 1 && t >= 0 && t <= 1) {
-            return new Collison(new Vector((a.getX() + (t * r.getX())), (a.getY() + (t * r.getY()))));
+//            System.out.println("com.FuturePixels.Utils.CollisonUtils.CheckForLineHits() "+new Vector((a.getX() + (t * r.getX())), (a.getY() + (t * r.getY()))).toString());
+            return new Collison(
+                    new Vector((a.getX() + (t * r.getX()))
+                    , (a.getY() + (t * r.getY()))));
         }
 
         return new Collison();
     }
 
+    /*
+        this is just for testing purposes with that in regards to this script 
+    
+    */
     public static void main(String args[]) {
-        System.out.println(CheckForLineHits(new Vector(0, 0), new Vector(30, 30), new Vector(30, 0), new Vector(0, 30)).IsHit);
+        System.out.println(
+                CheckForLineHits(new Vector(0, 0), new Vector(30, 30)
+                , new Vector(30, 0), new Vector(0, 30)).IsHit);
 
     }
 }

@@ -5,9 +5,10 @@
  */
 package com.FuturePixels.Components;
 
+import com.FuturePixels.Drawables.Levels.Player;
+import com.FuturePixels.Entry.Game;
 import com.FuturePixels.Utils.IComponent;
 import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.Utils.Vector;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -24,13 +25,18 @@ public class RigidBody extends IComponent {
 
     @Override
     public void Init() {
-        
+        System.out.println("com.FuturePixels.Components.RigidBody.Init()");
     }
 
     @Override
     public void Update(Graphics2D g) {
-
+        Player p = (Player) getParent();
+        float offset = getParent().GetRight().getY();
+        if (!getParent().isColliding()) {
+        } else {
+        }
+//        p.Velocity.add(p.GetRight().mult(1 - offset).mult(0.981f).mult((float) Game.g.getDelta()));
+//        p.Acc.add(p.GetUp().mult(-1).mult(0.981f).mult((float) Game.g.getDelta()));
     }
 
-  
 }

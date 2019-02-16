@@ -13,7 +13,7 @@ public class Collison {
 
     public final Vector hitLocation;
     IDrawable ObjectHit;
-    final boolean IsHit;
+    public final boolean IsHit;
 
     public Collison(IDrawable obj, Vector location, boolean ishit) {
         IsHit = ishit;

@@ -10,7 +10,8 @@ package com.FuturePixels.Drawables.Menus;
  * @author RandomlyFuzzy
  */
 public abstract class ButtonAbstract {
-    
-    public abstract void OnClick();
-    
+
+    public void OnClick (DropDownButton b){}
+    public void OnClick(Button b){}
+
 }

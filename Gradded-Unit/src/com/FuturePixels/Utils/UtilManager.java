@@ -18,4 +18,13 @@ public class UtilManager {
         new CalcUtils();
     }
     
+    
+    static void FindUseClass(int depth){
+        try{
+            throw new Exception();
+        }catch(Exception e){
+            System.err.println("FindUseClass() "+e.getStackTrace()[depth]);
+        }
+    }
+    
 }

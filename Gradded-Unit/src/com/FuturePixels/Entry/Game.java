@@ -98,10 +98,7 @@ public final class Game {
     public Game() {
         this.g = this;
         InitWindow();
-        this.AddLevel(new MainMenu(), "MainMenu");
-        this.AddLevel(new Level1(), "Level1");
-        this.AddLevel(new LeaderBoard(), "LeaderBoard");
-        Game.SetLevelActive("MainMenu");
+        Game.SetLevelActive(new MainMenu());
     }
 
     public void InitWindow() {
@@ -147,14 +144,8 @@ public final class Game {
         return gameWindow;
     }
 
-    public void AddLevel(ILevel level, String Name) {
-        level.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
-        Levels.add(level);
-        LevelFinder.put(Name, Levels.size() - 1);
-    }
-
-    public static void SetLevelActive(String name) {
-        System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() "+name+" loading");
+    public static void SetLevelActive(ILevel Level) {
+        System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() " + Level.getName() + " loading");
         try {
             if (CurrentLevel != null) {
                 gameWindow.getContentPane().removeAll();
@@ -166,11 +157,12 @@ public final class Game {
                 CurrentLevel = null;
                 System.gc();
             }
-            gameWindow.getContentPane().add(Levels.get(LevelFinder.get(name)), name);
+            Level.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
+            gameWindow.getContentPane().add(Level);
             CardLayout cl = (CardLayout) gameWindow.getContentPane().getLayout();
             cl.next(gameWindow.getContentPane());
-            Levels.get(LevelFinder.get(name)).requestFocus();
-            CurrentLevel = Levels.get(LevelFinder.get(name));
+            Level.requestFocus();
+            CurrentLevel = Level;
             CurrentLevel.OnStart();
             CurrentLevel.start();
         } catch (Exception e) {

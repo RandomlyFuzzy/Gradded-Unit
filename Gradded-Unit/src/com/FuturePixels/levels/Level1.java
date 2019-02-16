@@ -4,6 +4,7 @@ import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
+import com.FuturePixels.Utils.Vector;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,28 +26,28 @@ public class Level1 extends ILevel {
 
     public Level1() {
         super();
-        System.out.println("com.game.levels.level1.<init>()");
-        player = new Player();
-        AddObject(player);
-        AddObject(new PlatForm());
-        AddObject(new HUD());
-    }
-
-    @Override
-    public void Update(ActionEvent ae) {
-      
     }
 
     @Override
     public void init() {
 
+        System.out.println("com.game.levels.level1.<init>()");
+        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f));
+        AddObject(new PlatForm(new Vector(400, 200), (float) Math.PI * -0.25f / 3f));
+        player = new Player();
+        AddObject(player);
+        AddObject(new HUD());
+
         Game.toggleCursor();
         background = GetSprite("/Images/background.png");
-        LeaderBoard.AddTime(System.nanoTime());
+//        LeaderBoard.AddTime(System.nanoTime());
 
     }
 
-   
+    @Override
+    public void Update(ActionEvent ae) {
+
+    }
 
     @Override
     public void Draw(Graphics2D g) {

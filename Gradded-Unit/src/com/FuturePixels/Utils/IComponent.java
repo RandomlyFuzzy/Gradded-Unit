@@ -21,6 +21,10 @@ public abstract class IComponent {
     }
 
     public IDrawable getParent() {
+        if(Parent == null){
+            dispose();
+            return null;
+        }
         return Parent;
     }
 

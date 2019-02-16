@@ -9,6 +9,7 @@ import com.FuturePixels.Utils.MusicUtils;
 import com.FuturePixels.Utils.imageUtils;
 import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
+import com.FuturePixels.levels.MainMenu;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -29,11 +30,21 @@ import java.util.HashMap;
 public abstract class ILevel extends JPanel implements ActionListener {
 
     public final Game game;
-    public final Timer timer;
+    private Timer timer;
     private ArrayList<IDrawable> gameObjs = new ArrayList<IDrawable>();
     private Vector MousePos = new Vector(Vector.Zero);
     private boolean IsDragging = false, IsInside = true, IsClicking = false;
     public TAdapter InputAdapter = null;
+
+    void resetParams() {
+        IsDragging = false;
+        IsInside = true;
+        IsClicking = false;
+        InputAdapter = null;
+        MousePos = new Vector(Vector.Zero);
+        gameObjs = new ArrayList<IDrawable>();
+        timer = null;
+    }
 
     public Vector getMousePos() {
         return MousePos;
@@ -85,6 +96,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
         checkCollionsions();
         movement();
         this.repaint();
+//       
+
     }
 
     public void movement() {
@@ -98,34 +111,45 @@ public abstract class ILevel extends JPanel implements ActionListener {
         Graphics2D g2d = (Graphics2D) g;
         Draw(g2d);
         if (DebugCollisons) {
-            for (int j = 0; j < game.g.getWindowWidth(); j++) {
-                for (int k = 0; k < game.g.getWindowHeight(); k++) {
-                    boolean draw = false;
-                    for (int i = 0; i < gameObjs.size(); i++) {
-                        if (gameObjs.get(i).getBounds().contains(j, k)) {
-                            draw = true;
-                        }
-                    }
-                    if (draw) {
-                        g.drawRect(j, k, 1, 1);
-                    }
-                }
-            }
+//            for (int j = 0; j < game.g.getWindowWidth(); j++) {
+//                for (int k = 0; k < game.g.getWindowHeight(); k++) {
+//                    boolean draw = false;
+//                    for (int i = 0; i < gameObjs.size(); i++) {
+//                        if (gameObjs.get(i).getBounds().contains(j, k)) {
+//                            draw = true;
+//                            break;
+//                        }
+//                    }
+//                    if (draw) {
+//                        g.drawRect(j, k, 1, 1);
+//                    }
+//                }
+//            }
         }
         PostUpdate(g2d);
+    }
+
+    public IDrawable GetObject(int index) {
+        return gameObjs.get(index);
+    }
+
+    public int GetObjectCount() {
+        return gameObjs.size();
     }
 
     public void PostUpdate(Graphics2D g) {
         game.SetDelta();
         for (int i = 0; i < gameObjs.size(); i++) {
-            gameObjs.get(i).CoreUpdate(g);
-            gameObjs.get(i).setIsColliding(false);
+            if (gameObjs.get(i).isEnabled()) {
+                gameObjs.get(i).CoreUpdate(g);
+                gameObjs.get(i).setIsColliding(false);
+            }
         }
         g.dispose();
         System.gc();
     }
 
-    public void start(){
+    public void start() {
         if (InputAdapter == null) {
             InputAdapter = new TAdapter();
         }
@@ -181,7 +205,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
         return g;
     }
 
-    @SuppressWarnings("this will be amended soon :P")
     public void checkCollionsions() {
         if (gameObjs.size() <= 1) {
             return;
@@ -190,10 +213,10 @@ public abstract class ILevel extends JPanel implements ActionListener {
         for (int i = 0; i < gameObjs.size(); i++) {
             IDrawable a = gameObjs.get(i);
             for (int j = 0; j < gameObjs.size(); j++) {
-                if (i == j) {
+                IDrawable b = gameObjs.get(j);
+                if (i == j && (a.isEnabled() && b.isEnabled())) {
                     continue;
                 }
-                IDrawable b = gameObjs.get(j);
                 if (a != b) {
                     if (a.CheckCollions(b)) {
                         a.onCollison(b);
@@ -232,11 +255,14 @@ public abstract class ILevel extends JPanel implements ActionListener {
             if (e.getKeyCode() == 120) {
                 DebugCollisons = !DebugCollisons;
             }
-            if(e.getKeyCode()==10 && e.isAltDown()){
+            if (e.getKeyCode() == KeyEvent.VK_F10) {
+                Game.SetLevelActive(new MainMenu());
+            }
+            if (e.getKeyCode() == 10 && e.isAltDown()) {
                 Game.FullScreen();
-            }else if(e.getKeyCode()==10 && !e.isAltDown()){
+            } else if (e.getKeyCode() == 10 && !e.isAltDown()) {
                 Game.toggleCursor();
-            }   
+            }
             keyPress(e);
         }
 
@@ -300,12 +326,15 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     public void dispose() throws Exception {
         stop();
-        gameObjs.forEach((a) -> {
+        ArrayList<IDrawable> drawable = gameObjs;
+        gameObjs = new ArrayList<IDrawable>();
+        drawable.forEach((a) -> {
             a.dispose();
         });
-        for (int i = gameObjs.size() - 1; i > 0; i--) {
-            gameObjs.remove(i);
+        for (int i = drawable.size() - 1; i > 0; i--) {
+            drawable.remove(i);
         }
+        resetParams();
     }
 
     public abstract void init();

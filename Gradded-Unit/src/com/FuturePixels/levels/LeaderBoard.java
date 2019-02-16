@@ -66,7 +66,7 @@ public class LeaderBoard extends ILevel {
     public void keyRelease(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_P) {
             timer.stop();
-            Game.SetLevelActive("ShowStartScreen");
+            Game.SetLevelActive(new MainMenu());
         }
     }
 

@@ -40,11 +40,10 @@ public class Mouse extends IDrawable {
         HUD.EditText(pos,""+isColliding());
     }
 
-    public float Rad = 0;
 
     @Override
     public void Update(Graphics2D g) {
-//        g.drawImage(GetSprite("/Images/cookie.png"), (int) -getSpriteWidth() / 2, (int) -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
+        g.drawImage(GetSprite("/Images/Cursor.png"), (int) -getSpriteWidth()/2 , (int) -getSpriteHeight()/2 , getSpriteWidth(), getSpriteHeight(), null);
     }
 
     @Override
@@ -57,7 +56,7 @@ public class Mouse extends IDrawable {
             ((Button) im).DoAction();
         }
         
-        System.out.println("com.FuturePixels.GameClasses.Mouse.onCollison() with " + im.getClass().toString());
+//        System.out.println("com.FuturePixels.GameClasses.Mouse.onCollison() with " + im.getClass().toString());
     }
 
 }

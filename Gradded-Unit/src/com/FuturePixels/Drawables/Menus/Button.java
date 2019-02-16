@@ -21,6 +21,14 @@ import java.awt.Toolkit;
 public class Button extends IDrawable {
 
     private String Message = "";
+
+    public String getMessage() {
+        return Message;
+    }
+
+    public void setMessage(String Message) {
+        this.Message = Message;
+    }
     private Vector relpos = Vector.One;
     ButtonAbstract buttonDelegate;
 
@@ -37,7 +45,7 @@ public class Button extends IDrawable {
     public Button(Vector relpos, String Message, ButtonAbstract Logic) {
         super();
         this.Message = Message;
-        buttonDelegate = Logic;
+        this.buttonDelegate = Logic;
         this.relpos = relpos;
     }
 
@@ -61,7 +69,7 @@ public class Button extends IDrawable {
 
     public void DoAction() {
         if (buttonDelegate != null) {
-            buttonDelegate.OnClick();
+            buttonDelegate.OnClick(this);
         } else {
             System.err.println("error no delegate in this button");
         }
@@ -70,7 +78,8 @@ public class Button extends IDrawable {
     @Override
     public void onCollison(IDrawable im) {
         if (Level().isClicking()) {
-           DoAction();
+            DoAction();
+            setScale(Vector.One);
         }
     }
 

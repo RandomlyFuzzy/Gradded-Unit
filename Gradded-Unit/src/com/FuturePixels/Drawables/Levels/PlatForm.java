@@ -19,25 +19,26 @@ import java.awt.geom.AffineTransform;
  */
 public class PlatForm extends IDrawable {
 
-    private float Rad = 0f;
 
     public PlatForm() {
         super();
-        setPosition(200, 300);
+    }
+    
+    public PlatForm(Vector position,float RadianRotation){
+        super();
+        setPosition(position.getX(), position.getY());
+        setRotation(RadianRotation);
     }
 
     @Override
     public void init() {
         GetSprite("/images/Cookie.png");
-        Rad = 200;
+        setOffset((float) -Math.PI);
     }
 
     @Override
     public void Update(Graphics2D g) {
-        setRotation(Rad);
-
         g.drawImage(GetSprite("/images/Platform.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
-
     }
 
     @Override
@@ -49,5 +50,4 @@ public class PlatForm extends IDrawable {
     public void onCollison(IDrawable im) {
 //        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");
     }
-
 }

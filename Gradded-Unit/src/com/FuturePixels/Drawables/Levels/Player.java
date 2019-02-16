@@ -5,11 +5,16 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
+import com.FuturePixels.Components.RigidBody;
+import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Entry.Game;
+import com.FuturePixels.Utils.Collison;
+import com.FuturePixels.Utils.CollisonUtils;
 import com.FuturePixels.Utils.Vector;
 import com.FuturePixels.levels.LeaderBoard;
 import com.FuturePixels.Utils.ILevel;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -30,9 +35,9 @@ public class Player extends IDrawable {
     private float ind = 0, Scale = 1;
     private long score;
     private int ScoreInd = 0;
-    private boolean left = false, right = false, up = false, down = false, Stop = false;
+    private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true;
 
-    Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
+    public Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
 
     public boolean isLeft() {
         return left;
@@ -72,16 +77,20 @@ public class Player extends IDrawable {
 
     public Player() {
         super();
-        setPosition(100, 100);
-        score = 0;
+
     }
 
     public void init() {
-
+        System.out.println("com.FuturePixels.Drawables.Levels.Player.init()");
+        setPosition(100, 100);
+        Velocity = new Vector(0, 0);
+        Acc = new Vector(0, 0);
+        score = 0;
         for (int i = 0; i < 7; i++) {
             GetSprite("/Images/Player/sprite_" + i + ".png");
         }
         ScoreInd = HUD.AddText("Score:" + score, new Vector(0, 40));
+        AddComponent(new RigidBody(this));
     }
 
     public void move(boolean left, boolean right, boolean up, boolean down) {
@@ -97,7 +106,20 @@ public class Player extends IDrawable {
         ind = ind % 8;
         g.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
 
+//        setRotation(getRotation()+(float)(Math.PI/180));
+        getComponent(Transform.class).PopTransforms(g);
+        g.setColor(Color.GREEN);
+        Vector v2 = new Vector(-getSpriteHeight() - 20, (float) -getSpriteHeight() - 20).mult(GetUp()).add(getPosition());
+        g.drawLine(
+                (int)new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())).getX()
+                ,(int)new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())).getY()
+                , (int) v2.getX(), (int) v2.getY());
+        if (_hit != null) {
+            g.fillOval((int) (_hit.getX() - getPosition().getX()) - 5, (int) (_hit.getY() - getPosition().getX()) - 5, 10, 10);
+        }
+        getComponent(Transform.class).PushTransforms(g);
     }
+    Vector v;
 
     public long getScore() {
         return score;
@@ -114,40 +136,51 @@ public class Player extends IDrawable {
 
     public void doMove() {
         if (!isColliding()) {
-            setRotation(0);
+            setRotation((getRotation() * 0.98f));
         }
         movePlayer();
         Velocity.add(Acc);
-        addPosition(new Vector(0, 0).add(GetUp().mult(Velocity.getX())).add(GetRight().mult(Velocity.getY())));
-        Velocity.mult(0.93f);
+        addPosition(Vector.Zero.add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
+        Velocity.mult(new Vector(0.80f, 0.83f));
+        Acc.mult(0);
     }
 
     private void movePlayer() {
         boolean one = true, two = true;
 
-        if (up) {
-            Acc.setY(1);
+        if (up && canJump) {
+            Acc.setY(0.01f);
+            if (isColliding()) {
+                Velocity.setY(0.1f);
+            }
+//            canJump = false;
         } else if (down) {
-            Acc.setY(-1);
-
+            Acc.setY(-0.01f);
+            canJump = true;
         } else {
-            Acc.setY(0);
+//            Acc.setY(0);
 
             one = false;
         }
-        if (left) {
+        if (left && canJump) {
             Scale = -1;
-            Acc.setX(-1);
-        } else if (right) {
+            Acc.addX(-0.01f);
+        } else if (right && canJump) {
             Scale = 1;
-            Acc.setX(1);
-        } else {
+            Acc.addX(0.01f);
+        } else if (canJump) {
             two = false;
-            Acc.setX(0);
+//            Acc.setX(0);
         }
 
+        Acc.setX(Acc.getX() > 0.3f ? 0.3f : Acc.getX() < -0.3f ? 0.3f : Acc.getX());
+        if (!isColliding()) {
+//            Acc.setY(-9.81f * (float) Game.g.getDelta());
+        }
         Stop = !one && !two;
     }
+    private Vector _left, _hit;
+    private Vector[] _Top = new Vector[2];
 
     @Override
     public void onCollison(IDrawable im) {
@@ -156,8 +189,23 @@ public class Player extends IDrawable {
         }
 
         if (im instanceof PlatForm) {
-            System.out.println("com.FuturePixels.Drawables.Levels.Player.onCollison()");
+            canJump = true;
             setRotation(im.getRotation());
+            //get platfor top line
+
+            _left = new Vector(-getSpriteHeight() - 20, (float) -getSpriteHeight() - 20).mult(GetUp()).add(getPosition());
+            _Top = im.sideRight();
+
+            Collison col = CollisonUtils.CheckForLineHits(new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())), _left, _Top[0], _Top[1]);
+
+            if (col.IsHit) {
+                _hit = col.hitLocation;
+                
+                float x,y;
+                setPosition(col.hitLocation.getX(), col.hitLocation.getY());
+                Velocity.mult(0);
+            }
         }
     }
+
 }

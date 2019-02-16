@@ -21,7 +21,7 @@ public class Transform extends IComponent {
     private AffineTransform old;
 
     public Vector Scale = Vector.One;
-    public Vector Translation= Vector.Zero;
+    public Vector Translation = Vector.Zero;
     public float RotationZ = 0;
 
     public Transform(IDrawable parent) {
@@ -34,28 +34,30 @@ public class Transform extends IComponent {
 
     @Override
     public void Update(Graphics2D g) {
-        Scale = getParent().getScale();
-        Translation = getParent().getPosition();
-        RotationZ = getParent().getRotation();
+
     }
 
     public void PushTransforms(Graphics2D g) {
+        Scale = getParent().getScale();
+        Translation = getParent().getPosition();
+        RotationZ = getParent().getRotation();
+        
         old = g.getTransform();
-        g.scale(Scale.getX(), Scale.getY());
         g.translate((int) Translation.getX(), (int) Translation.getY());
-        g.rotate(RotationZ);
+        g.scale(Scale.getX(), Scale.getY());
+        g.rotate((RotationZ) + getParent().getOffset());
     }
 
     public void PopTransforms(Graphics2D g) {
         g.setTransform(old);
     }
-    
-        public Vector GetUp() {
-        return new Vector((float) Math.sin(RotationZ + Math.PI / 2), (float) -Math.cos(RotationZ + Math.PI / 2));
+
+    public Vector GetUp() {
+        return new Vector((float) Math.sin(RotationZ), (float) -Math.cos(RotationZ));
     }
 
     public Vector GetRight() {
-        return new Vector((float) Math.sin(RotationZ), (float) -Math.cos(RotationZ));
+        return new Vector((float) Math.sin(RotationZ + Math.PI / 2), (float) -Math.cos(RotationZ + Math.PI / 2));
     }
 
 }

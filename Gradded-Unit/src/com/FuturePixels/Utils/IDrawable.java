@@ -31,7 +31,15 @@ public abstract class IDrawable {
     private Vector position;
     private int spriteWidth = 0;
     private int spriteHeight = 0;
-    private float Rotation = 0;
+    private float Rotation = 0, offset = 0;
+
+    public float getOffset() {
+        return offset;
+    }
+
+    public void setOffset(float offset) {
+        this.offset = offset;
+    }
     private Vector Scale = Vector.One;
     private boolean Enabled = true, isColliding = false;
 
@@ -61,11 +69,15 @@ public abstract class IDrawable {
     //3. make a prototype of the game 
     //4. extend and polish that game prototype
     //5. release everything
+    public boolean hasSupered = false;
+
     public IDrawable() {
         position = new Vector(0, 0);
         CollisonUtils.PossableCols.add(this);
         transform = new Transform(this);
         AddComponent(transform);
+        hasSupered = true;
+
     }
 
     public float getRotation() {
@@ -111,16 +123,20 @@ public abstract class IDrawable {
         return transform.GetRight();
     }
 
+    public float getTotalRotation() {
+        return getRotation() + getOffset();
+    }
+
     public void UpdateBounds() {
         float hy = (float) Math.sqrt((getSpriteWidth() / 2 * getSpriteWidth() / 2) + (getSpriteHeight() / 2 * getSpriteHeight() / 2));
         a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2);
         a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2);
         a3 = (float) Math.atan2(-getSpriteHeight() / 2, -getSpriteWidth() / 2);
         a4 = (float) Math.atan2(getSpriteHeight() / 2, -getSpriteWidth() / 2);
-        v1 = new Vector((int) (getPosition().getX() + (float) Math.cos(a1 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a1 - getRotation()) * hy * Scale.getY()));
-        v2 = new Vector((int) (getPosition().getX() + (float) Math.cos(a2 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a2 - getRotation()) * hy * Scale.getY()));
-        v3 = new Vector((int) (getPosition().getX() + (float) Math.cos(a3 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a3 - getRotation()) * hy * Scale.getY()));
-        v4 = new Vector((int) (getPosition().getX() + (float) Math.cos(a4 - getRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a4 - getRotation()) * hy * Scale.getY()));
+        v1 = new Vector((int) (getPosition().getX() + (float) Math.cos(a1 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a1 - getTotalRotation()) * hy * Scale.getY()));
+        v2 = new Vector((int) (getPosition().getX() + (float) Math.cos(a2 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a2 - getTotalRotation()) * hy * Scale.getY()));
+        v3 = new Vector((int) (getPosition().getX() + (float) Math.cos(a3 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a3 - getTotalRotation()) * hy * Scale.getY()));
+        v4 = new Vector((int) (getPosition().getX() + (float) Math.cos(a4 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a4 - getTotalRotation()) * hy * Scale.getY()));
     }
 
     public Polygon getBounds() {
@@ -187,18 +203,18 @@ public abstract class IDrawable {
         return getClass().toString() + " at " + getPosition().getX() + " ," + getPosition().getY();
     }
 
-    public boolean IsVisible() {
-        return Enabled;
-    }
-
-    public void SetVisible(boolean vis) {
-        Enabled = vis;
+    public IComponent getComponent(IComponent g) {
+        IComponent ret = null;
+        for (IComponent t : Component) {
+            return (IComponent) t;
+        }
+        return ret;
     }
 
     public boolean CheckCollions(IDrawable t) {
         if (checkForIntersections(t.getBounds())) {
-            System.out.println("com.FuturePixels.Utils.IDrawable.CheckCollions()");
-            if (t.IsVisible() == true) {
+//            System.out.println("com.FuturePixels.Utils.IDrawable.CheckCollions()");
+            if (t.isEnabled() == true) {
                 onCollison(t);
                 return true;
             }
@@ -207,6 +223,10 @@ public abstract class IDrawable {
     }
 
     void CoreInit() {
+        if (!hasSupered) {
+            UtilManager.FindUseClass(5);
+            System.err.println("you must super this");
+        }
         init();
         initComponents();
     }
@@ -220,6 +240,9 @@ public abstract class IDrawable {
         UpdateComponents(g);
         transform.PopTransforms(g);
 
+        if (!Level().DebugCollisons) {
+            return;
+        }
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.red);
 
@@ -232,15 +255,25 @@ public abstract class IDrawable {
                 (int) (getPosition().getX() + (GetRight().getX() * 20)),
                 (int) ((getPosition().getY() + (GetRight().getY() * 20))));
 
+        Vector[] _left = sideLeft();
+        Vector[] _right = sideRight();
+        Vector[] _Top = sideUp();
+        Vector[] _down = sideDown();
+
+        g.drawLine((int) _left[0].getX(), (int) _left[0].getY(), (int) _left[1].getX(), (int) _left[1].getY());
+        g.drawLine((int) _right[0].getX(), (int) _right[0].getY(), (int) _right[1].getX(), (int) _right[1].getY());
+        g.drawLine((int) _Top[0].getX(), (int) _Top[0].getY(), (int) _Top[1].getX(), (int) _Top[1].getY());
+        g.drawLine((int) _down[0].getX(), (int) _down[0].getY(), (int) _down[1].getX(), (int) _down[1].getY());
+
     }
 
     void initComponents() {
         if (Component.isEmpty()) {
             return;
         }
-        Component.forEach((a) -> {
-            a.Init();
-        });
+//        Component.forEach((a) -> {
+//            a.Init();
+//        });
     }
 
     void UpdateComponents(Graphics2D g) {
@@ -257,7 +290,7 @@ public abstract class IDrawable {
             try {
                 throw new Exception();
             } catch (Exception e) {
-                System.err.println("error Drawing last image as their was not last image in " + e.getStackTrace()[1]);
+                System.err.println("error Drawing last image as their was not last image in " + e.getStackTrace()[1] + " try pre loading it in init() to get rid of this warning");
             }
         }
         g.drawImage(LastImage, -getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
@@ -265,12 +298,31 @@ public abstract class IDrawable {
 
     public void dispose() {
         LastImage = null;
-        Component.forEach((a) -> {
-            a.dispose();
-        });
+        ArrayList<IComponent> c = Component;
+        Component = new ArrayList<IComponent>();
         for (int i = Component.size() - 1; i > 0; i--) {
             Component.remove(i);
         }
+        c.forEach((a) -> {
+            a.dispose();
+        });
+        System.gc();
+    }
+
+    public Vector[] sideUp() {
+        return new Vector[]{v1, v2};
+    }
+
+    public Vector[] sideLeft() {
+        return new Vector[]{v3, v2};
+    }
+
+    public Vector[] sideDown() {
+        return new Vector[]{v3, v4};
+    }
+
+    public Vector[] sideRight() {
+        return new Vector[]{v1, v4};
     }
 
     public abstract void init();
