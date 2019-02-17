@@ -35,7 +35,6 @@ public class CollisonUtils {
         float t = (((c.getX() - a.getX()) * s.getY()) - ((c.getY() - a.getY()) * s.getX())) / g;
 
         if (0 <= u && u <= 1 && t >= 0 && t <= 1) {
-//            System.out.println("com.FuturePixels.Utils.CollisonUtils.CheckForLineHits() "+new Vector((a.getX() + (t * r.getX())), (a.getY() + (t * r.getY()))).toString());
             return new Collison(
                     new Vector((a.getX() + (t * r.getX()))
                     , (a.getY() + (t * r.getY()))));

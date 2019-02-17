@@ -20,6 +20,7 @@ import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -37,7 +38,7 @@ public final class Game {
     //Keeps instance to be GC later
     public static Game g = null;
 
-    private static final int WINDOW_WIDTH = 600, WINDOW_HEIGHT = 600;
+    private static final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
     private static JFrame gameWindow;
     private static HashMap<String, Integer> LevelFinder = new HashMap<String, Integer>();
     static ArrayList<ILevel> Levels = new ArrayList();
@@ -103,13 +104,14 @@ public final class Game {
 
     public void InitWindow() {
         gameWindow = new JFrame();
-        gameWindow.setMinimumSize(new Dimension(200, 350));
+        gameWindow.setMinimumSize(new Dimension(20, 20));
         gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.getContentPane().setLayout(new CardLayout());
         gameWindow.setLocationRelativeTo(null);
         gameWindow.setTitle("Gradded unit");
         gameWindow.setVisible(true);
+        FrameBounds = gameWindow.getBounds();
     }
 
     public static void toggleCursor() {
@@ -118,22 +120,22 @@ public final class Game {
         Swap = blankCursor;
     }
 
-    private static boolean isFullScreen = false;
+    private static boolean isFullScreen = false, isHalfFullScreen = false;
 
     public static void FullScreen() {
         GraphicsDevice graphicalDevices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
         gameWindow.dispose();
         if (!isFullScreen) {
+            FrameBounds = gameWindow.getBounds();
             gameWindow.setLocation(0, 0);
             gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
             gameWindow.setUndecorated(true);
             gameWindow.pack();
         } else {
-            gameWindow.setLocation(graphicalDevices.getDisplayModes()[0].getWidth() / 2, graphicalDevices.getDisplayModes()[0].getHeight() / 2);
             gameWindow.setExtendedState(JFrame.NORMAL);
             gameWindow.setUndecorated(false);
             gameWindow.pack();
-            gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+            gameWindow.setBounds(FrameBounds);
         }
         gameWindow.setVisible(true);
 
@@ -145,8 +147,7 @@ public final class Game {
     }
 
     public static void SetLevelActive(ILevel Level) {
-        System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() " + Level.getClass().toString()+ " loading");
-        UtilManager.FindUseClass(-1);
+        System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() " + Level.getClass().toString() + " loading");
         try {
             if (CurrentLevel != null) {
                 gameWindow.getContentPane().removeAll();
@@ -169,6 +170,13 @@ public final class Game {
         } catch (Exception e) {
 
         }
+    }
+
+    static Rectangle FrameBounds;
+
+    public void SetDimentions(int w, int h) {
+        Rectangle bo = Game.g.GetFrame().getBounds();
+        gameWindow.setBounds(bo.x, bo.y, w, h);
     }
 
     public static ILevel GetLevel() {

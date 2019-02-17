@@ -23,7 +23,7 @@ public class Collison {
 
     public Collison() {
         IsHit = false;
-        hitLocation = Vector.Zero;
+        hitLocation = Vector.Zero();
     }
 
     public Collison(IDrawable obj, Vector location) {

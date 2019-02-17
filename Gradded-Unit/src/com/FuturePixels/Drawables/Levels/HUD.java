@@ -21,6 +21,8 @@ public class HUD extends IDrawable {
 
     public HUD() {
         super();
+//        texts = new ArrayList<String>();
+//        textsPos = new ArrayList<Vector>();
     }
 
     public static int AddText(String text, Vector position) {
@@ -30,9 +32,10 @@ public class HUD extends IDrawable {
     }
 
     public static void EditText(int ind, String Text) {
-        if(texts.size()<=ind||ind<0) return;
-        
-        
+        if (texts.size() <= ind || ind < 0) {
+            return;
+        }
+
         texts.set(ind, Text);
     }
 

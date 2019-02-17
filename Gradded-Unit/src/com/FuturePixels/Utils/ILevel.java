@@ -32,7 +32,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public final Game game;
     private Timer timer;
     private ArrayList<IDrawable> gameObjs = new ArrayList<IDrawable>();
-    private Vector MousePos = new Vector(Vector.Zero);
+    private Vector MousePos = new Vector(Vector.Zero());
     private boolean IsDragging = false, IsInside = true, IsClicking = false;
     public TAdapter InputAdapter = null;
 
@@ -41,7 +41,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         IsInside = true;
         IsClicking = false;
         InputAdapter = null;
-        MousePos = new Vector(Vector.Zero);
+        MousePos = new Vector(Vector.Zero());
         gameObjs = new ArrayList<IDrawable>();
         timer = null;
     }
@@ -139,7 +139,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     public void PostUpdate(Graphics2D g) {
         game.SetDelta();
-        for (int i = 0; i < gameObjs.size(); i++) {
+        for (int i = gameObjs.size()-1; i >=0; i--) {
             if (gameObjs.get(i).isEnabled()) {
                 gameObjs.get(i).CoreUpdate(g);
                 gameObjs.get(i).setIsColliding(false);
@@ -205,16 +205,17 @@ public abstract class ILevel extends JPanel implements ActionListener {
         return g;
     }
 
+    
+    //this is using java swing native functionality but their are exameples or raycasting  in use in the player.onCollison function 
     public void checkCollionsions() {
         if (gameObjs.size() <= 1) {
             return;
         }
-
         for (int i = 0; i < gameObjs.size(); i++) {
             IDrawable a = gameObjs.get(i);
             for (int j = 0; j < gameObjs.size(); j++) {
                 IDrawable b = gameObjs.get(j);
-                if (i == j && (a.isEnabled() && b.isEnabled())) {
+                if (i == j || !(a.isEnabled() && b.isEnabled())) {
                     continue;
                 }
                 if (a != b) {

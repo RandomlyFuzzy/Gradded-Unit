@@ -11,8 +11,16 @@ package com.FuturePixels.Utils;
  */
 public class Vector {
 
-    public static final Vector Zero = new Vector(0, 0), One = new Vector(1, 1);
+    public static Vector Zero() {
+        return new Vector(0, 0);
+    }
 
+    public static Vector One() {
+        return new Vector(1, 1);
+    }
+
+//    sets self to weird things some times :/
+//    public static final Vector Zero = new Vector(0, 0), One = new Vector(1, 1);
     private float x, y;
 
     public Vector(float x, float y) {
@@ -44,16 +52,16 @@ public class Vector {
     public Vector mult(Vector v) {
         this.x *= v.getX();
         this.y *= v.getY();
-        v =null;
+        v = null;
         return this;
     }
 
-      public Vector mult(float v) {
+    public Vector mult(float v) {
         this.x *= v;
         this.y *= v;
         return this;
     }
-    
+
     public void setToVector(Vector v) {
         x = v.getX();
         y = v.getY();

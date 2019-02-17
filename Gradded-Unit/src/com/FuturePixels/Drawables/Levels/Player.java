@@ -114,11 +114,12 @@ public class Player extends IDrawable {
     public void doMove() {
         if (!isColliding()) {
             setRotation((getRotation() * 0.98f));
+            canJump = false;
         }
         movePlayer();
         Velocity.add(Acc);
-        addPosition(Vector.Zero.add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
-        Velocity.mult(new Vector(0.80f, 0.83f));
+        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
+        Velocity.mult(new Vector(0.985f, 0.995f));
         Acc.mult(0);
     }
 
@@ -128,7 +129,7 @@ public class Player extends IDrawable {
         if (up && canJump) {
             Acc.setY(0.01f);
             if (isColliding()) {
-                Velocity.setY(1.5f);
+                Velocity.setY(5f);
             }
             canJump = false;
         } else if (down) {
@@ -141,10 +142,10 @@ public class Player extends IDrawable {
         }
         if (left && canJump) {
             Scale = -1;
-            Acc.addX(-0.01f);
+            Acc.addX(-0.2f);
         } else if (right && canJump) {
             Scale = 1;
-            Acc.addX(0.01f);
+            Acc.addX(0.2f);
         } else if (canJump) {
             two = false;
 //            Acc.setX(0);
@@ -152,12 +153,12 @@ public class Player extends IDrawable {
 
         Acc.setX(Acc.getX() > 0.3f ? 0.3f : Acc.getX() < -0.3f ? 0.3f : Acc.getX());
         if (!isColliding()) {
-            Acc.setY(Acc.getY() + (-4.81f * (float) Game.g.getDelta()));
+            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
         }
         Stop = !one && !two;
     }
-    private Vector _left, _hit;
-    private Vector[] _Top = new Vector[2];
+    private Vector bottom, top, _hit;
+    private Vector[] _Top, _bottom;
 
     @Override
     public void onCollison(IDrawable im) {
@@ -166,36 +167,50 @@ public class Player extends IDrawable {
         }
 
         if (im instanceof PlatForm) {
-            canJump = true;
             setRotation(im.getRotation());
             //get platfor top line
 
-            _left = new Vector(-getSpriteHeight() + 20, (float) -getSpriteHeight() + 20).mult(GetUp()).add(getPosition());
-            _Top = im.sideLeft();
+            bottom = new Vector(getPosition()).add(GetUp().mult(getSpriteHeight() * -0.55f));
+            top = new Vector(bottom).mult(-1).add(getPosition()).add(getPosition());
+            _Top = im.sideUp();
 
-            Collison col = CollisonUtils.CheckForLineHits(new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())), _left, _Top[0], _Top[1]);
+            Collison col = CollisonUtils.CheckForLineHits(getPosition(), bottom, _Top[0], _Top[1]);
+            _bottom = im.sideDown();
 
             if (col.IsHit) {
-                DebugComponent.AddLine(_left, new Vector(getPosition()).add(GetUp().mult(getSpriteHeight())));
-                DebugComponent.AddLine(_Top[0], _Top[1]);
+                canJump = true;
+//                DebugComponent.AddLine(bottom, top);
+//                DebugComponent.AddLine(_Top[0], _Top[1]);
                 _hit = col.hitLocation;
 
-                float x = new Vector(_left).mult(0f).add(GetUp().mult(getSpriteHeight() * 0.550f)).getX(),
-                        y = new Vector(_left).mult(-0.001f).add(GetUp().mult(getSpriteHeight() * 0.550f)).getY();
-                DebugComponent.AddCirles(new Vector(col.hitLocation.getX() + x, col.hitLocation.getY() + y));
+                float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * 0.5f)).getX(),
+                      y = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * 0.5f)).getY();
+//                DebugComponent.AddCirles(new Vector(col.hitLocation.getX(), col.hitLocation.getY()));
                 setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
-//                Velocity.mult(0);
-                Velocity.mult(new Vector(1, 0));
-                Acc.mult(new Vector(1, 0.5f));
+                //Todo; bouncing of the bottom(just goes strait through)
+            }
+            Collison col2 = CollisonUtils.CheckForLineHits(top, getPosition(), _bottom[0], _bottom[1]);
+
+            if (col2.IsHit) {
+                canJump = false;
+                float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
+                        y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();
+
+                DebugComponent.AddLine(bottom, top);
+                DebugComponent.AddLine(_bottom[0], _bottom[1]);
+                setPosition(col2.hitLocation.getX() + x, col2.hitLocation.getY() + y);
+
+                DebugComponent.AddCirles(new Vector(col2.hitLocation.getX(), col2.hitLocation.getY()));
+                Velocity.mult(new Vector(1, -1f));
+                Acc.mult(new Vector(1, -1f));
             }
         }
     }
 
     public void dispose() {
         super.dispose();
-        Velocity = Vector.Zero;
-        Acc = Vector.Zero;
-        
+        Velocity = Vector.Zero();
+        Acc = Vector.Zero();
 
     }
 

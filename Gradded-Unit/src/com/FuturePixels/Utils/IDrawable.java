@@ -32,19 +32,23 @@ public abstract class IDrawable {
     private Vector position;
     private int spriteWidth = 0;
     private int spriteHeight = 0;
+
+    public void setSpriteWidth(int spriteWidth) {
+        this.spriteWidth = spriteWidth;
+    }
+
+    public void setSpriteHeight(int spriteHeight) {
+        this.spriteHeight = spriteHeight;
+    }
     private float Rotation = 0, offset = 0;
 
-    private Vector Scale = Vector.One;
+    private Vector Scale = Vector.One();
     private boolean Enabled = true, isColliding = false;
 
     private BufferedImage LastImage = null;
     private ArrayList<IComponent> Component = new ArrayList<IComponent>();
     private final Transform transform;
 
-    float a1,
-            a2,
-            a3,
-            a4;
     private Vector v1,
             v2,
             v3,
@@ -114,10 +118,10 @@ public abstract class IDrawable {
     }
 
     public void UpdateBounds() {
-        float hy = (float) Math.sqrt((getSpriteWidth() / 2 * getSpriteWidth() / 2) + (getSpriteHeight() / 2 * getSpriteHeight() / 2));
-        a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2);
-        a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2);
-        a3 = (float) Math.atan2(-getSpriteHeight() / 2, -getSpriteWidth() / 2);
+        float hy = (float) Math.sqrt((getSpriteWidth() / 2 * getSpriteWidth() / 2) + (getSpriteHeight() / 2 * getSpriteHeight() / 2)),
+        a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2),
+        a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2),
+        a3 = (float) Math.atan2(-getSpriteHeight() / 2, -getSpriteWidth() / 2),
         a4 = (float) Math.atan2(getSpriteHeight() / 2, -getSpriteWidth() / 2);
         v1 = new Vector((int) (getPosition().getX() + (float) Math.cos(a1 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a1 - getTotalRotation()) * hy * Scale.getY()));
         v2 = new Vector((int) (getPosition().getX() + (float) Math.cos(a2 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a2 - getTotalRotation()) * hy * Scale.getY()));
@@ -148,6 +152,10 @@ public abstract class IDrawable {
     }
 
     public boolean checkForIntersections(Polygon g) {
+        if(v1 == null){
+            UpdateBounds();
+            g = getBounds();
+        }
         return g.contains(v1.getX(), v1.getY()) || g.contains(v2.getX(), v2.getY()) || g.contains(v3.getX(), v3.getY()) || g.contains(v4.getX(), v4.getY());
     }
 
@@ -300,19 +308,19 @@ public abstract class IDrawable {
     }
 
     public Vector[] sideUp() {
-        return new Vector[]{v1, v2};
-    }
-
-    public Vector[] sideLeft() {
         return new Vector[]{v3, v2};
     }
 
-    public Vector[] sideDown() {
+    public Vector[] sideLeft() {
         return new Vector[]{v3, v4};
     }
 
+    public Vector[] sideDown() {
+        return new Vector[]{v4, v1};
+    }
+
     public Vector[] sideRight() {
-        return new Vector[]{v1, v4};
+        return new Vector[]{v1, v2};
     }
 
     public float getOffset() {

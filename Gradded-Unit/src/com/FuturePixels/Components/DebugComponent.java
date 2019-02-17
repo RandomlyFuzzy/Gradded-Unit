@@ -8,6 +8,7 @@ package com.FuturePixels.Components;
 import com.FuturePixels.Utils.IComponent;
 import com.FuturePixels.Utils.IDrawable;
 import com.FuturePixels.Utils.Vector;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -42,15 +43,16 @@ public class DebugComponent extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
+g.setColor(new Color(255,255,150,155));
         for (Vector v : Cirles) {
-            g.fillOval((int) v.getX() - 5, (int) v.getX() - 5, 10, 10);
+            g.fillOval((int) v.getX() - 5, (int) v.getY() - 5, 10, 10);
         }
 
         for (int i = 0; i < Lines.size(); i += 2) {
             g.drawLine((int) Lines.get(i).getX(),
-                     (int) Lines.get(i).getY(),
-                     (int) Lines.get(i + 1).getX(),
-                     (int) Lines.get(i + 1).getY());
+                    (int) Lines.get(i).getY(),
+                    (int) Lines.get(i + 1).getX(),
+                    (int) Lines.get(i + 1).getY());
         }
         Reset();
     }

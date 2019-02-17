@@ -21,7 +21,7 @@ import java.awt.Toolkit;
 public class Button extends IDrawable {
 
     private String Message = "";
-    private Vector relpos = Vector.One;
+    private Vector relpos = Vector.One();
     ButtonAbstract buttonDelegate;
 
     public Button() {
@@ -69,10 +69,7 @@ public class Button extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-        if (Level().isClicking()) {
-            DoAction();
-            setScale(Vector.One);
-        }
+      
     }
 
     public String getMessage() {

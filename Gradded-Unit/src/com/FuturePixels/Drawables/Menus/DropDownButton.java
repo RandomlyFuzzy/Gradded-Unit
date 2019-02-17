@@ -21,7 +21,7 @@ import java.awt.Toolkit;
 public class DropDownButton extends IDrawable {
 
     private String Message = "";
-    private Vector relpos = Vector.One;
+    private Vector relpos = Vector.One();
     ButtonAbstract buttonDelegate;
     public final int[] indexOfSubbuttons;
     private String[] SubMessage;
@@ -42,10 +42,10 @@ public class DropDownButton extends IDrawable {
         this.LogicForSubButtons = LogicForSubButtons;
         indexOfSubbuttons = new int[this.SubMessage.length];
         for (int i = 0; i < SubMessage.length; i++) {
-            Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i)), SubMessage[i], i + 1 < LogicForSubButtons.length ? LogicForSubButtons[i] : new ButtonAbstract() {
+            Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i+1)), SubMessage[i], i < LogicForSubButtons.length ? LogicForSubButtons[i] : new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                    b.setMessage("Button missing input with message");
+                    b.setMessage("Button missing input");
                 }
 
             }));
@@ -63,7 +63,8 @@ public class DropDownButton extends IDrawable {
 
     @Override
     public void init() {
-        GetSprite("/Images/Button_0.png");
+        GetSprite("/Images/Button_1.png");
+        DoAction();
 
     }
 
@@ -74,7 +75,7 @@ public class DropDownButton extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
-        System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.Update() "+getPosition().toString());
+//        System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.Update() "+getPosition().toString());
         DrawLastLoadedImage(g);
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
@@ -91,10 +92,7 @@ public class DropDownButton extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-        if (Level().isClicking()) {
-            DoAction();
-            setScale(Vector.One);
-        }
+       
     }
 
     public String getMessage() {

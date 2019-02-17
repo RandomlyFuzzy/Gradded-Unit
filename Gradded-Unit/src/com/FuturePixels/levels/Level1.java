@@ -28,10 +28,11 @@ public class Level1 extends ILevel {
     @Override
     public void init() {
 
-        System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f));
-        AddObject(new PlatForm(new Vector(400, 200), (float) Math.PI * -0.25f / 3f));
         AddObject(new DebugComponent());
+        System.out.println("com.game.levels.level1.<init>()");
+        AddObject(new PlatForm(new Vector(100, 50), (float) Math.PI * 0.25f / 3f));
+        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f));
+        AddObject(new PlatForm(new Vector(400, 200), 0));// (float) Math.PI * -0.25f / 3f));
         player = new Player();
         AddObject(player);
         AddObject(new HUD());

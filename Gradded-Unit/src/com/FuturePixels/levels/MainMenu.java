@@ -42,6 +42,8 @@ public class MainMenu extends ILevel {
     public void init() {
         Game.toggleCursor();
         m = new Mouse();
+        AddObject(m);
+        AddObject(new HUD());
         AddObject(new Button(new Vector(0.5f, 0.3f), "To Game", new ButtonAbstract() {
             @Override
             public void OnClick(Button b) {
@@ -66,8 +68,7 @@ public class MainMenu extends ILevel {
                 System.exit(0);
             }
         }));
-        AddObject(m);
-//        AddObject(new HUD());
+
     }
 
     @Override

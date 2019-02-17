@@ -1,5 +1,5 @@
 
-package com.FuturePixels.Utils;
+package com.FuturePixels.Drawables.Menus;
 
 /**
  * this is a singleton for all game related variables that need to controlled 

@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.levels;
 
+import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Utils.ILevel;
 import com.FuturePixels.Utils.Vector;
 import com.FuturePixels.Drawables.Menus.Button;
@@ -17,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import javax.swing.Timer;
 
 /**
@@ -46,51 +48,59 @@ public class Settings extends ILevel {
     @Override
     public void init() {
         m = new Mouse();
+        AddObject(m);
+        AddObject(new HUD());
         AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new ButtonAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
-        AddObject(new DropDownButton(new Vector(0.4f, 0.0f), "To Leaderboard", new Vector(0.0f, 0.1f), new String[]{"1", "2", "3", "4", "5"}, new ButtonAbstract[]{
+        AddObject(new DropDownButton(new Vector(0.4f, 0.2f), "Random DropDown", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"}, new ButtonAbstract[]{
             new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                    System.out.println(b.getMessage());
-                }
-            }
-                ,
-            new ButtonAbstract() {
-                @Override
-                public void OnClick(Button b) {
-                    System.out.println(b.getMessage());
+                    //1920X1080
+                     Game.g.SetDimentions(1920, 1080);
                 }
             },
             new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                    System.out.println(b.getMessage());
+                    //1920X1080
+                    Game.g.SetDimentions(1600, 900);
                 }
             },
             new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                    System.out.println(b.getMessage());
+                    Game.g.SetDimentions(1280, 720);
                 }
             },
             new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                    System.out.println(b.getMessage());
+                     Game.g.SetDimentions(860, 540);
+                }
+            },
+            new ButtonAbstract() {
+                @Override
+                public void OnClick(Button b) {
+                    Rectangle bo = Game.g.GetFrame().getBounds();
+                      Game.g.SetDimentions(640, 360);
+                   Game.g.GetFrame().setBounds(bo.x, bo.y, 640, 360);
                 }
             }
 
         }));
-
-        AddObject(m);
+        AddObject(new Button(new Vector(0.4f, 0.1f), "fullscreen", new ButtonAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                Game.FullScreen();
+            }
+        }));
 
 //        GetObject(0).setScale(new Vector(0.5f, 0.7f));
-
     }
 
     @Override

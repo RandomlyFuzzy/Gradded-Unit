@@ -21,8 +21,9 @@ public class Transform extends IComponent {
     
     private AffineTransform old;
 
-    public Vector Scale = Vector.One;
-    public Vector Translation = Vector.Zero;
+    public Vector Scale = Vector.One();
+    public Vector Translation = Vector.Zero();
+    public Vector offsetTranslation = Vector.Zero();
     public float RotationZ = 0;
 
     public Transform(IDrawable parent) {
@@ -44,7 +45,7 @@ public class Transform extends IComponent {
         RotationZ = getParent().getRotation();
         
         old = g.getTransform();
-        g.translate((int) Translation.getX(), (int) Translation.getY());
+        g.translate((int) Translation.getX()+offsetTranslation.getX(), (int) Translation.getY()+offsetTranslation.getY());
         g.scale(Scale.getX(), Scale.getY());
         g.rotate((RotationZ) + getParent().getOffset());
     }
