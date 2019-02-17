@@ -5,9 +5,9 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Utils.IDrawable;
+import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.Utils.Vector;
+import com.FuturePixels.MainClasses.Vector;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -42,7 +42,7 @@ public class DropDownButton extends IDrawable {
         this.LogicForSubButtons = LogicForSubButtons;
         indexOfSubbuttons = new int[this.SubMessage.length];
         for (int i = 0; i < SubMessage.length; i++) {
-            Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i+1)), SubMessage[i], i < LogicForSubButtons.length ? LogicForSubButtons[i] : new ButtonAbstract() {
+            Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i + 1)), SubMessage[i], i < LogicForSubButtons.length ? LogicForSubButtons[i] : new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     b.setMessage("Button missing input");
@@ -71,6 +71,9 @@ public class DropDownButton extends IDrawable {
     @Override
     public void doMove() {
         setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
+        float hypot = (float) Math.sqrt((Game.g.getWindowWidth() * Game.g.getWindowWidth()) + (Game.g.getWindowHeight() * Game.g.getWindowHeight()));
+        setScale(new Vector((Game.g.getWindowWidth() / hypot) * Game.g.getWindowWidth() / 1000, (Game.g.getWindowHeight() / hypot) * Game.g.getWindowHeight() / 500));
+
     }
 
     @Override
@@ -92,7 +95,7 @@ public class DropDownButton extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-       
+
     }
 
     public String getMessage() {

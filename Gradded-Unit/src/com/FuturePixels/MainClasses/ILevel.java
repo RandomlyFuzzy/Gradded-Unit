@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.Utils;
+package com.FuturePixels.MainClasses;
 
-import com.FuturePixels.Utils.MusicUtils;
-import com.FuturePixels.Utils.imageUtils;
-import com.FuturePixels.Utils.IDrawable;
+import com.FuturePixels.MainClasses.MusicUtils;
+import com.FuturePixels.MainClasses.imageUtils;
+import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.levels.MainMenu;
 import java.awt.Graphics;
@@ -34,7 +34,19 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private ArrayList<IDrawable> gameObjs = new ArrayList<IDrawable>();
     private Vector MousePos = new Vector(Vector.Zero());
     private boolean IsDragging = false, IsInside = true, IsClicking = false;
-    public TAdapter InputAdapter = null;
+    private KeyEvent LastKeyPress = null;
+
+    public KeyEvent getLastKeyPress() {
+        if(LastKeyPress == null){
+            System.err.println("their was no last key pressed");
+        }
+        return LastKeyPress;
+    }
+
+    public void setLastKeyPress(KeyEvent LastKeyPress) {
+        this.LastKeyPress = LastKeyPress;
+    }
+    private TAdapter InputAdapter = null;
 
     void resetParams() {
         IsDragging = false;
@@ -264,6 +276,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
             } else if (e.getKeyCode() == 10 && !e.isAltDown()) {
                 Game.toggleCursor();
             }
+            LastKeyPress = e;
             keyPress(e);
         }
 

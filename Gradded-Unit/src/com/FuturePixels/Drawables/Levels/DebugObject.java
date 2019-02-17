@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.Components;
+package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Utils.IComponent;
-import com.FuturePixels.Utils.IDrawable;
-import com.FuturePixels.Utils.Vector;
+import com.FuturePixels.MainClasses.IComponent;
+import com.FuturePixels.MainClasses.IDrawable;
+import com.FuturePixels.MainClasses.Vector;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author RandomlyFuzzy
  */
-public class DebugComponent extends IDrawable {
+public class DebugObject extends IDrawable {
 
     private static ArrayList<Vector> Lines = new ArrayList<Vector>();
     private static ArrayList<Vector> Cirles = new ArrayList<Vector>();
@@ -32,8 +32,10 @@ public class DebugComponent extends IDrawable {
         Cirles.add(v1);
     }
 
-    public DebugComponent() {
+    public DebugObject() {
         super();
+        Lines = new ArrayList<Vector>();
+        Cirles = new ArrayList<Vector>();
     }
 
     void Reset() {

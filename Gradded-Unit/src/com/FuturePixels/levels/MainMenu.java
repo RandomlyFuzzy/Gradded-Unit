@@ -6,12 +6,13 @@
 package com.FuturePixels.levels;
 
 import com.FuturePixels.Drawables.Levels.HUD;
+import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.ButtonAbstract;
-import com.FuturePixels.Utils.ILevel;
+import com.FuturePixels.MainClasses.ILevel;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.Utils.Vector;
+import com.FuturePixels.MainClasses.Vector;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -44,10 +45,17 @@ public class MainMenu extends ILevel {
         m = new Mouse();
         AddObject(m);
         AddObject(new HUD());
-        AddObject(new Button(new Vector(0.5f, 0.3f), "To Game", new ButtonAbstract() {
+
+        AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new ButtonAbstract() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new Level1());
+                Game.SetLevelActive(new Level1Solo());
+            }
+        }));
+        AddObject(new Button(new Vector(0.5f, 0.4f), "To Game Coop", new ButtonAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new Level1Coop());
             }
         }));
         AddObject(new Button(new Vector(0.5f, 0.5f), "To Leaderboard", new ButtonAbstract() {

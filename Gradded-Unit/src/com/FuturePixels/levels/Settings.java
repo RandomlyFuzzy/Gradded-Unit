@@ -6,8 +6,9 @@
 package com.FuturePixels.levels;
 
 import com.FuturePixels.Drawables.Levels.HUD;
-import com.FuturePixels.Utils.ILevel;
-import com.FuturePixels.Utils.Vector;
+import com.FuturePixels.Drawables.Menus.BlackoutButton;
+import com.FuturePixels.MainClasses.ILevel;
+import com.FuturePixels.MainClasses.Vector;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.ButtonAbstract;
 import com.FuturePixels.Drawables.Menus.DropDownButton;
@@ -61,7 +62,7 @@ public class Settings extends ILevel {
                 @Override
                 public void OnClick(Button b) {
                     //1920X1080
-                     Game.g.SetDimentions(1920, 1080);
+                    Game.g.SetDimentions(1920, 1080);
                 }
             },
             new ButtonAbstract() {
@@ -80,18 +81,24 @@ public class Settings extends ILevel {
             new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                     Game.g.SetDimentions(860, 540);
+                    Game.g.SetDimentions(860, 540);
                 }
             },
             new ButtonAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     Rectangle bo = Game.g.GetFrame().getBounds();
-                      Game.g.SetDimentions(640, 360);
-                   Game.g.GetFrame().setBounds(bo.x, bo.y, 640, 360);
+                    Game.g.SetDimentions(640, 360);
+                    Game.g.GetFrame().setBounds(bo.x, bo.y, 640, 360);
                 }
             }
 
+        }));
+        AddObject(new BlackoutButton("To Game Solo", new ButtonAbstract() {
+            @Override
+            public void OnClick(BlackoutButton b) {
+                b.setEnabled(false);
+            }
         }));
         AddObject(new Button(new Vector(0.4f, 0.1f), "fullscreen", new ButtonAbstract() {
             @Override
@@ -100,12 +107,19 @@ public class Settings extends ILevel {
             }
         }));
 
+        
+        
+        
+        
+        
+        
+        
+        
 //        GetObject(0).setScale(new Vector(0.5f, 0.7f));
     }
 
     @Override
     public void Update(ActionEvent ae) {
-        this.repaint();
     }
 
     @Override

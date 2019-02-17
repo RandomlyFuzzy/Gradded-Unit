@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.Utils;
+package com.FuturePixels.MainClasses;
 
 import com.FuturePixels.Components.Transform;
-import com.FuturePixels.Utils.imageUtils;
+import com.FuturePixels.MainClasses.imageUtils;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.levels.LeaderBoard;
-import com.FuturePixels.Utils.ILevel;
+import com.FuturePixels.MainClasses.ILevel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -119,10 +119,10 @@ public abstract class IDrawable {
 
     public void UpdateBounds() {
         float hy = (float) Math.sqrt((getSpriteWidth() / 2 * getSpriteWidth() / 2) + (getSpriteHeight() / 2 * getSpriteHeight() / 2)),
-        a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2),
-        a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2),
-        a3 = (float) Math.atan2(-getSpriteHeight() / 2, -getSpriteWidth() / 2),
-        a4 = (float) Math.atan2(getSpriteHeight() / 2, -getSpriteWidth() / 2);
+                a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2),
+                a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2),
+                a3 = (float) Math.atan2(-getSpriteHeight() / 2, -getSpriteWidth() / 2),
+                a4 = (float) Math.atan2(getSpriteHeight() / 2, -getSpriteWidth() / 2);
         v1 = new Vector((int) (getPosition().getX() + (float) Math.cos(a1 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a1 - getTotalRotation()) * hy * Scale.getY()));
         v2 = new Vector((int) (getPosition().getX() + (float) Math.cos(a2 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a2 - getTotalRotation()) * hy * Scale.getY()));
         v3 = new Vector((int) (getPosition().getX() + (float) Math.cos(a3 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a3 - getTotalRotation()) * hy * Scale.getY()));
@@ -152,7 +152,7 @@ public abstract class IDrawable {
     }
 
     public boolean checkForIntersections(Polygon g) {
-        if(v1 == null){
+        if (v1 == null) {
             UpdateBounds();
             g = getBounds();
         }
@@ -230,6 +230,10 @@ public abstract class IDrawable {
     }
 
     void CoreUpdate(Graphics g2) {
+        if (!isEnabled()) {
+            return;
+        }
+
         Graphics2D g = (Graphics2D) g2;
         doMove();
         transform.Update(g);

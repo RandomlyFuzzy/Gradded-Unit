@@ -7,8 +7,8 @@ package com.FuturePixels.Components;
 
 import com.FuturePixels.Drawables.Levels.Player;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.Utils.IComponent;
-import com.FuturePixels.Utils.IDrawable;
+import com.FuturePixels.MainClasses.IComponent;
+import com.FuturePixels.MainClasses.IDrawable;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;

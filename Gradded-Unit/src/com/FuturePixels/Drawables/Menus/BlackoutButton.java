@@ -18,27 +18,20 @@ import java.awt.Toolkit;
  *
  * @author RandomlyFuzzy
  */
-public class Button extends IDrawable {
+public class BlackoutButton extends IDrawable {
 
     private String Message = "";
     private Vector relpos = Vector.One();
     ButtonAbstract buttonDelegate;
 
-    public Button() {
+    public BlackoutButton() {
         super();
     }
 
-    public Button(String Message, ButtonAbstract Logic) {
+    public BlackoutButton(String Message, ButtonAbstract Logic) {
         super();
         this.Message = Message;
         buttonDelegate = Logic;
-    }
-
-    public Button(Vector relpos, String Message, ButtonAbstract Logic) {
-        super();
-        this.Message = Message;
-        this.buttonDelegate = Logic;
-        this.relpos = relpos;
     }
 
     @Override
@@ -48,16 +41,19 @@ public class Button extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
-        float hypot =(float) Math.sqrt((Game.g.getWindowWidth()* Game.g.getWindowWidth()) + (Game.g.getWindowHeight()*Game.g.getWindowHeight()));
-        setScale(new Vector((Game.g.getWindowWidth()/hypot)*Game.g.getWindowWidth()/1000,(Game.g.getWindowHeight()/hypot)*Game.g.getWindowHeight()/500));
+        setPosition(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2);
+        setSpriteWidth(Game.g.getWindowWidth());
+        setSpriteHeight(Game.g.getWindowHeight());
     }
 
     @Override
     public void Update(Graphics2D g) {
-        DrawLastLoadedImage(g);
+//        DrawLastLoadedImage(g);
+g.setColor(new Color(200,200,200,100));
+        g.fillRect(-getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
+
         g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
     }
 
@@ -71,7 +67,7 @@ public class Button extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-      
+
     }
 
     public String getMessage() {

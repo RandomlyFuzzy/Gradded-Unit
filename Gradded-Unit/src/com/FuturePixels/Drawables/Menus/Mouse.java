@@ -6,9 +6,9 @@
 package com.FuturePixels.Drawables.Menus;
 
 import com.FuturePixels.Drawables.Levels.HUD;
-import com.FuturePixels.Utils.IDrawable;
+import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.Utils.Vector;
+import com.FuturePixels.MainClasses.Vector;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -62,6 +62,10 @@ public class Mouse extends IDrawable {
         if (im instanceof DropDownButton && Level().isClicking() && !clicked) {
             clicked = true;
             ((DropDownButton) im).DoAction();
+        }
+        if (im instanceof BlackoutButton && Level().isClicking() && !clicked) {
+            clicked = true;
+            ((BlackoutButton) im).DoAction();
         }
 //        System.out.println("com.FuturePixels.GameClasses.Mouse.onCollison() with " + im.getClass().toString());
     }

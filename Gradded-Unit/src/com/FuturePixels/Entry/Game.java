@@ -9,9 +9,9 @@ I certify that this is my own work and I have not used code from any other sourc
  */
 package com.FuturePixels.Entry;
 
-import com.FuturePixels.Utils.imageUtils;
-import com.FuturePixels.Utils.ILevel;
-import com.FuturePixels.Utils.UtilManager;
+import com.FuturePixels.MainClasses.imageUtils;
+import com.FuturePixels.MainClasses.ILevel;
+import com.FuturePixels.MainClasses.UtilManager;
 import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
 import java.awt.Cursor;
@@ -40,11 +40,11 @@ public final class Game {
 
     private static final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
     private static JFrame gameWindow;
-    private static HashMap<String, Integer> LevelFinder = new HashMap<String, Integer>();
-    static ArrayList<ILevel> Levels = new ArrayList();
     private double DeltaTime = 0;
     private static long deltalong = 0;
     private static ILevel CurrentLevel;
+    private static Rectangle FrameBounds;
+    private static boolean isDecorate = false;
 
     private static Cursor Swap;
 
@@ -104,12 +104,14 @@ public final class Game {
 
     public void InitWindow() {
         gameWindow = new JFrame();
-        gameWindow.setMinimumSize(new Dimension(20, 20));
-        gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.getContentPane().setLayout(new CardLayout());
-        gameWindow.setLocationRelativeTo(null);
         gameWindow.setTitle("Gradded unit");
+        gameWindow.pack();
+        gameWindow.setLocationRelativeTo(null);
+        gameWindow.setMinimumSize(new Dimension(20, 20));
+        gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        gameWindow.setResizable(false);
         gameWindow.setVisible(true);
         FrameBounds = gameWindow.getBounds();
     }
@@ -130,10 +132,12 @@ public final class Game {
             gameWindow.setLocation(0, 0);
             gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
             gameWindow.setUndecorated(true);
+            isDecorate = true;
             gameWindow.pack();
         } else {
             gameWindow.setExtendedState(JFrame.NORMAL);
             gameWindow.setUndecorated(false);
+            isDecorate = false;
             gameWindow.pack();
             gameWindow.setBounds(FrameBounds);
         }
@@ -172,12 +176,12 @@ public final class Game {
         }
     }
 
-    static Rectangle FrameBounds;
-
     public void SetDimentions(int w, int h) {
         Rectangle bo = Game.g.GetFrame().getBounds();
         gameWindow.setBounds(bo.x, bo.y, w, h);
     }
+
+  
 
     public static ILevel GetLevel() {
         return CurrentLevel;

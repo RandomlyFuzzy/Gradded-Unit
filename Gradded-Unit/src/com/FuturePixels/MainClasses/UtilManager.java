@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.Utils;
+package com.FuturePixels.MainClasses;
+
+import com.FuturePixels.Drawables.Menus.GamePreferences;
 
 /**
  *
@@ -16,6 +18,7 @@ public class UtilManager {
         new MusicUtils();
         new imageUtils();
         new CalcUtils();
+        new GamePreferences();
     }
     
     

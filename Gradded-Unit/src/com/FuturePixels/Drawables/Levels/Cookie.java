@@ -5,10 +5,10 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Utils.IDrawable;
+import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.Utils.Vector;
-import com.FuturePixels.Utils.ILevel;
+import com.FuturePixels.MainClasses.Vector;
+import com.FuturePixels.MainClasses.ILevel;
 import com.sun.javafx.geom.Vec2d;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
