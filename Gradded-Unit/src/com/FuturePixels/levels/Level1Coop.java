@@ -29,7 +29,8 @@ public class Level1Coop extends ILevel {
     @Override
     public void init() {
 
-//        AddObject(new DebugObject());
+        AddObject(new DebugObject());
+        AddObject(new HUD());
         System.out.println("com.game.levels.level1.<init>()");
         AddObject(new PlatForm(new Vector(100, 50), (float) Math.PI * 0.25f / 3f));
         AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f));
@@ -38,7 +39,6 @@ public class Level1Coop extends ILevel {
         player2 = new Player();
         AddObject(player1);
         AddObject(player2);
-        AddObject(new HUD());
 
         Game.toggleCursor();
         background = GetSprite("/Images/background.png");
@@ -121,7 +121,7 @@ public class Level1Coop extends ILevel {
 
             } else if (code == GamePreferences.gp.getKeyDropP1()) {
                 player1.setDown(false);
-            }else if (code == GamePreferences.gp.getKeyRightP2()) {
+            } else if (code == GamePreferences.gp.getKeyRightP2()) {
                 Pressed = true;
                 player2.setRight(false);
             } else if (code == GamePreferences.gp.getKeyLeftP2()) {

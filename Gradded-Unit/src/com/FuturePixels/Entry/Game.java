@@ -53,8 +53,11 @@ public final class Game {
         deltalong = System.nanoTime();
     }
 
+    /*
+        this is the Delta time in milliseconds for each time the screen is drawn
+    */
     public double getDelta() {
-        return DeltaTime / 5000000000.0;
+        return DeltaTime / 1000000000.0;
     }
 
     public int getWindowWidth() {

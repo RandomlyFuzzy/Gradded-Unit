@@ -1,5 +1,7 @@
 package com.FuturePixels.Drawables.Menus;
 
+import com.FuturePixels.Entry.Game;
+import com.FuturePixels.MainClasses.Vector;
 import java.awt.event.KeyEvent;
 
 /**
@@ -83,4 +85,8 @@ public class GamePreferences {
         this.KeyDropP2 = KeyDropP2;
     }
 
+    public static Vector ButonDims() {
+        float hypot = (float) Math.sqrt((Game.g.getWindowWidth() * Game.g.getWindowWidth()) + (Game.g.getWindowHeight() * Game.g.getWindowHeight()));
+        return new Vector((Game.g.getWindowWidth() / hypot) * Game.g.getWindowWidth() / 1400, (Game.g.getWindowHeight() / hypot) * Game.g.getWindowHeight() / 500);
+    }
 }

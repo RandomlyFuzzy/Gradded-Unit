@@ -23,7 +23,15 @@ public class Transform extends IComponent {
 
     public Vector Scale = Vector.One();
     public Vector Translation = Vector.Zero();
-    public Vector offsetTranslation = Vector.Zero();
+    private static Vector offsetTranslation = Vector.Zero();
+
+    public static Vector getOffsetTranslation() {
+        return offsetTranslation;
+    }
+
+    public static void setOffsetTranslation(Vector offsetTranslation) {
+        Transform.offsetTranslation = offsetTranslation;
+    }
     public float RotationZ = 0;
 
     public Transform(IDrawable parent) {

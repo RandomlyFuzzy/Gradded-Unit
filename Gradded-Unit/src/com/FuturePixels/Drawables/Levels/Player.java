@@ -5,7 +5,7 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Components.RigidBody;
+import com.FuturePixels.Components.*;
 import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.MainClasses.Collison;
@@ -25,8 +25,6 @@ public class Player extends IDrawable {
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true;
 
     public Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
-
-   
 
     public boolean isLeft() {
         return left;
@@ -69,7 +67,6 @@ public class Player extends IDrawable {
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
     }
-    private DebugObject dComp;
 
     public void init() {
         System.out.println("com.FuturePixels.Drawables.Levels.Player.init()");
@@ -122,15 +119,18 @@ public class Player extends IDrawable {
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
         Velocity.mult(new Vector(0.985f, 0.995f));
         Acc.mult(0);
+        Transform.setOffsetTranslation(new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2)));
     }
 
     private void movePlayer() {
         boolean one = true, two = true;
 
         if (up && canJump) {
-            Acc.setY(0.01f);
+//            Acc.setY(0.01f);
             if (isColliding()) {
-                Velocity.setY(5f);
+                Acc.setY(12f);
+                Level().play("/Sounds/Jump.wav");
+
             }
             canJump = false;
         } else if (down) {
@@ -154,12 +154,13 @@ public class Player extends IDrawable {
 
         Acc.setX(Acc.getX() > 0.3f ? 0.3f : Acc.getX() < -0.3f ? 0.3f : Acc.getX());
         if (!isColliding()) {
-            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
+            //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
+//            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
+            //mars gravity*2  
+            Acc.setY(Acc.getY() + (-3.711f * (float) Game.g.getDelta() * 2));
         }
         Stop = !one && !two;
     }
-    private Vector bottom, top, _hit;
-    private Vector[] _Top, _bottom;
 
     @Override
     public void onCollison(IDrawable im) {
@@ -169,8 +170,9 @@ public class Player extends IDrawable {
 
         if (im instanceof PlatForm) {
             setRotation(im.getRotation());
+            Vector bottom, top, _hit;
+            Vector[] _Top, _bottom;
             //get platfor top line
-
             bottom = new Vector(getPosition()).add(GetUp().mult(getSpriteHeight() * -0.55f));
             top = new Vector(bottom).mult(-1).add(getPosition()).add(getPosition());
             _Top = im.sideUp();
@@ -180,6 +182,8 @@ public class Player extends IDrawable {
 
             if (col.IsHit) {
                 canJump = true;
+            }
+            if (col.IsHit && !down) {
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_Top[0], _Top[1]);
                 _hit = col.hitLocation;
@@ -188,6 +192,7 @@ public class Player extends IDrawable {
                         y = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * 0.5f)).getY();
                 DebugObject.AddCirles(new Vector(col.hitLocation.getX(), col.hitLocation.getY()));
                 setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
+                return;
             }
             Collison col2 = CollisonUtils.CheckForLineHits(top, getPosition(), _bottom[0], _bottom[1]);
 

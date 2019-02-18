@@ -8,6 +8,9 @@ package com.FuturePixels.MainClasses;
 import com.FuturePixels.MainClasses.MusicUtils;
 import com.FuturePixels.MainClasses.imageUtils;
 import com.FuturePixels.MainClasses.IDrawable;
+import com.FuturePixels.Components.*;
+import com.FuturePixels.Drawables.Levels.HUD;
+import static com.FuturePixels.Drawables.Levels.HUD.AddText;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.levels.MainMenu;
 import java.awt.Graphics;
@@ -37,7 +40,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private KeyEvent LastKeyPress = null;
 
     public KeyEvent getLastKeyPress() {
-        if(LastKeyPress == null){
+        if (LastKeyPress == null) {
             System.err.println("their was no last key pressed");
         }
         return LastKeyPress;
@@ -81,6 +84,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
         return MouseButtonPressed.get(ind);
     }
+    private int temp1;
 
     public ILevel() {
         timer = new Timer(16, this);
@@ -95,11 +99,14 @@ public abstract class ILevel extends JPanel implements ActionListener {
         setFocusable(true);
         setDoubleBuffered(true);
         init();
+        temp1 = HUD.AddText("", new Vector(0, 20));
+
     }
 
-    public void AddObject(IDrawable Drawable) {
+    public IDrawable AddObject(IDrawable Drawable) {
         gameObjs.add(Drawable);
         Drawable.CoreInit();
+        return Drawable;
     }
 
     @Override
@@ -108,8 +115,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
         checkCollionsions();
         movement();
         this.repaint();
-//       
-
     }
 
     public void movement() {
@@ -121,10 +126,18 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        game.SetDelta();
         Draw(g2d);
         if (DebugCollisons) {
-//            for (int j = 0; j < game.g.getWindowWidth(); j++) {
-//                for (int k = 0; k < game.g.getWindowHeight(); k++) {
+            try{
+            HUD.EditText(temp1, ("" + (1 / Game.g.getDelta())).substring(0, ("" + (1 / Game.g.getDelta())).indexOf(".") + 3) + "fps on update");
+            }catch(Exception e){
+            
+            }
+
+//            int CWH = 6;
+//            for (int j = (int) -Transform.getOffsetTranslation().getX() - (int) Game.g.getWindowWidth() / 2; j < (int) -Transform.getOffsetTranslation().getX() + (int) Game.g.getWindowWidth(); j += CWH) {
+//                for (int k = (int) -Transform.getOffsetTranslation().getY() - (int) Game.g.getWindowHeight() / 2; k < (int) -Transform.getOffsetTranslation().getY() + (int) Game.g.getWindowHeight(); k += CWH) {
 //                    boolean draw = false;
 //                    for (int i = 0; i < gameObjs.size(); i++) {
 //                        if (gameObjs.get(i).getBounds().contains(j, k)) {
@@ -133,10 +146,12 @@ public abstract class ILevel extends JPanel implements ActionListener {
 //                        }
 //                    }
 //                    if (draw) {
-//                        g.drawRect(j, k, 1, 1);
+//                        g.fillRect((int) Transform.getOffsetTranslation().getX() + j, (int) Transform.getOffsetTranslation().getY() + k, CWH, CWH);
 //                    }
 //                }
 //            }
+        } else {
+            HUD.EditText(temp1, "");
         }
         PostUpdate(g2d);
     }
@@ -150,8 +165,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public void PostUpdate(Graphics2D g) {
-        game.SetDelta();
-        for (int i = gameObjs.size()-1; i >=0; i--) {
+        for (int i = gameObjs.size() - 1; i >= 0; i--) {
             if (gameObjs.get(i).isEnabled()) {
                 gameObjs.get(i).CoreUpdate(g);
                 gameObjs.get(i).setIsColliding(false);
@@ -208,7 +222,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
         Game.Remove(this.getClass());
     }
 
-    public synchronized void play(InputStream soundResource) {
+    public synchronized void play(String soundResource) {
+        System.out.println("com.FuturePixels.MainClasses.ILevel.play()");
         MusicUtils.play(soundResource);
     }
 
@@ -217,7 +232,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
         return g;
     }
 
-    
     //this is using java swing native functionality but their are exameples or raycasting  in use in the player.onCollison function 
     public void checkCollionsions() {
         if (gameObjs.size() <= 1) {
@@ -227,7 +241,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
             IDrawable a = gameObjs.get(i);
             for (int j = 0; j < gameObjs.size(); j++) {
                 IDrawable b = gameObjs.get(j);
-                if (i == j || !(a.isEnabled() && b.isEnabled())) {
+                if (i == j || !(a.isEnabled() && b.isEnabled()) || !(a.IsCollidable() && b.IsCollidable())) {
                     continue;
                 }
                 if (a != b) {
@@ -348,7 +362,9 @@ public abstract class ILevel extends JPanel implements ActionListener {
         for (int i = drawable.size() - 1; i > 0; i--) {
             drawable.remove(i);
         }
+
         resetParams();
+        Transform.setOffsetTranslation(Vector.Zero());
     }
 
     public abstract void init();

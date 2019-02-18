@@ -42,8 +42,7 @@ public class MainMenu extends ILevel {
     @Override
     public void init() {
         Game.toggleCursor();
-        m = new Mouse();
-        AddObject(m);
+        AddObject(new Mouse());
         AddObject(new HUD());
 
         AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new ButtonAbstract() {

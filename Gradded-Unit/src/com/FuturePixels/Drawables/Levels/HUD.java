@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
+import com.FuturePixels.Entry.Game;
 import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.MainClasses.Vector;
 import java.awt.Graphics2D;
@@ -21,8 +22,6 @@ public class HUD extends IDrawable {
 
     public HUD() {
         super();
-//        texts = new ArrayList<String>();
-//        textsPos = new ArrayList<Vector>();
     }
 
     public static int AddText(String text, Vector position) {
@@ -35,7 +34,6 @@ public class HUD extends IDrawable {
         if (texts.size() <= ind || ind < 0) {
             return;
         }
-
         texts.set(ind, Text);
     }
 
@@ -45,7 +43,8 @@ public class HUD extends IDrawable {
 
     @Override
     public void init() {
-
+        setIsCollidable(false);
+        setUseTransforms(false);
     }
 
     @Override
@@ -54,9 +53,13 @@ public class HUD extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
+
+//        updateTime =  System.nanoTime();
         for (int i = 0; i < texts.size(); i++) {
             g.drawString(this.texts.get(i), this.textsPos.get(i).getX(), this.textsPos.get(i).getY());
         }
+        
+        
     }
 
     @Override
@@ -64,6 +67,7 @@ public class HUD extends IDrawable {
 
     }
 
+    @Override
     public void dispose() {
         super.dispose();
         texts = new ArrayList<String>();

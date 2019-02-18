@@ -29,11 +29,11 @@ public class Level1Solo extends ILevel {
     @Override
     public void init() {
 
-//        AddObject(new DebugObject());
+        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new PlatForm(new Vector(100, 50), (float) Math.PI * 0.25f / 3f));
-        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f));
-        AddObject(new PlatForm(new Vector(400, 200), 0));// (float) Math.PI * -0.25f / 3f));
+        AddObject(new PlatForm(new Vector(100, 50), (float) Math.PI * 0.25f / 3f)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(400, 200), 0)).GetSprite("/images/Platform.png");// (float) Math.PI * -0.25f / 3f));
         player1 = new Player();
         AddObject(player1);
         AddObject(new HUD());

@@ -43,7 +43,23 @@ public abstract class IDrawable {
     private float Rotation = 0, offset = 0;
 
     private Vector Scale = Vector.One();
-    private boolean Enabled = true, isColliding = false;
+    private boolean Enabled = true, isColliding = false, isCollidable = true, useTransforms = true;
+
+    public boolean IsCollidable() {
+        return isCollidable;
+    }
+
+    public void setIsCollidable(boolean isCollidable) {
+        this.isCollidable = isCollidable;
+    }
+
+    public boolean getUseTransforms() {
+        return useTransforms;
+    }
+
+    public void setUseTransforms(boolean useTransforms) {
+        this.useTransforms = useTransforms;
+    }
 
     private BufferedImage LastImage = null;
     private ArrayList<IComponent> Component = new ArrayList<IComponent>();
@@ -236,39 +252,59 @@ public abstract class IDrawable {
 
         Graphics2D g = (Graphics2D) g2;
         doMove();
-        transform.Update(g);
-        transform.PushTransforms(g);
+        if (getUseTransforms()) {
+            transform.Update(g);
+            transform.PushTransforms(g);
+        }
         Update(g);
         UpdateComponents(g);
-        transform.PopTransforms(g);
 
-        if (!Level().DebugCollisons) {
+        if (getUseTransforms()) {
+            transform.PopTransforms(g);
+        }
+
+        if (!Level().DebugCollisons||(getSpriteWidth()+getSpriteHeight() ==0)) {
             return;
         }
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.red);
 
-        g2d.drawLine((int) getPosition().getX(),
-                (int) getPosition().getY(),
-                (int) (getPosition().getX() + (GetUp().getX()) * 20),
-                (int) (getPosition().getY() + (GetUp().getY()) * 20));
-        g2d.drawLine((int) getPosition().getX(),
-                (int) getPosition().getY(),
-                (int) (getPosition().getX() + (GetRight().getX() * 20)),
-                (int) ((getPosition().getY() + (GetRight().getY() * 20))));
+        g2d.drawLine((int) Transform.getOffsetTranslation().getX() + (int) getPosition().getX(),
+                (int) Transform.getOffsetTranslation().getY() + (int) getPosition().getY(),
+                (int) Transform.getOffsetTranslation().getX() + (int) (getPosition().getX() + (GetUp().getX()) * 20),
+                (int) Transform.getOffsetTranslation().getY() + (int) (getPosition().getY() + (GetUp().getY()) * 20));
+        g2d.drawLine((int) Transform.getOffsetTranslation().getX() + (int) getPosition().getX(),
+                (int) Transform.getOffsetTranslation().getY() + (int) getPosition().getY(),
+                (int) Transform.getOffsetTranslation().getX() + (int) (getPosition().getX() + (GetRight().getX() * 20)),
+                (int) Transform.getOffsetTranslation().getY() + (int) ((getPosition().getY() + (GetRight().getY() * 20))));
 
         Vector[] _left = sideLeft();
         Vector[] _right = sideRight();
         Vector[] _Top = sideUp();
         Vector[] _down = sideDown();
-
-        g.drawLine((int) _left[0].getX(), (int) _left[0].getY(), (int) _left[1].getX(), (int) _left[1].getY());
-        g.drawLine((int) _right[0].getX(), (int) _right[0].getY(), (int) _right[1].getX(), (int) _right[1].getY());
-        g.drawLine((int) _Top[0].getX(), (int) _Top[0].getY(), (int) _Top[1].getX(), (int) _Top[1].getY());
-        g.drawLine((int) _down[0].getX(), (int) _down[0].getY(), (int) _down[1].getX(), (int) _down[1].getY());
+        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _left[0].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _left[0].getY(),
+                   (int) Transform.getOffsetTranslation().getX() + (int) _left[1].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _left[1].getY());
+        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _right[0].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _right[0].getY(),
+                   (int) Transform.getOffsetTranslation().getX() + (int) _right[1].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _right[1].getY());
+        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _Top[0].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _Top[0].getY(),
+                   (int) Transform.getOffsetTranslation().getX() + (int) _Top[1].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _Top[1].getY());
+        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _down[0].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _down[0].getY(),
+                   (int) Transform.getOffsetTranslation().getX() + (int) _down[1].getX(),
+                   (int) Transform.getOffsetTranslation().getY() + (int) _down[1].getY());
 
     }
 
+    /*
+        no need to use this as it inits when its added to the object
+    */
+    @Deprecated()
     void initComponents() {
         if (Component.isEmpty()) {
             return;
@@ -312,18 +348,30 @@ public abstract class IDrawable {
     }
 
     public Vector[] sideUp() {
+        if (v3 == null || v2 == null) {
+            UpdateBounds();
+        }
         return new Vector[]{v3, v2};
     }
 
     public Vector[] sideLeft() {
+        if (v3 == null || v4 == null) {
+            UpdateBounds();
+        }
         return new Vector[]{v3, v4};
     }
 
     public Vector[] sideDown() {
+        if (v4 == null || v1 == null) {
+            UpdateBounds();
+        }
         return new Vector[]{v4, v1};
     }
 
     public Vector[] sideRight() {
+        if (v2 == null || v1 == null) {
+            UpdateBounds();
+        }
         return new Vector[]{v1, v2};
     }
 
@@ -339,7 +387,7 @@ public abstract class IDrawable {
         return isColliding;
     }
 
-    public void setIsColliding(boolean isColliding) {
+    void setIsColliding(boolean isColliding) {
         this.isColliding = isColliding;
     }
 

@@ -71,8 +71,8 @@ public class DropDownButton extends IDrawable {
     @Override
     public void doMove() {
         setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
-        float hypot = (float) Math.sqrt((Game.g.getWindowWidth() * Game.g.getWindowWidth()) + (Game.g.getWindowHeight() * Game.g.getWindowHeight()));
-        setScale(new Vector((Game.g.getWindowWidth() / hypot) * Game.g.getWindowWidth() / 1000, (Game.g.getWindowHeight() / hypot) * Game.g.getWindowHeight() / 500));
+        
+        setScale(GamePreferences.ButonDims());
 
     }
 

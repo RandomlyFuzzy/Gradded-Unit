@@ -32,13 +32,14 @@ public class PlatForm extends IDrawable {
 
     @Override
     public void init() {
-        GetSprite("/images/Cookie.png");
+//        GetSprite("/images/Cookie.png");
         setOffset((float) -Math.PI);
     }
 
     @Override
     public void Update(Graphics2D g) {
-        g.drawImage(GetSprite("/images/Platform.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
+        DrawLastLoadedImage(g);
+//        g.drawImage(GetSprite("/images/Platform.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
     }
 
     @Override
