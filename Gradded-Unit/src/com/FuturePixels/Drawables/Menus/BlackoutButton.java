@@ -49,7 +49,7 @@ public class BlackoutButton extends IDrawable {
     @Override
     public void Update(Graphics2D g) {
 //        DrawLastLoadedImage(g);
-g.setColor(new Color(200,200,200,100));
+        g.setColor(new Color(200,200,200,100));
         g.fillRect(-getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());

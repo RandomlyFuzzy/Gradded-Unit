@@ -19,27 +19,28 @@ import java.awt.geom.AffineTransform;
  */
 public class PlatForm extends IDrawable {
 
-
     public PlatForm() {
         super();
     }
-    
-    public PlatForm(Vector position,float RadianRotation){
+
+    public PlatForm(Vector position, float RadianRotation) {
         super();
-        setPosition(position.getX(), position.getY());
+        setPosition(position);
         setRotation(RadianRotation);
     }
 
     @Override
     public void init() {
-//        GetSprite("/images/Cookie.png");
+        if (getLastImage() == null) {
+            GetSprite("/images/Platform.png");
+        }
         setOffset((float) -Math.PI);
     }
 
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
-//        g.drawImage(GetSprite("/images/Platform.png"), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
+        g.drawImage(getLastImage(), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
     }
 
     @Override

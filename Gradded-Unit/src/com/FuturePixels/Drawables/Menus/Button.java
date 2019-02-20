@@ -58,6 +58,12 @@ public class Button extends IDrawable {
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
+        if(isColliding()){
+            Color c = g.getColor();
+            g.setColor(new Color(200,200,200,100));
+            g.fillRect(-getSpriteWidth()/2, -getSpriteHeight()/2, getSpriteWidth(), getSpriteHeight());
+            g.setColor(c);
+        }
     }
 
     public void DoAction() {
@@ -70,7 +76,6 @@ public class Button extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-      
     }
 
     public String getMessage() {

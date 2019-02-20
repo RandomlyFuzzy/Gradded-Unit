@@ -34,7 +34,6 @@ public abstract class IComponent {
 
     void dispose() {
         Parent = null;
-        System.gc();
     }
 
 }

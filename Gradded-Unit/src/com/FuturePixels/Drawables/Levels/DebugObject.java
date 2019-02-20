@@ -45,7 +45,7 @@ public class DebugObject extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
-g.setColor(new Color(255,255,150,155));
+        g.setColor(new Color(255, 255, 150, 155));
         for (Vector v : Cirles) {
             g.fillOval((int) v.getX() - 5, (int) v.getY() - 5, 10, 10);
         }

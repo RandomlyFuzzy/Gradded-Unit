@@ -37,7 +37,7 @@ public class Mouse extends IDrawable {
     @Override
     public void doMove() {
 //        Rad += Game.g.getDelta() * 100;
-        setPosition(Level().getMousePos().getX(), Level().getMousePos().getY());
+        setPosition(Level().getMousePos());
 //        setRotation(Rad);
         HUD.EditText(pos, "" + isColliding());
         clicked = clicked != !Level().isClicking() && clicked;

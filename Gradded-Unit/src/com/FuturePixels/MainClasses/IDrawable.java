@@ -63,7 +63,7 @@ public abstract class IDrawable {
 
     private BufferedImage LastImage = null;
     private ArrayList<IComponent> Component = new ArrayList<IComponent>();
-    private final Transform transform;
+    private Transform transform;
 
     private Vector v1,
             v2,
@@ -83,7 +83,6 @@ public abstract class IDrawable {
         transform = new Transform(this);
         AddComponent(transform);
         hasSupered = true;
-
     }
 
     public float getRotation() {
@@ -96,12 +95,13 @@ public abstract class IDrawable {
     }
 
     public Vector getScale() {
-        return Scale;
+        return new Vector(Scale);
     }
 
     public void setScale(Vector Scale) {
         UpdateBounds();
         this.Scale = Scale;
+        Scale = null;
     }
 
     public boolean isEnabled() {
@@ -167,6 +167,14 @@ public abstract class IDrawable {
         return g;
     }
 
+    BufferedImage GetImage(String URI) {
+        return imageUtils.T.GetImage(URI);
+    }
+
+    public void SetImage(String name, BufferedImage img) {
+        imageUtils.T.setImage(name, img);
+    }
+
     public boolean checkForIntersections(Polygon g) {
         if (v1 == null) {
             UpdateBounds();
@@ -184,7 +192,7 @@ public abstract class IDrawable {
     }
 
     public BufferedImage GetSprite(String URI) {
-        LastImage = imageUtils.T.GetImage(URI);
+        LastImage = GetImage(URI);
         if (LastImage != null) {
             this.spriteWidth = LastImage.getWidth();
             this.spriteHeight = LastImage.getHeight();
@@ -193,10 +201,16 @@ public abstract class IDrawable {
         return LastImage;
     }
 
-    //used a memory snap shot and found that this is a big proble for memory usage in this program
+    
     public void setPosition(float X, float Y) {
         this.position.setX(X);
         this.position.setY(Y);
+        UpdateBounds();
+    } 
+
+    public void setPosition(Vector v) {
+        this.position.setX(v.getX());
+        this.position.setY(v.getY());
         UpdateBounds();
     }
 
@@ -242,7 +256,6 @@ public abstract class IDrawable {
             System.err.println("you must super this");
         }
         init();
-        initComponents();
     }
 
     void CoreUpdate(Graphics g2) {
@@ -263,7 +276,7 @@ public abstract class IDrawable {
             transform.PopTransforms(g);
         }
 
-        if (!Level().DebugCollisons||(getSpriteWidth()+getSpriteHeight() ==0)) {
+        if (!Level().DebugCollisons || (getSpriteWidth() + getSpriteHeight() == 0)) {
             return;
         }
         Graphics2D g2d = (Graphics2D) g;
@@ -283,37 +296,27 @@ public abstract class IDrawable {
         Vector[] _Top = sideUp();
         Vector[] _down = sideDown();
         g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _left[0].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _left[0].getY(),
-                   (int) Transform.getOffsetTranslation().getX() + (int) _left[1].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _left[1].getY());
+                (int) Transform.getOffsetTranslation().getY() + (int) _left[0].getY(),
+                (int) Transform.getOffsetTranslation().getX() + (int) _left[1].getX(),
+                (int) Transform.getOffsetTranslation().getY() + (int) _left[1].getY());
         g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _right[0].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _right[0].getY(),
-                   (int) Transform.getOffsetTranslation().getX() + (int) _right[1].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _right[1].getY());
+                (int) Transform.getOffsetTranslation().getY() + (int) _right[0].getY(),
+                (int) Transform.getOffsetTranslation().getX() + (int) _right[1].getX(),
+                (int) Transform.getOffsetTranslation().getY() + (int) _right[1].getY());
         g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _Top[0].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _Top[0].getY(),
-                   (int) Transform.getOffsetTranslation().getX() + (int) _Top[1].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _Top[1].getY());
+                (int) Transform.getOffsetTranslation().getY() + (int) _Top[0].getY(),
+                (int) Transform.getOffsetTranslation().getX() + (int) _Top[1].getX(),
+                (int) Transform.getOffsetTranslation().getY() + (int) _Top[1].getY());
         g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _down[0].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _down[0].getY(),
-                   (int) Transform.getOffsetTranslation().getX() + (int) _down[1].getX(),
-                   (int) Transform.getOffsetTranslation().getY() + (int) _down[1].getY());
+                (int) Transform.getOffsetTranslation().getY() + (int) _down[0].getY(),
+                (int) Transform.getOffsetTranslation().getX() + (int) _down[1].getX(),
+                (int) Transform.getOffsetTranslation().getY() + (int) _down[1].getY());
 
     }
 
     /*
         no need to use this as it inits when its added to the object
-    */
-    @Deprecated()
-    void initComponents() {
-        if (Component.isEmpty()) {
-            return;
-        }
-//        Component.forEach((a) -> {
-//            a.Init();
-//        });
-    }
-
+     */
     void UpdateComponents(Graphics2D g) {
         if (Component.isEmpty()) {
             return;
@@ -334,6 +337,10 @@ public abstract class IDrawable {
         g.drawImage(LastImage, -getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
     }
 
+    public BufferedImage getLastImage() {
+        return LastImage;
+    }
+
     public void dispose() {
         LastImage = null;
         ArrayList<IComponent> c = Component;
@@ -344,7 +351,6 @@ public abstract class IDrawable {
         c.forEach((a) -> {
             a.dispose();
         });
-        System.gc();
     }
 
     public Vector[] sideUp() {
@@ -387,7 +393,7 @@ public abstract class IDrawable {
         return isColliding;
     }
 
-    void setIsColliding(boolean isColliding) {
+    public void setIsColliding(boolean isColliding) {
         this.isColliding = isColliding;
     }
 

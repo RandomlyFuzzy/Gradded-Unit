@@ -28,7 +28,7 @@ public class imageUtils {
         return GetImage(URI, false);
     }
 
-    public BufferedImage GetImage(String URI, boolean isDefault) {
+    private BufferedImage GetImage(String URI, boolean isDefault) {
 
         URI = "" + URI;
         BufferedImage g = null;
@@ -57,4 +57,8 @@ public class imageUtils {
         return GetImage("/images/defualt.png", true);
     }
 
+    public void setImage(String Name,BufferedImage img){
+        Images.put(Name, img);
+    }
+    
 }

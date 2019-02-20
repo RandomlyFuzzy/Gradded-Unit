@@ -31,7 +31,6 @@ public class Player extends IDrawable {
     }
 
     public void setLeft(boolean left) {
-        System.out.println("com.FuturePixels.Drawables.Levels.Player.setLeft()");
         this.left = left;
     }
 
@@ -40,7 +39,6 @@ public class Player extends IDrawable {
     }
 
     public void setRight(boolean right) {
-        System.out.println("com.FuturePixels.Drawables.Levels.Player.setRight()");
         this.right = right;
     }
 
@@ -49,7 +47,6 @@ public class Player extends IDrawable {
     }
 
     public void setUp(boolean up) {
-        System.out.println("com.FuturePixels.Drawables.Levels.Player.setUp()");
         this.up = up;
     }
 
@@ -58,7 +55,6 @@ public class Player extends IDrawable {
     }
 
     public void setDown(boolean down) {
-        System.out.println("com.FuturePixels.Drawables.Levels.Player.setDown()");
         this.down = down;
     }
 
@@ -113,14 +109,21 @@ public class Player extends IDrawable {
         if (!isColliding()) {
             setRotation((getRotation() * 0.98f));
             canJump = false;
+            once = true;
+            Velocity.mult(new Vector(0.99f, 0.995f));
+        } else {
         }
         movePlayer();
         Velocity.add(Acc);
-        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
-        Velocity.mult(new Vector(0.985f, 0.995f));
+        addPosition( Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
+        if (isColliding()) {
+            Velocity.mult(new Vector(0.985f, 0.995f));
+        }
         Acc.mult(0);
-        Transform.setOffsetTranslation(new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2)));
+
     }
+
+    private float distFromhit = 0;
 
     private void movePlayer() {
         boolean one = true, two = true;
@@ -128,9 +131,9 @@ public class Player extends IDrawable {
         if (up && canJump) {
 //            Acc.setY(0.01f);
             if (isColliding()) {
-                Acc.setY(12f);
+                System.out.println("com.FuturePixels.Drawables.Levels.Player.movePlayer() " + (distFromhit));
+                Acc.setY((float) Math.pow(1.1f, distFromhit) + 8f);
                 Level().play("/Sounds/Jump.wav");
-
             }
             canJump = false;
         } else if (down) {
@@ -149,7 +152,7 @@ public class Player extends IDrawable {
             Acc.addX(0.2f);
         } else if (canJump) {
             two = false;
-//            Acc.setX(0);
+            Acc.setX(0);
         }
 
         Acc.setX(Acc.getX() > 0.3f ? 0.3f : Acc.getX() < -0.3f ? 0.3f : Acc.getX());
@@ -162,9 +165,16 @@ public class Player extends IDrawable {
         Stop = !one && !two;
     }
 
+    boolean once = true;
+
     @Override
     public void onCollison(IDrawable im) {
-        if (im == null || im instanceof Player) {
+        if (im == null) {
+            return;
+        }
+        if (im instanceof Player) {
+            setIsColliding(false);
+//            Velocity.add(new Vector(getPosition()).add(new Vector(im.getPosition()).mult(-1)).mult(3f));
             return;
         }
 
@@ -173,7 +183,7 @@ public class Player extends IDrawable {
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;
             //get platfor top line
-            bottom = new Vector(getPosition()).add(GetUp().mult(getSpriteHeight() * -0.55f));
+            bottom = new Vector(getPosition()).add(GetUp().mult(getSpriteHeight() * -0.5f));
             top = new Vector(bottom).mult(-1).add(getPosition()).add(getPosition());
             _Top = im.sideUp();
 
@@ -188,10 +198,20 @@ public class Player extends IDrawable {
                 DebugObject.AddLine(_Top[0], _Top[1]);
                 _hit = col.hitLocation;
 
-                float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * 0.5f)).getX(),
-                        y = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * 0.5f)).getY();
+                float x = (GetUp().mult(getSpriteHeight() * 0.5f)).getX(),
+                        y = (GetUp().mult(getSpriteHeight() * 0.5f)).getY();
                 DebugObject.AddCirles(new Vector(col.hitLocation.getX(), col.hitLocation.getY()));
+//                Acc.addY((-3.711f * (float) Game.g.getDelta() * -2));
+                Vector dif = new Vector(col.hitLocation).add(new Vector(bottom).mult(-1));
+                dif.mult(dif);
+                distFromhit = (float) Math.sqrt(dif.getX() + dif.getY());
+                dif = null;
+                if (once) {
+                    Velocity.setY(0);
+                    once = false;
+                }
                 setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
+                col = null;
                 return;
             }
             Collison col2 = CollisonUtils.CheckForLineHits(top, getPosition(), _bottom[0], _bottom[1]);
@@ -206,9 +226,14 @@ public class Player extends IDrawable {
                 setPosition(col2.hitLocation.getX() + x, col2.hitLocation.getY() + y);
 
                 DebugObject.AddCirles(new Vector(col2.hitLocation.getX(), col2.hitLocation.getY()));
-                Velocity.mult(new Vector(1, -1f));
-                Acc.mult(new Vector(1, -1f));
+                if (once) {
+                    Velocity.mult(new Vector(1, -1f));
+                    Acc.mult(new Vector(1, -1f));
+                    once = false;
+                }
+                col2 = null;
             }
+            col2 = null;
         }
     }
 

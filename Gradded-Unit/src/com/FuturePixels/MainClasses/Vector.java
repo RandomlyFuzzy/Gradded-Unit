@@ -23,6 +23,8 @@ public class Vector {
 //    public static final Vector Zero = new Vector(0, 0), One = new Vector(1, 1);
     private float x, y;
 
+ 
+
     public Vector(float x, float y) {
         this.x = x;
         this.y = y;
@@ -31,7 +33,6 @@ public class Vector {
     public Vector(Vector v) {
         x = v.getX();
         y = v.getY();
-        v = null;
     }
 
     public Vector add(Vector v) {
@@ -62,9 +63,12 @@ public class Vector {
         return this;
     }
 
+
+
     public void setToVector(Vector v) {
         x = v.getX();
         y = v.getY();
+        v = null;
     }
 
     public float getX() {

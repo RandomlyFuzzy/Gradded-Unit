@@ -40,7 +40,7 @@ public final class Game {
 
     private static final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
     private static JFrame gameWindow;
-    private double DeltaTime = 0;
+    private float DeltaTime = 0;
     private static long deltalong = 0;
     private static ILevel CurrentLevel;
     private static Rectangle FrameBounds;
@@ -55,9 +55,9 @@ public final class Game {
 
     /*
         this is the Delta time in milliseconds for each time the screen is drawn
-    */
-    public double getDelta() {
-        return DeltaTime / 1000000000.0;
+     */
+    public float getDelta() {
+        return DeltaTime / 1000000000.0f;
     }
 
     public int getWindowWidth() {
@@ -108,12 +108,14 @@ public final class Game {
     public void InitWindow() {
         gameWindow = new JFrame();
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameWindow.getContentPane().setLayout(new CardLayout());
-        gameWindow.setTitle("Gradded unit");
-        gameWindow.pack();
         gameWindow.setLocationRelativeTo(null);
+        gameWindow.setLocation(WINDOW_WIDTH/3, WINDOW_HEIGHT/3);
         gameWindow.setMinimumSize(new Dimension(20, 20));
         gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        gameWindow.getContentPane().setLayout(new CardLayout());
+        gameWindow.setTitle("Gradded unit");
+//        gameWindow.pack();
+
         gameWindow.setResizable(false);
         gameWindow.setVisible(true);
         FrameBounds = gameWindow.getBounds();
@@ -183,8 +185,6 @@ public final class Game {
         Rectangle bo = Game.g.GetFrame().getBounds();
         gameWindow.setBounds(bo.x, bo.y, w, h);
     }
-
-  
 
     public static ILevel GetLevel() {
         return CurrentLevel;

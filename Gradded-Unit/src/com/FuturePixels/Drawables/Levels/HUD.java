@@ -56,7 +56,7 @@ public class HUD extends IDrawable {
 
 //        updateTime =  System.nanoTime();
         for (int i = 0; i < texts.size(); i++) {
-            g.drawString(this.texts.get(i), this.textsPos.get(i).getX(), this.textsPos.get(i).getY());
+            g.drawString(this.texts.get(i), this.textsPos.get(i).getX(),this.textsPos.get(i).getY());
         }
         
         

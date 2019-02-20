@@ -9,7 +9,6 @@ import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.MainClasses.Vector;
 import com.FuturePixels.MainClasses.ILevel;
-import com.sun.javafx.geom.Vec2d;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -18,7 +17,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
-import jdk.nashorn.internal.objects.Global;
 
 /**
  *

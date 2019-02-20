@@ -92,14 +92,13 @@ public class Settings extends ILevel {
                     Game.g.GetFrame().setBounds(bo.x, bo.y, 640, 360);
                 }
             }
-
         }));
         AddObject(new BlackoutButton("To Game Solo", new ButtonAbstract() {
             @Override
             public void OnClick(BlackoutButton b) {
                 b.setEnabled(false);
             }
-        }));
+        })).setEnabled(false);
         AddObject(new Button(new Vector(0.4f, 0.1f), "fullscreen", new ButtonAbstract() {
             @Override
             public void OnClick(Button b) {

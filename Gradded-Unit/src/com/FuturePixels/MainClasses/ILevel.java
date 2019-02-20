@@ -5,12 +5,8 @@
  */
 package com.FuturePixels.MainClasses;
 
-import com.FuturePixels.MainClasses.MusicUtils;
-import com.FuturePixels.MainClasses.imageUtils;
-import com.FuturePixels.MainClasses.IDrawable;
 import com.FuturePixels.Components.*;
 import com.FuturePixels.Drawables.Levels.HUD;
-import static com.FuturePixels.Drawables.Levels.HUD.AddText;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.levels.MainMenu;
 import java.awt.Graphics;
@@ -22,7 +18,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -87,7 +82,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private int temp1;
 
     public ILevel() {
-        timer = new Timer(16, this);
+        timer = new Timer(15, this);
         game = Game.g;
     }
 
@@ -111,10 +106,12 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        Update(ae);
         checkCollionsions();
+        game.SetDelta();
+        Update(ae);
         movement();
         this.repaint();
+
     }
 
     public void movement() {
@@ -126,13 +123,12 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        game.SetDelta();
         Draw(g2d);
         if (DebugCollisons) {
-            try{
-            HUD.EditText(temp1, ("" + (1 / Game.g.getDelta())).substring(0, ("" + (1 / Game.g.getDelta())).indexOf(".") + 3) + "fps on update");
-            }catch(Exception e){
-            
+            try {
+                HUD.EditText(temp1, ("" + (1 / Game.g.getDelta())).substring(0, ("" + (1 / Game.g.getDelta())).indexOf(".") + 3) + "fps on update");
+            } catch (Exception e) {
+
             }
 
 //            int CWH = 6;
@@ -172,7 +168,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
             }
         }
         g.dispose();
-        System.gc();
+
     }
 
     public void start() {
@@ -248,9 +244,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
                     if (a.CheckCollions(b)) {
                         a.onCollison(b);
                         a.setIsColliding(true);
+                        b.setIsColliding(true);
                     }
                     if (b.CheckCollions(a)) {
                         b.onCollison(a);
+                        a.setIsColliding(true);
                         b.setIsColliding(true);
                     }
                 }

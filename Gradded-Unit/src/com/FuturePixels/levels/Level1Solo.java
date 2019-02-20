@@ -1,5 +1,6 @@
 package com.FuturePixels.levels;
 
+import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
 import com.FuturePixels.MainClasses.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
@@ -21,6 +22,7 @@ public class Level1Solo extends ILevel {
     Image background;
     boolean Pressed = false, p2 = false;
     Player player1;
+    Vector temp;
 
     public Level1Solo() {
         super();
@@ -29,24 +31,39 @@ public class Level1Solo extends ILevel {
     @Override
     public void init() {
 
-        AddObject(new DebugObject());
+//        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
         AddObject(new PlatForm(new Vector(100, 50), (float) Math.PI * 0.25f / 3f)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.25f / 3f)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.1f)).GetSprite("/images/Platform.png");
         AddObject(new PlatForm(new Vector(400, 200), 0)).GetSprite("/images/Platform.png");// (float) Math.PI * -0.25f / 3f));
         player1 = new Player();
         AddObject(player1);
         AddObject(new HUD());
+//        AddObject(new ScrollingBackground());
 
         Game.toggleCursor();
         background = GetSprite("/Images/background.png");
 //        LeaderBoard.AddTime(System.nanoTime());
+        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
 
     }
 
     @Override
     public void Update(ActionEvent ae) {
 
+        if (player1 == null) {
+            return;
+        }
+        if (-player1.getPosition().getX() != temp.getX()-Game.g.getWindowWidth() / 2) {
+            temp.setX(-player1.getPosition().getX()+Game.g.getWindowWidth() / 2);
+        }
+        if (-player1.getPosition().getY() > temp.getY()-Game.g.getWindowHeight() / 2) {
+            temp.setY(-player1.getPosition().getY()+Game.g.getWindowHeight() / 2);
+        }
+        //screen scroller
+        temp.setY(temp.getY()+Game.g.getDelta()*30f);
+//        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
+        Transform.setOffsetTranslation(temp);
     }
 
     @Override
@@ -109,9 +126,7 @@ public class Level1Solo extends ILevel {
             } else if (code == GamePreferences.gp.getKeyDropP1()) {
                 player1.setDown(false);
             }
-            
-            
-            
+
 //            switch (e.getKeyCode()) {
 //                case KeyEvent.VK_SPACE:
 //                    Pressed = true;

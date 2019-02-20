@@ -17,13 +17,13 @@ import java.awt.geom.AffineTransform;
  * @author RandomlyFuzzy
  */
 public class Transform extends IComponent {
- 
-    
+
     private AffineTransform old;
 
     public Vector Scale = Vector.One();
     public Vector Translation = Vector.Zero();
     private static Vector offsetTranslation = Vector.Zero();
+    private static Vector WorldScale = new Vector(1, 1);
 
     public static Vector getOffsetTranslation() {
         return offsetTranslation;
@@ -31,6 +31,7 @@ public class Transform extends IComponent {
 
     public static void setOffsetTranslation(Vector offsetTranslation) {
         Transform.offsetTranslation = offsetTranslation;
+        offsetTranslation = null;
     }
     public float RotationZ = 0;
 
@@ -51,11 +52,19 @@ public class Transform extends IComponent {
         Scale = getParent().getScale();
         Translation = getParent().getPosition();
         RotationZ = getParent().getRotation();
-        
+
         old = g.getTransform();
-        g.translate((int) Translation.getX()+offsetTranslation.getX(), (int) Translation.getY()+offsetTranslation.getY());
-        g.scale(Scale.getX(), Scale.getY());
+        g.translate((((int) Translation.getX())) + offsetTranslation.getX(), (((int) Translation.getY())) + offsetTranslation.getY());
+        g.scale(Scale.getX() * WorldScale.getX(), Scale.getY() * WorldScale.getY());
         g.rotate((RotationZ) + getParent().getOffset());
+    }
+
+    public static float GetWorldScaleX() {
+        return WorldScale.getX();
+    }
+
+    public static  float GetWorldScaleY() {
+        return WorldScale.getY();
     }
 
     public void PopTransforms(Graphics2D g) {
