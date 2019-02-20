@@ -30,14 +30,17 @@ public class Level1Solo extends ILevel {
 
     @Override
     public void init() {
-
+        // (float) Math.PI * -0.25f / 3f));
+        //Adding Platforms
 //        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new PlatForm(new Vector(100, 50), (float) Math.PI * 0.25f / 3f)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(100, 200), (float) Math.PI * 0.1f)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(400, 200), 0)).GetSprite("/images/Platform.png");// (float) Math.PI * -0.25f / 3f));
+        AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(200, -200), 0)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(100, -400), 0)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(300, -600), 0)).GetSprite("/images/Platform.png");
+        
         player1 = new Player();
-        AddObject(player1);
+        AddObject(player1).setPosition(0,-30);
         AddObject(new HUD());
 //        AddObject(new ScrollingBackground());
 
