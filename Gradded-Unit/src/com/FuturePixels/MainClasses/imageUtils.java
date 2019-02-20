@@ -46,7 +46,7 @@ public class imageUtils {
                 try {
                     throw new Exception();
                 } catch (Exception e) {
-                    System.out.println("Image loaded " + URI + " in " + e.getStackTrace()[isDefault ? 2 : 3].getClassName());
+                    System.out.println("Image loaded " + URI + " in " + e.getStackTrace()[isDefault ? 3 : 4].getClassName());
                     return g;
                 }
             } catch (Exception e) {

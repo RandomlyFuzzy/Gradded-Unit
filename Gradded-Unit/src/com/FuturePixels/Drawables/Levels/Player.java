@@ -110,14 +110,17 @@ public class Player extends IDrawable {
             setRotation((getRotation() * 0.98f));
             canJump = false;
             once = true;
-            Velocity.mult(new Vector(0.99f, 0.995f));
-        } else {
+            Velocity.mult(new Vector(0.5f, 0.995f));
         }
         movePlayer();
         Velocity.add(Acc);
-        addPosition( Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
+        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
+
         if (isColliding()) {
             Velocity.mult(new Vector(0.985f, 0.995f));
+            Velocity.mult(new Vector(0f, 1f));
+        } else {
+            Velocity.mult(new Vector(0.5f, 1f));
         }
         Acc.mult(0);
 
@@ -132,7 +135,7 @@ public class Player extends IDrawable {
 //            Acc.setY(0.01f);
             if (isColliding()) {
                 System.out.println("com.FuturePixels.Drawables.Levels.Player.movePlayer() " + (distFromhit));
-                Acc.setY((float) Math.pow(1.1f, distFromhit) + 8f);
+                Acc.setY((float) Math.pow(1.1f, distFromhit) + 6.5f);
                 Level().play("/Sounds/Jump.wav");
             }
             canJump = false;
@@ -144,18 +147,18 @@ public class Player extends IDrawable {
 
             one = false;
         }
-        if (left && canJump) {
+        if (left) {
             Scale = -1;
-            Acc.addX(-0.2f);
-        } else if (right && canJump) {
+            Acc.addX(-100);
+        } else if (right) {
             Scale = 1;
-            Acc.addX(0.2f);
+            Acc.addX(100);
         } else if (canJump) {
             two = false;
             Acc.setX(0);
         }
-
-        Acc.setX(Acc.getX() > 0.3f ? 0.3f : Acc.getX() < -0.3f ? 0.3f : Acc.getX());
+        float Clamp = 5f;
+        Acc.setX(Acc.getX() > Clamp ? Clamp : Acc.getX() < -Clamp ? -Clamp : Acc.getX());
         if (!isColliding()) {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
