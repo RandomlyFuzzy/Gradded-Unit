@@ -11,6 +11,7 @@ package com.FuturePixels.Entry;
 
 import com.FuturePixels.MainClasses.imageUtils;
 import com.FuturePixels.MainClasses.ILevel;
+import com.FuturePixels.MainClasses.MusicUtils;
 import com.FuturePixels.MainClasses.UtilManager;
 import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
@@ -133,6 +134,7 @@ public final class Game {
         GraphicsDevice graphicalDevices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
         gameWindow.dispose();
         if (!isFullScreen) {
+            MusicUtils.StopAllSounds();
             FrameBounds = gameWindow.getBounds();
             gameWindow.setLocation(0, 0);
             gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);

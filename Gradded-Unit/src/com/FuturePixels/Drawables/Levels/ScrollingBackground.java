@@ -63,11 +63,11 @@ public class ScrollingBackground extends IDrawable {
         Raster raster = Scrollingimg.getData();
         WritableRaster NEW = Raster.createWritableRaster(raster.getSampleModel(), new Point(raster.getSampleModelTranslateX(), raster.getSampleModelTranslateY()));
 
-        byte[] one = null, two, three, four;
+        Raster one, two, three, four;
 
 //        NEW.setDataElements(0, 0, Scrollingimg.getData(new Rectangle(0,0,(int)v.getX(),(int)v.getY())));
-        raster.getDataElements((int) getSpriteWidth() - (int) v.getX(), (int) getSpriteHeight() - (int) v.getY(), (int) v.getX(), (int) v.getY(), one);
-        NEW.setDataElements(0, 0, one);
+        one = Scrollingimg.getData(new Rectangle((int) getSpriteWidth() - (int) v.getX()-1, (int) getSpriteHeight() - (int) v.getY()-1, (int) v.getX(), (int) v.getY()));
+        NEW.setDataElements(( (int) getSpriteWidth() - (int) v.getX()),((int) getSpriteHeight() - (int) v.getY()), one);
 //        NEW.setDataElements(0, 0, one);
 //        NEW.setDataElements(0, 0, one);
 //        NEW.setDataElements(0, 0, one);

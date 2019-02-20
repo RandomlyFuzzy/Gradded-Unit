@@ -22,7 +22,7 @@ public class Level1Solo extends ILevel {
     Image background;
     boolean Pressed = false, p2 = false;
     Player player1;
-    Vector temp;
+    Vector temp = Vector.Zero();
 
     public Level1Solo() {
         super();
@@ -44,7 +44,7 @@ public class Level1Solo extends ILevel {
         Game.toggleCursor();
         background = GetSprite("/Images/background.png");
 //        LeaderBoard.AddTime(System.nanoTime());
-        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
+//        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
 
     }
 
@@ -54,15 +54,15 @@ public class Level1Solo extends ILevel {
         if (player1 == null) {
             return;
         }
-        if (-player1.getPosition().getX() != temp.getX()-Game.g.getWindowWidth() / 2) {
-            temp.setX(-player1.getPosition().getX()+Game.g.getWindowWidth() / 2);
-        }
-        if (-player1.getPosition().getY() > temp.getY()-Game.g.getWindowHeight() / 2) {
-            temp.setY(-player1.getPosition().getY()+Game.g.getWindowHeight() / 2);
-        }
-        //screen scroller
-        temp.setY(temp.getY()+Game.g.getDelta()*30f);
-//        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
+//        if (-player1.getPosition().getX() != temp.getX()-Game.g.getWindowWidth() / 2) {
+//            temp.setX(-player1.getPosition().getX()+Game.g.getWindowWidth() / 2);
+//        }
+//        if (-player1.getPosition().getY() > temp.getY()-Game.g.getWindowHeight() / 2) {
+//            temp.setY(-player1.getPosition().getY()+Game.g.getWindowHeight() / 2);
+//        }
+//        //screen scroller
+//        temp.setY(temp.getY()+Game.g.getDelta()*30f);
+        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
         Transform.setOffsetTranslation(temp);
     }
 
