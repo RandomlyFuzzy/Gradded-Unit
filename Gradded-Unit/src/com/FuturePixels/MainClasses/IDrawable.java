@@ -40,7 +40,7 @@ public abstract class IDrawable {
     public void setSpriteHeight(int spriteHeight) {
         this.spriteHeight = spriteHeight;
     }
-    private float Rotation = 0, offset = 0;
+    private double Rotation = 0, offset = 0;
 
     private Vector Scale = Vector.One();
     private boolean Enabled = true, isColliding = false, isCollidable = true, useTransforms = true;
@@ -76,7 +76,7 @@ public abstract class IDrawable {
     //3. make a prototype of the game 
     //4. extend and polish that game prototype
     //5. release everything
-    public boolean hasSupered = false;
+    private boolean hasSupered = false;
 
     public IDrawable() {
         position = new Vector(0, 0);
@@ -85,11 +85,11 @@ public abstract class IDrawable {
         hasSupered = true;
     }
 
-    public float getRotation() {
+    public double getRotation() {
         return Rotation;
     }
 
-    public void setRotation(float Rotation) {
+    public void setRotation(double Rotation) {
         UpdateBounds();
         this.Rotation = Rotation;
     }
@@ -129,7 +129,7 @@ public abstract class IDrawable {
         return transform.GetRight();
     }
 
-    public float getTotalRotation() {
+    public double getTotalRotation() {
         return getRotation() + getOffset();
     }
 
@@ -193,20 +193,17 @@ public abstract class IDrawable {
 
     public BufferedImage GetSprite(String URI) {
         LastImage = GetImage(URI);
-        if (LastImage != null) {
-            this.spriteWidth = LastImage.getWidth();
-            this.spriteHeight = LastImage.getHeight();
-            UpdateBounds();
-        }
+        this.spriteWidth = LastImage.getWidth();
+        this.spriteHeight = LastImage.getHeight();
+        UpdateBounds();
         return LastImage;
     }
 
-    
     public void setPosition(float X, float Y) {
         this.position.setX(X);
         this.position.setY(Y);
         UpdateBounds();
-    } 
+    }
 
     public void setPosition(Vector v) {
         this.position.setX(v.getX());
@@ -270,13 +267,12 @@ public abstract class IDrawable {
             transform.PushTransforms(g);
         }
         Update(g);
-        UpdateComponents(g);
 
         if (getUseTransforms()) {
             transform.PopTransforms(g);
         }
 
-        if (!Level().DebugCollisons || (getSpriteWidth() + getSpriteHeight() == 0)) {
+        if (!Level().isDebugCollisons() || (getSpriteWidth() + getSpriteHeight() == 0)) {
             return;
         }
         Graphics2D g2d = (Graphics2D) g;
@@ -314,18 +310,6 @@ public abstract class IDrawable {
 
     }
 
-    /*
-        no need to use this as it inits when its added to the object
-     */
-    void UpdateComponents(Graphics2D g) {
-        if (Component.isEmpty()) {
-            return;
-        }
-        Component.forEach((a) -> {
-            a.Update(g);
-        });
-    }
-
     public void DrawLastLoadedImage(Graphics2D g) {
         if (LastImage == null) {
             try {
@@ -333,8 +317,9 @@ public abstract class IDrawable {
             } catch (Exception e) {
                 System.err.println("error Drawing last image as their was not last image in " + e.getStackTrace()[1] + " try pre loading it in init() to get rid of this warning");
             }
+        } else {
+            g.drawImage(LastImage, -getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
         }
-        g.drawImage(LastImage, -getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
     }
 
     public BufferedImage getLastImage() {
@@ -381,11 +366,11 @@ public abstract class IDrawable {
         return new Vector[]{v1, v2};
     }
 
-    public float getOffset() {
+    public double getOffset() {
         return offset;
     }
 
-    public void setOffset(float offset) {
+    public void setOffset(double offset) {
         this.offset = offset;
     }
 

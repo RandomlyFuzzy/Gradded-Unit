@@ -32,8 +32,6 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends ILevel {
 
-    private Image backgroundImage;
-    Mouse m;
 
     public MainMenu() {
         super();

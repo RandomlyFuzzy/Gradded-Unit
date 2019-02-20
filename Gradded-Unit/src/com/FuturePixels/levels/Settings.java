@@ -28,28 +28,15 @@ import javax.swing.Timer;
  */
 public class Settings extends ILevel {
 
-    private Mouse m;
 
     public Settings() {
         super();
         System.out.println("com.game.levels.Settings.<init>()");
     }
 
-    /*
-        Game 
-            Button
-        Audio 
-            Master
-        Controls 
-            Player 1
-            Player 2
-    
-    
-     */
     @Override
     public void init() {
-        m = new Mouse();
-        AddObject(m);
+        AddObject(new Mouse());
         AddObject(new HUD());
         AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new ButtonAbstract() {
             @Override
@@ -105,15 +92,6 @@ public class Settings extends ILevel {
                 Game.FullScreen();
             }
         }));
-
-        
-        
-        
-        
-        
-        
-        
-        
 //        GetObject(0).setScale(new Vector(0.5f, 0.7f));
     }
 

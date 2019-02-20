@@ -19,10 +19,8 @@ import java.awt.Image;
  */
 public class Level1Solo extends ILevel {
 
-    Image background;
-    boolean Pressed = false, p2 = false;
-    Player player1;
-    Vector temp = Vector.Zero();
+    private Player player1;
+    private Vector Cameraopos = Vector.Zero();
 
     public Level1Solo() {
         super();
@@ -35,9 +33,9 @@ public class Level1Solo extends ILevel {
 //        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
         AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(200, -200), 0)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(100, -400), 0)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(300, -600), 0)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(75, -300), 0)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(300, -450), 0)).GetSprite("/images/Platform.png");
         
         player1 = new Player();
         AddObject(player1).setPosition(0,-30);
@@ -45,9 +43,8 @@ public class Level1Solo extends ILevel {
 //        AddObject(new ScrollingBackground());
 
         Game.toggleCursor();
-        background = GetSprite("/Images/background.png");
 //        LeaderBoard.AddTime(System.nanoTime());
-//        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
+//        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
 
     }
 
@@ -57,21 +54,21 @@ public class Level1Solo extends ILevel {
         if (player1 == null) {
             return;
         }
-//        if (-player1.getPosition().getX() != temp.getX()-Game.g.getWindowWidth() / 2) {
-//            temp.setX(-player1.getPosition().getX()+Game.g.getWindowWidth() / 2);
+//        if (-player1.getPosition().getX() != Cameraopos.getX()-Game.g.getWindowWidth() / 2) {
+//            Cameraopos.setX(-player1.getPosition().getX()+Game.g.getWindowWidth() / 2);
 //        }
-//        if (-player1.getPosition().getY() > temp.getY()-Game.g.getWindowHeight() / 2) {
-//            temp.setY(-player1.getPosition().getY()+Game.g.getWindowHeight() / 2);
+//        if (-player1.getPosition().getY() > Cameraopos.getY()-Game.g.getWindowHeight() / 2) {
+//            Cameraopos.setY(-player1.getPosition().getY()+Game.g.getWindowHeight() / 2);
 //        }
 //        //screen scroller
-//        temp.setY(temp.getY()+Game.g.getDelta()*30f);
-        temp = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-        Transform.setOffsetTranslation(temp);
+//        Cameraopos.setY(temp.getY()+Game.g.getDelta()*30f);
+        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
+        Transform.setOffsetTranslation(Cameraopos);
     }
 
     @Override
     public void Draw(Graphics2D g) {
-        g.drawImage(background, 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 
@@ -80,7 +77,6 @@ public class Level1Solo extends ILevel {
         try {
             int code = e.getKeyCode();
             if (code == GamePreferences.gp.getKeyRightP1()) {
-                Pressed = true;
                 player1.setRight(true);
             } else if (code == GamePreferences.gp.getKeyLeftP1()) {
                 player1.setLeft(true);
@@ -118,7 +114,6 @@ public class Level1Solo extends ILevel {
         try {
             int code = e.getKeyCode();
             if (code == GamePreferences.gp.getKeyRightP1()) {
-                Pressed = true;
                 player1.setRight(false);
             } else if (code == GamePreferences.gp.getKeyLeftP1()) {
                 player1.setLeft(false);

@@ -9,17 +9,12 @@ import com.FuturePixels.Components.*;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.levels.MainMenu;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.swing.*;
+import java.util.*;
 
 /**
  *
@@ -27,18 +22,23 @@ import java.util.HashMap;
  */
 public abstract class ILevel extends JPanel implements ActionListener {
 
-    public final Game game;
-    private Timer timer;
+    private javax.swing.Timer timer;
     private ArrayList<IDrawable> gameObjs = new ArrayList<IDrawable>();
     private Vector MousePos = new Vector(Vector.Zero());
     private boolean IsDragging = false, IsInside = true, IsClicking = false;
     private KeyEvent LastKeyPress = null;
+
+    private boolean DebugCollisons = false;
 
     public KeyEvent getLastKeyPress() {
         if (LastKeyPress == null) {
             System.err.println("their was no last key pressed");
         }
         return LastKeyPress;
+    }
+
+    public boolean isDebugCollisons() {
+        return DebugCollisons;
     }
 
     public void setLastKeyPress(KeyEvent LastKeyPress) {
@@ -82,8 +82,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private int temp1;
 
     public ILevel() {
-        timer = new Timer(15, this);
-        game = Game.g;
+        timer = new javax.swing.Timer(15, this);
     }
 
     private ILevel get() {
@@ -106,12 +105,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        checkCollionsions();
-        game.SetDelta();
+        Game.g.SetDelta();
         Update(ae);
         movement();
+        checkCollionsions();
         this.repaint();
-
     }
 
     public void movement() {
@@ -175,9 +173,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         if (InputAdapter == null) {
             InputAdapter = new TAdapter();
         }
-        if (Game.GetTotal() != 0) {
-            Game.PrintAllTotal();
-        }
+
         timer.start();
 
         if (getKeyListeners().length == 0) {
@@ -195,7 +191,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
         } else {
             System.err.println("com.FuturePixels.Utils.ILevel.start() their was a problem disposing of the MouseMotionListeners");
         }
-        Game.Add(this.getClass());
     }
 
     public void stop() throws Exception {
@@ -215,7 +210,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
         if (getMouseMotionListeners().length != 0) {
             removeMouseMotionListener(InputAdapter);
         }
-        Game.Remove(this.getClass());
     }
 
     public synchronized void play(String soundResource) {
@@ -223,7 +217,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         MusicUtils.play(soundResource);
     }
 
-    protected synchronized BufferedImage GetSprite(String URI) {
+    protected BufferedImage GetSprite(String URI) {
         BufferedImage g = imageUtils.T.GetImage(URI);
         return g;
     }
@@ -258,8 +252,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
 //        thePlayer.checkCollision(theTreasure);
     }
-
-    public boolean DebugCollisons = false;
 
     private class TAdapter extends InputAdapter {
 

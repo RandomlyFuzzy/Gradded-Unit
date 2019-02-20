@@ -33,7 +33,7 @@ public class Transform extends IComponent {
         Transform.offsetTranslation = offsetTranslation;
         offsetTranslation = null;
     }
-    public float RotationZ = 0;
+    public double RotationZ = 0;
 
     public Transform(IDrawable parent) {
         super(parent);

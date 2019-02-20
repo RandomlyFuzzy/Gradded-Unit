@@ -21,7 +21,6 @@ import javax.swing.Timer;
 public class LeaderBoard extends ILevel {
 
     private Timer timer;
-    Image background;
     private static long[] CollectionTimes = new long[6];
     private static int ind = 0;
 
@@ -37,6 +36,7 @@ public class LeaderBoard extends ILevel {
 
     @Override
     public void init() {
+        GetSprite("/Images/background.png");
     }
 
     @Override

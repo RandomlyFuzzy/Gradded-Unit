@@ -34,20 +34,18 @@ import javax.swing.JPanel;
  *
  * @author Liam Woolley 1748910
  */
-public final class Game {
+public class Game {
 
-    //Keeps instance to be GC later
     public static Game g = null;
 
+    private static boolean isFullScreen = false;
     private static final int WINDOW_WIDTH = 1280, WINDOW_HEIGHT = 720;
     private static JFrame gameWindow;
-    private float DeltaTime = 0;
     private static long deltalong = 0;
     private static ILevel CurrentLevel;
     private static Rectangle FrameBounds;
-    private static boolean isDecorate = false;
-
     private static Cursor Swap;
+    private float DeltaTime = 0;
 
     public void SetDelta() {
         DeltaTime = System.nanoTime() - deltalong;
@@ -80,25 +78,9 @@ public final class Game {
         deltalong = System.nanoTime();
     }
 
-    private static ArrayList<Class> currentThings = new ArrayList<Class>();
 
-    public static <T extends ILevel> void Add(Class<T> obj) {
-        currentThings.add(obj);
-    }
 
-    public static <T extends ILevel> void Remove(Class<T> obj) {
-        currentThings.remove(obj);
-    }
-
-    public static int GetTotal() {
-        return currentThings.size();
-    }
-
-    public static void PrintAllTotal() {
-        currentThings.forEach((a) -> {
-            System.out.println("" + a.getClass().toString());
-        });
-    }
+ 
 
     public Game() {
         this.g = this;
@@ -110,7 +92,7 @@ public final class Game {
         gameWindow = new JFrame();
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setLocationRelativeTo(null);
-        gameWindow.setLocation(WINDOW_WIDTH/3, WINDOW_HEIGHT/3);
+        gameWindow.setLocation(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3);
         gameWindow.setMinimumSize(new Dimension(20, 20));
         gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         gameWindow.getContentPane().setLayout(new CardLayout());
@@ -128,8 +110,6 @@ public final class Game {
         Swap = blankCursor;
     }
 
-    private static boolean isFullScreen = false, isHalfFullScreen = false;
-
     public static void FullScreen() {
         GraphicsDevice graphicalDevices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
         gameWindow.dispose();
@@ -139,12 +119,10 @@ public final class Game {
             gameWindow.setLocation(0, 0);
             gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
             gameWindow.setUndecorated(true);
-            isDecorate = true;
             gameWindow.pack();
         } else {
             gameWindow.setExtendedState(JFrame.NORMAL);
             gameWindow.setUndecorated(false);
-            isDecorate = false;
             gameWindow.pack();
             gameWindow.setBounds(FrameBounds);
         }

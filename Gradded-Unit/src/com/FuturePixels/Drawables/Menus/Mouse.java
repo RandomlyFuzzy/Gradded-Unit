@@ -18,19 +18,18 @@ import java.awt.geom.AffineTransform;
  * @author RandomlyFuzzy
  */
 public class Mouse extends IDrawable {
+    
+    private boolean clicked = false;
+    private int HudIndex = 0;
 
     public Mouse() {
         super();
-        GetSprite("/Images/Cursor.png");
-
     }
-    int pos = 0;
 
     @Override
     public void init() {
         GetSprite("/Images/Cursor.png");
-        System.out.println("com.FuturePixels.Drawables.Menus.Mouse.init()");
-        pos = HUD.AddText("" + isColliding(), new Vector(0, 10));
+        HudIndex = HUD.AddText("" + isColliding(), new Vector(0, 10));
         setScale(new Vector(0.2f, 0.2f));
     }
 
@@ -39,7 +38,7 @@ public class Mouse extends IDrawable {
 //        Rad += Game.g.getDelta() * 100;
         setPosition(Level().getMousePos());
 //        setRotation(Rad);
-        HUD.EditText(pos, "" + isColliding());
+        HUD.EditText(HudIndex, "" + isColliding());
         clicked = clicked != !Level().isClicking() && clicked;
     }
 
@@ -47,7 +46,6 @@ public class Mouse extends IDrawable {
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
     }
-    boolean clicked = false;
 
     @Override
     public void onCollison(IDrawable im) {
@@ -67,7 +65,6 @@ public class Mouse extends IDrawable {
             clicked = true;
             ((BlackoutButton) im).DoAction();
         }
-//        System.out.println("com.FuturePixels.GameClasses.Mouse.onCollison() with " + im.getClass().toString());
     }
 
 }

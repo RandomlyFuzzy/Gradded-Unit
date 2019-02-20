@@ -29,15 +29,15 @@ public class CollisonUtils {
         Vector r = new Vector(b.getX() - a.getX(), b.getY() - a.getY());
         Vector s = new Vector(d.getX() - c.getX(), d.getY() - c.getY());
 
-        float g = r.getX() * s.getY() - r.getY() * s.getX();
+        double g = r.getX() * s.getY() - r.getY() * s.getX();
 
-        float u = (((c.getX() - a.getX()) * r.getY()) - ((c.getY() - a.getY()) * r.getX())) / g;
-        float t = (((c.getX() - a.getX()) * s.getY()) - ((c.getY() - a.getY()) * s.getX())) / g;
+        double u = (((c.getX() - a.getX()) * r.getY()) - ((c.getY() - a.getY()) * r.getX())) / g;
+        double t = (((c.getX() - a.getX()) * s.getY()) - ((c.getY() - a.getY()) * s.getX())) / g;
 
         if (0 <= u && u <= 1 && t >= 0 && t <= 1) {
             return new Collison(
-                    new Vector((a.getX() + (t * r.getX()))
-                    , (a.getY() + (t * r.getY()))));
+                    new Vector((a.getX() + ((float)t * r.getX()))
+                    , (a.getY() + ((float)t * r.getY()))));
         }
 
         return new Collison();

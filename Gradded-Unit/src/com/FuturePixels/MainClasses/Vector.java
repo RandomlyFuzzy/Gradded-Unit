@@ -18,12 +18,7 @@ public class Vector {
     public static Vector One() {
         return new Vector(1, 1);
     }
-
-//    sets self to weird things some times :/
-//    public static final Vector Zero = new Vector(0, 0), One = new Vector(1, 1);
     private float x, y;
-
- 
 
     public Vector(float x, float y) {
         this.x = x;
