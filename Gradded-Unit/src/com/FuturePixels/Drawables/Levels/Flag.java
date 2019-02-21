@@ -60,7 +60,7 @@ public class Flag extends IDrawable {
             FileReader FileReader;
             try {
                 String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".")+1);
-                File file = new File("resources/"+Slim+".txt");
+                File file = new File("resources/Savedata/"+Slim+".txt");
                 if(!file.exists()){
                     file.createNewFile();
                 }
@@ -70,7 +70,7 @@ public class Flag extends IDrawable {
                 fis.close();
                 String str = new String(data);
                 str += ""+String.format("%.2f",Level().getTime()) + "\n";
-                FileStream = new PrintStream(new File("resources/"+Slim+".txt"));
+                FileStream = new PrintStream(new File("resources/Savedata/"+Slim+".txt"));
                 FileStream.print(str);
                 FileStream.close();
                 new LevelLoader(new MainMenu());

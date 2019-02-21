@@ -58,10 +58,11 @@ public class Level1Solo extends ILevel {
         AddObject(new PlatForm(new Vector(300, -4000), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(400, -4200), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(200, -4400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        
+        AddObject(new Flag()).setPosition(new Vector(200, -4450));
+
         player1 = new Player();
 //        player1.setScale(new Vector(0.3f,0.5f));
-        AddObject(player1).setPosition(0,-50);
+        AddObject(player1).setPosition(0, -50);
         AddObject(new HUD());
 //        AddObject(new ScrollingBackground());
 

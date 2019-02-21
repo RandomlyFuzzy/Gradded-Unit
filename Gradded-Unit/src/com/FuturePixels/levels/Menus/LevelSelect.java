@@ -22,10 +22,14 @@ import java.awt.event.KeyEvent;
  */
 public class LevelSelect extends ILevel {
 
+    public LevelSelect() {
+        super();
+    }
+
     @Override
     public void init() {
-        for (int i = 0; i < 20; i++) {
-            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i+1)), new ButtonAbstract() { 
+        for (int i = 0; i < 2; i++) {
+            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)), new ButtonAbstract() {
                 public void OnClick(Button b) {
                     new LevelLoader(b.getMessage());
                 }

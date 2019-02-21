@@ -59,7 +59,7 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(100, -3300), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
         AddObject(new PlatForm(new Vector(250, -3450), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
         AddObject(new PlatForm(new Vector(500, -3500), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new Flag()).GetSprite("/images/Platform/rock_platform_moss_01.png").setPosition(new Vector(500, -3550));
+        AddObject(new Flag()).setPosition(new Vector(500, -3550));
 
         player1 = new Player();
         AddObject(player1).setPosition(500, -3600);

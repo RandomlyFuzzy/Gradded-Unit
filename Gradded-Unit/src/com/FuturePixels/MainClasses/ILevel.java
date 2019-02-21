@@ -206,9 +206,13 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
     }
 
-    public void stop() throws Exception {
+    public void stop()  {
         if (InputAdapter == null) {
-            throw new Exception("tried to stop it before it even ran");
+            try {
+                throw new Exception("tried to stop it before it even ran");
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
         } else {
             timer.stop();
 
@@ -364,7 +368,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
     }
 
-    public void dispose() throws Exception {
+    public void dispose(){
         stop();
         ArrayList<IDrawable> drawable = gameObjs;
         gameObjs = new ArrayList<IDrawable>();
