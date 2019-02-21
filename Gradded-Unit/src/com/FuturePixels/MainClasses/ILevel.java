@@ -8,7 +8,7 @@ package com.FuturePixels.MainClasses;
 import com.FuturePixels.Components.*;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.levels.MainMenu;
+import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.*;
 
 import java.awt.event.*;
@@ -29,6 +29,15 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private Vector MousePos = new Vector(Vector.Zero());
     private boolean IsDragging = false, IsInside = true, IsClicking = false;
     private KeyEvent LastKeyPress = null;
+    private double Time = 0;
+
+    public double getTime() {
+        return Time;
+    }
+
+    public void setTime(double Time) {
+        this.Time = Time;
+    }
 
     private boolean DebugCollisons = false;
 
@@ -56,6 +65,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         MousePos = new Vector(Vector.Zero());
         gameObjs = new ArrayList<IDrawable>();
         timer = null;
+        Time = 0;
     }
 
     public Vector getMousePos() {
@@ -99,7 +109,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     }
 
-    public IDrawable AddObject(IDrawable Drawable) {
+    public synchronized IDrawable AddObject(IDrawable Drawable) {
         gameObjs.add(Drawable);
         Drawable.CoreInit();
         return Drawable;
@@ -107,6 +117,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        Time += Game.g.getDelta();
         Game.g.SetDelta();
         Update(ae);
         movement();
@@ -115,7 +126,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public void movement() {
-        for (int i = 0; i < gameObjs.size(); i++) {
+        for (int i = gameObjs.size() - 1; i >= 0; i--) {
             gameObjs.get(i).doMove();
         }
     }

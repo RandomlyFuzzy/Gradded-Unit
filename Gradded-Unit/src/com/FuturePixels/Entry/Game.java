@@ -9,11 +9,11 @@ I certify that this is my own work and I have not used code from any other sourc
  */
 package com.FuturePixels.Entry;
 
+import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.MainClasses.ILevel;
 import com.FuturePixels.MainClasses.MusicUtils;
 import com.FuturePixels.MainClasses.UtilManager;
 import com.FuturePixels.MainClasses.imageUtils;
-import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -46,6 +46,15 @@ public class Game {
     private static ILevel CurrentLevel;
     private static Rectangle FrameBounds;
     private static Cursor Swap;
+    private static String LastLevelName = "";
+
+    public static String getLastLevelName() {
+        return LastLevelName;
+    }
+
+    public static void setLastLevelName(String LastLevelName) {
+        Game.LastLevelName = LastLevelName;
+    }
     private float DeltaTime = 0;
 
     public void SetDelta() {
@@ -132,10 +141,11 @@ public class Game {
         return gameWindow;
     }
 
-    public static void SetLevelActive(ILevel Level) {
+    public synchronized static void SetLevelActive(ILevel Level) {
         System.out.println("com.FuturePixels.Entry.Game.SetLevelActive() " + Level.getClass().toString() + " loading");
         try {
             if (CurrentLevel != null) {
+                LastLevelName = CurrentLevel.getClass().toString();
                 gameWindow.getContentPane().removeAll();
                 CurrentLevel.removeAll();
                 CurrentLevel.stop();
@@ -157,8 +167,6 @@ public class Game {
 
         }
     }
-
-  
 
     public void SetDimentions(int w, int h) {
         Rectangle bo = Game.g.GetFrame().getBounds();

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.levels;
+package com.FuturePixels.levels.Menus;
 
+import com.FuturePixels.levels.SoloLevels.Level2Solo;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
@@ -13,6 +14,7 @@ import com.FuturePixels.Drawables.Menus.ButtonAbstract;
 import com.FuturePixels.MainClasses.ILevel;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.MainClasses.Vector;
+import com.FuturePixels.levels.OtherLevels.LeaderBoard;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -46,7 +48,7 @@ public class MainMenu extends ILevel {
         AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new ButtonAbstract() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new Level2Solo());
+                Game.SetLevelActive(new LevelSelect());
             }
         }));
 //        AddObject(new Button(new Vector(0.5f, 0.4f), "To Game Coop", new ButtonAbstract() {

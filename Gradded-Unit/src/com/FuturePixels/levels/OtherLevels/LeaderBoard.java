@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.levels;
+package com.FuturePixels.levels.OtherLevels;
 
+import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.MainClasses.ILevel;
 import com.FuturePixels.Entry.Game;
 import java.awt.event.ActionEvent;

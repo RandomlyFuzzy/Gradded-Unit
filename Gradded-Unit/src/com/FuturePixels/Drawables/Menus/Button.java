@@ -76,6 +76,9 @@ public class Button extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
+        if(im instanceof Button){
+            setIsColliding(false);
+        }
     }
 
     public String getMessage() {

@@ -27,14 +27,14 @@ public class PlatForm extends IDrawable {
 
     public PlatForm(Vector position, double RadianRotation) {
         super();
-        GetSprite("/images/Platform.png");
+        GetSprite("/images/platform/Platform.png");
         setPosition(position);
         setRotation(RadianRotation);
     }
 
     @Override
     public void init() {
-        GetSprite("/images/Platform.png");
+        GetSprite("/images/platform/Platform.png");
     }
 
     @Override

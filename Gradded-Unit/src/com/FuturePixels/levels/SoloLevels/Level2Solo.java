@@ -1,4 +1,4 @@
-package com.FuturePixels.levels;
+package com.FuturePixels.levels.SoloLevels;
 
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
@@ -17,12 +17,12 @@ import java.awt.Image;
  *
  * @author Liam Woolley 1748910
  */
-public class Level1Solo extends ILevel {
+public class Level2Solo extends ILevel {
 
     private Player player1;
     private Vector Cameraopos = Vector.Zero();
 
-    public Level1Solo() {
+    public Level2Solo() {
         super();
     }
 
@@ -32,22 +32,37 @@ public class Level1Solo extends ILevel {
         //Adding Platforms
 //        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(100, -350), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(400, -500), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -650), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(375, -850), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(385, -1000), 0)).GetSprite("/images.platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(250, -1150), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -1325), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(350, -1475), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -1650), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(500, -1650), 0)).GetSprite("/images.platform/rock_platform_clean_01.png");
-        
+        AddObject(new PlatForm(new Vector(75, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-200, -75), 0.35)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-425, -140), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-90, -330), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(150, -425), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-170, -600), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-400, -600), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-300, -800), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-150, -800), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-00, -1000), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-200, -1200), 0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-450, -1250), 0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-300, -1450), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-100, -1550), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-250, -1700), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-500, -1750), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-400, -1950), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-150, -2150), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-350, -2300), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-200, -2500), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-450, -2700), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-350, -2850), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
+        AddObject(new PlatForm(new Vector(-200, -3000), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
+        AddObject(new PlatForm(new Vector(-50, -3150), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
+        AddObject(new PlatForm(new Vector(100, -3300), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
+        AddObject(new PlatForm(new Vector(250, -3450), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
+        AddObject(new PlatForm(new Vector(500, -3500), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new Flag()).GetSprite("/images/Platform/rock_platform_moss_01.png").setPosition(new Vector(500, -3550));
+
         player1 = new Player();
-//        player1.setScale(new Vector(0.3f,0.5f));
-        AddObject(player1).setPosition(0,-50);
+        AddObject(player1).setPosition(500, -3600);
         AddObject(new HUD());
 //        AddObject(new ScrollingBackground());
 

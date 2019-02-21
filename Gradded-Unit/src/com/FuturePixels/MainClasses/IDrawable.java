@@ -8,7 +8,7 @@ package com.FuturePixels.MainClasses;
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.MainClasses.imageUtils;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.levels.LeaderBoard;
+import com.FuturePixels.levels.OtherLevels.LeaderBoard;
 import com.FuturePixels.MainClasses.ILevel;
 import java.awt.Color;
 import java.awt.Graphics;
