@@ -46,7 +46,7 @@ public class MainMenu extends ILevel {
         AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new ButtonAbstract() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new Level1Solo());
+                Game.SetLevelActive(new Level2Solo());
             }
         }));
 //        AddObject(new Button(new Vector(0.5f, 0.4f), "To Game Coop", new ButtonAbstract() {

@@ -15,6 +15,8 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -274,6 +276,15 @@ public abstract class ILevel extends JPanel implements ActionListener {
             }
             if (e.getKeyCode() == KeyEvent.VK_F10) {
                 Game.SetLevelActive(new MainMenu());
+            }
+            if (e.getKeyCode() == KeyEvent.VK_F11) {
+                try {
+                    new LevelLoader(gameObjs.get(0).Level().getClass().newInstance());
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             if (e.getKeyCode() == 10 && e.isAltDown()) {
                 Game.FullScreen();

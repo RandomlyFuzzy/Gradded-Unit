@@ -72,6 +72,7 @@ public class Player extends IDrawable {
         score = 0;
         for (int i = 0; i < 7; i++) {
             GetSprite("/Images/Player/sprite_" + i + ".png");
+            GetSprite("/Images/Player/sprite_" + i + ".png");
         }
         ScoreInd = HUD.AddText("Score:" + score, new Vector(0, 40));
         AddComponent(new RigidBody(this));

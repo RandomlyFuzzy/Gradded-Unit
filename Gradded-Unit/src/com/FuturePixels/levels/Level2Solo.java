@@ -32,10 +32,14 @@ public class Level2Solo extends ILevel {
         //Adding Platforms
 //        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new PlatForm(new Vector(0, 0), 0.13)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new PlatForm(new Vector(75, -300), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(300, -450), 0)).GetSprite("/images/Platform/Platform.png");
+        AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-200, -75), 0.65)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-400, -140), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-170, -380), -0.65)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+
+//        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
+//        AddObject(new PlatForm(new Vector(75, -300), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+//        AddObject(new PlatForm(new Vector(300, -450), 0)).GetSprite("/images/Platform/Platform.png");
         
         player1 = new Player();
 //        player1.setScale(new Vector(0.3f,0.5f));
