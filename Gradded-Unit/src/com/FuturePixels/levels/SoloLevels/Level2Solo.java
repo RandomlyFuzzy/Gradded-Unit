@@ -62,7 +62,7 @@ public class Level2Solo extends ILevel {
         AddObject(new Flag()).setPosition(new Vector(500, -3550));
 
         player1 = new Player();
-        AddObject(player1).setPosition(500, -3600);
+        AddObject(player1).setPosition(0,-50);
         AddObject(new HUD());
 //        AddObject(new ScrollingBackground());
 

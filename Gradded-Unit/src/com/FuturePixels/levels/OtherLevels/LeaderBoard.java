@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +38,7 @@ public class LeaderBoard extends ILevel {
     private static String EndURI = "Solo.txt";
     private int previousind = 0;
     private static int Currentind = 1;
-    private ArrayList<String> times = new ArrayList<String>();
+    private ArrayList<Double> times = new ArrayList<Double>();
 
     public static int getCurrentind() {
         return Currentind;
@@ -65,6 +66,12 @@ public class LeaderBoard extends ILevel {
                 }
             }));
         }
+        AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new ButtonAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new MainMenu());
+            }
+        }));
         AddObject(new Mouse());
     }
 
@@ -72,8 +79,8 @@ public class LeaderBoard extends ILevel {
     public void Update(ActionEvent ae) {
         if (previousind != Currentind) {
             try {
-                times = new ArrayList<String>();
-                System.out.println("com.FuturePixels.levels.OtherLevels.LeaderBoard.Update() "+FileURI + Currentind + EndURI);
+                times = new ArrayList<Double>();
+                System.out.println("com.FuturePixels.levels.OtherLevels.LeaderBoard.Update() " + FileURI + Currentind + EndURI);
                 File file = new File(FileURI + Currentind + EndURI);
                 if (!file.exists()) {
                     file.createNewFile();
@@ -81,8 +88,15 @@ public class LeaderBoard extends ILevel {
                 FileReader fis = new FileReader(file);
                 Scanner scan = new Scanner(fis);
                 while (scan.hasNextLine()) {
-                    times.add(scan.nextLine());
+                    times.add(Double.parseDouble(scan.nextLine()));
                 }
+                times.sort(new Comparator<Double>() {
+                    @Override
+                    public int compare(Double o1, Double o2) {
+                        return o1 > o2 ? 1 : -1;
+                    }
+                });
+
             } catch (IOException ex) {
                 Logger.getLogger(LeaderBoard.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -94,8 +108,8 @@ public class LeaderBoard extends ILevel {
     public void Draw(Graphics2D g) {
         g.drawImage(GetSprite("/Images/background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
         float y = 0.3f;
-        for (String s : times) {
-            g.drawString(s, 0.05f * Game.g.getWindowWidth(), y * Game.g.getWindowHeight());
+        for (Double s : times) {
+            g.drawString("" + s + " secs", 0.05f * Game.g.getWindowWidth(), y * Game.g.getWindowHeight());
             y += 0.05f;
         }
     }

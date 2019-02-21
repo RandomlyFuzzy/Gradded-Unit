@@ -35,6 +35,12 @@ public class LevelSelect extends ILevel {
                 }
             }));
         }
+        AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new ButtonAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new MainMenu());
+            }
+        }));
         AddObject(new Mouse());
     }
 
