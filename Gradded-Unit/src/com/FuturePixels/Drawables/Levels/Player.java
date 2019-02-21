@@ -86,7 +86,7 @@ public class Player extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
-        ind += !canJump&&Velocity.getY()<0?0.7f:Stop ? -ind : 0.3f;
+        ind += !canJump && Velocity.getY() < 0 ? 0.7f : Stop ? -ind : 0.3f;
         ind = ind % 7;
         GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png");
         g.drawImage(getLastImage(), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
@@ -145,7 +145,7 @@ public class Player extends IDrawable {
 
             one = false;
         }
-        if (left ) {
+        if (left) {
             Scale = -1;
             Acc.addX(-100);
         } else if (right) {
@@ -155,7 +155,7 @@ public class Player extends IDrawable {
             two = false;
             Acc.setX(0);
         }
-        float Clamp = canJump? 1f:0.1f;
+        float Clamp = canJump ? 1f : 0.1f;
         Acc.setX(Acc.getX() > Clamp ? Clamp : Acc.getX() < -Clamp ? -Clamp : Acc.getX());
         if (!isColliding()) {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
@@ -179,6 +179,8 @@ public class Player extends IDrawable {
             return;
         }
 
+       
+
         if (im instanceof PlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
@@ -191,7 +193,6 @@ public class Player extends IDrawable {
 
             Collison col = CollisonUtils.CheckForLineHits(getPosition(), bottom, _Top[0], _Top[1]);
             Collison col2 = CollisonUtils.CheckForLineHits(getPosition(), top, _bottom[0], _bottom[1]);
-
 
             if (col.IsHit) {
                 canJump = true;
@@ -214,8 +215,8 @@ public class Player extends IDrawable {
                 setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
                 col = null;
                 return;
-            } 
-            
+            }
+
             if (col2.IsHit) {
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
