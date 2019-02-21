@@ -15,8 +15,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -109,8 +107,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         Game.g.SetDelta();
         Update(ae);
-        checkCollionsions();
         movement();
+        checkCollionsions();
         this.repaint();
     }
 
@@ -233,19 +231,19 @@ public abstract class ILevel extends JPanel implements ActionListener {
             IDrawable a = gameObjs.get(i);
             for (int j = 0; j < gameObjs.size(); j++) {
                 IDrawable b = gameObjs.get(j);
-                if (a == b || !(a.isEnabled() && b.isEnabled()) || !(a.IsCollidable() && b.IsCollidable())) {
+                if (i == j || !(a.isEnabled() && b.isEnabled()) || !(a.IsCollidable() && b.IsCollidable())) {
                     continue;
                 }
                 if (a != b) {
                     if (a.CheckCollions(b)) {
+                        a.onCollison(b);
                         a.setIsColliding(true);
                         b.setIsColliding(true);
-                        a.onCollison(b);
                     }
                     if (b.CheckCollions(a)) {
+                        b.onCollison(a);
                         a.setIsColliding(true);
                         b.setIsColliding(true);
-                        b.onCollison(a);
                     }
                 }
             }
@@ -271,25 +269,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
             if (get() != Game.GetLevel()) {
                 return;
             }
-            if (e.getKeyCode() == KeyEvent.VK_F9) {
+            if (e.getKeyCode() == 120) {
                 DebugCollisons = !DebugCollisons;
             }
-
             if (e.getKeyCode() == KeyEvent.VK_F10) {
                 Game.SetLevelActive(new MainMenu());
-            }
-            if (e.getKeyCode() == KeyEvent.VK_F11) {
-                if (gameObjs.size() < 1) {
-                    return;
-                }
-                try {
-                    ILevel level = gameObjs.get(0).Level().getClass().newInstance();
-                    new LevelLoaderUtil(level);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
             if (e.getKeyCode() == 10 && e.isAltDown()) {
                 Game.FullScreen();

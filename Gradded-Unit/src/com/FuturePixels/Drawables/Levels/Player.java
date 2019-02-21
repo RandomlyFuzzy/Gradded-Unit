@@ -21,11 +21,10 @@ public class Player extends IDrawable {
 
     private float ind = 0, Scale = 1;
     private long score;
-    private int ScoreInd = 0, RotInd;
+    private int ScoreInd = 0;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true;
 
-    private Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
-    private Vector Cameraopos;
+    public Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
 
     public boolean isLeft() {
         return left;
@@ -75,7 +74,6 @@ public class Player extends IDrawable {
             GetSprite("/Images/Player/sprite_" + i + ".png");
         }
         ScoreInd = HUD.AddText("Score:" + score, new Vector(0, 40));
-        RotInd = HUD.AddText("", new Vector(0, 60));
         AddComponent(new RigidBody(this));
     }
 
@@ -109,35 +107,20 @@ public class Player extends IDrawable {
 
     public void doMove() {
         if (!isColliding()) {
-            if (Acc.getY() != 0) {
-                System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove() "+Velocity.getY());
-                setRotation((getRotation() * 0.98f));
-            }
+            setRotation((getRotation() * 0.98f));
             canJump = false;
             once = true;
             Velocity.mult(new Vector(0.985f, 0.995f));
-//            HUD.EditText(RotInd, "rotation is " + getRotation() + " is colliding FALSE");
         }
         movePlayer();
         Velocity.add(Acc);
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
-        HUD.EditText(RotInd, "rotation is " + getRotation() + " is colliding " + isColliding());
 
         if (isColliding()) {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
         Acc.mult(0);
 
-//        if (-getPosition().getX() != Cameraopos.getX()-Game.g.getWindowWidth() / 2) {
-//            Cameraopos.setX(-getPosition().getX()+Game.g.getWindowWidth() / 2);
-//        }
-//        if (-getPosition().getY() > Cameraopos.getY()-Game.g.getWindowHeight() / 2) {
-//            Cameraopos.setY(-getPosition().getY()+Game.g.getWindowHeight() / 2);
-//        }
-//        //screen scroller
-//        Cameraopos.setY(temp.getY()+Game.g.getDelta()*30f);
-        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-        Transform.setOffsetTranslation(Cameraopos);
     }
 
     private float distFromhit = 0;
@@ -200,7 +183,7 @@ public class Player extends IDrawable {
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;
             //get platfor top line
-            bottom = new Vector(getPosition()).add(GetUp().mult(getSpriteHeight() * -0.49f));
+            bottom = new Vector(getPosition()).add(GetUp().mult(getSpriteHeight() * -0.54f));
             top = new Vector(bottom).mult(-1f).add(getPosition()).add(getPosition());
             _Top = im.sideUp();
             _bottom = im.sideDown();
@@ -208,7 +191,8 @@ public class Player extends IDrawable {
             Collison col = CollisonUtils.CheckForLineHits(getPosition(), bottom, _Top[0], _Top[1]);
             Collison col2 = CollisonUtils.CheckForLineHits(getPosition(), top, _bottom[0], _bottom[1]);
 
-            if (col.IsHit&&!down) {
+
+            if (col.IsHit) {
                 canJump = true;
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_Top[0], _Top[1]);
@@ -229,9 +213,9 @@ public class Player extends IDrawable {
                 setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
                 col = null;
                 return;
-            }
-
-            if (col2.IsHit&&(Acc.getY()>0||Velocity.getY()>0)) {
+            } 
+            
+            if (col2.IsHit) {
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
                         y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();

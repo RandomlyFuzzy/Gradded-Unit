@@ -25,7 +25,7 @@ public class PlatForm extends IDrawable {
         super();
     }
 
-    public PlatForm(Vector position, double RadianRotation) {
+    public PlatForm(Vector position, float RadianRotation) {
         super();
         setPosition(position);
         setRotation(RadianRotation);
