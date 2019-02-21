@@ -24,7 +24,7 @@ public class PlatForm extends IDrawable {
         super();
     }
 
-    public PlatForm(Vector position, float RadianRotation) {
+    public PlatForm(Vector position, double RadianRotation) {
         super();
         GetSprite("/images/Platform.png");
         setPosition(position);

@@ -61,6 +61,7 @@ public class DebugObject extends IDrawable {
 
     @Override
     public void init() {
+        setIsCollidable(false);
     }
 
     @Override

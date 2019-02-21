@@ -28,7 +28,6 @@ public class Level1Solo extends ILevel {
 
     @Override
     public void init() {
-        // (float) Math.PI * -0.25f / 3f));
         //Adding Platforms
 //        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
@@ -54,16 +53,7 @@ public class Level1Solo extends ILevel {
         if (player1 == null) {
             return;
         }
-//        if (-player1.getPosition().getX() != Cameraopos.getX()-Game.g.getWindowWidth() / 2) {
-//            Cameraopos.setX(-player1.getPosition().getX()+Game.g.getWindowWidth() / 2);
-//        }
-//        if (-player1.getPosition().getY() > Cameraopos.getY()-Game.g.getWindowHeight() / 2) {
-//            Cameraopos.setY(-player1.getPosition().getY()+Game.g.getWindowHeight() / 2);
-//        }
-//        //screen scroller
-//        Cameraopos.setY(temp.getY()+Game.g.getDelta()*30f);
-        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-        Transform.setOffsetTranslation(Cameraopos);
+
     }
 
     @Override

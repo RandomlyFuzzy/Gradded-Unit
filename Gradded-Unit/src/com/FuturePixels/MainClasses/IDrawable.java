@@ -90,8 +90,8 @@ public abstract class IDrawable {
     }
 
     public void setRotation(double Rotation) {
-        UpdateBounds();
         this.Rotation = Rotation;
+        UpdateBounds();
     }
 
     public Vector getScale() {
@@ -99,9 +99,9 @@ public abstract class IDrawable {
     }
 
     public void setScale(Vector Scale) {
-        UpdateBounds();
         this.Scale = Scale;
         Scale = null;
+        UpdateBounds();
     }
 
     public boolean isEnabled() {
@@ -239,7 +239,7 @@ public abstract class IDrawable {
     public boolean CheckCollions(IDrawable t) {
         if (checkForIntersections(t.getBounds())) {
 //            System.out.println("com.FuturePixels.Utils.IDrawable.CheckCollions()");
-            if (t.isEnabled() == true) {
+            if (t.isEnabled()) {
                 onCollison(t);
                 return true;
             }
@@ -379,6 +379,7 @@ public abstract class IDrawable {
     }
 
     public void setIsColliding(boolean isColliding) {
+
         this.isColliding = isColliding;
     }
 
