@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.MediaTracker;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.Stroke;
@@ -79,9 +80,9 @@ public abstract class IDrawable {
     private boolean hasSupered = false;
 
     public IDrawable() {
-        position = new Vector(0, 0);
         transform = new Transform(this);
-        AddComponent(transform);
+        position = new Vector(0, 0);
+//        AddComponent(transform);
         hasSupered = true;
     }
 
@@ -89,13 +90,13 @@ public abstract class IDrawable {
         return Rotation;
     }
 
+    public Vector getScale() {
+        return new Vector(Scale);
+    }
+
     public void setRotation(double Rotation) {
         this.Rotation = Rotation;
         UpdateBounds();
-    }
-
-    public Vector getScale() {
-        return new Vector(Scale);
     }
 
     public void setScale(Vector Scale) {
@@ -134,6 +135,7 @@ public abstract class IDrawable {
     }
 
     public void UpdateBounds() {
+
         float hy = (float) Math.sqrt((getSpriteWidth() / 2 * getSpriteWidth() / 2) + (getSpriteHeight() / 2 * getSpriteHeight() / 2)),
                 a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2),
                 a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2),
@@ -154,7 +156,7 @@ public abstract class IDrawable {
 
         Polygon g = new Polygon();
 
-        if (v1 == null) {
+        if (v1 == null || v2 == null || v3 == null || v4 == null) {
             UpdateBounds();
         }
 
@@ -176,7 +178,7 @@ public abstract class IDrawable {
     }
 
     public boolean checkForIntersections(Polygon g) {
-        if (v1 == null) {
+        if (v1 == null || v2 == null || v3 == null || v4 == null) {
             UpdateBounds();
             g = getBounds();
         }
@@ -191,7 +193,7 @@ public abstract class IDrawable {
         return this.position.add(v);
     }
 
-    public BufferedImage GetSprite(String URI) {
+    public BufferedImage GetSprite(String URI) { 
         LastImage = GetImage(URI);
         this.spriteWidth = LastImage.getWidth();
         this.spriteHeight = LastImage.getHeight();
@@ -249,10 +251,12 @@ public abstract class IDrawable {
 
     void CoreInit() {
         if (!hasSupered) {
-            UtilManager.FindUseClass(5);
-            System.err.println("you must super this");
+            UtilManager.FindUseClass(3);
+            System.err.println("you must super this " + (transform != null) + position.toString());
         }
+//        GetSprite("/images/default.png");
         init();
+
     }
 
     void CoreUpdate(Graphics g2) {
@@ -267,12 +271,10 @@ public abstract class IDrawable {
             transform.PushTransforms(g);
         }
         Update(g);
-
         if (getUseTransforms()) {
             transform.PopTransforms(g);
         }
-
-        if (!Level().isDebugCollisons() || (getSpriteWidth() + getSpriteHeight() == 0)) {
+        if (!Level().isDebugCollisons()) {//) || (getSpriteWidth() + getSpriteHeight() == 0)) {
             return;
         }
         Graphics2D g2d = (Graphics2D) g;
@@ -322,7 +324,14 @@ public abstract class IDrawable {
         }
     }
 
-    public BufferedImage getLastImage() {
+    public BufferedImage getLastImage() { 
+        MediaTracker mediaTracker = new MediaTracker(Level());
+        mediaTracker.addImage(LastImage, 0);
+        try {
+            mediaTracker.waitForAll();
+        } catch (InterruptedException interuptedException) {
+            interuptedException.printStackTrace();
+        }
         return LastImage;
     }
 

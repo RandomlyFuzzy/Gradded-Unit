@@ -12,22 +12,20 @@ import com.FuturePixels.Drawables.Menus.GamePreferences;
  * @author RandomlyFuzzy
  */
 public class UtilManager {
-    
-    
-    public UtilManager(){
-        new MusicUtils();
+
+    public UtilManager() {
         new imageUtils();
+        new MusicUtils();
         new CalcUtils();
         new GamePreferences();
     }
-    
-    
-    static void FindUseClass(int depth){
-        try{
+
+    static void FindUseClass(int depth) {
+        try {
             throw new Exception();
-        }catch(Exception e){
-            System.err.println("FindUseClass() "+e.getStackTrace()[depth==-1?e.getStackTrace().length-1:depth]);
+        } catch (Exception e) {
+            System.err.println("FindUseClass() " + e.getStackTrace()[depth == -1 ? e.getStackTrace().length - 1 : depth]);
         }
     }
-    
+
 }

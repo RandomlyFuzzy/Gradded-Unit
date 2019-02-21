@@ -20,8 +20,9 @@ public class Transform extends IComponent {
 
     private AffineTransform old;
 
-    public Vector Scale = Vector.One();
     public Vector Translation = Vector.Zero();
+    public Vector Scale = Vector.One();
+    public double RotationZ = 0;
     private static Vector offsetTranslation = Vector.Zero();
     private static Vector WorldScale = new Vector(1, 1);
 
@@ -33,7 +34,6 @@ public class Transform extends IComponent {
         Transform.offsetTranslation = offsetTranslation;
         offsetTranslation = null;
     }
-    public double RotationZ = 0;
 
     public Transform(IDrawable parent) {
         super(parent);
@@ -41,6 +41,9 @@ public class Transform extends IComponent {
 
     @Override
     public void Init() {
+        Scale = getParent().getScale();
+        Translation = getParent().getPosition();
+        RotationZ = getParent().getRotation();
     }
 
     @Override
@@ -63,7 +66,7 @@ public class Transform extends IComponent {
         return WorldScale.getX();
     }
 
-    public static  float GetWorldScaleY() {
+    public static float GetWorldScaleY() {
         return WorldScale.getY();
     }
 

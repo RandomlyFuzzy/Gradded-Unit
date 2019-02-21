@@ -25,7 +25,7 @@ public class Button extends IDrawable {
     ButtonAbstract buttonDelegate;
 
     public Button() {
-        super();
+//        super();
     }
 
     public Button(String Message, ButtonAbstract Logic) {

@@ -12,6 +12,7 @@ import com.FuturePixels.MainClasses.ILevel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.Raster;
 import sun.awt.image.OffScreenImageSource;
 
 /**
@@ -26,7 +27,6 @@ public class PlatForm extends IDrawable {
 
     public PlatForm(Vector position, double RadianRotation) {
         super();
-        GetSprite("/images/Platform.png");
         setPosition(position);
         setRotation(RadianRotation);
     }
@@ -34,9 +34,7 @@ public class PlatForm extends IDrawable {
     @Override
     public void init() {
         System.out.println("com.FuturePixels.Drawables.Levels.PlatForm.init() " + getLastImage().toString());
-        if (getLastImage().equals("loading")) {
-            GetSprite("/images/Platform.png");
-        }
+        GetSprite("/images/Platform.png");
         setOffset(-Math.PI);
     }
 

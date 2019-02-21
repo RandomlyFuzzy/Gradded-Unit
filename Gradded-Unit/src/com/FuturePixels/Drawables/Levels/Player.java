@@ -161,17 +161,17 @@ public class Player extends IDrawable {
 
             one = false;
         }
-        if (left && canJump) {
+        if (left ) {
             Scale = -1;
             Acc.addX(-100);
-        } else if (right && canJump) {
+        } else if (right) {
             Scale = 1;
             Acc.addX(100);
         } else if (canJump) {
             two = false;
             Acc.setX(0);
         }
-        float Clamp = 1f;
+        float Clamp = canJump? 1f:0.1f;
         Acc.setX(Acc.getX() > Clamp ? Clamp : Acc.getX() < -Clamp ? -Clamp : Acc.getX());
         if (!isColliding()) {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)

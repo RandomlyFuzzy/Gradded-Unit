@@ -7,6 +7,9 @@ package com.FuturePixels.MainClasses;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.File;
+
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 
@@ -20,6 +23,39 @@ public class imageUtils {
 
     public imageUtils() {
         T = this;
+        LoadResoureces();
+    }
+
+    public void LoadResoureces() {
+        if (new File("resources/images/").exists()) {
+            File f = new File("resources/images/");
+            if (f.isDirectory()) {
+                LoadDir(f);
+            } else {
+                System.err.println("couldnt load images ?");
+            }
+        } else {
+            System.err.println("/resources/images/ folder missing reconstructing");
+            File f = new File("resources/images/");
+            f.mkdir();
+        }
+    }
+
+    //recursive function reaching into all the sub folders
+    private void LoadDir(File dir) {
+        for (File f2 : dir.listFiles()) {
+            if (f2.isDirectory()) {
+                LoadDir(f2);
+                System.out.println("preloading image from /resources/images/ " + f2.getAbsolutePath());
+            } else {
+                //form uri
+                String form = f2.getAbsolutePath().toString();
+                form = form.substring(form.indexOf("resources") + "resources".length());
+                form = form.replace('\\', '/');
+                System.out.println("preloading image " + form);
+                imageUtils.T.GetImage(form);
+            }
+        }
     }
 
     private HashMap<String, BufferedImage> Images = new HashMap<String, BufferedImage>();
@@ -57,8 +93,8 @@ public class imageUtils {
         return GetImage("/images/defualt.png", true);
     }
 
-    public void setImage(String Name,BufferedImage img){
+    public void setImage(String Name, BufferedImage img) {
         Images.put(Name, img);
     }
-    
+
 }

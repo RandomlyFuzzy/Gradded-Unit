@@ -9,26 +9,27 @@ I certify that this is my own work and I have not used code from any other sourc
  */
 package com.FuturePixels.Entry;
 
-import com.FuturePixels.MainClasses.imageUtils;
 import com.FuturePixels.MainClasses.ILevel;
 import com.FuturePixels.MainClasses.MusicUtils;
 import com.FuturePixels.MainClasses.UtilManager;
+import com.FuturePixels.MainClasses.imageUtils;
 import com.FuturePixels.levels.*;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -77,10 +78,6 @@ public class Game {
         Game window = new Game();
         deltalong = System.nanoTime();
     }
-
-
-
- 
 
     public Game() {
         this.g = this;
@@ -160,6 +157,8 @@ public class Game {
 
         }
     }
+
+  
 
     public void SetDimentions(int w, int h) {
         Rectangle bo = Game.g.GetFrame().getBounds();
