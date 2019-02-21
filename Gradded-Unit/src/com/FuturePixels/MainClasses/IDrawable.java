@@ -95,14 +95,14 @@ public abstract class IDrawable {
     }
 
     public void setRotation(double Rotation) {
-        UpdateBounds();
         this.Rotation = Rotation;
+        UpdateBounds();
     }
 
     public void setScale(Vector Scale) {
-        UpdateBounds();
         this.Scale = Scale;
         Scale = null;
+        UpdateBounds();
     }
 
     public boolean isEnabled() {
@@ -134,17 +134,20 @@ public abstract class IDrawable {
         return getRotation() + getOffset();
     }
 
-    public void UpdateBounds() {
+    public synchronized void UpdateBounds() {
+        float sw = getScaledSpriteWidth(), sh = getScaledSpriteHeight();
+        double tr = getRotation();
+        Vector Sca = getScale(), pos = getPosition();
 
-        float hy = (float) Math.sqrt((getSpriteWidth() / 2 * getSpriteWidth() / 2) + (getSpriteHeight() / 2 * getSpriteHeight() / 2)),
-                a1 = (float) Math.atan2(getSpriteHeight() / 2, getSpriteWidth() / 2),
-                a2 = (float) Math.atan2(-getSpriteHeight() / 2, getSpriteWidth() / 2),
-                a3 = (float) Math.atan2(-getSpriteHeight() / 2, -getSpriteWidth() / 2),
-                a4 = (float) Math.atan2(getSpriteHeight() / 2, -getSpriteWidth() / 2);
-        v1 = new Vector((int) (getPosition().getX() + (float) Math.cos(a1 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a1 - getTotalRotation()) * hy * Scale.getY()));
-        v2 = new Vector((int) (getPosition().getX() + (float) Math.cos(a2 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a2 - getTotalRotation()) * hy * Scale.getY()));
-        v3 = new Vector((int) (getPosition().getX() + (float) Math.cos(a3 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a3 - getTotalRotation()) * hy * Scale.getY()));
-        v4 = new Vector((int) (getPosition().getX() + (float) Math.cos(a4 - getTotalRotation()) * hy * Scale.getX()), (int) (getPosition().getY() + (float) -Math.sin(a4 - getTotalRotation()) * hy * Scale.getY()));
+        float hy = (float) Math.sqrt((sw / 2 * sw / 2) + (sh / 2 * sh / 2)),
+                a1 = (float) Math.atan2(sh / 2, sw / 2),
+                a2 = (float) Math.atan2(-sh / 2, sw / 2),
+                a3 = (float) Math.atan2(-sh / 2, -sw / 2),
+                a4 = (float) Math.atan2(sh / 2, -sw / 2);
+        v1 = new Vector((int) (pos.getX() + (float) Math.cos(a1 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a1 - tr) * hy));
+        v2 = new Vector((int) (pos.getX() + (float) Math.cos(a2 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a2 - tr) * hy));
+        v3 = new Vector((int) (pos.getX() + (float) Math.cos(a3 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a3 - tr) * hy));
+        v4 = new Vector((int) (pos.getX() + (float) Math.cos(a4 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a4 - tr) * hy));
     }
 
     public Polygon getBounds() {
@@ -193,12 +196,12 @@ public abstract class IDrawable {
         return this.position.add(v);
     }
 
-    public BufferedImage GetSprite(String URI) { 
+    public IDrawable GetSprite(String URI) {
         LastImage = GetImage(URI);
         this.spriteWidth = LastImage.getWidth();
         this.spriteHeight = LastImage.getHeight();
         UpdateBounds();
-        return LastImage;
+        return this;
     }
 
     public void setPosition(float X, float Y) {
@@ -219,6 +222,14 @@ public abstract class IDrawable {
 
     public int getSpriteWidth() {
         return spriteWidth;
+    }
+
+    public float getScaledSpriteHeight() {
+        return spriteHeight * getScale().getY();
+    }
+
+    public float getScaledSpriteWidth() {
+        return spriteWidth * getScale().getX();
     }
 
     @Override
@@ -320,11 +331,11 @@ public abstract class IDrawable {
                 System.err.println("error Drawing last image as their was not last image in " + e.getStackTrace()[1] + " try pre loading it in init() to get rid of this warning");
             }
         } else {
-            g.drawImage(LastImage, -getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight(), null);
+            g.drawImage(LastImage, (int) -(getSpriteWidth()) / 2, (int) -(getSpriteHeight()) / 2, (int) (getSpriteWidth()), (int) (getSpriteHeight()), null);
         }
     }
 
-    public BufferedImage getLastImage() { 
+    public BufferedImage getLastImage() {
         MediaTracker mediaTracker = new MediaTracker(Level());
         mediaTracker.addImage(LastImage, 0);
         try {
@@ -348,31 +359,33 @@ public abstract class IDrawable {
     }
 
     public Vector[] sideUp() {
+        if (v4 == null || v1 == null) {
+            UpdateBounds();
+        }
+        return new Vector[]{v4, v1};
+
+    }
+
+    public Vector[] sideLeft() {
+        if (v2 == null || v1 == null) {
+            UpdateBounds();
+        }
+        return new Vector[]{v1, v2};
+    }
+
+    public Vector[] sideDown() {
         if (v3 == null || v2 == null) {
             UpdateBounds();
         }
         return new Vector[]{v3, v2};
     }
 
-    public Vector[] sideLeft() {
+    public Vector[] sideRight() {
         if (v3 == null || v4 == null) {
             UpdateBounds();
         }
         return new Vector[]{v3, v4};
-    }
 
-    public Vector[] sideDown() {
-        if (v4 == null || v1 == null) {
-            UpdateBounds();
-        }
-        return new Vector[]{v4, v1};
-    }
-
-    public Vector[] sideRight() {
-        if (v2 == null || v1 == null) {
-            UpdateBounds();
-        }
-        return new Vector[]{v1, v2};
     }
 
     public double getOffset() {

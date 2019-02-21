@@ -20,7 +20,6 @@ import java.awt.geom.AffineTransform;
 public class Mouse extends IDrawable {
     
     private boolean clicked = false;
-    private int HudIndex = 0;
 
     public Mouse() {
         super();
@@ -29,7 +28,6 @@ public class Mouse extends IDrawable {
     @Override
     public void init() {
         GetSprite("/Images/Cursor.png");
-        HudIndex = HUD.AddText("" + isColliding(), new Vector(0, 10));
         setScale(new Vector(0.2f, 0.2f));
     }
 
@@ -38,7 +36,6 @@ public class Mouse extends IDrawable {
 //        Rad += Game.g.getDelta() * 100;
         setPosition(Level().getMousePos());
 //        setRotation(Rad);
-        HUD.EditText(HudIndex, "" + isColliding());
         clicked = clicked != !Level().isClicking() && clicked;
     }
 

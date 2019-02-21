@@ -86,9 +86,10 @@ public class Player extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
-        ind += Stop ? -ind : 0.3f;
-        ind = ind % 8;
-        g.drawImage(GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png"), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
+        ind += !canJump&&Velocity.getY()<0?0.7f:Stop ? -ind : 0.3f;
+        ind = ind % 7;
+        GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png");
+        g.drawImage(getLastImage(), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
 //        setRotation(getRotation()+(float)(Math.PI/180));
     }
 
@@ -183,7 +184,7 @@ public class Player extends IDrawable {
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;
             //get platfor top line
-            bottom = new Vector(getPosition()).add(GetUp().mult(getSpriteHeight() * -0.54f));
+            bottom = new Vector(getPosition()).add(GetUp().mult(getScaledSpriteHeight() * -0.5f));
             top = new Vector(bottom).mult(-1f).add(getPosition()).add(getPosition());
             _Top = im.sideUp();
             _bottom = im.sideDown();

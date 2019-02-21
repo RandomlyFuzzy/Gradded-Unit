@@ -25,17 +25,16 @@ public class PlatForm extends IDrawable {
         super();
     }
 
-    public PlatForm(Vector position, float RadianRotation) {
+    public PlatForm(Vector position, double RadianRotation) {
         super();
+        GetSprite("/images/Platform.png");
         setPosition(position);
         setRotation(RadianRotation);
     }
 
     @Override
     public void init() {
-        System.out.println("com.FuturePixels.Drawables.Levels.PlatForm.init() " + getLastImage().toString());
         GetSprite("/images/Platform.png");
-        setOffset(-Math.PI);
     }
 
     @Override

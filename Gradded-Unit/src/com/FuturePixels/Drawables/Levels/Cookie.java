@@ -47,7 +47,8 @@ public class Cookie extends IDrawable {
     @Override
     public void Update(Graphics2D g) {
         if (isVisible == true) {
-            g.drawImage(GetSprite("/Images/Cookie.png"), (int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteWidth() / 2, getSpriteWidth(), getSpriteHeight(), null);
+            GetSprite("/Images/Cookie.png");
+            g.drawImage(getLastImage(), (int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteWidth() / 2, getSpriteWidth(), getSpriteHeight(), null);
             g.drawRect((int) getPosition().getX() - getSpriteWidth() / 2, (int) getPosition().getY() - getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
         }
 

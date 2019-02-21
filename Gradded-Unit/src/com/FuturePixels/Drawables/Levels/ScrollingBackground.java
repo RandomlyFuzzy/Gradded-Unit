@@ -47,7 +47,8 @@ public class ScrollingBackground extends IDrawable {
     @Override
     public void init() {
         setIsCollidable(false);
-        Scrollingimg = GetSprite(imgURI);
+        GetSprite(imgURI);
+        Scrollingimg = getLastImage();
     }
 
     @Override

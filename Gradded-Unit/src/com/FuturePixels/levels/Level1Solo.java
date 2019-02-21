@@ -30,15 +30,16 @@ public class Level1Solo extends ILevel {
     public void init() {
         // (float) Math.PI * -0.25f / 3f));
         //Adding Platforms
-//        AddObject(new DebugObject());
+        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/Platform.png");
-        AddObject(new PlatForm(new Vector(75, -300), 0)).GetSprite("/images/Platform.png");
+        AddObject(new PlatForm(new Vector(0, 0), 0.13)).GetSprite("/images/rock_platform_moss.png").setScale(new Vector(2.33f,1));
+        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/wooden_platform.png").setScale(new Vector(2.33f,1));
+        AddObject(new PlatForm(new Vector(75, -300), 0)).GetSprite("/images/rock_platform_clean.png").setScale(new Vector(2.33f,1));
         AddObject(new PlatForm(new Vector(300, -450), 0)).GetSprite("/images/Platform.png");
         
         player1 = new Player();
-        AddObject(player1).setPosition(0,-30);
+//        player1.setScale(new Vector(0.3f,0.5f));
+        AddObject(player1).setPosition(0,-50);
         AddObject(new HUD());
 //        AddObject(new ScrollingBackground());
 
