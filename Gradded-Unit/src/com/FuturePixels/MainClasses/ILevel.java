@@ -30,6 +30,13 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private boolean IsDragging = false, IsInside = true, IsClicking = false;
     private KeyEvent LastKeyPress = null;
     private double Time = 0;
+    private TAdapter InputAdapter = null;
+    private boolean DebugCollisons = false;
+    private HashMap<Integer, Boolean> MouseButtonPressed = new HashMap<Integer, Boolean>();
+
+    public ILevel() {
+        timer = new javax.swing.Timer(15, this);
+    }
 
     public double getTime() {
         return Time;
@@ -38,8 +45,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public void setTime(double Time) {
         this.Time = Time;
     }
-
-    private boolean DebugCollisons = false;
 
     public KeyEvent getLastKeyPress() {
         if (LastKeyPress == null) {
@@ -55,7 +60,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public void setLastKeyPress(KeyEvent LastKeyPress) {
         this.LastKeyPress = LastKeyPress;
     }
-    private TAdapter InputAdapter = null;
 
     void resetParams() {
         IsDragging = false;
@@ -83,7 +87,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public boolean isClicking() {
         return IsClicking;
     }
-    private HashMap<Integer, Boolean> MouseButtonPressed = new HashMap<Integer, Boolean>();
 
     public boolean GetMouseButtonDown(int ind) {
         if (!MouseButtonPressed.containsKey(ind)) {
@@ -92,10 +95,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
         return MouseButtonPressed.get(ind);
     }
     private int temp1;
-
-    public ILevel() {
-        timer = new javax.swing.Timer(15, this);
-    }
 
     private ILevel get() {
         return this;
@@ -206,7 +205,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
     }
 
-    public void stop()  {
+    public void stop() {
         if (InputAdapter == null) {
             try {
                 throw new Exception("tried to stop it before it even ran");
@@ -239,7 +238,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         return g;
     }
 
-    //this is using java swing native functionality but their are exameples or raycasting  in use in the player.onCollison function 
+    //this is using java swing native functionality (polygon collisions) but their are exameples or raycasting  in use in the player.onCollison function 
     public void checkCollionsions() {
         if (gameObjs.size() <= 1) {
             return;
@@ -252,15 +251,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
                     continue;
                 }
                 if (a != b) {
-                    if (a.CheckCollions(b)) {
+                    if (a.CheckCollions(b) || b.CheckCollions(a)) {
+                        a.setIsColliding(true);
                         a.onCollison(b);
-                        a.setIsColliding(true);
                         b.setIsColliding(true);
-                    }
-                    if (b.CheckCollions(a)) {
                         b.onCollison(a);
-                        a.setIsColliding(true);
-                        b.setIsColliding(true);
                     }
                 }
             }
@@ -368,7 +363,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
     }
 
-    public void dispose(){
+    public void dispose() {
         stop();
         ArrayList<IDrawable> drawable = gameObjs;
         gameObjs = new ArrayList<IDrawable>();

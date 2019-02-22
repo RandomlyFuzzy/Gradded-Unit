@@ -29,8 +29,8 @@ public class Level1Solo extends ILevel {
     @Override
     public void init() {
         // (float) Math.PI * -0.25f / 3f));
+        //        AddObject(new DebugObject());
         //Adding Platforms
-//        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
         AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
