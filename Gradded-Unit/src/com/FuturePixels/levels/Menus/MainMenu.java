@@ -42,9 +42,9 @@ public class MainMenu extends ILevel {
     @Override
     public void init() {
         Game.toggleCursor();
+        play("/sounds/music.wav",255);
         AddObject(new Mouse());
         AddObject(new HUD());
-
         AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new ButtonAbstract() {
             @Override
             public void OnClick(Button b) {

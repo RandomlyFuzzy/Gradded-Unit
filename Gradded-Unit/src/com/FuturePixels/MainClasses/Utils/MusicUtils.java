@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -26,25 +28,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class MusicUtils {
 
-    private static ArrayList<Thread> sounds = new ArrayList<Thread>();
-    
+    private static ArrayList<MusicThread> sounds = new ArrayList<MusicThread>();
+
     public synchronized static void play(String soundResource) {
+        play(soundResource, 0);
+    }
+
+    public synchronized static void play(String soundResource, float time) {
         try {
-
-            Thread d = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Clip clip = AudioSystem.getClip();
-                        AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(soundResource));
-                        clip.open(ais);
-                        clip.start();
-                    } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-
-                    }
-                }
-            });
-            d.start();
+            MusicThread d = new MusicThread(soundResource);
+            d.Search(time);
+            d.Start();
             sounds.add(d);
         } catch (Exception ex) {
             System.out.println("Error playing sound " + ex.getMessage());
@@ -53,7 +47,53 @@ public class MusicUtils {
 
     public static void StopAllSounds() {
         sounds.forEach((A) -> {
-            A.stop();
+            A.Stop();
         });
     }
+
+    private static class MusicThread {
+
+        private Clip clip;
+        private AudioInputStream ais;
+
+        public MusicThread(String Source) {
+            super();
+            try {
+                clip = AudioSystem.getClip();
+                this.ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(Source));
+                clip.open(ais);
+
+            } catch (LineUnavailableException ex) {
+                Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedAudioFileException ex) {
+                Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        public Clip getClip() {
+            return clip;
+        }
+
+        public void Search(float time) {
+            if (time * clip.getFormat().getFrameRate() >= ais.getFrameLength()) {
+                System.err.println("input size to big");
+            } else {
+                clip.setFramePosition(((int) (time * clip.getFormat().getFrameRate())));
+            }
+        }
+
+        public void Start() {
+            new Thread(() -> {
+                clip.start();
+            }).start();
+        }
+
+        public void Stop() {
+            clip.stop();
+        }
+    }
+
 }

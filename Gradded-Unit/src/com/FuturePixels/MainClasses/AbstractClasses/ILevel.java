@@ -232,9 +232,13 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
     }
 
-    public synchronized void play(String soundResource) {
+    public void play(String soundResource) {
+        play(soundResource, 0);
+    }
+
+    public synchronized void play(String soundResource, float seconds) {
         System.out.println("com.FuturePixels.MainClasses.ILevel.play()");
-        MusicUtils.play(soundResource);
+        MusicUtils.play(soundResource,seconds);
     }
 
     protected BufferedImage GetSprite(String URI) {

@@ -153,6 +153,7 @@ public class Game {
                 CurrentLevel.setFocusable(false);
                 CurrentLevel.setEnabled(false);
                 CurrentLevel = null;
+                MusicUtils.StopAllSounds();
                 System.gc();
             }
             Level.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));

@@ -46,9 +46,9 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(-450, -1250), 0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-300, -1450), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-100, -1550), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(-250, -1700), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(-500, -1750), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(-400, -1950), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-250, -1750), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-500, -1800), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-400, -2000), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-150, -2150), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-350, -2300), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-200, -2500), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
