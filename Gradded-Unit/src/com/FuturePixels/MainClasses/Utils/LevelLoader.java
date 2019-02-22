@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.MainClasses;
+package com.FuturePixels.MainClasses.Utils;
 
 import com.FuturePixels.Entry.Game;
+import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
 import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.levels.Menus.*;
 import com.FuturePixels.levels.OtherLevels.*;

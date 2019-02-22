@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.MainClasses;
+package com.FuturePixels.MainClasses.AbstractClasses;
 
+import com.FuturePixels.MainClasses.Utils.LevelLoader;
+import com.FuturePixels.MainClasses.Components.Vector;
+import com.FuturePixels.MainClasses.Utils.imageUtils;
+import com.FuturePixels.MainClasses.Utils.MusicUtils;
 import com.FuturePixels.Components.*;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Entry.Game;

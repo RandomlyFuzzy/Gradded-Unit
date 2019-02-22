@@ -10,10 +10,10 @@ I certify that this is my own work and I have not used code from any other sourc
 package com.FuturePixels.Entry;
 
 import com.FuturePixels.levels.Menus.MainMenu;
-import com.FuturePixels.MainClasses.ILevel;
-import com.FuturePixels.MainClasses.MusicUtils;
-import com.FuturePixels.MainClasses.UtilManager;
-import com.FuturePixels.MainClasses.imageUtils;
+import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
+import com.FuturePixels.MainClasses.Utils.MusicUtils;
+import com.FuturePixels.MainClasses.Utils.UtilManager;
+import com.FuturePixels.MainClasses.Utils.imageUtils;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;

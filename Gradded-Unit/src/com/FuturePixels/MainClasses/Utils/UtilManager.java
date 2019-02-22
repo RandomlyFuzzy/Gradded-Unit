@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.MainClasses;
+package com.FuturePixels.MainClasses.Utils;
 
+import com.FuturePixels.MainClasses.Utils.CalcUtils;
+import com.FuturePixels.MainClasses.Utils.imageUtils;
+import com.FuturePixels.MainClasses.Utils.MusicUtils;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 
 /**
@@ -20,7 +23,7 @@ public class UtilManager {
         new GamePreferences();
     }
 
-    static void FindUseClass(int depth) {
+    public static void FindUseClass(int depth) {
         try {
             throw new Exception();
         } catch (Exception e) {

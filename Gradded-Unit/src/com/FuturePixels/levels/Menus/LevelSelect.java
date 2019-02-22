@@ -9,9 +9,9 @@ import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.ButtonAbstract;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.ILevel;
-import com.FuturePixels.MainClasses.LevelLoader;
-import com.FuturePixels.MainClasses.Vector;
+import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
+import com.FuturePixels.MainClasses.Utils.LevelLoader;
+import com.FuturePixels.MainClasses.Components.Vector;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -28,7 +28,8 @@ public class LevelSelect extends ILevel {
 
     @Override
     public void init() {
-        for (int i = 0; i < 2; i++) {
+         AddObject(new Mouse());
+         for (int i = 0; i < 2; i++) {
             AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)), new ButtonAbstract() {
                 public void OnClick(Button b) {
                     new LevelLoader(b.getMessage());
@@ -41,7 +42,7 @@ public class LevelSelect extends ILevel {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
-        AddObject(new Mouse());
+
     }
 
     @Override

@@ -7,8 +7,8 @@ package com.FuturePixels.levels.Menus;
 
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.BlackoutButton;
-import com.FuturePixels.MainClasses.ILevel;
-import com.FuturePixels.MainClasses.Vector;
+import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
+import com.FuturePixels.MainClasses.Components.Vector;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.ButtonAbstract;
 import com.FuturePixels.Drawables.Menus.DropDownButton;

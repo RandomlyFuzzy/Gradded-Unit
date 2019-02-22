@@ -6,9 +6,9 @@
 package com.FuturePixels.Drawables.Menus;
 
 import com.FuturePixels.Drawables.Levels.HUD;
-import com.FuturePixels.MainClasses.IDrawable;
+import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.Vector;
+import com.FuturePixels.MainClasses.Components.Vector;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.MainClasses;
+package com.FuturePixels.MainClasses.AbstractClasses;
 
+import com.FuturePixels.MainClasses.Components.Vector;
+import com.FuturePixels.MainClasses.Utils.UtilManager;
 import com.FuturePixels.Components.Transform;
-import com.FuturePixels.MainClasses.imageUtils;
+import com.FuturePixels.MainClasses.Utils.imageUtils;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.levels.OtherLevels.LeaderBoard;
-import com.FuturePixels.MainClasses.ILevel;
+import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

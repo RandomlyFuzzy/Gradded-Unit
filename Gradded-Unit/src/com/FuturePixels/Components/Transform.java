@@ -5,9 +5,9 @@
  */
 package com.FuturePixels.Components;
 
-import com.FuturePixels.MainClasses.IComponent;
-import com.FuturePixels.MainClasses.IDrawable;
-import com.FuturePixels.MainClasses.Vector;
+import com.FuturePixels.MainClasses.AbstractClasses.IComponent;
+import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
+import com.FuturePixels.MainClasses.Components.Vector;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;

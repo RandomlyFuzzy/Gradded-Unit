@@ -1,7 +1,7 @@
 package com.FuturePixels.Drawables.Menus;
 
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.Vector;
+import com.FuturePixels.MainClasses.Components.Vector;
 import java.awt.event.KeyEvent;
 
 /**
