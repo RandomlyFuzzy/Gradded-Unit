@@ -32,9 +32,35 @@ import javax.imageio.ImageIO;
  */
 public abstract class IDrawable {
 
-    private Vector position;
+    private Vector position, Toffset = Vector.Zero();
+
     private int spriteWidth = 0;
     private int spriteHeight = 0;
+    private double Rotation = 0, offset = 0;
+    private Vector Scale = Vector.One();
+    private boolean Enabled = true, isColliding = false, isCollidable = true, useTransforms = true;
+    private BufferedImage LastImage = null;
+    private String LastimageAddress = "";
+
+    private ArrayList<IComponent> Component = new ArrayList<IComponent>();
+    private Transform transform;
+
+    private Vector v1,
+            v2,
+            v3,
+            v4;
+
+    public Vector getPoffset() {
+        return Toffset;
+    }
+
+    public String getLastimageAddress() {
+        return LastimageAddress;
+    }
+
+    public void setPoffset(Vector Toffset) {
+        this.Toffset = Toffset;
+    }
 
     public void setSpriteWidth(int spriteWidth) {
         this.spriteWidth = spriteWidth;
@@ -43,10 +69,6 @@ public abstract class IDrawable {
     public void setSpriteHeight(int spriteHeight) {
         this.spriteHeight = spriteHeight;
     }
-    private double Rotation = 0, offset = 0;
-
-    private Vector Scale = Vector.One();
-    private boolean Enabled = true, isColliding = false, isCollidable = true, useTransforms = true;
 
     public boolean IsCollidable() {
         return isCollidable;
@@ -63,15 +85,6 @@ public abstract class IDrawable {
     public void setUseTransforms(boolean useTransforms) {
         this.useTransforms = useTransforms;
     }
-
-    private BufferedImage LastImage = null;
-    private ArrayList<IComponent> Component = new ArrayList<IComponent>();
-    private Transform transform;
-
-    private Vector v1,
-            v2,
-            v3,
-            v4;
 
     //to do
     //1. add component based logic
@@ -93,7 +106,7 @@ public abstract class IDrawable {
     }
 
     public Vector getScale() {
-        return new Vector(Scale);
+        return Scale;
     }
 
     public void setRotation(double Rotation) {
@@ -146,10 +159,10 @@ public abstract class IDrawable {
                 a2 = (float) Math.atan2(-sh / 2, sw / 2),
                 a3 = (float) Math.atan2(-sh / 2, -sw / 2),
                 a4 = (float) Math.atan2(sh / 2, -sw / 2);
-        v1 = new Vector((int) (pos.getX() + (float) Math.cos(a1 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a1 - tr) * hy));
-        v2 = new Vector((int) (pos.getX() + (float) Math.cos(a2 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a2 - tr) * hy));
-        v3 = new Vector((int) (pos.getX() + (float) Math.cos(a3 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a3 - tr) * hy));
-        v4 = new Vector((int) (pos.getX() + (float) Math.cos(a4 - tr) * hy), (int) (pos.getY() + (float) -Math.sin(a4 - tr) * hy));
+        v1 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a1 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a1 - tr) * hy));
+        v2 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a2 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a2 - tr) * hy));
+        v3 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a3 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a3 - tr) * hy));
+        v4 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a4 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a4 - tr) * hy));
     }
 
     public Polygon getBounds() {
@@ -200,6 +213,7 @@ public abstract class IDrawable {
 
     public IDrawable GetSprite(String URI) {
         LastImage = GetImage(URI);
+        LastimageAddress = URI;
         this.spriteWidth = LastImage.getWidth();
         this.spriteHeight = LastImage.getHeight();
         UpdateBounds();
@@ -215,6 +229,7 @@ public abstract class IDrawable {
     public void setPosition(Vector v) {
         this.position.setX(v.getX());
         this.position.setY(v.getY());
+        v = null;
         UpdateBounds();
     }
 

@@ -22,10 +22,10 @@ public class DropDownButton extends IDrawable {
 
     private String Message = "";
     private Vector relpos = Vector.One();
-    ButtonAbstract buttonDelegate;
+    private HUDAbstract buttonDelegate;
     public final int[] indexOfSubbuttons;
     private String[] SubMessage;
-    private ButtonAbstract[] LogicForSubButtons;
+    private HUDAbstract[] LogicForSubButtons;
     private Vector AddVector;
 
     public DropDownButton() {
@@ -33,7 +33,7 @@ public class DropDownButton extends IDrawable {
         indexOfSubbuttons = new int[0];
     }
 
-    public DropDownButton(Vector relpos, String Message, Vector AddPerButton, String[] SubMessage, ButtonAbstract[] LogicForSubButtons) {
+    public DropDownButton(Vector relpos, String Message, Vector AddPerButton, String[] SubMessage, HUDAbstract[] LogicForSubButtons) {
         super();
         this.Message = Message;
         this.relpos = relpos;
@@ -42,7 +42,7 @@ public class DropDownButton extends IDrawable {
         this.LogicForSubButtons = LogicForSubButtons;
         indexOfSubbuttons = new int[this.SubMessage.length];
         for (int i = 0; i < SubMessage.length; i++) {
-            Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i + 1)), SubMessage[i], i < LogicForSubButtons.length ? LogicForSubButtons[i] : new ButtonAbstract() {
+            Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i + 1)), SubMessage[i], i < LogicForSubButtons.length ? LogicForSubButtons[i] : new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     b.setMessage("Button missing input");
@@ -51,7 +51,7 @@ public class DropDownButton extends IDrawable {
             }));
             indexOfSubbuttons[i] = Level().GetObjectCount() - 1;
         }
-        buttonDelegate = new ButtonAbstract() {
+        buttonDelegate = new HUDAbstract() {
             @Override
             public void OnClick(DropDownButton b) {
                 for (int i : b.indexOfSubbuttons) {
@@ -71,8 +71,8 @@ public class DropDownButton extends IDrawable {
     @Override
     public void doMove() {
         setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
-        
-        setScale(GamePreferences.ButonDims());
+
+        setScale(GamePreferences.ButtonDims());
 
     }
 
@@ -83,6 +83,12 @@ public class DropDownButton extends IDrawable {
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
+        if (isColliding()) {
+            Color c = g.getColor();
+            g.setColor(new Color(200, 200, 200, 100));
+            g.fillRect(-getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
+            g.setColor(c);
+        }
     }
 
     public void DoAction() {

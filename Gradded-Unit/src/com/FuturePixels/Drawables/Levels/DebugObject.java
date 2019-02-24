@@ -52,9 +52,9 @@ public class DebugObject extends IDrawable {
 
         for (int i = 0; i < Lines.size(); i += 2) {
             g.drawLine((int) Lines.get(i).getX(),
-                    (int) Lines.get(i).getY(),
-                    (int) Lines.get(i + 1).getX(),
-                    (int) Lines.get(i + 1).getY());
+                       (int) Lines.get(i).getY(),
+                       (int) Lines.get(i + 1).getX(),
+                       (int) Lines.get(i + 1).getY());
         }
         Reset();
     }

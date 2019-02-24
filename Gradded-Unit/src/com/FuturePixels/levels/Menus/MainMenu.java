@@ -10,7 +10,7 @@ import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.Mouse;
-import com.FuturePixels.Drawables.Menus.ButtonAbstract;
+import com.FuturePixels.Drawables.Menus.HUDAbstract;
 import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.MainClasses.Components.Vector;
@@ -34,42 +34,42 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends ILevel {
 
-
     public MainMenu() {
         super();
+        setStopAudioOnStart(false);
     }
 
     @Override
     public void init() {
         Game.toggleCursor();
-        play("/sounds/music.wav",255);
+        play("/sounds/music.wav", 254,-1);
         AddObject(new Mouse());
         AddObject(new HUD());
-        AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelect());
             }
         }));
-//        AddObject(new Button(new Vector(0.5f, 0.4f), "To Game Coop", new ButtonAbstract() {
+//        AddObject(new Button(new Vector(0.5f, 0.4f), "To Game Coop", new HUDAbstract() {
 //            @Override
 //            public void OnClick(Button b) {
 //                Game.SetLevelActive(new Level1Solo());
 //            }
 //        }));
-        AddObject(new Button(new Vector(0.5f, 0.5f), "To Leaderboard", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.5f, 0.5f), "To Leaderboard", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        AddObject(new Button(new Vector(0.5f, 0.7f), "To Settings", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.5f, 0.7f), "To Settings", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
         }));
-        AddObject(new Button(new Vector(0.5f, 0.8f), "Quit", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.5f, 0.8f), "Quit", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);

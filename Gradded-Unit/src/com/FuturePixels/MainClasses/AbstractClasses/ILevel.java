@@ -37,6 +37,15 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private TAdapter InputAdapter = null;
     private boolean DebugCollisons = false;
     private HashMap<Integer, Boolean> MouseButtonPressed = new HashMap<Integer, Boolean>();
+    private boolean StopAudioOnStart = true;
+
+    public boolean StopAudioOnStart() {
+        return StopAudioOnStart;
+    }
+
+    public void setStopAudioOnStart(boolean StopAudioOnStart) {
+        this.StopAudioOnStart = StopAudioOnStart;
+    }
 
     public ILevel() {
         timer = new javax.swing.Timer(15, this);
@@ -236,9 +245,13 @@ public abstract class ILevel extends JPanel implements ActionListener {
         play(soundResource, 0);
     }
 
-    public synchronized void play(String soundResource, float seconds) {
+    public void play(String soundResource, float seconds) {
+        play(soundResource, seconds, 0);
+    }
+
+    public synchronized void play(String soundResource, float seconds, int LoopAmt) {
         System.out.println("com.FuturePixels.MainClasses.ILevel.play()");
-        MusicUtils.play(soundResource,seconds);
+        MusicUtils.play(soundResource, seconds, LoopAmt);
     }
 
     protected BufferedImage GetSprite(String URI) {
@@ -306,8 +319,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
             }
             if (e.getKeyCode() == 10 && e.isAltDown()) {
                 Game.FullScreen();
-            } else if (e.getKeyCode() == 10 && !e.isAltDown()) {
-                Game.toggleCursor();
+            } else if (e.getKeyCode() == 10) {
+//                Game.toggleCursor();
             }
             LastKeyPress = e;
             keyPress(e);
@@ -363,6 +376,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
         @Override
         public void mouseDragged(MouseEvent e) {
             IsDragging = true;
+            IsClicking = false;
+            MousePos = new Vector(e.getX(), e.getY());
         }
 
         @Override

@@ -60,6 +60,8 @@ public class Transform extends IComponent {
         g.translate((((int) Translation.getX())) + offsetTranslation.getX(), (((int) Translation.getY())) + offsetTranslation.getY());
         g.rotate((RotationZ) + getParent().getOffset());
         g.scale(Scale.getX() * WorldScale.getX(), Scale.getY() * WorldScale.getY());
+        Scale = null;
+        Translation = null;
     }
 
     public static float GetWorldScaleX() {

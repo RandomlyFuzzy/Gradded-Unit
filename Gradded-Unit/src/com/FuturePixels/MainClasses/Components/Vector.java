@@ -28,6 +28,7 @@ public class Vector {
     public Vector(Vector v) {
         x = v.getX();
         y = v.getY();
+        v=null;
     }
 
     public Vector add(Vector v) {

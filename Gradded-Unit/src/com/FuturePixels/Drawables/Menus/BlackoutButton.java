@@ -22,13 +22,13 @@ public class BlackoutButton extends IDrawable {
 
     private String Message = "";
     private Vector relpos = Vector.One();
-    ButtonAbstract buttonDelegate;
+    private HUDAbstract buttonDelegate;
 
     public BlackoutButton() {
         super();
     }
 
-    public BlackoutButton(String Message, ButtonAbstract Logic) {
+    public BlackoutButton(String Message, HUDAbstract Logic) {
         super();
         this.Message = Message;
         buttonDelegate = Logic;

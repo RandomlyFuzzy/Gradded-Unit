@@ -6,7 +6,7 @@
 package com.FuturePixels.levels.OtherLevels;
 
 import com.FuturePixels.Drawables.Menus.Button;
-import com.FuturePixels.Drawables.Menus.ButtonAbstract;
+import com.FuturePixels.Drawables.Menus.HUDAbstract;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
@@ -51,6 +51,7 @@ public class LeaderBoard extends ILevel {
     public LeaderBoard() {
         super();
         System.out.println("com.game.levels.LeaderBoard.<init>()");
+        setStopAudioOnStart(false);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class LeaderBoard extends ILevel {
         GetSprite("/Images/background.png");
 
         for (int i = 0; i < 2; i++) {
-            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)), new ButtonAbstract() {
+            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)), new HUDAbstract() {
                 public void OnClick(Button b) {
                     String mess = b.getMessage().substring(5);
                     System.out.println(".OnClick() " + mess);
@@ -66,7 +67,7 @@ public class LeaderBoard extends ILevel {
                 }
             }));
         }
-        AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new ButtonAbstract() {
+        AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
@@ -108,9 +109,10 @@ public class LeaderBoard extends ILevel {
     public void Draw(Graphics2D g) {
         g.drawImage(GetSprite("/Images/background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
         float y = 0.3f;
-        for (Double s : times) {
-            g.drawString("" + s + " secs", 0.05f * Game.g.getWindowWidth(), y * Game.g.getWindowHeight());
-            y += 0.05f;
+        for (int i = 0; i < times.size(); i++) {
+            Double s = times.get(i);
+            g.drawString("No " + (i + 1) + " Place with " + s + " secs", (((i/20)*0.13f)+0.03f) *  Game.g.getWindowWidth(), (((i%20)*0.03f)+0.25f) * Game.g.getWindowHeight());
+            y += 0.03f;
         }
     }
 
@@ -121,13 +123,13 @@ public class LeaderBoard extends ILevel {
 
     @Override
     public void keyRelease(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_P) {
-            new LevelLoader(new MainMenu());
-        }
+
     }
 
     public void dispose() {
         super.dispose();
         Currentind = 1;
+        previousind = 0; 
+        times = new ArrayList<Double>();
     }
 }

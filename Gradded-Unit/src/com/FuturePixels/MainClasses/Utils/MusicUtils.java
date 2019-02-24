@@ -6,14 +6,7 @@
 package com.FuturePixels.MainClasses.Utils;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.AbstractQueue;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -30,38 +23,72 @@ public class MusicUtils {
 
     private static ArrayList<MusicThread> sounds = new ArrayList<MusicThread>();
 
-    public synchronized static void play(String soundResource) {
+    public static void play(String soundResource) {
         play(soundResource, 0);
     }
 
-    public synchronized static void play(String soundResource, float time) {
+    public static void play(String soundResource, float time) {
+        play(soundResource, time);
+    }
+
+    public synchronized static void play(String soundResource, float time, int LoopAmt) {
         try {
-            MusicThread d = new MusicThread(soundResource);
-            d.Search(time);
-            d.Start();
-            sounds.add(d);
+            boolean isPlaying = false;
+            for (int i = sounds.size() - 1; i >= 0; i--) {
+                MusicThread mt = sounds.get(i);
+                if (mt.isFinished()) {
+                    sounds.remove(mt);
+                    continue;
+                }
+                if (!mt.isFinished() && mt.Path == soundResource) {
+                    isPlaying = true;
+                    break;
+                }
+            }
+            if (!isPlaying) {
+                MusicThread d = new MusicThread(soundResource);
+                d.Loop(LoopAmt);
+                d.Search(time);
+                sounds.add(d);
+                d.Start();
+            }
         } catch (Exception ex) {
-            System.out.println("Error playing sound " + ex.getMessage());
+            System.out.println("Error playing sound " + soundResource + " " + ex.getMessage());
         }
+    }
+
+    public static void playLastSound() {
+        sounds.get(sounds.size() - 1).Start();
     }
 
     public static void StopAllSounds() {
         sounds.forEach((A) -> {
             A.Stop();
         });
+        sounds = new ArrayList<MusicThread>();
     }
 
     private static class MusicThread {
 
+        private String Path = "";
         private Clip clip;
         private AudioInputStream ais;
+        private boolean finished = false;
+
+        public boolean isFinished() {
+            return finished;
+        }
+
+        public void setFinished(boolean finished) {
+            this.finished = finished;
+        }
 
         public MusicThread(String Source) {
             super();
             try {
+                this.Path = Source;
                 clip = AudioSystem.getClip();
                 this.ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(Source));
-                clip.open(ais);
 
             } catch (LineUnavailableException ex) {
                 Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,12 +114,27 @@ public class MusicUtils {
 
         public void Start() {
             new Thread(() -> {
-                clip.start();
+                try {
+                    clip.open(ais);
+                    clip.start();
+                    Thread.sleep((int) ((ais.getFrameLength() / clip.getFormat().getFrameRate()) * 1000f));
+                    finished = true;
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (LineUnavailableException ex) {
+                    Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }).start();
         }
 
         public void Stop() {
             clip.stop();
+        }
+
+        public void Loop(int amt) {
+            clip.loop(amt);
         }
     }
 

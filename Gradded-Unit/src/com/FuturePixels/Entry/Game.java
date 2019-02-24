@@ -9,6 +9,8 @@ I certify that this is my own work and I have not used code from any other sourc
  */
 package com.FuturePixels.Entry;
 
+import com.FuturePixels.Drawables.Levels.Player;
+import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
 import com.FuturePixels.MainClasses.Utils.MusicUtils;
@@ -91,7 +93,9 @@ public class Game {
     public Game() {
         this.g = this;
         InitWindow();
+//        FullScreen();
         Game.SetLevelActive(new MainMenu());
+        toggleCursor();
     }
 
     public void InitWindow() {
@@ -100,7 +104,7 @@ public class Game {
         gameWindow.setLocationRelativeTo(null);
         gameWindow.setLocation(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 3);
         gameWindow.setMinimumSize(new Dimension(20, 20));
-        gameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        SetDimentions(WINDOW_WIDTH, WINDOW_HEIGHT);
         gameWindow.getContentPane().setLayout(new CardLayout());
         gameWindow.setTitle("Gradded unit");
 //        gameWindow.pack();
@@ -120,7 +124,6 @@ public class Game {
         GraphicsDevice graphicalDevices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
         gameWindow.dispose();
         if (!isFullScreen) {
-            MusicUtils.StopAllSounds();
             FrameBounds = gameWindow.getBounds();
             gameWindow.setLocation(0, 0);
             gameWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -133,7 +136,7 @@ public class Game {
             gameWindow.setBounds(FrameBounds);
         }
         gameWindow.setVisible(true);
-
+        SetDimentions(gameWindow.getWidth(), gameWindow.getHeight());
         isFullScreen = !isFullScreen;
     }
 
@@ -153,7 +156,6 @@ public class Game {
                 CurrentLevel.setFocusable(false);
                 CurrentLevel.setEnabled(false);
                 CurrentLevel = null;
-                MusicUtils.StopAllSounds();
                 System.gc();
             }
             Level.setPreferredSize(new Dimension(WINDOW_WIDTH / 2, WINDOW_HEIGHT));
@@ -162,16 +164,21 @@ public class Game {
             cl.next(gameWindow.getContentPane());
             Level.requestFocus();
             CurrentLevel = Level;
+            if (CurrentLevel.StopAudioOnStart()) {
+                MusicUtils.StopAllSounds();
+            }
             CurrentLevel.OnStart();
             CurrentLevel.start();
+
         } catch (Exception e) {
 
         }
     }
 
-    public void SetDimentions(int w, int h) {
+    public static void SetDimentions(int w, int h) {
         Rectangle bo = Game.g.GetFrame().getBounds();
         gameWindow.setBounds(bo.x, bo.y, w, h);
+        GamePreferences.CalculateDims();
     }
 
     public static ILevel GetLevel() {

@@ -55,13 +55,13 @@ public class Flag extends IDrawable {
     @Override
     public void onCollison(IDrawable im) {
 
-        if (im instanceof Player&&!ran ) {
+        if (im instanceof Player && !ran) {
             PrintStream FileStream;
             FileReader FileReader;
             try {
-                String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".")+1);
-                File file = new File("resources/Savedata/"+Slim+".txt");
-                if(!file.exists()){
+                String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".") + 1);
+                File file = new File("resources/Savedata/" + Slim + ".txt");
+                if (!file.exists()) {
                     file.createNewFile();
                 }
                 FileReader fis = new FileReader(file);
@@ -69,18 +69,27 @@ public class Flag extends IDrawable {
                 fis.read(data);
                 fis.close();
                 String str = new String(data);
-                str += ""+String.format("%.2f",Level().getTime()) + "\n";
-                FileStream = new PrintStream(new File("resources/Savedata/"+Slim+".txt"));
+                str += "" + String.format("%.2f", Level().getTime()) + "\n";
+                FileStream = new PrintStream(new File("resources/Savedata/" + Slim + ".txt"));
                 FileStream.print(str);
                 FileStream.close();
-                new LevelLoader(new MainMenu());
+                Level().play("/sounds/LevelCompleate.wav");
+                Player.setLock(true);
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(2000);
+                        new LevelLoader(new MainMenu());
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    }
+                }).start();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
 
-        }else{
+        } else {
             return;
         }
         ran = true;

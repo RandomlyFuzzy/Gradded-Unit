@@ -28,10 +28,11 @@ public class Level2Solo extends ILevel {
 
     @Override
     public void init() {
-        // (float) Math.PI * -0.25f / 3f));
+        player1 = new Player();
         //Adding Platforms
 //        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
+        AddObject(new HUD());
         AddObject(new PlatForm(new Vector(75, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-200, -75), 0.35)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-425, -140), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
@@ -59,13 +60,11 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(100, -3300), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
         AddObject(new PlatForm(new Vector(250, -3450), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
         AddObject(new PlatForm(new Vector(500, -3500), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+
+        AddObject(player1).setPosition(0, -50);
         AddObject(new Flag()).setPosition(new Vector(500, -3550));
 
-        player1 = new Player();
-        AddObject(player1).setPosition(0,-50);
-        AddObject(new HUD());
 //        AddObject(new ScrollingBackground());
-
         Game.toggleCursor();
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));

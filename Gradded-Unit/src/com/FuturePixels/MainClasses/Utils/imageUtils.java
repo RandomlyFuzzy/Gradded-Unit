@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
 public class imageUtils {
 
     public static imageUtils T;
+    private HashMap<String, BufferedImage> Images = new HashMap<String, BufferedImage>();
 
     public imageUtils() {
         T = this;
@@ -58,14 +59,11 @@ public class imageUtils {
         }
     }
 
-    private HashMap<String, BufferedImage> Images = new HashMap<String, BufferedImage>();
-
     public BufferedImage GetImage(String URI) {
         return GetImage(URI, false);
     }
 
     private BufferedImage GetImage(String URI, boolean isDefault) {
-
         URI = "" + URI;
         BufferedImage g = null;
         if (Images.containsKey(URI)) {

@@ -85,8 +85,15 @@ public class GamePreferences {
         this.KeyDropP2 = KeyDropP2;
     }
 
-    public static Vector ButonDims() {
+    private static Vector buttondims = Vector.Zero();
+
+    public static void CalculateDims() {
         float hypot = (float) Math.sqrt((Game.g.getWindowWidth() * Game.g.getWindowWidth()) + (Game.g.getWindowHeight() * Game.g.getWindowHeight()));
-        return new Vector((Game.g.getWindowWidth() / hypot) * Game.g.getWindowWidth() / 1400, (Game.g.getWindowHeight() / hypot) * Game.g.getWindowHeight() / 500);
+        buttondims = new Vector((Game.g.getWindowWidth() / hypot) * Game.g.getWindowWidth() / 1400, (Game.g.getWindowHeight() / hypot) * Game.g.getWindowHeight() / 500);
     }
+
+    public static Vector ButtonDims() {
+        return buttondims;
+    }
+
 }

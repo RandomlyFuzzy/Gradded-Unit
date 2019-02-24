@@ -23,8 +23,17 @@ public class Player extends IDrawable {
     private long score;
     private int ScoreInd = 0;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true;
+    private Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
 
-    public Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
+    private static boolean Lock = false;
+
+    public static boolean isLock() {
+        return Lock;
+    }
+
+    public static void setLock(boolean Lock) {
+        Player.Lock = Lock;
+    }
 
     public boolean isLeft() {
         return left;
@@ -65,6 +74,7 @@ public class Player extends IDrawable {
     }
 
     public void init() {
+        Player.setLock(false);
         System.out.println("com.FuturePixels.Drawables.Levels.Player.init()");
         setPosition(100, 100);
         Velocity = new Vector(0, 0);
@@ -72,10 +82,10 @@ public class Player extends IDrawable {
         score = 0;
         for (int i = 0; i < 7; i++) {
             GetSprite("/Images/Player/sprite_" + i + ".png");
-            GetSprite("/Images/Player/sprite_" + i + ".png");
         }
         ScoreInd = HUD.AddText("Score:" + score, new Vector(0, 40));
-        AddComponent(new RigidBody(this));
+//        AddComponent(new RigidBody(this));
+//        AddComponent(new BackgroundDrawer(this));
     }
 
     public void move(boolean left, boolean right, boolean up, boolean down) {
@@ -87,10 +97,30 @@ public class Player extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
-        ind += !canJump && Velocity.getY() < 0 ? 0.7f : Stop ? -ind : 0.3f;
-        ind = ind % 7;
-        GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png");
-        g.drawImage(getLastImage(), -((getSpriteWidth() / 2) * (int) Scale), -(getSpriteHeight()) / 2, getSpriteWidth() * (int) Scale, getSpriteHeight(), null);
+        ind += !canJump ? 0.3f : Stop ? -ind : 0.3f;
+        setScale(new Vector(Scale, 1));
+        if (isLock()) {
+            GetSprite("/Images/Player/reggie WIN.png");
+        } else if ((canJump)) {
+            ind = ind % 7f;
+            GetSprite("/Images/Player/sprite_" + ((int) ind) + ".png");
+        } else if (Velocity.getY() < 0) {
+            ind = ind % 3f;
+            if (ind < 1) {
+                GetSprite("/Images/Player/reggie FALL.png");
+            } else {
+                GetSprite("/Images/Player/sprite_6.png");
+            }
+        } else if (Velocity.getY() > 0) {
+            ind = ind % 3f;
+            if (ind < 1) {
+                GetSprite("/Images/Player/reggie JUMP.png");
+            } else {
+                GetSprite("/Images/Player/sprite_1.png");
+            }
+        }
+
+        DrawLastLoadedImage(g);
 //        setRotation(getRotation()+(float)(Math.PI/180));
     }
 
@@ -114,7 +144,15 @@ public class Player extends IDrawable {
             once = true;
             Velocity.mult(new Vector(0.985f, 0.995f));
         }
-        movePlayer();
+        if (!Lock) {
+            movePlayer();
+        }
+        if (!isColliding()) {
+            //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
+//            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
+            //mars gravity*2  
+            Acc.setY(Acc.getY() + (-3.711f * (float) Game.g.getDelta() * 2));
+        }
         Velocity.add(Acc);
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
 
@@ -158,12 +196,7 @@ public class Player extends IDrawable {
         }
         float Clamp = canJump ? 1f : 0.1f;
         Acc.setX(Acc.getX() > Clamp ? Clamp : Acc.getX() < -Clamp ? -Clamp : Acc.getX());
-        if (!isColliding()) {
-            //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
-//            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
-            //mars gravity*2  
-            Acc.setY(Acc.getY() + (-3.711f * (float) Game.g.getDelta() * 2));
-        }
+
         Stop = !one && !two;
     }
 
@@ -180,8 +213,9 @@ public class Player extends IDrawable {
             return;
         }
 
-       
-
+        if (isLock()) {
+            Velocity.addY(0.1f);
+        }
         if (im instanceof PlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
