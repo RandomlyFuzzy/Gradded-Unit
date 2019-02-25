@@ -173,7 +173,7 @@ public class Player extends IDrawable {
             if (isColliding()) {
                 System.out.println("com.FuturePixels.Drawables.Levels.Player.movePlayer() " + (distFromhit));
                 Acc.setY( 8f);
-                Level().play("/Sounds/Jump.wav");
+//                Level().play("/Sounds/Jump.wav");
             }
             canJump = false;
         } else if (down) {
@@ -251,7 +251,6 @@ public class Player extends IDrawable {
                 }
                 setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
                 col = null;
-                return;
             }
 
             if (col2.IsHit) {

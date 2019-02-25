@@ -48,6 +48,7 @@ public class MovingPlatoform extends IDrawable {
         Vector newpos = getPosition().add(dist.Normalized().mult(-Speed));
         DebugObject.AddCirles(Cycle[ind]);
         setPosition(newpos);
+        UpdateBounds();
     }
 
     @Override

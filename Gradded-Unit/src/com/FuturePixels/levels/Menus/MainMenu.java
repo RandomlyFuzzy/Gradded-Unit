@@ -41,7 +41,6 @@ public class MainMenu extends ILevel {
 
     @Override
     public void init() {
-//        Game.toggleCursor();
         play("/sounds/music.wav", 254,-1);
         AddObject(new Mouse());
         AddObject(new HUD());
