@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.MainClasses.Utils;
+package com.FuturePixels.Engine.Utils;
 
-import com.FuturePixels.MainClasses.Utils.CalcUtils;
-import com.FuturePixels.MainClasses.Utils.imageUtils;
-import com.FuturePixels.MainClasses.Utils.MusicUtils;
+import com.FuturePixels.Engine.Utils.CalcUtils;
+import com.FuturePixels.Engine.Utils.imageUtils;
+import com.FuturePixels.Engine.Utils.MusicUtils;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 
 /**

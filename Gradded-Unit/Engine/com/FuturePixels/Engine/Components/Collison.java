@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.MainClasses.Components;
+package com.FuturePixels.Engine.Components;
 
-import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
+import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 
 /**
  *
