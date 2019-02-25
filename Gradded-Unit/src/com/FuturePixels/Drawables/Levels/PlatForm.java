@@ -34,7 +34,6 @@ public class PlatForm extends IDrawable {
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
-//        g.drawImage(getLastImage(), -((getSpriteWidth() / 2)), -(getSpriteHeight() / 2), getSpriteWidth(), getSpriteHeight(), null);
     }
 
     @Override

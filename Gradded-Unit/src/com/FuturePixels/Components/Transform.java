@@ -74,6 +74,7 @@ public class Transform extends IComponent {
 
     public void PopTransforms(Graphics2D g) {
         g.setTransform(old);
+        old = null;
     }
 
     public Vector GetUp() {

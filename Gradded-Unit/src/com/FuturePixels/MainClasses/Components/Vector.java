@@ -5,6 +5,8 @@
  */
 package com.FuturePixels.MainClasses.Components;
 
+import sun.security.util.Length;
+
 /**
  *
  * @author Liam Woolley 1748910
@@ -21,14 +23,29 @@ public class Vector {
     private float x, y;
 
     public Vector(float x, float y) {
-        this.x = x;
-        this.y = y;
+        if (!isNaN(x, y)) {
+            this.x = x;
+            this.y = y;
+        } else {
+            this.x = 0;
+            this.y = 0;
+        }
+    }
+
+    public boolean isNaN(Vector v) {
+        return Float.isNaN(v.getX()) || Float.isNaN(v.getY());
+    }
+
+    public boolean isNaN(float x, float y) {
+        return Float.isNaN(x) || Float.isNaN(y);
     }
 
     public Vector(Vector v) {
-        x = v.getX();
-        y = v.getY();
-        v=null;
+        if (!isNaN(v)) {
+            x = v.getX();
+            y = v.getY();
+        }
+        v = null;
     }
 
     public Vector add(Vector v) {
@@ -58,8 +75,6 @@ public class Vector {
         this.y *= v;
         return this;
     }
-
-
 
     public void setToVector(Vector v) {
         x = v.getX();
@@ -93,5 +108,21 @@ public class Vector {
 
     public String toString() {
         return "" + this.x + "," + this.y;
+    }
+
+    public double Length() {
+        return (getX() * getX()) + (getY() * getY());
+    }
+
+    public double Lengthsqrt() {
+        return (double) Math.sqrt((getX() * getX()) + (getY() * getY()));
+    }
+
+    public Vector Normalized() {
+        double hypot = Lengthsqrt();
+        double x = (getX()) / hypot;
+        double y = (getY()) / hypot;
+        //needs the conversion else small but relivant inaccuracy
+        return new Vector((float) x, (float) y);
     }
 }

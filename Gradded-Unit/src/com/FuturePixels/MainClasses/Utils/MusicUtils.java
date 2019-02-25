@@ -61,6 +61,15 @@ public class MusicUtils {
         sounds.get(sounds.size() - 1).Start();
     }
 
+    public static void StopASounds(String path) {
+        sounds.forEach((A) -> {
+            if (A.getPath() == path) {
+                A.Stop();
+            }
+        });
+        sounds = new ArrayList<MusicThread>();
+    }
+
     public static void StopAllSounds() {
         sounds.forEach((A) -> {
             A.Stop();
@@ -71,6 +80,7 @@ public class MusicUtils {
     private static class MusicThread {
 
         private String Path = "";
+
         private Clip clip;
         private AudioInputStream ais;
         private boolean finished = false;
@@ -135,6 +145,10 @@ public class MusicUtils {
 
         public void Loop(int amt) {
             clip.loop(amt);
+        }
+
+        public String getPath() {
+            return Path;
         }
     }
 

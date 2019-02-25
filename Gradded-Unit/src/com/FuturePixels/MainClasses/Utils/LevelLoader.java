@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class LevelLoader {
 
     private static final ILevel[] LEVELS = new ILevel[]{
-        new MainMenu(), new Settings(), new LevelSelect(), new LeaderBoard(), new Level1Solo(), new Level2Solo()
+        new MainMenu(), new Settings(), new LevelSelect(), new LeaderBoard(), new Level1Solo(), new Level2Solo(),new Level3Solo()
     };
 
     public LevelLoader(ILevel level) {

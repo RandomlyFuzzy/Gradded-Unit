@@ -30,7 +30,7 @@ public class LevelSelect extends ILevel {
     @Override
     public void init() {
          AddObject(new Mouse());
-         for (int i = 0; i < 2; i++) {
+         for (int i = 0; i < 5; i++) {
             AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)), new HUDAbstract() {
                 public void OnClick(Button b) {
                     new LevelLoader(b.getMessage());

@@ -155,10 +155,10 @@ public abstract class IDrawable {
         Vector Sca = getScale(), pos = getPosition();
 
         float hy = (float) Math.sqrt((sw / 2 * sw / 2) + (sh / 2 * sh / 2)),
-                a1 = (float) Math.atan2(sh / 2, sw / 2),
-                a2 = (float) Math.atan2(-sh / 2, sw / 2),
-                a3 = (float) Math.atan2(-sh / 2, -sw / 2),
-                a4 = (float) Math.atan2(sh / 2, -sw / 2);
+              a1 = (float) Math.atan2(sh / 2, sw / 2),
+              a2 = (float) Math.atan2(-sh / 2, sw / 2),
+              a3 = (float) Math.atan2(-sh / 2, -sw / 2),
+              a4 = (float) Math.atan2(sh / 2, -sw / 2);
         v1 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a1 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a1 - tr) * hy));
         v2 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a2 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a2 - tr) * hy));
         v3 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a3 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a3 - tr) * hy));
@@ -204,7 +204,7 @@ public abstract class IDrawable {
     }
 
     public Vector getPosition() {
-        return this.position;
+        return new Vector(this.position);
     }
 
     public Vector addPosition(Vector v) {
@@ -213,10 +213,10 @@ public abstract class IDrawable {
 
     public IDrawable GetSprite(String URI) {
         LastImage = GetImage(URI);
-        LastimageAddress = URI;
         this.spriteWidth = LastImage.getWidth();
         this.spriteHeight = LastImage.getHeight();
         UpdateBounds();
+        LastimageAddress = URI;
         return this;
     }
 
@@ -282,7 +282,6 @@ public abstract class IDrawable {
             UtilManager.FindUseClass(3);
             System.err.println("you must super this " + (transform != null) + position.toString());
         }
-//        GetSprite("/images/default.png");
         init();
 
     }
@@ -302,7 +301,7 @@ public abstract class IDrawable {
         if (getUseTransforms()) {
             transform.PopTransforms(g);
         }
-        if (!Level().isDebugCollisons()) {//) || (getSpriteWidth() + getSpriteHeight() == 0)) {
+        if (!Level().isDebugCollisons() || (getSpriteWidth() + getSpriteHeight() == 0)) {
             return;
         }
         Graphics2D g2d = (Graphics2D) g;
@@ -340,7 +339,7 @@ public abstract class IDrawable {
 
     }
 
-    public void DrawLastLoadedImage(Graphics2D g) {
+    public synchronized void DrawLastLoadedImage(Graphics2D g) {
         if (LastImage == null) {
             try {
                 throw new Exception();

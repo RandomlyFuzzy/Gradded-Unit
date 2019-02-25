@@ -172,7 +172,7 @@ public class Player extends IDrawable {
 //            Acc.setY(0.01f);
             if (isColliding()) {
                 System.out.println("com.FuturePixels.Drawables.Levels.Player.movePlayer() " + (distFromhit));
-                Acc.setY((float) Math.pow(1.1f, distFromhit) + 7f);
+                Acc.setY( 8f);
                 Level().play("/Sounds/Jump.wav");
             }
             canJump = false;
@@ -207,6 +207,8 @@ public class Player extends IDrawable {
         if (im == null) {
             return;
         }
+        System.out.println("com.FuturePixels.Drawables.Levels.Player.onCollison() "+(im instanceof MovingPlatoform));
+        
         if (im instanceof Player) {
             setIsColliding(false);
 //            Velocity.add(new Vector(getPosition()).add(new Vector(im.getPosition()).mult(-1)).mult(3f));
@@ -216,7 +218,7 @@ public class Player extends IDrawable {
         if (isLock()) {
             Velocity.addY(0.1f);
         }
-        if (im instanceof PlatForm) {
+        if (im instanceof PlatForm||im instanceof MovingPlatoform) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;
