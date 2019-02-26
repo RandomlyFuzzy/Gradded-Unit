@@ -7,6 +7,7 @@ package com.FuturePixels.Drawables.Levels;
 
 import com.FuturePixels.Components.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
@@ -14,11 +15,16 @@ import com.FuturePixels.Engine.Components.Collison;
 import com.FuturePixels.Engine.Utils.CollisonUtils;
 import com.FuturePixels.Engine.Components.Vector;
 =======
+=======
+>>>>>>> parent of 6dcbfdd... moved engine to separt package
 import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
 import com.FuturePixels.MainClasses.Components.Collison;
 import com.FuturePixels.MainClasses.Utils.CollisonUtils;
 import com.FuturePixels.MainClasses.Components.Vector;
+<<<<<<< HEAD
+>>>>>>> parent of 6dcbfdd... moved engine to separt package
+=======
 >>>>>>> parent of 6dcbfdd... moved engine to separt package
 import java.awt.Graphics2D;
 
