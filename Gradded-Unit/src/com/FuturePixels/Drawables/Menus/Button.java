@@ -5,9 +5,9 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Engine.AbstractClasses.IDrawable;
-import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
+import com.FuturePixels.Entry.Game;
+import com.FuturePixels.MainClasses.Components.Vector;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.Engine.Utils;
+package com.FuturePixels.MainClasses.Utils;
 
-import com.FuturePixels.Engine.Components.Collison;
-import com.FuturePixels.Engine.AbstractClasses.IDrawable;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.MainClasses.Components.Collison;
+import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
+import com.FuturePixels.MainClasses.Components.Vector;
 import java.util.ArrayList;
 
 /**

@@ -5,7 +5,6 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>Gradded-unit</name>
             <source-roots>
-                <root id="src.Engine.dir"/>
                 <root id="src.dir"/>
                 <root id="src.resources.dir"/>
             </source-roots>

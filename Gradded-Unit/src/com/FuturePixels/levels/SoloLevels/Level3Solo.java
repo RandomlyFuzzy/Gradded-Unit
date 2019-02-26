@@ -2,12 +2,12 @@ package com.FuturePixels.levels.SoloLevels;
 
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
-import com.FuturePixels.Engine.AbstractClasses.ILevel;
+import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
-import com.FuturePixels.Engine.AbstractClasses.IDrawable;
-import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
+import com.FuturePixels.Entry.Game;
+import com.FuturePixels.MainClasses.Components.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;

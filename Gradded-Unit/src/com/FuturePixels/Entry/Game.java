@@ -7,15 +7,15 @@ Liam Woolley 1748910
 
 I certify that this is my own work and I have not used code from any other source.
  */
-package com.FuturePixels.Engine.Entry;
+package com.FuturePixels.Entry;
 
 import com.FuturePixels.Drawables.Levels.Player;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.levels.Menus.MainMenu;
-import com.FuturePixels.Engine.AbstractClasses.ILevel;
-import com.FuturePixels.Engine.Utils.MusicUtils;
-import com.FuturePixels.Engine.Utils.UtilManager;
-import com.FuturePixels.Engine.Utils.imageUtils;
+import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
+import com.FuturePixels.MainClasses.Utils.MusicUtils;
+import com.FuturePixels.MainClasses.Utils.UtilManager;
+import com.FuturePixels.MainClasses.Utils.imageUtils;
 import java.awt.CardLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
