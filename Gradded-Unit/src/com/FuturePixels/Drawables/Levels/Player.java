@@ -7,6 +7,7 @@ package com.FuturePixels.Drawables.Levels;
 
 import com.FuturePixels.Components.*;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
+import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Collison;
 import com.FuturePixels.Engine.Utils.CollisonUtils;
@@ -71,6 +72,8 @@ public class Player extends IDrawable {
         super();
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
+        // :( FPS sort of works but cant find the persistant gravity and resistance changing 
+        ILevel.setFPS(60);
     }
 
     public void init() {
@@ -142,7 +145,7 @@ public class Player extends IDrawable {
             setRotation((getRotation() * 0.98f));
             canJump = false;
             once = true;
-            Velocity.mult(new Vector(0.985f, 0.995f));
+            Velocity.mult(new Vector(0.985f,0.992f));
         }
         if (!Lock) {
             movePlayer();
@@ -151,13 +154,13 @@ public class Player extends IDrawable {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
             //mars gravity*2  
-            Acc.setY(Acc.getY() + (-3.711f * (float) Game.g.getDelta() * 2));
+            Acc.setY(Acc.getY() + (-3.711f  * 2));
         }
         Velocity.add(Acc);
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
 
         if (isColliding()) {
-            Velocity.mult(new Vector(0.8f, 0.995f));
+            Velocity.mult(new Vector(0.8f,0.992f));
         }
         Acc.mult(0);
 
@@ -177,11 +180,10 @@ public class Player extends IDrawable {
             }
             canJump = false;
         } else if (down) {
-            Acc.setY(-0.01f);
+            Acc.setY(-0.1f);
             canJump = true;
         } else {
 //            Acc.setY(0);
-
             one = false;
         }
         if (left) {
@@ -216,7 +218,7 @@ public class Player extends IDrawable {
         }
 
         if (isLock()) {
-            Velocity.addY(0.1f);
+            Velocity.addY(5.4f);
         }
         if (im instanceof PlatForm||im instanceof MovingPlatoform) {
             setRotation(im.getRotation());

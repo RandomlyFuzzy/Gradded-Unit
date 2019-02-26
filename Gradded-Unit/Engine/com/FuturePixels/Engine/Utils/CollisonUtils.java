@@ -16,13 +16,6 @@ import java.util.ArrayList;
  */
 public class CollisonUtils {
 
-    static ArrayList<IDrawable> PossableCols = new ArrayList<IDrawable>();
-
-    public static void Release() {
-        PossableCols = new ArrayList<IDrawable>();
-        System.gc();
-    }
-
     /**
      * check for line intersections using ray-casting or linecasting theory
      * Some things are still needed to be done to make this usable 
@@ -46,14 +39,4 @@ public class CollisonUtils {
         return new Collison();
     }
 
-    /*
-        this is just for testing purposes with that in regards to this script 
-    
-    */
-    public static void main(String args[]) {
-        System.out.println(
-                CheckForLineHits(new Vector(0, 0), new Vector(30, 30)
-                , new Vector(30, 0), new Vector(0, 30)).IsHit);
-
-    }
 }

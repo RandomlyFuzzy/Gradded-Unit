@@ -143,11 +143,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         Time += Game.g.getDelta();
-        Game.g.SetDelta();
         Update(ae);
         movement();
         checkCollionsions();
         this.repaint();
+        Game.g.SetDelta();
     }
 
     public void movement() {

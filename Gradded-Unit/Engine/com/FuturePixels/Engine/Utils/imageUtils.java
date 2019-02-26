@@ -31,6 +31,7 @@ public class imageUtils {
         if (new File("resources/images/").exists()) {
             File f = new File("resources/images/");
             if (f.isDirectory()) {
+                System.out.println("preloading images from folder " + f.getAbsolutePath());
                 LoadDir(f);
             } else {
                 System.err.println("couldnt load images ?");
@@ -46,14 +47,15 @@ public class imageUtils {
     private void LoadDir(File dir) {
         for (File f2 : dir.listFiles()) {
             if (f2.isDirectory()) {
+                System.out.println("preloading images from folder " + f2.getAbsolutePath());
                 LoadDir(f2);
-                System.out.println("preloading image from /resources/images/ " + f2.getAbsolutePath());
+                System.out.println("");
             } else {
                 //form uri
                 String form = f2.getAbsolutePath().toString();
                 form = form.substring(form.indexOf("resources") + "resources".length());
                 form = form.replace('\\', '/');
-                System.out.println("preloading image " + form);
+//                System.out.println("preloading image " + form);
                 imageUtils.T.GetImage(form);
             }
         }

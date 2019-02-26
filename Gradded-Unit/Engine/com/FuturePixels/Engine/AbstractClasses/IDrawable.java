@@ -32,7 +32,7 @@ import javax.imageio.ImageIO;
  */
 public abstract class IDrawable {
 
-    private Vector position, Toffset = Vector.Zero();
+    private Vector position = Vector.Zero(), Toffset = Vector.Zero();
 
     private int spriteWidth = 0;
     private int spriteHeight = 0;
@@ -95,8 +95,8 @@ public abstract class IDrawable {
     private boolean hasSupered = false;
 
     public IDrawable() {
-        transform = new Transform(this);
         position = new Vector(0, 0);
+        transform = new Transform(this);
 //        AddComponent(transform);
         hasSupered = true;
     }
@@ -155,10 +155,10 @@ public abstract class IDrawable {
         Vector Sca = getScale(), pos = getPosition();
 
         float hy = (float) Math.sqrt((sw / 2 * sw / 2) + (sh / 2 * sh / 2)),
-              a1 = (float) Math.atan2(sh / 2, sw / 2),
-              a2 = (float) Math.atan2(-sh / 2, sw / 2),
-              a3 = (float) Math.atan2(-sh / 2, -sw / 2),
-              a4 = (float) Math.atan2(sh / 2, -sw / 2);
+                a1 = (float) Math.atan2(sh / 2, sw / 2),
+                a2 = (float) Math.atan2(-sh / 2, sw / 2),
+                a3 = (float) Math.atan2(-sh / 2, -sw / 2),
+                a4 = (float) Math.atan2(sh / 2, -sw / 2);
         v1 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a1 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a1 - tr) * hy));
         v2 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a2 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a2 - tr) * hy));
         v3 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a3 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a3 - tr) * hy));

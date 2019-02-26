@@ -65,9 +65,12 @@ public class Settings extends ILevel {
             public void OnChange(Slider s, float Value) {
                 System.out.println(".OnChange() " + Value);
                 ILevel.setFPS(30 + (int)(Value*60f));
+                HUD.EditText(0,""+(int)(30f + (int)(Value*60f))+" fps");
+                HUD.EditText(0,s.getPosition().add(new Vector(Game.g.getWindowWidth()*0.1f,0)));
 //                MusicUtils.ChangeMasterVolume(Value);
             }
         }));
+        HUD.AddText("60 FPS",(new Vector(Game.g.getWindowWidth()*0.65f,Game.g.getWindowHeight()*0.1f)));
 
         AddObject(new DropDownButton(new Vector(0.4f, 0.2f), "Random DropDown", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDAbstract[]{
