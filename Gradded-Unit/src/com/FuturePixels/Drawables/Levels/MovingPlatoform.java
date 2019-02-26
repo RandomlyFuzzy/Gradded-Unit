@@ -5,8 +5,8 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
-import com.FuturePixels.MainClasses.Components.Vector;
+import com.FuturePixels.Engine.AbstractClasses.IDrawable;
+import com.FuturePixels.Engine.Components.Vector;
 import java.awt.Graphics2D;
 
 /**
@@ -48,6 +48,7 @@ public class MovingPlatoform extends IDrawable {
         Vector newpos = getPosition().add(dist.Normalized().mult(-Speed));
         DebugObject.AddCirles(Cycle[ind]);
         setPosition(newpos);
+        UpdateBounds();
     }
 
     @Override

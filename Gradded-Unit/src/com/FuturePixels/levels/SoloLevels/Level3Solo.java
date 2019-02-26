@@ -2,12 +2,12 @@ package com.FuturePixels.levels.SoloLevels;
 
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
-import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
+import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
-import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
-import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.Components.Vector;
+import com.FuturePixels.Engine.AbstractClasses.IDrawable;
+import com.FuturePixels.Engine.Entry.Game;
+import com.FuturePixels.Engine.Components.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
@@ -28,6 +28,7 @@ public class Level3Solo extends ILevel {
 
     @Override
     public void init() {
+        setSimpleCollison(false);
         player1 = new Player();
         //Adding Platforms
         AddObject(new DebugObject());
@@ -41,11 +42,10 @@ public class Level3Solo extends ILevel {
         
         
 
-        AddObject(player1).setPosition(50, -50);
+        AddObject(player1).setPosition(50, -150);
         AddObject(new Flag()).setPosition(new Vector(150, 50));
 
 //        AddObject(new ScrollingBackground());
-        Game.toggleCursor();
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
 

@@ -5,9 +5,9 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
-import com.FuturePixels.MainClasses.Utils.LevelLoader;
+import com.FuturePixels.Engine.Entry.Game;
+import com.FuturePixels.Engine.AbstractClasses.IDrawable;
+import com.FuturePixels.Engine.Utils.LevelLoader;
 import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;

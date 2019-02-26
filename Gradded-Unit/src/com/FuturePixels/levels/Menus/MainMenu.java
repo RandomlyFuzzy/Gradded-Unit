@@ -11,9 +11,9 @@ import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.HUDAbstract;
-import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
-import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.Components.Vector;
+import com.FuturePixels.Engine.AbstractClasses.ILevel;
+import com.FuturePixels.Engine.Entry.Game;
+import com.FuturePixels.Engine.Components.Vector;
 import com.FuturePixels.levels.OtherLevels.LeaderBoard;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -41,7 +41,6 @@ public class MainMenu extends ILevel {
 
     @Override
     public void init() {
-//        Game.toggleCursor();
         play("/sounds/music.wav", 254,-1);
         AddObject(new Mouse());
         AddObject(new HUD());

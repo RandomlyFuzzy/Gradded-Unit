@@ -2,12 +2,12 @@ package com.FuturePixels.levels.SoloLevels;
 
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
-import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
+import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
-import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
-import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.Components.Vector;
+import com.FuturePixels.Engine.AbstractClasses.IDrawable;
+import com.FuturePixels.Engine.Entry.Game;
+import com.FuturePixels.Engine.Components.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
@@ -28,17 +28,18 @@ public class Level1Solo extends ILevel {
 
     @Override
     public void init() {
+        setSimpleCollison(false);
         // (float) Math.PI * -0.25f / 3f));
         //        AddObject(new DebugObject());
         //Adding Platforms
         System.out.println("com.game.levels.level1.<init>()");
         AddObject(new HUD());
-        AddObject(new PlatForm(new Vector(0  ,     0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200,  -150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(100,  -350), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(400,  -500), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200,  -650), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(375,  -850), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(100, -350), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(400, -500), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(200, -650), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(375, -850), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(385, -1000), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(250, -1150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(150, -1325), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
@@ -66,7 +67,6 @@ public class Level1Solo extends ILevel {
         AddObject(new Flag()).setPosition(new Vector(200, -4450));
 //        AddObject(new ScrollingBackground());
 
-        Game.toggleCursor();
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
 

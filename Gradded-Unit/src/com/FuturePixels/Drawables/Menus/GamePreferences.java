@@ -1,7 +1,7 @@
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.Components.Vector;
+import com.FuturePixels.Engine.Entry.Game;
+import com.FuturePixels.Engine.Components.Vector;
 import java.awt.event.KeyEvent;
 
 /**
@@ -89,7 +89,7 @@ public class GamePreferences {
 
     public static void CalculateDims() {
         float hypot = (float) Math.sqrt((Game.g.getWindowWidth() * Game.g.getWindowWidth()) + (Game.g.getWindowHeight() * Game.g.getWindowHeight()));
-        buttondims = new Vector((Game.g.getWindowWidth() ) / 1920f, (Game.g.getWindowHeight()) / 1080f);
+        buttondims = new Vector((Game.g.getWindowWidth() / hypot) * Game.g.getWindowWidth() / 1400, (Game.g.getWindowHeight() / hypot) * Game.g.getWindowHeight() / 500);
     }
 
     public static Vector ButtonDims() {
