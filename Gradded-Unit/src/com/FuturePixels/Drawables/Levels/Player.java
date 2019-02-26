@@ -5,13 +5,12 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
+import com.FuturePixels.Components.*;
 import com.FuturePixels.MainClasses.AbstractClasses.IDrawable;
 import com.FuturePixels.Entry.Game;
-import com.FuturePixels.MainClasses.AbstractClasses.ILevel;
 import com.FuturePixels.MainClasses.Components.Collison;
 import com.FuturePixels.MainClasses.Utils.CollisonUtils;
 import com.FuturePixels.MainClasses.Components.Vector;
-
 import java.awt.Graphics2D;
 
 /**
