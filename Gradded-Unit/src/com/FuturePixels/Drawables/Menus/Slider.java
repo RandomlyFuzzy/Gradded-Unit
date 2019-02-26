@@ -32,7 +32,7 @@ public class Slider extends IDrawable {
 
     public Slider(Vector relpos, float Length, HUDAbstract Logic) {
         super();
-        this.length = Game.g.getWindowWidth()*Length;
+        this.length = Length;
         this.Delegate = Logic;
         this.relpos = relpos;
     }
@@ -58,7 +58,7 @@ public class Slider extends IDrawable {
             value = (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX());
             Delegate.OnChange(this, GetValue());
         }
-        setPosition((Game.g.getWindowWidth() * relpos.getX()) - (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX()), (Game.g.getWindowHeight() * relpos.getY()));
+        setPosition((Game.g.getWindowWidth() * relpos.getX()) - (MoveAmt.getX() > Game.g.getWindowWidth()*length ? Game.g.getWindowWidth()*length : MoveAmt.getX() < Game.g.getWindowWidth()*-length ? Game.g.getWindowWidth()*-length : MoveAmt.getX()), (Game.g.getWindowHeight() * relpos.getY()));
     }
 
     public float GetValue() {

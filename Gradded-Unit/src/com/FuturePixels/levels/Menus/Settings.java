@@ -30,10 +30,6 @@ import javax.swing.Timer;
  */
 public class Settings extends ILevel {
 
-    private static BlackoutButton BB = null;
-    private static ILevel level;
-    private Button B = null;
-
     public Settings() {
         super();
         System.out.println("com.game.levels.Settings.<init>()");
@@ -42,17 +38,7 @@ public class Settings extends ILevel {
 
     @Override
     public void init() {
-        level = this;
         AddObject(new Mouse());
-
-        BB = AddObject(new BlackoutButton("Player1 Left", new HUDAbstract() {
-            @Override
-            public void OnClick(BlackoutButton b) {
-                b.setEnabled(false);
-            }
-        }));
-//                .setEnabled(false);
-
         AddObject(new HUD());
         AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDAbstract() {
             @Override
@@ -62,45 +48,41 @@ public class Settings extends ILevel {
         }));
         AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDAbstract() {
             @Override
-            public void OnChange(Slider s, float Value) {
-                System.out.println(".OnChange() " + Value);
-                ILevel.setFPS(30 + (int)(Value*60f));
-                HUD.EditText(0,""+(int)(30f + (int)(Value*60f))+" fps");
-                HUD.EditText(0,s.getPosition().add(new Vector(Game.g.getWindowWidth()*0.1f,0)));
+            public void OnChange(Slider s,float Value) {
+                System.out.println(".OnChange() "+Value);
 //                MusicUtils.ChangeMasterVolume(Value);
             }
         }));
         HUD.AddText("60 FPS",(new Vector(Game.g.getWindowWidth()*0.65f,Game.g.getWindowHeight()*0.1f)));
 
-        AddObject(new DropDownButton(new Vector(0.4f, 0.2f), "Random DropDown", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
-                new HUDAbstract[]{
-                    new HUDAbstract() {
+        AddObject(new DropDownButton(new Vector(0.4f, 0.2f), "Random DropDown", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"}, new HUDAbstract[]{
+            new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     //1920X1080
                     Game.SetDimentions(1920, 1080);
                 }
             },
-                    new HUDAbstract() {
+            new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     //1920X1080
                     Game.SetDimentions(1600, 900);
                 }
             },
-                    new HUDAbstract() {
+            new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     Game.SetDimentions(1280, 720);
                 }
             },
-                    new HUDAbstract() {
+            new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     Game.SetDimentions(860, 540);
                 }
             },
-                    new HUDAbstract() {
+            new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
                     Rectangle bo = Game.g.GetFrame().getBounds();
@@ -108,8 +90,13 @@ public class Settings extends ILevel {
                     Game.g.GetFrame().setBounds(bo.x, bo.y, 640, 360);
                 }
             }
-                }));
-
+        }));
+        AddObject(new BlackoutButton("To Game Solo", new HUDAbstract() {
+            @Override
+            public void OnClick(BlackoutButton b) {
+                b.setEnabled(false);
+            }
+        })).setEnabled(false);
         AddObject(new Button(new Vector(0.4f, 0.1f), "fullscreen", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
@@ -117,14 +104,8 @@ public class Settings extends ILevel {
             }
         }));
 //        GetObject(0).setScale(new Vector(0.5f, 0.7f));
-
     }
 
-    public static void SetToCurrent(int ind){
-        BB = (BlackoutButton)level.GetObject(ind);
-    }
-    
-    
     @Override
     public void Update(ActionEvent ae) {
     }
@@ -136,10 +117,7 @@ public class Settings extends ILevel {
 
     @Override
     public void keyPress(KeyEvent e) {
-        if (BB != null) {
-            BB.setMessage("" + e.getKeyChar());
-//            B.setMessage(B.getMessage().substring(0,B.getMessage().length()-2)+e.getKeyChar());
-        }
+
     }
 
     @Override

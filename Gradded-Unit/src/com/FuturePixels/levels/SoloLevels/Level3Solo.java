@@ -28,7 +28,6 @@ public class Level3Solo extends ILevel {
 
     @Override
     public void init() {
-        setSimpleCollison(false);
         player1 = new Player();
         //Adding Platforms
         AddObject(new DebugObject());
@@ -42,10 +41,11 @@ public class Level3Solo extends ILevel {
         
         
 
-        AddObject(player1).setPosition(50, -150);
+        AddObject(player1).setPosition(50, -50);
         AddObject(new Flag()).setPosition(new Vector(150, 50));
 
 //        AddObject(new ScrollingBackground());
+        Game.toggleCursor();
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
 

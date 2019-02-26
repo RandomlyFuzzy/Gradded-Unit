@@ -37,19 +37,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private TAdapter InputAdapter = null;
     private boolean DebugCollisons = false;
     private HashMap<Integer, Boolean> MouseButtonPressed = new HashMap<Integer, Boolean>();
-    private boolean StopAudioOnStart = true, SimpleCollison = true;
-    private static int FPS = 60;
-    private static ILevel current;
-
-    public static int getFPS() {
-        return FPS;
-    }
-
-    public static void setFPS(int FPS) {
-        ILevel.FPS = FPS;
-        current.stop();
-        current.start();
-    }
+    private boolean StopAudioOnStart = true;
 
     public boolean StopAudioOnStart() {
         return StopAudioOnStart;
@@ -60,7 +48,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public ILevel() {
-        current = this;
         timer = new javax.swing.Timer(15, this);
     }
 
@@ -134,7 +121,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
 
     }
 
-    public synchronized <T extends IDrawable> T AddObject(T Drawable) {
+    public synchronized IDrawable AddObject(IDrawable Drawable) {
         gameObjs.add(Drawable);
         Drawable.CoreInit();
         return Drawable;
@@ -211,7 +198,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         if (InputAdapter == null) {
             InputAdapter = new TAdapter();
         }
-        current.timer = new javax.swing.Timer((int) ((float) 1000 / (float) FPS), this);
+
         timer.start();
 
         if (getKeyListeners().length == 0) {
@@ -290,9 +277,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
                         a.onCollison(b);
                         b.setIsColliding(true);
                         b.onCollison(a);
-                        if (SimpleCollison) {
-                            return;
-                        }
                     }
                 }
             }
@@ -300,14 +284,6 @@ public abstract class ILevel extends JPanel implements ActionListener {
         }
 
 //        thePlayer.checkCollision(theTreasure);
-    }
-
-    public boolean isSimpleCollison() {
-        return SimpleCollison;
-    }
-
-    public void setSimpleCollison(boolean SimpleCollison) {
-        this.SimpleCollison = SimpleCollison;
     }
 
     private class TAdapter extends InputAdapter {
