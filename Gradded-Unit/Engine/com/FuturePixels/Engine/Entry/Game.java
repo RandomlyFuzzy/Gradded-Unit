@@ -79,22 +79,19 @@ public class Game {
         return gameWindow.getHeight();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void init(ILevel firstLevel) {
         new UtilManager();
         Swap = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor");
-        Game window = new Game();
+        Game window = new Game(new MainMenu());
         deltalong = System.nanoTime();
     }
 
-    public Game() {
+
+    public Game(ILevel Level) {
         this.g = this;
         InitWindow();
 //        FullScreen();
-        Game.SetLevelActive(new MainMenu());
+        Game.SetLevelActive(Level);
         toggleCursor();
     }
 
