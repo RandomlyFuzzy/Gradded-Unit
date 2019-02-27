@@ -230,7 +230,7 @@ public class Player extends IDrawable {
             Collison col = CollisonUtils.CheckForLineHits(getPosition(), bottom, _Top[0], _Top[1]);
             Collison col2 = CollisonUtils.CheckForLineHits(getPosition(), top, _bottom[0], _bottom[1]);
 
-            if (col.IsHit) {
+            if (col.IsHit&&!down) {
                 canJump = true;
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_Top[0], _Top[1]);
@@ -252,7 +252,7 @@ public class Player extends IDrawable {
                 col = null;
             }
 
-            if (col2.IsHit) {
+            if (col2.IsHit&&Velocity.getY()>0) {
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
                         y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();

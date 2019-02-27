@@ -115,7 +115,7 @@ public class Settings extends ILevel {
             
            
         }));
-        AddObject(new Button(new Vector(0.73f, 0.9f), "Controls", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.8f, 0.1f), "Controls", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());
