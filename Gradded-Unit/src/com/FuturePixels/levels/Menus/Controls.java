@@ -14,10 +14,12 @@ import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Components.Vector;
 import com.FuturePixels.Engine.Entry.Game;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import static java.awt.image.ImageObserver.WIDTH;
 
 /**
  *
@@ -39,19 +41,19 @@ public class Controls extends ILevel {
             }
         }));
         //PLAYER 1
-        AddObject(new Button(new Vector(0.15f, 0.3f), "LEFT = A", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = A", new HUDAbstract() {
         }));
-        AddObject(new Button(new Vector(0.15f, 0.4f), "RIGHT = D", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.4f), "RIGHT = D", new HUDAbstract() {
         }));
-        AddObject(new Button(new Vector(0.15f, 0.5f), "JUMP = SPACE", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.5f), "JUMP = SPACE", new HUDAbstract() {
         }));
 
         //PLAYER 2
-        AddObject(new Button(new Vector(0.5f, 0.3f), "LEFT = Left Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = Left Arrow", new HUDAbstract() {
         }));
-        AddObject(new Button(new Vector(0.5f, 0.4f), "RIGHT = Right Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.4f), "RIGHT = Right Arrow", new HUDAbstract() {
         }));
-        AddObject(new Button(new Vector(0.5f, 0.5f), "JUMP = Up Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = Up Arrow", new HUDAbstract() {
         }));
     }
 
@@ -65,10 +67,13 @@ public class Controls extends ILevel {
         //g.drawImage(GetSprite("/Images/Start.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 
         //Player Text
+        Font title = new Font("Arial", 0, WIDTH+16);
+        g.setFont(title);
         g.setColor(Color.red);
+        
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString("Player 1 Controls", Game.g.getWindowWidth() * 0.15f-metrics.stringWidth("Player 1 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
-        g.drawString("Player 2 Controls", Game.g.getWindowWidth() * 0.5f-metrics.stringWidth("Player 2 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
+        g.drawString("Player 1 Controls", Game.g.getWindowWidth() * 0.30f-metrics.stringWidth("Player 1 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
+        g.drawString("Player 2 Controls", Game.g.getWindowWidth() * 0.70f-metrics.stringWidth("Player 2 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
     }
 
     @Override
