@@ -171,7 +171,6 @@ public class Player extends IDrawable {
         if (up && canJump) {
 //            Acc.setY(0.01f);
             if (isColliding()) {
-                System.out.println("com.FuturePixels.Drawables.Levels.Player.movePlayer() " + (distFromhit));
                 Acc.setY( 8f);
 //                Level().play("/Sounds/Jump.wav");
             }

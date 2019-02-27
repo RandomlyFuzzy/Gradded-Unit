@@ -8,6 +8,7 @@ import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
@@ -31,7 +32,7 @@ public class Level3Solo extends ILevel {
         setSimpleCollison(false);
         player1 = new Player();
         //Adding Platforms
-        AddObject(new DebugObject());
+//        AddObject(new DebugObject());
         System.out.println("com.game.levels.level1.<init>()");
         AddObject(new HUD());
 //        AddObject(new PlatForm(new Vector(75, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
@@ -43,7 +44,7 @@ public class Level3Solo extends ILevel {
         
 
         AddObject(player1).setPosition(50, -150);
-        AddObject(new Flag()).setPosition(new Vector(150, 50));
+        AddObject(new Flag(new MainMenu())).setPosition(new Vector(150, 50));
 
 //        AddObject(new ScrollingBackground());
 //        LeaderBoard.AddTime(System.nanoTime());

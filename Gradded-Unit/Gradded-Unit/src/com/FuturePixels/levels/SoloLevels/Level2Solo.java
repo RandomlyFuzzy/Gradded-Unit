@@ -63,7 +63,7 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(500, -3500), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
 
         AddObject(player1).setPosition(0, -50);
-        AddObject(new Flag()).setPosition(new Vector(500, -3550));
+        AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3550));
 
 //        AddObject(new ScrollingBackground());
 //        LeaderBoard.AddTime(System.nanoTime());
