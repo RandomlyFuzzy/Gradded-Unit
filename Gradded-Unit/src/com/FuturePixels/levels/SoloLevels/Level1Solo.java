@@ -20,7 +20,6 @@ import java.awt.Image;
 public class Level1Solo extends ILevel {
 
     private Player player1;
-    private Vector Cameraopos = Vector.Zero();
 
     public Level1Solo() {
         super();
@@ -67,11 +66,6 @@ public class Level1Solo extends ILevel {
         AddObject(new PlatForm(new Vector(550, -5400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(700, -5600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
 
-
-
-
-
-
         player1 = new Player();
 //        player1.setScale(new Vector(0.3f,0.5f));
         AddObject(player1).setPosition(0, -50);
@@ -80,7 +74,6 @@ public class Level1Solo extends ILevel {
 
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-
     }
 
     @Override
@@ -89,16 +82,7 @@ public class Level1Solo extends ILevel {
         if (player1 == null) {
             return;
         }
-//        if (-player1.getPosition().getX() != Cameraopos.getX()-Game.g.getWindowWidth() / 2) {
-//            Cameraopos.setX(-player1.getPosition().getX()+Game.g.getWindowWidth() / 2);
-//        }
-//        if (-player1.getPosition().getY() > Cameraopos.getY()-Game.g.getWindowHeight() / 2) {
-//            Cameraopos.setY(-player1.getPosition().getY()+Game.g.getWindowHeight() / 2);
-//        }
-//        //screen scroller
-//        Cameraopos.setY(Cameraopos.getY()+Game.g.getDelta()*30f);
-        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-        Transform.setOffsetTranslation(Cameraopos);
+
     }
 
     @Override
