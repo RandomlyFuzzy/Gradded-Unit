@@ -7,6 +7,7 @@ package com.FuturePixels.Drawables.Levels;
 
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
+import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Utils.LevelLoader;
 import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.Graphics2D;
@@ -29,8 +30,14 @@ import java.util.logging.Logger;
  */
 public class Flag extends IDrawable {
 
-    float ind = 0;
-
+    private float ind = 0;
+    private ILevel next;
+    public Flag(ILevel nextLevel){
+       super();
+       next = nextLevel;
+    }
+    
+    
     @Override
     public void init() {
         for (int i = 1; i < 8; i++) {
@@ -78,8 +85,13 @@ public class Flag extends IDrawable {
                 new Thread(() -> {
                     try {
                         Thread.sleep(2000);
-                        new LevelLoader(new MainMenu());
+ 
+                        new LevelLoader(next.getClass().newInstance());
                     } catch (InterruptedException ex) {
+                        Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
                         Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                     }
                 }).start();

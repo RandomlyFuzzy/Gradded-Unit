@@ -112,6 +112,14 @@ public class Settings extends ILevel {
             public void OnClick(Button b) {
                 Game.FullScreen();
             }
+            
+           
+        }));
+        AddObject(new Button(new Vector(0.73f, 0.9f), "Controls", new HUDAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new Controls());
+            }
         }));
 //        GetObject(0).setScale(new Vector(0.5f, 0.7f));
 

@@ -60,11 +60,22 @@ public class Level1Solo extends ILevel {
         AddObject(new PlatForm(new Vector(300, -4000), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(400, -4200), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(200, -4400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(300, -4600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(400, -4800), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(500, -5000), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(50, -5200), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(550, -5400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(700, -5600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+
+
+
+
+
 
         player1 = new Player();
 //        player1.setScale(new Vector(0.3f,0.5f));
         AddObject(player1).setPosition(0, -50);
-        AddObject(new Flag()).setPosition(new Vector(200, -4450));
+        AddObject(new Flag(new Level2Solo())).setPosition(new Vector(800, -5650));
 //        AddObject(new ScrollingBackground());
 
 //        LeaderBoard.AddTime(System.nanoTime());
