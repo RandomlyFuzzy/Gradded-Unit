@@ -32,3 +32,6 @@ hs_err_pid*
 /Gradded-Unit/regex a source/nbproject/private/
 /Gradded-Unit/regex a source/build/
 /Gradded-Unit/regex a source/dist/
+/Engine/nbproject/private/
+/Engine/build/
+/Engine/dist/

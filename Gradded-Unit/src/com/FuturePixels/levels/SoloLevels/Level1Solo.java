@@ -1,6 +1,6 @@
 package com.FuturePixels.levels.SoloLevels;
 
-import com.FuturePixels.Components.Transform;
+import com.FuturePixels.Engine.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Drawables.Levels.*;

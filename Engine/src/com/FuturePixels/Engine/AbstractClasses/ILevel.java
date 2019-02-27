@@ -5,14 +5,13 @@
  */
 package com.FuturePixels.Engine.AbstractClasses;
 
+import com.FuturePixels.Drawables.Levels.HUD;
+import com.FuturePixels.Engine.Components.Transform;
 import com.FuturePixels.Engine.Utils.LevelLoader;
 import com.FuturePixels.Engine.Components.Vector;
 import com.FuturePixels.Engine.Utils.imageUtils;
 import com.FuturePixels.Engine.Utils.MusicUtils;
-import com.FuturePixels.Components.*;
-import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.*;
 
 import java.awt.event.*;
@@ -197,10 +196,12 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public void PostUpdate(Graphics2D g) {
-        for (int i = gameObjs.size() - 1; i >= 0; i--) {
-            if (gameObjs.get(i).isEnabled()) {
-                gameObjs.get(i).CoreUpdate(g);
-                gameObjs.get(i).setIsColliding(false);
+        if (gameObjs.size() != 0) {
+            for (int i = gameObjs.size() - 1; i >= 0; i--) {
+                if (gameObjs.get(i).isEnabled()) {
+                    gameObjs.get(i).CoreUpdate(g);
+                    gameObjs.get(i).setIsColliding(false);
+                }
             }
         }
         g.dispose();
@@ -330,7 +331,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
                 DebugCollisons = !DebugCollisons;
             }
             if (e.getKeyCode() == KeyEvent.VK_F10) {
-                Game.SetLevelActive(new MainMenu());
+                Game.SetLevelActive(Game.getDefualtLevel());
             }
             if (e.getKeyCode() == KeyEvent.VK_F11) {
                 try {

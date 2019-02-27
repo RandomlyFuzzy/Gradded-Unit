@@ -21,6 +21,7 @@ public class UtilManager {
         new MusicUtils();
         new CalcUtils();
         new GamePreferences();
+        new LevelLoader();
     }
 
     public static void FindUseClass(int depth) {

@@ -6,11 +6,10 @@
 package com.FuturePixels.Engine.AbstractClasses;
 
 import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.Components.Transform;
 import com.FuturePixels.Engine.Utils.UtilManager;
-import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Engine.Utils.imageUtils;
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.levels.OtherLevels.LeaderBoard;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import java.awt.Color;
 import java.awt.Graphics;

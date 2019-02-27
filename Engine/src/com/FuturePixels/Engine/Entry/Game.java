@@ -9,10 +9,9 @@ I certify that this is my own work and I have not used code from any other sourc
  */
 package com.FuturePixels.Engine.Entry;
 
-import com.FuturePixels.Drawables.Levels.Player;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
-import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
+import com.FuturePixels.Engine.Utils.LevelLoader;
 import com.FuturePixels.Engine.Utils.MusicUtils;
 import com.FuturePixels.Engine.Utils.UtilManager;
 import com.FuturePixels.Engine.Utils.imageUtils;
@@ -46,9 +45,18 @@ public class Game {
     private static JFrame gameWindow;
     private static long deltalong = 0;
     private static ILevel CurrentLevel;
+    private static ILevel DefualtLevel;
     private static Rectangle FrameBounds;
     private static Cursor Swap;
     private static String LastLevelName = "";
+
+    public static ILevel getDefualtLevel() {
+        return DefualtLevel;
+    }
+
+    public static void setDefualtLevel(ILevel DefualtLevel) {
+        Game.DefualtLevel = DefualtLevel;
+    }
 
     public static String getLastLevelName() {
         return LastLevelName;
@@ -64,9 +72,6 @@ public class Game {
         deltalong = System.nanoTime();
     }
 
-    /*
-        this is the Delta time in milliseconds for each time the screen is drawn
-     */
     public float getDelta() {
         return DeltaTime / 1000000000.0f;
     }
@@ -82,10 +87,9 @@ public class Game {
     public static void init(ILevel firstLevel) {
         new UtilManager();
         Swap = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "blank cursor");
-        Game window = new Game(new MainMenu());
+        Game window = new Game(firstLevel);
         deltalong = System.nanoTime();
     }
-
 
     public Game(ILevel Level) {
         this.g = this;

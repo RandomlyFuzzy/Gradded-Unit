@@ -5,7 +5,6 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Components.*;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Collison;

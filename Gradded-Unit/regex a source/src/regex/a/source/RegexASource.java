@@ -32,9 +32,10 @@ public class RegexASource {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        File f = new File("./");
+        File f = new File("./" + args[0]);
         String regex = "";
-        for (String str : args) {
+        for (int i = 1; i < args.length; i++) {
+            String str = args[i];
             regex += " " + str;
         }
         pattern = Pattern.compile(regex);
@@ -47,31 +48,37 @@ public class RegexASource {
     }
 
     public static synchronized void DirectoryRecursion(File Start) {
-        for (File f2 : Start.listFiles()) {
-            if (f2.isDirectory()) {
-                DirectoryRecursion(f2);
-            } else {
-                try {
-                    System.out.println(f2.getName() + " is being read");
-                    fileInput = new BufferedReader(new FileReader(f2));
-                    scan = new Scanner(fileInput);
-                    Mathches.add(" file "+f2.getName());
-                    while (scan.hasNextLine()) {
-                        String s = scan.nextLine();
-                        matcher = pattern.matcher(s);
-                        while (matcher.find()) {
-                            Mathches.add(s.substring(matcher.start(), matcher.end()));
-                        }
-                    };
-                    if (scan.hasNext(pattern)) {
-                        Mathches.add(scan.next(pattern));
-                    }
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(RegexASource.class.getName()).log(Level.SEVERE, null, ex);
+        if (Start.isDirectory()) {
+            for (File f2 : Start.listFiles()) {
+                if (f2.isDirectory()) {
+                    DirectoryRecursion(f2);
+                } else {
+                    AddFromFile(f2);
                 }
             }
+        } else {
+            AddFromFile(Start);
         }
-
     }
 
+    public static void AddFromFile(File f2) {
+        try {
+            System.out.println(f2.getName() + " is being read");
+            fileInput = new BufferedReader(new FileReader(f2));
+            scan = new Scanner(fileInput);
+            Mathches.add(" file " + f2.getName());
+            while (scan.hasNextLine()) {
+                String s = scan.nextLine();
+                matcher = pattern.matcher(s);
+                while (matcher.find()) {
+                    Mathches.add(s.substring(matcher.start(), matcher.end()));
+                }
+            };
+            if (scan.hasNext(pattern)) {
+                Mathches.add(scan.next(pattern));
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(RegexASource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
