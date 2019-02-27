@@ -16,12 +16,14 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.Slider;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.MusicUtils;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.Timer;
 
 /**
@@ -136,6 +138,8 @@ public class Settings extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
+        Font title = new Font("Arial", 0, WIDTH+16);
+        g.setFont(title);
         g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
     }
 

@@ -41,6 +41,7 @@ public class MainMenu extends ILevel {
 
     @Override
     public void init() {
+        
         play("/sounds/music.wav", 254,-1);
         AddObject(new Mouse());
         AddObject(new HUD());
@@ -84,6 +85,9 @@ public class MainMenu extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
+        Font title = new Font("Arial", 0, WIDTH+16);
+        g.setFont(title);
+        
         g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        for (int i = 0; i < Game.g.getWindowWidth(); i++) {
 //            for (int j = 0; j < Game.g.getWindowHeight(); j++) {
