@@ -11,7 +11,6 @@ import com.FuturePixels.Engine.Components.Collison;
 import com.FuturePixels.Engine.Utils.CollisonUtils;
 import com.FuturePixels.Engine.Components.Vector;
 import java.awt.Graphics2D;
-import java.util.Random;
 
 /**
  *
@@ -173,8 +172,7 @@ public class Player extends IDrawable {
             if (isColliding()) {
                 System.out.println("com.FuturePixels.Drawables.Levels.Player.movePlayer() " + (distFromhit));
                 Acc.setY( 8f);
-                int r = new Random().nextInt(3)+1;
-                Level().play("/Sounds/Jump"+r+".wav");
+//                Level().play("/Sounds/Jump.wav");
             }
             canJump = false;
         } else if (down) {

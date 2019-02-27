@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Gradded-Unit/src/Entry.java
 
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
@@ -7,15 +8,23 @@ import com.FuturePixels.levels.OtherLevels.*;
 import com.FuturePixels.levels.SoloLevels.*;
 import java.util.ArrayList;
 
+=======
+>>>>>>> parent of aa3bd39... Added music and made engine modular:Gradded-Unit/src/com/FuturePixels/MainClasses/Utils/CalcUtils.java
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+<<<<<<< HEAD:Gradded-Unit/src/Entry.java
+=======
+package com.FuturePixels.MainClasses.Utils;
+
+>>>>>>> parent of aa3bd39... Added music and made engine modular:Gradded-Unit/src/com/FuturePixels/MainClasses/Utils/CalcUtils.java
 /**
  *
  * @author RandomlyFuzzy
  */
+<<<<<<< HEAD:Gradded-Unit/src/Entry.java
 public class Entry {
 
     public static void main(String args[]) {
@@ -32,4 +41,8 @@ public class Entry {
         com.FuturePixels.Engine.Utils.LevelLoader.setLEVELS(Levels);
 
     }
+=======
+public class CalcUtils {
+    
+>>>>>>> parent of aa3bd39... Added music and made engine modular:Gradded-Unit/src/com/FuturePixels/MainClasses/Utils/CalcUtils.java
 }
