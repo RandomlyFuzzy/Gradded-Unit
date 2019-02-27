@@ -12,6 +12,7 @@ import com.FuturePixels.Engine.Components.Collison;
 import com.FuturePixels.Engine.Utils.CollisonUtils;
 import com.FuturePixels.Engine.Components.Vector;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Player extends IDrawable {
     private int ScoreInd = 0;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true;
     private Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
+    private Vector Cameraopos = Vector.Zero();
 
     private static boolean Lock = false;
 
@@ -160,7 +162,18 @@ public class Player extends IDrawable {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
         Acc.mult(0);
-
+        if (-getPosition().getX() != Cameraopos.getX() - Game.g.getWindowWidth() / 2) {
+            Cameraopos.setX(-getPosition().getX() + Game.g.getWindowWidth() / 2);
+        }
+        if (-getPosition().getY() > Cameraopos.getY() - Game.g.getWindowHeight() / 2) {
+            Cameraopos.setY(-getPosition().getY() + Game.g.getWindowHeight() / 2);
+        }
+        //screen scroller
+        if (!Player.isLock()) {
+            Cameraopos.setY(Cameraopos.getY() + Game.g.getDelta() * 30f);
+        }
+//        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
+        Transform.setOffsetTranslation(Cameraopos);
     }
 
     private float distFromhit = 0;
@@ -171,8 +184,9 @@ public class Player extends IDrawable {
         if (up && canJump) {
 //            Acc.setY(0.01f);
             if (isColliding()) {
-                Acc.setY( 8f);
-//                Level().play("/Sounds/Jump.wav");
+                Acc.setY(8f);
+                int r = new Random().nextInt(3) + 1;
+                Level().play("/Sounds/Jump" + r + ".wav");
             }
             canJump = false;
         } else if (down) {
@@ -186,12 +200,19 @@ public class Player extends IDrawable {
         if (left) {
             Scale = -1;
             Acc.addX(-100);
+            if (canJump) {
+                Level().play("/Sounds/Footsteps.wav");
+            }
         } else if (right) {
             Scale = 1;
             Acc.addX(100);
+            if (canJump) {
+                Level().play("/Sounds/Footsteps.wav");
+            }
         } else if (canJump) {
             two = false;
             Acc.setX(0);
+
         }
         float Clamp = canJump ? 1f : 0.1f;
         Acc.setX(Acc.getX() > Clamp ? Clamp : Acc.getX() < -Clamp ? -Clamp : Acc.getX());
@@ -206,8 +227,7 @@ public class Player extends IDrawable {
         if (im == null) {
             return;
         }
-        System.out.println("com.FuturePixels.Drawables.Levels.Player.onCollison() "+(im instanceof MovingPlatoform));
-        
+
         if (im instanceof Player) {
             setIsColliding(false);
 //            Velocity.add(new Vector(getPosition()).add(new Vector(im.getPosition()).mult(-1)).mult(3f));
@@ -217,7 +237,7 @@ public class Player extends IDrawable {
         if (isLock()) {
             Velocity.addY(0.1f);
         }
-        if (im instanceof PlatForm||im instanceof MovingPlatoform) {
+        if (im instanceof PlatForm || im instanceof MovingPlatoform) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;
