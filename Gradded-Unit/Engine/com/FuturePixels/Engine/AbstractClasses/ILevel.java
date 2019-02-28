@@ -17,10 +17,17 @@ import java.awt.*;
 
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.swing.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  *
@@ -126,12 +133,42 @@ public abstract class ILevel extends JPanel implements ActionListener {
         return this;
     }
 
+    public BufferedImage getOnlineImage(String URL) {
+        try {
+            return ImageIO.read(new URL(URL));
+        } catch (IOException ex) {
+            Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public BufferedImage getFromApi(String APIURL) {
+        BufferedReader in = null;
+        String Data = "";
+        try {
+            in = new BufferedReader(new InputStreamReader(new URL(APIURL).openStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                Data+=(line);
+            }
+            in.close();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+        }
+        Data = Data.substring(Data.indexOf("data\",\"")+10,Data.length()-2);
+        Data = Data.replace("\\/", "/");
+        System.out.println(Data);
+        return getOnlineImage(Data);
+    }
+
     public void OnStart() {
         setFocusable(true);
         setDoubleBuffered(true);
         init();
         temp1 = HUD.AddText("", new Vector(0, 20));
-
     }
 
     public synchronized <T extends IDrawable> T AddObject(T Drawable) {
@@ -151,7 +188,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public void movement() {
-        for (int i = gameObjs.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < gameObjs.size(); i++) {
             gameObjs.get(i).doMove();
         }
     }
@@ -197,10 +234,12 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public void PostUpdate(Graphics2D g) {
-        for (int i = gameObjs.size() - 1; i >= 0; i--) {
-            if (gameObjs.get(i).isEnabled()) {
-                gameObjs.get(i).CoreUpdate(g);
-                gameObjs.get(i).setIsColliding(false);
+        if (gameObjs.size() != 0) {
+            for (int i = 0; i < gameObjs.size(); i++) {
+                if (gameObjs.get(i).isEnabled()) {
+                    gameObjs.get(i).CoreUpdate(g);
+                    gameObjs.get(i).setIsColliding(false);
+                }
             }
         }
         g.dispose();
@@ -263,7 +302,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public synchronized void play(String soundResource, float seconds, int LoopAmt) {
-        System.out.println("com.FuturePixels.MainClasses.ILevel.play()");
+//        System.out.println("com.FuturePixels.MainClasses.ILevel.play()");
         MusicUtils.play(soundResource, seconds, LoopAmt);
     }
 
@@ -330,6 +369,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
                 DebugCollisons = !DebugCollisons;
             }
             if (e.getKeyCode() == KeyEvent.VK_F10) {
+                MusicUtils.StopAllSounds();
                 Game.SetLevelActive(new MainMenu());
             }
             if (e.getKeyCode() == KeyEvent.VK_F11) {
@@ -376,9 +416,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
                 MouseButtonPressed.keySet().toArray(arr);
                 for (Integer a : arr) {
                     isactiveOne = isactiveOne != MouseButtonPressed.get(a) || isactiveOne;
-
                 }
-
                 IsClicking = isactiveOne;
             } else {
                 IsClicking = false;

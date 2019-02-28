@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -31,9 +32,8 @@ public class Level2Solo extends ILevel {
         setSimpleCollison(false);
         player1 = new Player();
         //Adding Platforms
-//        AddObject(new DebugObject());
-        System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new HUD());
+        AddObject(player1).setPosition(0, -50);
+        AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3550));
         AddObject(new PlatForm(new Vector(75, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-200, -75), 0.35)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-425, -140), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
@@ -61,14 +61,13 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(100, -3300), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
         AddObject(new PlatForm(new Vector(250, -3450), 0)).GetSprite("/images/Platform/rock_platform_moss_00.png");
         AddObject(new PlatForm(new Vector(500, -3500), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-
-        AddObject(player1).setPosition(0, -50);
-        AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3550));
+//        AddObject(new DebugObject());
+        AddObject(new Lava());
+        AddObject(new HUD());
 
 //        AddObject(new ScrollingBackground());
-//        LeaderBoard.AddTime(System.nanoTime());
-//        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-        Transform.setOffsetTranslation(new Vector((Game.g.getWindowWidth() ) / 2, 0));
+        Transform.setOffsetTranslation(new Vector((Game.g.getWindowWidth()) / 2, 0));
+        play("/sounds/soung.wav", 0, Clip.LOOP_CONTINUOUSLY);
     }
 
     @Override

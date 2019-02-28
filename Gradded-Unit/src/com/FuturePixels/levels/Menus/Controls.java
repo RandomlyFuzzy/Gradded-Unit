@@ -29,11 +29,14 @@ public class Controls extends ILevel {
 
     Vector relataiveity = Vector.Zero();
 
+    public Controls() {
+        super();
+        setStopAudioOnStart(false);
+    }
+
     @Override
     public void init() {
-        setStopAudioOnStart(false);
-        AddObject(new Mouse());
-        AddObject(new HUD());
+
         AddObject(new Button(new Vector(0.1f, 0.1f), "Back", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
@@ -55,6 +58,8 @@ public class Controls extends ILevel {
         }));
         AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = Up Arrow", new HUDAbstract() {
         }));
+        AddObject(new Mouse());
+        AddObject(new HUD());
     }
 
     @Override
@@ -64,16 +69,16 @@ public class Controls extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        //g.drawImage(GetSprite("/Images/Start.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 
         //Player Text
-        Font title = new Font("Arial", 0, WIDTH+16);
+        Font title = new Font("Arial", 0, WIDTH + 16);
         g.setFont(title);
         g.setColor(Color.red);
-        
+
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString("Player 1 Controls", Game.g.getWindowWidth() * 0.30f-metrics.stringWidth("Player 1 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
-        g.drawString("Player 2 Controls", Game.g.getWindowWidth() * 0.70f-metrics.stringWidth("Player 2 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
+        g.drawString("Player 1 Controls", Game.g.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
+        g.drawString("Player 2 Controls", Game.g.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
     }
 
     @Override
