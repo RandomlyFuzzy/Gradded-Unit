@@ -11,6 +11,7 @@ import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.levels.Menus.*;
 import com.FuturePixels.levels.OtherLevels.*;
 import com.FuturePixels.levels.SoloLevels.*;
+import com.FuturePixels.levels.CoopLevels.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
