@@ -6,6 +6,7 @@
 package com.FuturePixels.levels.Menus;
 
 import com.FuturePixels.Drawables.Levels.HUD;
+import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.HUDAbstract;
@@ -28,10 +29,51 @@ import static java.awt.image.ImageObserver.WIDTH;
 public class Controls extends ILevel {
 
     Vector relataiveity = Vector.Zero();
+    public static BlackoutButton BB = new BlackoutButton("Press to get key", new HUDAbstract() {
+        public void OnClick(BlackoutButton b) {
+            if (Controls.val == 1) {
+                GamePreferences.gp.setKeyLeftP1(Controls.lastKey);
+            } else if (Controls.val == 2) {
+                GamePreferences.gp.setKeyRightP1(Controls.lastKey);
+
+            } else if (Controls.val == 3) {
+                GamePreferences.gp.setKeyJumpP1(Controls.lastKey);
+
+            } else if (Controls.val == 4) {
+                GamePreferences.gp.setKeyLeftP2(Controls.lastKey);
+
+            } else if (Controls.val == 5) {
+                GamePreferences.gp.setKeyRightP2(Controls.lastKey);
+
+            } else if (Controls.val == 6) {
+                GamePreferences.gp.setKeyJumpP2(Controls.lastKey);
+
+            } else if (Controls.val == 7) {
+                GamePreferences.gp.setKeyDropP1(Controls.lastKey);
+
+            } else if (Controls.val == 8) {
+                GamePreferences.gp.setKeyDropP2(Controls.lastKey);
+
+            }
+            ((Button) b.Level().GetObject(val)).setMessage(b.getMessage());
+
+            b.Level().GetObject(10).setEnabled(false);
+        }
+    }
+    );
+    private static int val = -1;
+    private static int lastKey = -1;
 
     public Controls() {
         super();
         setStopAudioOnStart(false);
+        setSimpleCollison(false);
+
+    }
+
+    public static void ReadyForKeyChange(int change) {
+        BB.setEnabled(true);
+        val = change;
     }
 
     @Override
@@ -45,21 +87,58 @@ public class Controls extends ILevel {
         }));
         //PLAYER 1
         AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = A", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(1);
+            }
         }));
         AddObject(new Button(new Vector(0.30f, 0.4f), "RIGHT = D", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(2);
+            }
         }));
         AddObject(new Button(new Vector(0.30f, 0.5f), "JUMP = SPACE", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(3);
+            }
         }));
 
         //PLAYER 2
-        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = Left Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = LEFT", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(4);
+            }
         }));
-        AddObject(new Button(new Vector(0.70f, 0.4f), "RIGHT = Right Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.4f), "RIGHT = RIGHT", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(5);
+            }
+        
         }));
-        AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = Up Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = NUMPAD 0", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(6);
+            }
+        
         }));
-        AddObject(new Mouse());
+        
+        //Player 1 Drop
+        AddObject(new Button(new Vector(0.30f, 0.6f), "DROP = S", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(7);
+            }
+        }));
+        
+        //Player 2 Drop
+        AddObject(new Button(new Vector(0.70f, 0.6f), "DROP = DOWN", new HUDAbstract() {
+            public void OnClick(Button b) {
+                Controls.ReadyForKeyChange(8);
+            }
+        }));
+    
         AddObject(new HUD());
+        BB.setEnabled(false);
+        AddObject(BB);
+        AddObject(new Mouse());
     }
 
     @Override
@@ -83,7 +162,20 @@ public class Controls extends ILevel {
 
     @Override
     public void keyPress(KeyEvent e) {
+        if (BB.isEnabled()) {
+            String buttontext = ((Button) GetObject(val)).getMessage();
+            buttontext = buttontext.substring(0, buttontext.indexOf("=") + 2);
+            String text = e.paramString();
+            System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + text);
+            text = text.substring(text.indexOf("keyText") + 8);
+            System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + text);
+            text = text.substring(0, text.indexOf(","));
+            System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + text);
 
+            BB.setMessage(buttontext + text);
+            lastKey = e.getKeyCode();
+//            B.setMessage(B.getMessage().substring(0,B.getMessage().length()-2)+e.getKeyChar());
+        }
     }
 
     @Override

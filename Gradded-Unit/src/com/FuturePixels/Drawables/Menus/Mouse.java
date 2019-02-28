@@ -19,7 +19,7 @@ import java.awt.geom.AffineTransform;
  * @author RandomlyFuzzy
  */
 public class Mouse extends IDrawable {
-    
+
     private boolean clicked = false;
 
     public Mouse() {
@@ -28,13 +28,22 @@ public class Mouse extends IDrawable {
 
     @Override
     public void init() {
-        GetSprite("/Images/Cursor.png");
-        setScale(new Vector(0.2f, 0.2f));
+//        GetSprite("/Images/Cursor.png");
     }
+    float ind = 0;
 
     @Override
     public void doMove() {
 //        Rad += Game.g.getDelta() * 100;
+        if (Level().isClicking()) {
+            ind = 1f;
+            ind = ind % 2;
+        } else {
+            ind = 0;
+        }
+
+        setScale(new Vector(GamePreferences.ButtonDims()).mult(1.5f));
+
         setPosition(new Vector(Level().getMousePos()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        setRotation(Rad);
         clicked = clicked != !Level().isClicking() && clicked;
@@ -42,6 +51,7 @@ public class Mouse extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
+        GetSprite("/Images/cursor_" + (int) ind + ".png");
         DrawLastLoadedImage(g);
     }
 
