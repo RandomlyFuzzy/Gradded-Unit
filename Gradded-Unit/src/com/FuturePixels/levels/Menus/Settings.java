@@ -71,31 +71,33 @@ public class Settings extends ILevel {
             }
         }));
 
-        AddObject(new DropDownButton(new Vector(0.4f, 0.2f), "Random DropDown", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
+        AddObject(new DropDownButton(new Vector(0.4f, 0.2f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDAbstract[]{
                     new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                    //1920X1080
+                    //1920 x 1080
                     Game.SetDimentions(1920, 1080);
                 }
             },
                     new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
-                    //1920X1080
+                    //1600 x 900
                     Game.SetDimentions(1600, 900);
                 }
             },
                     new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
+                    //1280 x 720
                     Game.SetDimentions(1280, 720);
                 }
             },
                     new HUDAbstract() {
                 @Override
                 public void OnClick(Button b) {
+                    //860 x 540
                     Game.SetDimentions(860, 540);
                 }
             },
@@ -103,16 +105,18 @@ public class Settings extends ILevel {
                 @Override
                 public void OnClick(Button b) {
                     Rectangle bo = Game.g.GetFrame().getBounds();
+                    //640 x 360
                     Game.SetDimentions(640, 360);
                     Game.g.GetFrame().setBounds(bo.x, bo.y, 640, 360);
                 }
             }
                 }));
 
-        AddObject(new Button(new Vector(0.4f, 0.1f), "fullscreen", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.4f, 0.1f), "Fullscreen", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.FullScreen();
+                
             }
 
         }));

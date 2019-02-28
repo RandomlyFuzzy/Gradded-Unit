@@ -42,13 +42,13 @@ public class MainMenu extends ILevel {
         
         play("/sounds/music.wav", 254,-1);
 
-        AddObject(new Button(new Vector(0.15f, 0.2f), "To Game Solo", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.2f), "Solo", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectSolo());
             }
         }));
-         AddObject(new Button(new Vector(0.15f, 0.3f), "To Game Coop", new HUDAbstract() {
+         AddObject(new Button(new Vector(0.15f, 0.3f), "Coop", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectCoop());
@@ -60,13 +60,13 @@ public class MainMenu extends ILevel {
 //                Game.SetLevelActive(new Level1Solo());
 //            }
 //        }));
-        AddObject(new Button(new Vector(0.15f, 0.4f), "To Leaderboard", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.4f), "Leaderboard", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.6f), "To Settings", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.6f), "Settings", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
