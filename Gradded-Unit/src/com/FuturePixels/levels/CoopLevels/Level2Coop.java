@@ -1,4 +1,4 @@
-package com.FuturePixels.levels.SoloLevels;
+package com.FuturePixels.levels.CoopLevels;
 
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
@@ -67,7 +67,7 @@ public class Level2Coop extends ILevel {
 
         AddObject(player1).setPosition(0, -50);
         AddObject(player2).setPosition(0, -50);
-        AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3550));
+        AddObject(new Flag(new Level3Coop())).setPosition(new Vector(500, -3550));
 
 //        AddObject(new ScrollingBackground());
         Transform.setOffsetTranslation(new Vector((Game.g.getWindowWidth()) / 2, 0));

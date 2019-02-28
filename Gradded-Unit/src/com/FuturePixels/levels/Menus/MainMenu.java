@@ -5,9 +5,7 @@
  */
 package com.FuturePixels.levels.Menus;
 
-import com.FuturePixels.levels.SoloLevels.Level2Coop;
 import com.FuturePixels.Drawables.Levels.HUD;
-import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.HUDAbstract;

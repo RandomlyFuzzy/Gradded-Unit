@@ -7,11 +7,15 @@ package com.FuturePixels.Engine.Utils;
 
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
+import com.FuturePixels.levels.CoopLevels.Level1Coop;
+import com.FuturePixels.levels.CoopLevels.Level2Coop;
+import com.FuturePixels.levels.CoopLevels.Level3Coop;
 import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.levels.Menus.*;
 import com.FuturePixels.levels.OtherLevels.*;
-import com.FuturePixels.levels.SoloLevels.*;
-import com.FuturePixels.levels.CoopLevels.*;
+import com.FuturePixels.levels.SoloLevels.Level1Solo;
+import com.FuturePixels.levels.SoloLevels.Level2Solo;
+import com.FuturePixels.levels.SoloLevels.Level3Solo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

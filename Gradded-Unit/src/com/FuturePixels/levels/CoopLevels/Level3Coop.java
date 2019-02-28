@@ -1,4 +1,4 @@
-package com.FuturePixels.levels.SoloLevels;
+package com.FuturePixels.levels.CoopLevels;
 
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
