@@ -36,7 +36,7 @@ public class Level1Solo extends ILevel {
         player1 = new Player();
 //        player1.setScale(new Vector(0.3f,0.5f));
         AddObject(player1).setPosition(0, -50);
-        AddObject(new PlatForm(new Vector(0,      0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(100, -350), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(400, -500), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
@@ -90,7 +90,7 @@ public class Level1Solo extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 

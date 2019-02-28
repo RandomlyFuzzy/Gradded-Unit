@@ -14,13 +14,15 @@ import java.awt.Graphics2D;
  *
  * @author RandomlyFuzzy
  */
-public class PlatForm extends IDrawable {
+public class DestroyingPlatForm extends IDrawable {
 
-    public PlatForm() {
+    boolean haslanded = false;
+
+    public DestroyingPlatForm() {
         super();
     }
 
-    public PlatForm(Vector position, double RadianRotation) {
+    public DestroyingPlatForm(Vector position, double RadianRotation) {
         super();
         GetSprite("/images/platform/Platform.png");
         setPosition(position);
@@ -30,11 +32,15 @@ public class PlatForm extends IDrawable {
     @Override
     public void init() {
         GetSprite("/images/platform/Platform.png");
+        
     }
 
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
+        if (haslanded && !isColliding()) {
+            setEnabled(false);
+        }
     }
 
     @Override
@@ -44,6 +50,9 @@ public class PlatForm extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
+        if (im instanceof Player) {
+            haslanded = true;
+        }
 //        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");
     }
 }

@@ -256,7 +256,7 @@ public class Player extends IDrawable {
         if (hasLost) {
             Velocity.setY(6.5f);
         }
-        if (im instanceof PlatForm || im instanceof MovingPlatoform) {
+        if (im instanceof PlatForm || im instanceof MovingPlatoform||im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;

@@ -47,14 +47,6 @@ public class Settings extends ILevel {
     public void init() {
         level = this;
 
-        BB = AddObject(new BlackoutButton("Player1 Left", new HUDAbstract() {
-            @Override
-            public void OnClick(BlackoutButton b) {
-                b.setEnabled(false);
-            }
-        }));
-//                .setEnabled(false);
-
         AddObject(new HUD());
         AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDAbstract() {
             @Override
@@ -131,10 +123,6 @@ public class Settings extends ILevel {
 
     }
 
-    public static void SetToCurrent(int ind) {
-        BB = (BlackoutButton) level.GetObject(ind);
-    }
-
     @Override
     public void Update(ActionEvent ae) {
     }
@@ -148,10 +136,7 @@ public class Settings extends ILevel {
 
     @Override
     public void keyPress(KeyEvent e) {
-        if (BB != null) {
-            BB.setMessage("" + e.getKeyChar());
-//            B.setMessage(B.getMessage().substring(0,B.getMessage().length()-2)+e.getKeyChar());
-        }
+
     }
 
     @Override

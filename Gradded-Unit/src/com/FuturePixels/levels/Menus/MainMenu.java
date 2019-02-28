@@ -66,12 +66,12 @@ public class MainMenu extends ILevel {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.6f), "Settings", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.6f), "", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
-        }));
+        })).GetSprite("/images/Settings.png");;
         AddObject(new Button(new Vector(0.98f, 0.91f), "", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
