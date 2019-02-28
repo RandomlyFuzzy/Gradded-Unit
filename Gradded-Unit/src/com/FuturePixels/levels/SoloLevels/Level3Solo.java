@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -31,25 +32,26 @@ public class Level3Solo extends ILevel {
     public void init() {
         setSimpleCollison(false);
         player1 = new Player();
-        //Adding Platforms
-//        AddObject(new DebugObject());
-        System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new HUD());
-//        AddObject(new PlatForm(new Vector(75, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new MovingPlatoform(new Vector(75, 0), 0,new Vector[]{
-            new Vector(75,0),new Vector(150,0),new Vector(0,0)
-        },1)).GetSprite("/images/Platform/rock_platform_moss_01.png").UpdateBounds();
         
-        
-        
-
+                
         AddObject(player1).setPosition(50, -150);
         AddObject(new Flag(new MainMenu())).setPosition(new Vector(150, 50));
+        //Adding Platforms
+//        AddObject(new PlatForm(new Vector(75, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
+            new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
+        }, 1)).GetSprite("/images/Platform/rock_platform_moss_01.png").UpdateBounds();
 
+        
+        
+
+//        AddObject(new DebugObject());
+        AddObject(new HUD());
+        AddObject(new Lava());
 //        AddObject(new ScrollingBackground());
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-
+        play("/sounds/soung.wav", 0, Clip.LOOP_CONTINUOUSLY);
     }
 
     @Override
@@ -59,7 +61,6 @@ public class Level3Solo extends ILevel {
             return;
         }
 
-        Transform.setOffsetTranslation(Cameraopos);
     }
 
     @Override

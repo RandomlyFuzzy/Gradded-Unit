@@ -44,7 +44,7 @@ public class HUD extends IDrawable {
     @Override
     public void init() {
         setIsCollidable(false);
-        setUseTransforms(false);
+        UseTransforms(false);
     }
 
     @Override

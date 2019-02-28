@@ -5,7 +5,7 @@
  */
 package com.FuturePixels.levels.Menus;
 
-import com.FuturePixels.levels.SoloLevels.Level2Solo;
+import com.FuturePixels.levels.SoloLevels.Level2Coop;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
@@ -43,12 +43,17 @@ public class MainMenu extends ILevel {
     public void init() {
         
         play("/sounds/music.wav", 254,-1);
-        AddObject(new Mouse());
-        AddObject(new HUD());
-        AddObject(new Button(new Vector(0.5f, 0.3f), "To Game Solo", new HUDAbstract() {
+
+        AddObject(new Button(new Vector(0.15f, 0.2f), "To Game Solo", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new LevelSelect());
+                Game.SetLevelActive(new LevelSelectSolo());
+            }
+        }));
+         AddObject(new Button(new Vector(0.15f, 0.3f), "To Game Coop", new HUDAbstract() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new LevelSelectCoop());
             }
         }));
 //        AddObject(new Button(new Vector(0.5f, 0.4f), "To Game Coop", new HUDAbstract() {
@@ -57,25 +62,26 @@ public class MainMenu extends ILevel {
 //                Game.SetLevelActive(new Level1Solo());
 //            }
 //        }));
-        AddObject(new Button(new Vector(0.5f, 0.5f), "To Leaderboard", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.4f), "To Leaderboard", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        AddObject(new Button(new Vector(0.5f, 0.7f), "To Settings", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.6f), "To Settings", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
         }));
-        AddObject(new Button(new Vector(0.5f, 0.8f), "Quit", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.98f, 0.91f), "", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);
             }
-        }));
-
+        })).GetSprite("/images/Quit.png");
+        AddObject(new Mouse());
+        AddObject(new HUD());
     }
 
     @Override
@@ -88,7 +94,7 @@ public class MainMenu extends ILevel {
         Font title = new Font("Arial", 0, WIDTH+16);
         g.setFont(title);
         
-        g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        for (int i = 0; i < Game.g.getWindowWidth(); i++) {
 //            for (int j = 0; j < Game.g.getWindowHeight(); j++) {
 //                if (m != null && m.getBounds().contains(i, j)) {

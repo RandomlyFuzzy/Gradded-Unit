@@ -78,11 +78,11 @@ public abstract class IDrawable {
         this.isCollidable = isCollidable;
     }
 
-    public boolean getUseTransforms() {
+    public boolean canUseTransforms() {
         return useTransforms;
     }
 
-    public void setUseTransforms(boolean useTransforms) {
+    public void UseTransforms(boolean useTransforms) {
         this.useTransforms = useTransforms;
     }
 
@@ -293,12 +293,12 @@ public abstract class IDrawable {
 
         Graphics2D g = (Graphics2D) g2;
         doMove();
-        if (getUseTransforms()) {
+        if (canUseTransforms()) {
             transform.Update(g);
             transform.PushTransforms(g);
         }
         Update(g);
-        if (getUseTransforms()) {
+        if (canUseTransforms()) {
             transform.PopTransforms(g);
         }
         if (!Level().isDebugCollisons() || (getSpriteWidth() + getSpriteHeight() == 0)) {

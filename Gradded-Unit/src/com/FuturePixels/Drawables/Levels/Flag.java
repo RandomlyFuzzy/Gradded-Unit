@@ -9,6 +9,7 @@ import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Utils.LevelLoader;
+import com.FuturePixels.Engine.Utils.MusicUtils;
 import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -85,7 +86,7 @@ public class Flag extends IDrawable {
                 new Thread(() -> {
                     try {
                         Thread.sleep(2000);
- 
+                         MusicUtils.StopAllSounds();
                         new LevelLoader(next.getClass().newInstance());
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

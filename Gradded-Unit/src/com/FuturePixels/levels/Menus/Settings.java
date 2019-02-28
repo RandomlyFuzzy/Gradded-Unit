@@ -40,12 +40,12 @@ public class Settings extends ILevel {
         super();
         System.out.println("com.game.levels.Settings.<init>()");
         setStopAudioOnStart(false);
+        setSimpleCollison(false);
     }
 
     @Override
     public void init() {
         level = this;
-        AddObject(new Mouse());
 
         BB = AddObject(new BlackoutButton("Player1 Left", new HUDAbstract() {
             @Override
@@ -66,7 +66,7 @@ public class Settings extends ILevel {
             @Override
             public void OnChange(Slider s, float Value) {
                 System.out.println(".OnChange() " + Value);
-                ILevel.setFPS(30 + (int)(Value*60f));
+                ILevel.setFPS(30 + (int) (Value * 60f));
 //                MusicUtils.ChangeMasterVolume(Value);
             }
         }));
@@ -114,8 +114,7 @@ public class Settings extends ILevel {
             public void OnClick(Button b) {
                 Game.FullScreen();
             }
-            
-           
+
         }));
         AddObject(new Button(new Vector(0.8f, 0.1f), "Controls", new HUDAbstract() {
             @Override
@@ -124,23 +123,23 @@ public class Settings extends ILevel {
             }
         }));
 //        GetObject(0).setScale(new Vector(0.5f, 0.7f));
+        AddObject(new Mouse());
 
     }
 
-    public static void SetToCurrent(int ind){
-        BB = (BlackoutButton)level.GetObject(ind);
+    public static void SetToCurrent(int ind) {
+        BB = (BlackoutButton) level.GetObject(ind);
     }
-    
-    
+
     @Override
     public void Update(ActionEvent ae) {
     }
 
     @Override
     public void Draw(Graphics2D g) {
-        Font title = new Font("Arial", 0, WIDTH+16);
-        g.setFont(title);
-        g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+        Font title = new Font("Arial", 0, WIDTH + 16);
+        g.setFont(title); 
     }
 
     @Override

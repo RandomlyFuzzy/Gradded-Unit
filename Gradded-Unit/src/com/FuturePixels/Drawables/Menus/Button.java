@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
+import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Vector;
@@ -25,7 +26,9 @@ public class Button extends IDrawable {
     private HUDAbstract buttonDelegate;
 
     public Button() {
-//        super();
+        super();
+        UseTransforms(false);
+
     }
 
     public Button(String Message, HUDAbstract Logic) {
@@ -48,7 +51,7 @@ public class Button extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
+        setPosition(new Vector(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
         setScale(GamePreferences.ButtonDims());
     }
 
@@ -58,10 +61,10 @@ public class Button extends IDrawable {
         g.setColor(Color.red);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
-        if(isColliding()){
+        if (isColliding()) {
             Color c = g.getColor();
-            g.setColor(new Color(200,200,200,100));
-            g.fillRect(-getSpriteWidth()/2, -getSpriteHeight()/2, getSpriteWidth(), getSpriteHeight());
+            g.setColor(new Color(200, 200, 200, 100));
+            g.fillRect(-getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
             g.setColor(c);
         }
     }
@@ -76,7 +79,7 @@ public class Button extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-        if(im instanceof Button){
+        if (im instanceof Button) {
             setIsColliding(false);
         }
     }

@@ -47,10 +47,10 @@ public class MusicUtils {
             }
             if (!isPlaying) {
                 MusicThread d = new MusicThread(soundResource);
-                d.Loop(LoopAmt);
                 d.Search(time);
-                sounds.add(d);
                 d.Start();
+                d.Loop(LoopAmt);
+                sounds.add(d);
             }
         } catch (Exception ex) {
             System.out.println("Error playing sound " + soundResource + " " + ex.getMessage());
@@ -83,10 +83,13 @@ public class MusicUtils {
 
         private Clip clip;
         private AudioInputStream ais;
-        private boolean finished = false;
+        private boolean finished = false, isLooping = true;
 
         public boolean isFinished() {
-            return finished;
+            if (isLooping && finished) {
+                Start();
+            }
+            return finished && !isLooping;
         }
 
         public void setFinished(boolean finished) {
@@ -99,6 +102,7 @@ public class MusicUtils {
                 this.Path = Source;
                 clip = AudioSystem.getClip();
                 this.ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(Source));
+                clip.open(ais);
 
             } catch (LineUnavailableException ex) {
                 Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,16 +129,12 @@ public class MusicUtils {
         public void Start() {
             new Thread(() -> {
                 try {
-                    clip.open(ais);
                     clip.start();
                     Thread.sleep((int) ((ais.getFrameLength() / clip.getFormat().getFrameRate()) * 1000f));
                     finished = true;
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (LineUnavailableException ex) {
-                    Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+             
                 }
             }).start();
         }

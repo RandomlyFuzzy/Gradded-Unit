@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
+import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
@@ -34,7 +35,7 @@ public class Mouse extends IDrawable {
     @Override
     public void doMove() {
 //        Rad += Game.g.getDelta() * 100;
-        setPosition(Level().getMousePos());
+        setPosition(new Vector(Level().getMousePos()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        setRotation(Rad);
         clicked = clicked != !Level().isClicking() && clicked;
     }
