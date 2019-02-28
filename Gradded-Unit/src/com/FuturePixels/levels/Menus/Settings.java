@@ -16,6 +16,7 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.Slider;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.MusicUtils;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -129,9 +130,12 @@ public class Settings extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
+        g.setColor(Color.WHITE);
+        Font title = new Font("Arial", 0, 22);
+        g.setFont(title);
         g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
-        Font title = new Font("Arial", 0, WIDTH + 16);
-        g.setFont(title); 
+             
+        
     }
 
     @Override

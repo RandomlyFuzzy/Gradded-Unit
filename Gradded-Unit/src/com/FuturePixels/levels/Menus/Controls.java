@@ -85,18 +85,20 @@ public class Controls extends ILevel {
                 Game.SetLevelActive(new Settings());
             }
         }));
+        
+        
         //PLAYER 1
         AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = A", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(1);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.4f), "RIGHT = D", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.425f), "RIGHT = D", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(2);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.5f), "JUMP = SPACE", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.550f), "JUMP = SPACE", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(3);
             }
@@ -108,13 +110,13 @@ public class Controls extends ILevel {
                 Controls.ReadyForKeyChange(4);
             }
         }));
-        AddObject(new Button(new Vector(0.70f, 0.4f), "RIGHT = RIGHT", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.425f), "RIGHT = RIGHT", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(5);
             }
         
         }));
-        AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = NUMPAD 0", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.550f), "JUMP = NUMPAD 0", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(6);
             }
@@ -122,14 +124,14 @@ public class Controls extends ILevel {
         }));
         
         //Player 1 Drop
-        AddObject(new Button(new Vector(0.30f, 0.6f), "DROP = S", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.675f), "DROP = S", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(7);
             }
         }));
         
         //Player 2 Drop
-        AddObject(new Button(new Vector(0.70f, 0.6f), "DROP = DOWN", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.675f), "DROP = DOWN", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(8);
             }
@@ -151,10 +153,15 @@ public class Controls extends ILevel {
         g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 
         //Player Text
-        Font title = new Font("Arial", 0, WIDTH + 16);
+        g.setColor(Color.WHITE);
+        Font title = new Font("Arial", 0, 22);
         g.setFont(title);
-        g.setColor(Color.red);
-
+        g.setColor(new Color(55,55,55,150));
+        g.fillRect((int) ((0.222f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), 200, 390);
+        g.fillRect((int) ((0.622f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), 200, 390);
+        
+        //g.fillRect((int) ((0.03f) * Game.g.getWindowWidth()), (int) ((0.235f) * Game.g.getWindowHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getWindowWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getWindowHeight()));
+        g.setColor(Color.WHITE);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString("Player 1 Controls", Game.g.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
         g.drawString("Player 2 Controls", Game.g.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
