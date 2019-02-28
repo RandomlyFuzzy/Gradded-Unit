@@ -103,31 +103,38 @@ public class Controls extends ILevel {
         }));
 
         //PLAYER 2
-        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = Left Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = LEFT", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(4);
             }
         }));
-        AddObject(new Button(new Vector(0.70f, 0.4f), "RIGHT = Right Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.4f), "RIGHT = RIGHT", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(5);
             }
+        
         }));
-        AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = Up Arrow", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = NUMPAD 0", new HUDAbstract() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(6);
             }
+        
         }));
-        AddObject(new Button(new Vector(0.70f, 0.4f), "RIGHT = Right Arrow", new HUDAbstract() {
+        
+        //Player 1 Drop
+        AddObject(new Button(new Vector(0.30f, 0.6f), "DROP = S", new HUDAbstract() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(5);
+                Controls.ReadyForKeyChange(7);
             }
         }));
-        AddObject(new Button(new Vector(0.70f, 0.5f), "JUMP = Up Arrow", new HUDAbstract() {
+        
+        //Player 2 Drop
+        AddObject(new Button(new Vector(0.70f, 0.6f), "DROP = DOWN", new HUDAbstract() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(6);
+                Controls.ReadyForKeyChange(8);
             }
         }));
+    
         AddObject(new HUD());
         BB.setEnabled(false);
         AddObject(BB);
