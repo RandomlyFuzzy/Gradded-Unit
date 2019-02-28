@@ -24,6 +24,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.JPanel;
 
 /**
@@ -40,7 +41,7 @@ public class MainMenu extends ILevel {
     @Override
     public void init() {
         
-        play("/sounds/music.wav", 254,-1);
+        play("/sounds/music.wav", 0,Clip.LOOP_CONTINUOUSLY);
 
         AddObject(new Button(new Vector(0.15f, 0.2f), "Solo", new HUDAbstract() {
             @Override
@@ -54,12 +55,6 @@ public class MainMenu extends ILevel {
                 Game.SetLevelActive(new LevelSelectCoop());
             }
         }));
-//        AddObject(new Button(new Vector(0.5f, 0.4f), "To Game Coop", new HUDAbstract() {
-//            @Override
-//            public void OnClick(Button b) {
-//                Game.SetLevelActive(new Level1Solo());
-//            }
-//        }));
         AddObject(new Button(new Vector(0.15f, 0.4f), "Leaderboard", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
