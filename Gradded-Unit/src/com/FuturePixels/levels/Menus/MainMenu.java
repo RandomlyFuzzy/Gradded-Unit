@@ -13,6 +13,7 @@ import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Vector;
 import com.FuturePixels.levels.OtherLevels.LeaderBoard;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -61,12 +62,12 @@ public class MainMenu extends ILevel {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.6f), "Settings", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.6f), "", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
-        }));
+        })).GetSprite("/images/Settings.png");;
         AddObject(new Button(new Vector(0.98f, 0.91f), "", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
@@ -84,7 +85,8 @@ public class MainMenu extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        Font title = new Font("Arial", 0, WIDTH+16);
+        g.setColor(Color.WHITE);
+        Font title = new Font("Arial", 0, 22);
         g.setFont(title);
         
         g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);

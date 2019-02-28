@@ -18,6 +18,7 @@ import javax.sound.sampled.Clip;
 /**
  *
  * @author Liam Woolley 1748910
+ * @author Liam Rickman
  */
 public class Level3Solo extends ILevel {
 
@@ -34,13 +35,23 @@ public class Level3Solo extends ILevel {
         player1 = new Player();
         
                 
-        AddObject(player1).setPosition(50, -150);
-        AddObject(new Flag(new MainMenu())).setPosition(new Vector(150, 50));
+        AddObject(player1).setPosition(100, 0);
+        AddObject(new Flag(new MainMenu())).setPosition(new Vector(150, 200));
         //Adding Platforms
-//        AddObject(new PlatForm(new Vector(75, 0), 0)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
-            new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
-        }, 1)).GetSprite("/images/Platform/rock_platform_moss_01.png").UpdateBounds();
+        AddObject(new PlatForm(new Vector(100, 100), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(300, 0), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(475, -150), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(600, -350), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(425, -550), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(150, -625), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(425, -850), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(550, -850), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(400, -1050), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(200, -1200), 0.35)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        
+        //AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
+            //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
+        //}, 1)).GetSprite("/images/Platform/rock_platform_moss_01.png").UpdateBounds();
 
         
         

@@ -16,6 +16,7 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.Slider;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.MusicUtils;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -46,14 +47,6 @@ public class Settings extends ILevel {
     @Override
     public void init() {
         level = this;
-
-        BB = AddObject(new BlackoutButton("Player1 Left", new HUDAbstract() {
-            @Override
-            public void OnClick(BlackoutButton b) {
-                b.setEnabled(false);
-            }
-        }));
-//                .setEnabled(false);
 
         AddObject(new HUD());
         AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDAbstract() {
@@ -131,27 +124,23 @@ public class Settings extends ILevel {
 
     }
 
-    public static void SetToCurrent(int ind) {
-        BB = (BlackoutButton) level.GetObject(ind);
-    }
-
     @Override
     public void Update(ActionEvent ae) {
     }
 
     @Override
     public void Draw(Graphics2D g) {
+        g.setColor(Color.WHITE);
+        Font title = new Font("Arial", 0, 22);
+        g.setFont(title);
         g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
-        Font title = new Font("Arial", 0, WIDTH + 16);
-        g.setFont(title); 
+             
+        
     }
 
     @Override
     public void keyPress(KeyEvent e) {
-        if (BB != null) {
-            BB.setMessage("" + e.getKeyChar());
-//            B.setMessage(B.getMessage().substring(0,B.getMessage().length()-2)+e.getKeyChar());
-        }
+
     }
 
     @Override

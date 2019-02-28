@@ -63,7 +63,7 @@ public class DropDownButton extends IDrawable {
 
     @Override
     public void init() {
-        GetSprite("/Images/Button_1.png");
+        GetSprite("/Images/DropButton.png");
         DoAction();
 
     }
