@@ -40,7 +40,7 @@ public class LeaderBoard extends ILevel {
     private static String FileURI = "resources/Savedata/Level";
     private static String EndURI = "Solo.txt";
     private String previousind = "";
-    private static String Currentind = "1";
+    private static String Currentind = "Level1Solo";
     private ArrayList<String> times = new ArrayList<String>();
 
     public static String getCurrentind() {

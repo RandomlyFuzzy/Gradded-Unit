@@ -238,7 +238,11 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public IDrawable GetObject(int index) {
-        return gameObjs.get(index);
+        if (gameObjs.get(index) != null) {
+            return gameObjs.get(index);
+        }
+        return null;      
+
     }
 
     public int GetObjectCount() {
@@ -249,7 +253,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         try {
             if (gameObjs.size() != 0) {
                 for (int i = 0; i < gameObjs.size(); i++) {
-                    if (gameObjs.get(i).isEnabled()) {
+                    if (gameObjs.get(i) != null && gameObjs.get(i).isEnabled()) {
                         gameObjs.get(i).CoreUpdate(g);
                         gameObjs.get(i).setIsColliding(false);
                     }
@@ -258,7 +262,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         } catch (Exception ex) {
             System.err.println(ex.toString());
         }
-        g.dispose();
+//        g.dispose();
     }
 
     public void start() {
@@ -335,7 +339,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
             IDrawable a = gameObjs.get(i);
             for (int j = 0; j < gameObjs.size(); j++) {
                 IDrawable b = gameObjs.get(j);
-                if (i == j || !(a.isEnabled() && b.isEnabled()) || !(a.IsCollidable() && b.IsCollidable())) {
+                if (i == j || (a != null && b != null) || !(a.isEnabled() && b.isEnabled()) || !(a.IsCollidable() && b.IsCollidable())) {
                     continue;
                 }
                 if (a != b) {

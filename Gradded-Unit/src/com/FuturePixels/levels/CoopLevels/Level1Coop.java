@@ -35,15 +35,15 @@ public class Level1Coop extends ILevel {
                 imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
             }
         }).start();
-        
-        
+
         setSimpleCollison(false);
         // (float) Math.PI * -0.25f / 3f));
-        AddObject(new DebugObject());
+        player1 = new Player();
+//        player1.setScale(new Vector(0.3f,0.5f));
+        AddObject(player1).setPosition(0, -50);
         //Adding Platforms
         System.out.println("com.game.levels.level1.<init>()");
-        AddObject(new HUD());
-        AddObject(new Lava());
+
         AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(100, -350), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
@@ -76,17 +76,17 @@ public class Level1Coop extends ILevel {
         AddObject(new PlatForm(new Vector(50, -5200), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(550, -5400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(700, -5600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-
-        player1 = new Player();
-//        player1.setScale(new Vector(0.3f,0.5f));
-        AddObject(player1).setPosition(0, -50);
+        AddObject(new DebugObject());
         AddObject(new Flag(new Level2Coop())).setPosition(new Vector(800, -5650));
+        AddObject(new HUD());
+        AddObject(new Lava());
 //        AddObject(new ScrollingBackground());
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
         Transform.setOffsetTranslation(new Vector((Game.g.getWindowWidth() * .6f) / 2, 0));
         play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/background.png"));
+
     }
 
     @Override

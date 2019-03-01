@@ -26,11 +26,12 @@ public class Level2Coop extends ILevel {
 
     public Level2Coop() {
         super();
+        setSimpleCollison(false);
+        setStopAudioOnStart(true);
     }
 
     @Override
     public void init() {
-        setSimpleCollison(false);
         player1 = new Player();
         player2 = new Player();
         //Adding Platforms

@@ -38,6 +38,7 @@ public class MainMenu extends ILevel {
     public MainMenu() {
         super();
         setStopAudioOnStart(false);
+        setSimpleCollison(false);
     }
 
     @Override
@@ -51,13 +52,13 @@ public class MainMenu extends ILevel {
                 Game.SetLevelActive(new LevelSelectSolo());
             }
         }));
-         AddObject(new Button(new Vector(0.15f, 0.3f), "Coop", new HUDAbstract() {
+         AddObject(new Button(new Vector(0.15f, 0.32f), "Coop", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectCoop());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.4f), "Leaderboard", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.44f), "Leaderboard", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
