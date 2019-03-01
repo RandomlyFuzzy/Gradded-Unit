@@ -48,6 +48,14 @@ public class FileUtils {
     }
 
     public static void SetFileContence(String URI, String Data) {
+        File file = new File(URI);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         PrintStream FileStream = null;
         try {
             FileStream = new PrintStream(new File(URI));
@@ -65,14 +73,22 @@ public class FileUtils {
     }
 
     public static String[] GetFileSplit(String URI, String regex) {
+        File file = new File(URI);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         String contence = GetFileContence(URI);
         return contence.split(regex);
     }
 
-    public static ArrayList<String> GetFileSplit(String URI, String regex,Object AsCollection) {
+    public static ArrayList<String> GetFileSplit(String URI, String regex, Object AsCollection) {
         ArrayList<String> ret = new ArrayList<String>();
         String[] contence = GetFileSplit(URI, regex);
-        System.out.println("com.FuturePixels.Engine.Utils.FileUtils.GetFileSplit() "+contence.length);
+        System.out.println("com.FuturePixels.Engine.Utils.FileUtils.GetFileSplit() " + contence.length);
         for (String s : contence) {
             ret.add(s);
         }
