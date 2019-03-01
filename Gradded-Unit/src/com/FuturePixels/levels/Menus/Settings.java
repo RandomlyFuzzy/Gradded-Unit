@@ -41,7 +41,7 @@ public class Settings extends ILevel {
         super();
         System.out.println("com.game.levels.Settings.<init>()");
         setStopAudioOnStart(false);
-        setSimpleCollison(false);
+        setSimpleCollison(true);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class Settings extends ILevel {
         }));
 //        GetObject(0).setScale(new Vector(0.5f, 0.7f));
         AddObject(new Mouse());
-
+        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 
     @Override
@@ -133,8 +133,6 @@ public class Settings extends ILevel {
         g.setColor(Color.WHITE);
         Font title = new Font("Arial", 0, 22);
         g.setFont(title);
-        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
-             
         
     }
 

@@ -141,6 +141,7 @@ public class Controls extends ILevel {
         BB.setEnabled(false);
         AddObject(BB);
         AddObject(new Mouse());
+        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 
     @Override
@@ -150,15 +151,14 @@ public class Controls extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 
         //Player Text
         g.setColor(Color.WHITE);
         Font title = new Font("Arial", 0, 22);
         g.setFont(title);
         g.setColor(new Color(55,55,55,150));
-        g.fillRect((int) ((0.222f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), 200, 390);
-        g.fillRect((int) ((0.622f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), 200, 390);
+        g.fillRect((int) ((0.222f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), (int)((200f/1280f)* Game.g.getWindowWidth()), (int)((390f/720f) * Game.g.getWindowHeight()));
+        g.fillRect((int) ((0.622f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), (int)((200f/1280f)* Game.g.getWindowWidth()), (int)((390f/720f) * Game.g.getWindowHeight()));
         
         //g.fillRect((int) ((0.03f) * Game.g.getWindowWidth()), (int) ((0.235f) * Game.g.getWindowHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getWindowWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getWindowHeight()));
         g.setColor(Color.WHITE);

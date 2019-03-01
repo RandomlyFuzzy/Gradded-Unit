@@ -25,6 +25,7 @@ import static java.awt.image.ImageObserver.WIDTH;
  */
 public class LevelSelectSolo extends ILevel {
 
+
     public LevelSelectSolo() {
         super();
         setStopAudioOnStart(false);
@@ -32,8 +33,8 @@ public class LevelSelectSolo extends ILevel {
 
     @Override
     public void init() {
-         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1))+"Solo", new HUDAbstract() {
+        for (int i = 0; i < 5; i++) {
+            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)) + "Solo", new HUDAbstract() {
                 public void OnClick(Button b) {
                     new LevelLoader(b.getMessage());
                 }
@@ -45,8 +46,8 @@ public class LevelSelectSolo extends ILevel {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
-         AddObject(new Mouse());
-
+        AddObject(new Mouse());
+        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 
     @Override
@@ -58,7 +59,6 @@ public class LevelSelectSolo extends ILevel {
         g.setColor(Color.WHITE);
         Font title = new Font("Arial", 0, 22);
         g.setFont(title);
-        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
     }
 
     @Override

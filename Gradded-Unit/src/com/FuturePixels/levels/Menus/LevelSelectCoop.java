@@ -46,6 +46,7 @@ public class LevelSelectCoop extends ILevel {
             }
         }));
          AddObject(new Mouse());
+         setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 
     @Override
@@ -57,7 +58,6 @@ public class LevelSelectCoop extends ILevel {
         g.setColor(Color.WHITE);
         Font title = new Font("Arial", 0, 22);
         g.setFont(title);
-        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
     }
 
     @Override

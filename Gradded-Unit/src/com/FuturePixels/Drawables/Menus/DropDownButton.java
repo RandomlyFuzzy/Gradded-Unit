@@ -80,7 +80,7 @@ public class DropDownButton extends IDrawable {
     public void Update(Graphics2D g) {
 //        System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.Update() "+getPosition().toString());
         DrawLastLoadedImage(g);
-        g.setColor(Color.red);
+        g.setColor(new Color(128, 0, 128));
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
         if (isColliding()) {

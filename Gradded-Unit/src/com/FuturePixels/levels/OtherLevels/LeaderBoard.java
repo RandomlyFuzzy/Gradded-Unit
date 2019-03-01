@@ -13,6 +13,7 @@ import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.LevelLoader;
 import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.Utils.FileUtils;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -38,15 +39,15 @@ public class LeaderBoard extends ILevel {
 
     private static String FileURI = "resources/Savedata/Level";
     private static String EndURI = "Solo.txt";
-    private int previousind = 0;
-    private static int Currentind = 1;
-    private ArrayList<Double> times = new ArrayList<Double>();
+    private String previousind = "";
+    private static String Currentind = "1";
+    private ArrayList<String> times = new ArrayList<String>();
 
-    public static int getCurrentind() {
+    public static String getCurrentind() {
         return Currentind;
     }
 
-    public static void setCurrentind(int Currentind) {
+    public static void setCurrentind(String Currentind) {
         LeaderBoard.Currentind = Currentind;
     }
 
@@ -60,12 +61,10 @@ public class LeaderBoard extends ILevel {
     public void init() {
         GetSprite("/Images/background.png");
 
-        for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)), new HUDAbstract() {
+        for (int i = 0; i < 10; i++) {
+            AddObject(new Button(new Vector(((0.15f * (i % 5)) + 0.1f), ((0.1f * (i / 5)) + 0.1f)), ("Level" + ((i % 5) + 1)) + ((i >= 5) ? "Coop" : "Solo"), new HUDAbstract() {
                 public void OnClick(Button b) {
-                    String mess = b.getMessage().substring(5);
-                    System.out.println(".OnClick() " + mess);
-                    LeaderBoard.setCurrentind(Integer.parseInt(mess));
+                    LeaderBoard.setCurrentind(b.getMessage());
                 }
             }));
         }
@@ -81,30 +80,21 @@ public class LeaderBoard extends ILevel {
     @Override
     public void Update(ActionEvent ae) {
         if (previousind != Currentind) {
-            try {
-                times = new ArrayList<Double>();
-                System.out.println("com.FuturePixels.levels.OtherLevels.LeaderBoard.Update() " + FileURI + Currentind + EndURI);
-                File file = new File(FileURI + Currentind + EndURI);
-                if (!file.exists()) {
-                    file.createNewFile();
-                }
-                FileReader fis = new FileReader(file);
-                Scanner scan = new Scanner(fis);
-                while (scan.hasNextLine()) {
-                    times.add(Double.parseDouble(scan.nextLine()));
-                }
-                times.sort(new Comparator<Double>() {
-                    @Override
-                    public int compare(Double o1, Double o2) {
-                        return o1 > o2 ? 1 : -1;
-                    }
-                });
+            times = new ArrayList<String>();
+            times.addAll(
+                    FileUtils.GetFileSplit("Resources/savedata/" + Currentind + ".txt", "\n", true)
+            );
 
-            } catch (IOException ex) {
-                Logger.getLogger(LeaderBoard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            previousind = Currentind;
+            System.out.println("com.FuturePixels.levels.OtherLevels.LeaderBoard.Update() " + times.size());
+            times.sort(new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return Double.parseDouble(o1) > Double.parseDouble(o2) ? 1 : -1;
+                }
+            });
+
         }
+        previousind = Currentind;
     }
 
     @Override
@@ -113,16 +103,18 @@ public class LeaderBoard extends ILevel {
         g.setFont(title);
         g.drawImage(GetSprite("/Images/WIP Background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
         float y = 0.3f;
-        g.setColor(new Color(55,55,55,150));
-        g.fillRect((int) ((0.03f) * Game.g.getWindowWidth()), (int) ((0.235f) * Game.g.getWindowHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getWindowWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getWindowHeight()));
-        g.setColor(Color.WHITE);
-        Font mainText = new Font("Arial", 0, 13);
-        g.setFont(mainText);
-        
-        for (int i = 0; i < times.size(); i++) {
-            Double s = times.get(i);
-            g.drawString("No " + (i + 1) + " Place with " + s + " secs", (((i / 20) * 0.13f) + 0.03f) * Game.g.getWindowWidth(), (((i % 20) * 0.03f) + 0.25f) * Game.g.getWindowHeight());
-            y += 0.03f;
+        if (times.size() != 0) {
+            g.setColor(new Color(55, 55, 55, 150));
+            g.fillRect((int) ((0.03f) * Game.g.getWindowWidth()), (int) ((0.285f) * Game.g.getWindowHeight()), (int) ((((times.size() / 20) * 0.13f) + 0.13f) * Game.g.getWindowWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getWindowHeight()));
+            g.setColor(Color.WHITE);
+            Font mainText = new Font("Arial", 0, 13);
+            g.setFont(mainText);
+
+            for (int i = 0; i < times.size(); i++) {
+                String s = times.get(i);
+                g.drawString("No " + (i + 1) + " Place with " + s + " secs", (((i / 20) * 0.13f) + 0.03f) * Game.g.getWindowWidth(), (((i % 20) * 0.03f) + 0.3f) * Game.g.getWindowHeight());
+                y += 0.03f;
+            }
         }
     }
 
@@ -138,8 +130,8 @@ public class LeaderBoard extends ILevel {
 
     public void dispose() {
         super.dispose();
-        Currentind = 1;
-        previousind = 0;
-        times = new ArrayList<Double>();
+        Currentind = "Level2Solo";
+        previousind = "Level1Solo";
+        times = new ArrayList<String>();
     }
 }

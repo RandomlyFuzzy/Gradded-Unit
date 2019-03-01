@@ -47,6 +47,15 @@ public abstract class ILevel extends JPanel implements ActionListener {
     private boolean StopAudioOnStart = true, SimpleCollison = true;
     private static int FPS = 60;
     private static ILevel current;
+    private BufferedImage background;
+
+    public BufferedImage getBackgroundimage() {
+        return background;
+    }
+
+    public void setBackgroundimage(BufferedImage background) {
+        this.background = background;
+    }
 
     public static int getFPS() {
         return FPS;
@@ -149,7 +158,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
             in = new BufferedReader(new InputStreamReader(new URL(APIURL).openStream()));
             String line;
             while ((line = in.readLine()) != null) {
-                Data+=(line);
+                Data += (line);
             }
             in.close();
         } catch (MalformedURLException ex) {
@@ -158,7 +167,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
             Logger.getLogger(ILevel.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
         }
-        Data = Data.substring(Data.indexOf("data\",\"")+10,Data.length()-2);
+        Data = Data.substring(Data.indexOf("data\",\"") + 10, Data.length() - 2);
         Data = Data.replace("\\/", "/");
         System.out.println(Data);
         return getOnlineImage(Data);
@@ -196,6 +205,9 @@ public abstract class ILevel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        if (background != null) {
+            g.drawImage(background, 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+        }
         Draw(g2d);
         if (DebugCollisons) {
             try {
@@ -234,16 +246,19 @@ public abstract class ILevel extends JPanel implements ActionListener {
     }
 
     public void PostUpdate(Graphics2D g) {
-        if (gameObjs.size() != 0) {
-            for (int i = 0; i < gameObjs.size(); i++) {
-                if (gameObjs.get(i).isEnabled()) {
-                    gameObjs.get(i).CoreUpdate(g);
-                    gameObjs.get(i).setIsColliding(false);
+        try {
+            if (gameObjs.size() != 0) {
+                for (int i = 0; i < gameObjs.size(); i++) {
+                    if (gameObjs.get(i).isEnabled()) {
+                        gameObjs.get(i).CoreUpdate(g);
+                        gameObjs.get(i).setIsColliding(false);
+                    }
                 }
             }
+        } catch (Exception ex) {
+            System.err.println(ex.toString());
         }
         g.dispose();
-
     }
 
     public void start() {

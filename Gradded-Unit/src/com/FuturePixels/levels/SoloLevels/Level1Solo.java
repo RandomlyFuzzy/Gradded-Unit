@@ -8,6 +8,7 @@ import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.Utils.imageUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
@@ -25,11 +26,17 @@ public class Level1Solo extends ILevel {
 
     public Level1Solo() {
         super();
+        setSimpleCollison(false);
     }
 
     @Override
     public void init() {
-        setSimpleCollison(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+            }
+        }).start();
         // (float) Math.PI * -0.25f / 3f));
         //Adding Platforms
         System.out.println("com.game.levels.level1.<init>()");
@@ -77,6 +84,7 @@ public class Level1Solo extends ILevel {
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
         Transform.setOffsetTranslation(new Vector((Game.g.getWindowWidth() * .6f) / 2, 0));
         play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 
     @Override
@@ -90,7 +98,6 @@ public class Level1Solo extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 

@@ -50,7 +50,7 @@ public class DestroyingPlatForm extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-        if (im instanceof Player) {
+        if (im instanceof Player&&(((Player)im).Velocity.getY()==0)) {
             haslanded = true;
         }
 //        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");

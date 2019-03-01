@@ -34,6 +34,7 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends ILevel {
 
+    
     public MainMenu() {
         super();
         setStopAudioOnStart(false);
@@ -62,7 +63,7 @@ public class MainMenu extends ILevel {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.6f), "", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
@@ -76,6 +77,8 @@ public class MainMenu extends ILevel {
         })).GetSprite("/images/Quit.png");
         AddObject(new Mouse());
         AddObject(new HUD());
+        
+        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 
     @Override
@@ -89,7 +92,6 @@ public class MainMenu extends ILevel {
         Font title = new Font("Arial", 0, 22);
         g.setFont(title);
         
-        g.drawImage(GetSprite("/Images/WIP Background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        for (int i = 0; i < Game.g.getWindowWidth(); i++) {
 //            for (int j = 0; j < Game.g.getWindowHeight(); j++) {
 //                if (m != null && m.getBounds().contains(i, j)) {

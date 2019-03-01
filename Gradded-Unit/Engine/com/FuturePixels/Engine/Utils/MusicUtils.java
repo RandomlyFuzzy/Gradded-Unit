@@ -32,28 +32,24 @@ public class MusicUtils {
     }
 
     public synchronized static void play(String soundResource, float time, int LoopAmt) {
-        try {
-            boolean isPlaying = false;
-            for (int i = sounds.size() - 1; i >= 0; i--) {
-                MusicThread mt = sounds.get(i);
-                if (mt.isFinished()) {
-                    sounds.remove(mt);
-                    continue;
-                }
-                if (!mt.isFinished() && mt.Path == soundResource) {
-                    isPlaying = true;
-                    break;
-                }
+        boolean isPlaying = false;
+        for (int i = sounds.size() - 1; i >= 0; i--) {
+            MusicThread mt = sounds.get(i);
+            if (mt.isFinished()) {
+                sounds.remove(mt);
+                continue;
             }
-            if (!isPlaying) {
-                MusicThread d = new MusicThread(soundResource);
-                d.Search(time);
-                d.Start();
-                d.Loop(LoopAmt);
-                sounds.add(d);
+            if (!mt.isFinished() && mt.Path == soundResource) {
+                isPlaying = true;
+                break;
             }
-        } catch (Exception ex) {
-            System.out.println("Error playing sound " + soundResource + " " + ex.getMessage());
+        }
+        if (!isPlaying) {
+            MusicThread d = new MusicThread(soundResource);
+            d.Search(time);
+            d.Start();
+            d.Loop(LoopAmt);
+            sounds.add(d);
         }
     }
 
@@ -134,13 +130,18 @@ public class MusicUtils {
                     finished = true;
                 } catch (InterruptedException ex) {
                     Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
-             
                 }
             }).start();
         }
 
         public void Stop() {
-            clip.stop();
+            try {
+                clip.stop();
+                clip.flush();
+                ais.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         public void Loop(int amt) {

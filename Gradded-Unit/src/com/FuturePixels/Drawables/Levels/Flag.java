@@ -8,6 +8,7 @@ package com.FuturePixels.Drawables.Levels;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
+import com.FuturePixels.Engine.Utils.FileUtils;
 import com.FuturePixels.Engine.Utils.LevelLoader;
 import com.FuturePixels.Engine.Utils.MusicUtils;
 import com.FuturePixels.levels.Menus.MainMenu;
@@ -33,12 +34,12 @@ public class Flag extends IDrawable {
 
     private float ind = 0;
     private ILevel next;
-    public Flag(ILevel nextLevel){
-       super();
-       next = nextLevel;
+
+    public Flag(ILevel nextLevel) {
+        super();
+        next = nextLevel;
     }
-    
-    
+
     @Override
     public void init() {
         for (int i = 1; i < 8; i++) {
@@ -64,44 +65,23 @@ public class Flag extends IDrawable {
     public void onCollison(IDrawable im) {
 
         if (im instanceof Player && !ran) {
-            PrintStream FileStream;
-            FileReader FileReader;
-            try {
-                String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".") + 1);
-                File file = new File("resources/Savedata/" + Slim + ".txt");
-                if (!file.exists()) {
-                    file.createNewFile();
+            String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".") + 1);
+            FileUtils.AppendToFile("resources/Savedata/" + Slim + ".txt", "" + String.format("%.2f", Level().getTime()) + "\n");
+            Level().play("/sounds/LevelCompleate.wav");
+            Player.setLock(true);
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                    MusicUtils.StopAllSounds();
+                    new LevelLoader(next.getClass().newInstance());
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
-                FileReader fis = new FileReader(file);
-                char[] data = new char[(int) file.length()];
-                fis.read(data);
-                fis.close();
-                String str = new String(data);
-                str += "" + String.format("%.2f", Level().getTime()) + "\n";
-                FileStream = new PrintStream(new File("resources/Savedata/" + Slim + ".txt"));
-                FileStream.print(str);
-                FileStream.close();
-                Level().play("/sounds/LevelCompleate.wav");
-                Player.setLock(true);
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(2000);
-                         MusicUtils.StopAllSounds();
-                        new LevelLoader(next.getClass().newInstance());
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                    } catch (InstantiationException ex) {
-                        Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                    }
-                }).start();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            }
-
+            }).start();
         } else {
             return;
         }

@@ -21,11 +21,9 @@ import java.util.Random;
 public class Player extends IDrawable {
 
     private float ind = 0, Scale = 1;
-    private long score;
-    private int ScoreInd = 0;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, IsPlayer = false;
-    private Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
-    private Vector Cameraopos = Vector.Zero();
+    public Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
+    public Vector Cameraopos = Vector.Zero();
 
     private static boolean Lock = false;
     private static boolean hasLost = false;
@@ -91,11 +89,9 @@ public class Player extends IDrawable {
         setPosition(100, 100);
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
-        score = 0;
         for (int i = 0; i < 7; i++) {
             GetSprite("/Images/Player/sprite_" + i + ".png");
         }
-        ScoreInd = HUD.AddText("Score:" + score, new Vector(0, 40));
 //        AddComponent(new RigidBody(this));
 //        AddComponent(new BackgroundDrawer(this));
     }
@@ -140,18 +136,7 @@ public class Player extends IDrawable {
 //        setRotation(getRotation()+(float)(Math.PI/180));
     }
 
-    public long getScore() {
-        return score;
-    }
-
-    public void setScore(long score) {
-        this.score = score;
-        try {
-            HUD.EditText(ScoreInd, "Score:" + this.score);
-        } catch (Exception e) {
-            System.err.println("error");
-        }
-    }
+   
 
     public void doMove() {
         if (!isColliding()) {

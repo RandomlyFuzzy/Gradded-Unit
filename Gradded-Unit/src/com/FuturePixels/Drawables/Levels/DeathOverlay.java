@@ -14,6 +14,7 @@ import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Components.Vector;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.LevelLoader;
+import com.FuturePixels.Engine.Utils.MusicUtils;
 import com.FuturePixels.Engine.Utils.imageUtils;
 import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.Color;
@@ -50,17 +51,18 @@ public class DeathOverlay extends IDrawable {
 
         Level().AddObject(new Button(new Vector(0.7f, 0.8f), "MainMenu", new HUDAbstract() {
             public void OnClick(Button b) {
+                MusicUtils.StopAllSounds();
                 new LevelLoader(new MainMenu());
+                
             }
         }));
         Level().AddObject(new Mouse());
-        
+        GetSprite("API/cat");
     }
 
     @Override
 
     public void doMove() {
-        GetSprite("API/cat");
         setPosition(new Vector(Game.g.getWindowWidth() * .5f, Game.g.getWindowHeight() * 1.3f));
         setSpriteWidth((int) (Game.g.getWindowWidth() * .5f));
         setSpriteHeight((int) (Game.g.getWindowHeight() * .6f));
@@ -77,8 +79,12 @@ public class DeathOverlay extends IDrawable {
         Font title = new Font("Comic sans serif ms", 0, (int) (GamePreferences.ButtonDims().getY() * 30f));
         g.setFont(title);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.setColor(Color.red);
-        g.drawString("You loss but here's a cat to chear you up", (0.5f*w)-metrics.stringWidth("You loss but here's a cat to chear you up") / 2, (h*0.125f));
+        float wid = metrics.stringWidth("You loss but here's a cat to chear you up") / 2;
+        float hei = g.getFont().getSize();
+        g.setColor(new Color(100, 100, 100, 200));
+        g.fillRect((int) ((0.5f * w) - wid), (int) ((h * 0.13f)-hei), (int) (wid * 2), (int)hei);
+        g.setColor(new Color(128,0,128));
+        g.drawString("You loss but here's a cat to chear you up", (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
     }
 

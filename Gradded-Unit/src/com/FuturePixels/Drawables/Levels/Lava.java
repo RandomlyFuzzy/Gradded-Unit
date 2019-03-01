@@ -23,7 +23,6 @@ public class Lava extends IDrawable {
     public void init() {
 //        UseTransforms(false);
         GetSprite("/images/platform/Platform.png");
-        imageUtils.T.setImage("API/cat", Level().getFromApi("http://aws.random.cat/meow"));
     }
 
     @Override
@@ -38,9 +37,6 @@ public class Lava extends IDrawable {
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
-        if (hasCollided) {
-
-        }
     }
 
     @Override

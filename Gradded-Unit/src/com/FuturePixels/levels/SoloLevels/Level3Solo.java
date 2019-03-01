@@ -8,6 +8,7 @@ import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.Utils.imageUtils;
 import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -27,14 +28,19 @@ public class Level3Solo extends ILevel {
 
     public Level3Solo() {
         super();
+        setSimpleCollison(false);
     }
 
     @Override
     public void init() {
-        setSimpleCollison(false);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+            }
+        }).start();
         player1 = new Player();
-        
-                
+
         AddObject(player1).setPosition(100, 0);
         AddObject(new Flag(new MainMenu())).setPosition(new Vector(150, 200));
         //Adding Platforms
@@ -48,21 +54,18 @@ public class Level3Solo extends ILevel {
         AddObject(new DestroyingPlatForm(new Vector(550, -850), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new DestroyingPlatForm(new Vector(400, -1050), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(200, -1200), 0.35)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        
+
         //AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
-            //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
+        //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
         //}, 1)).GetSprite("/images/Platform/rock_platform_moss_01.png").UpdateBounds();
-
-        
-        
-
 //        AddObject(new DebugObject());
         AddObject(new HUD());
         AddObject(new Lava());
 //        AddObject(new ScrollingBackground());
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-        play("/sounds/soung.wav", 0, Clip.LOOP_CONTINUOUSLY);
+//        play("/sounds/soung.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        setBackgroundimage(GetSprite("/Images/background.png"));
     }
 
     @Override
@@ -76,7 +79,6 @@ public class Level3Solo extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        g.drawImage(GetSprite("/Images/background.png"), 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 
