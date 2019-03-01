@@ -38,7 +38,6 @@ public class MainMenu extends ILevel {
     public MainMenu() {
         super();
         setStopAudioOnStart(false);
-        setSimpleCollison(false);
     }
 
     @Override

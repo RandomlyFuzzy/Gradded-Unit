@@ -339,7 +339,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
             IDrawable a = gameObjs.get(i);
             for (int j = 0; j < gameObjs.size(); j++) {
                 IDrawable b = gameObjs.get(j);
-                if (i == j || (a != null && b != null) || !(a.isEnabled() && b.isEnabled()) || !(a.IsCollidable() && b.IsCollidable())) {
+                if (i == j || (a == null && b == null) || !(a.isEnabled() && b.isEnabled()) || !(a.IsCollidable() && b.IsCollidable())) {
                     continue;
                 }
                 if (a != b) {

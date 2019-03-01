@@ -115,14 +115,14 @@ public class Vector {
     }
 
     public double Lengthsqrt() {
-        return (double) Math.sqrt((getX() * getX()) + (getY() * getY()));
+        return Math.sqrt((getX() * getX()) + (getY() * getY()));
     }
 
     public Vector Normalized() {
         double hypot = Lengthsqrt();
-        double x = (getX()) / hypot;
-        double y = (getY()) / hypot;
+        double X = (getX()) / hypot;
+        double Y = (getY()) / hypot;
         //needs the conversion else small but relivant inaccuracy
-        return new Vector((float) x, (float) y);
+        return new Vector((float) X, (float) Y);
     }
 }
