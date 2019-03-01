@@ -8,6 +8,7 @@ package com.FuturePixels.Engine.AbstractClasses;
 import com.FuturePixels.Engine.Components.Vector;
 import com.FuturePixels.Engine.Utils.UtilManager;
 import com.FuturePixels.Components.Transform;
+import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Engine.Utils.imageUtils;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.levels.OtherLevels.LeaderBoard;
@@ -152,13 +153,13 @@ public abstract class IDrawable {
     public synchronized void UpdateBounds() {
         float sw = getScaledSpriteWidth(), sh = getScaledSpriteHeight();
         double tr = getRotation();
-        Vector Sca = getScale(), pos = getPosition();
+        Vector Sca = new Vector(getScale()).mult(GamePreferences.WorldScale()), pos = getPosition();
 
         float hy = (float) Math.sqrt((sw / 2 * sw / 2) + (sh / 2 * sh / 2)),
-              a1 = (float) Math.atan2(sh / 2, sw / 2),
-              a2 = (float) Math.atan2(-sh / 2, sw / 2),
-              a3 = (float) Math.atan2(-sh / 2, -sw / 2),
-              a4 = (float) Math.atan2(sh / 2, -sw / 2);
+                a1 = (float) Math.atan2(sh / 2, sw / 2),
+                a2 = (float) Math.atan2(-sh / 2, sw / 2),
+                a3 = (float) Math.atan2(-sh / 2, -sw / 2),
+                a4 = (float) Math.atan2(sh / 2, -sw / 2);
         v1 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a1 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a1 - tr) * hy));
         v2 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a2 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a2 - tr) * hy));
         v3 = new Vector((int) (pos.getX() + Toffset.getX() + (float) Math.cos(a3 - tr) * hy), (int) (pos.getY() + Toffset.getY() + (float) -Math.sin(a3 - tr) * hy));
@@ -307,35 +308,46 @@ public abstract class IDrawable {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.red);
 
-        g2d.drawLine((int) Transform.getOffsetTranslation().getX() + (int) getPosition().getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) getPosition().getY(),
-                (int) Transform.getOffsetTranslation().getX() + (int) (getPosition().getX() + (GetUp().getX()) * 20),
-                (int) Transform.getOffsetTranslation().getY() + (int) (getPosition().getY() + (GetUp().getY()) * 20));
-        g2d.drawLine((int) Transform.getOffsetTranslation().getX() + (int) getPosition().getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) getPosition().getY(),
-                (int) Transform.getOffsetTranslation().getX() + (int) (getPosition().getX() + (GetRight().getX() * 20)),
-                (int) Transform.getOffsetTranslation().getY() + (int) ((getPosition().getY() + (GetRight().getY() * 20))));
+        g2d.drawLine(
+                (int) ((Transform.getOffsetTranslation().getX() + (int) getPosition().getX()) * GamePreferences.WorldScale().getX()),
+                (int) ((Transform.getOffsetTranslation().getY() + (int) getPosition().getY()) * GamePreferences.WorldScale().getY()),
+                (int) ((Transform.getOffsetTranslation().getX() + (int) (getPosition().getX() + (GetUp().getX()) * 20)) * GamePreferences.WorldScale().getX()),
+                (int) ((Transform.getOffsetTranslation().getY() + (int) (getPosition().getY() + (GetUp().getY()) * 20)) * GamePreferences.WorldScale().getX()));
+        g2d.drawLine(
+                (int) ((Transform.getOffsetTranslation().getX() + (int) getPosition().getX()) * GamePreferences.WorldScale().getX()),
+                (int) ((Transform.getOffsetTranslation().getY() + (int) getPosition().getY()) * GamePreferences.WorldScale().getY()),
+                (int) ((Transform.getOffsetTranslation().getX() + (int) (getPosition().getX() + (GetRight().getX()) * 20)) * GamePreferences.WorldScale().getX()),
+                (int) ((Transform.getOffsetTranslation().getY() + (int) (getPosition().getY() + (GetRight().getY()) * 20)) * GamePreferences.WorldScale().getX()));
 
         Vector[] _left = sideLeft();
         Vector[] _right = sideRight();
         Vector[] _Top = sideUp();
         Vector[] _down = sideDown();
-        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _left[0].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _left[0].getY(),
-                (int) Transform.getOffsetTranslation().getX() + (int) _left[1].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _left[1].getY());
-        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _right[0].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _right[0].getY(),
-                (int) Transform.getOffsetTranslation().getX() + (int) _right[1].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _right[1].getY());
-        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _Top[0].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _Top[0].getY(),
-                (int) Transform.getOffsetTranslation().getX() + (int) _Top[1].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _Top[1].getY());
-        g.drawLine((int) Transform.getOffsetTranslation().getX() + (int) _down[0].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _down[0].getY(),
-                (int) Transform.getOffsetTranslation().getX() + (int) _down[1].getX(),
-                (int) Transform.getOffsetTranslation().getY() + (int) _down[1].getY());
+        
+        g.drawLine(
+                (int)(((int) Transform.getOffsetTranslation().getX() +  _left[0].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _left[0].getY())* GamePreferences.WorldScale().getY()),
+                (int)(((int) Transform.getOffsetTranslation().getX() + (int) _left[1].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _left[1].getY())* GamePreferences.WorldScale().getY())
+        );
+        g.drawLine(
+                (int)(((int) Transform.getOffsetTranslation().getX() + (int) _right[0].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _right[0].getY())* GamePreferences.WorldScale().getY()),
+                (int)(((int) Transform.getOffsetTranslation().getX() + (int) _right[1].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _right[1].getY())* GamePreferences.WorldScale().getY())
+        );
+        g.drawLine(
+                (int)(((int) Transform.getOffsetTranslation().getX() + (int) _Top[0].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _Top[0].getY())* GamePreferences.WorldScale().getY()),
+                (int)(((int) Transform.getOffsetTranslation().getX() + (int) _Top[1].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _Top[1].getY())* GamePreferences.WorldScale().getY())
+        );
+        g.drawLine(
+                (int)(((int) Transform.getOffsetTranslation().getX() + (int) _down[0].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _down[0].getY())* GamePreferences.WorldScale().getY()),
+                (int)(((int) Transform.getOffsetTranslation().getX() + (int) _down[1].getX())* GamePreferences.WorldScale().getX()),
+                (int)(((int) Transform.getOffsetTranslation().getY() + (int) _down[1].getY())* GamePreferences.WorldScale().getY())
+        );
 
     }
 

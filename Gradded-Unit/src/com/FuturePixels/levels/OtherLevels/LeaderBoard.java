@@ -99,20 +99,16 @@ public class LeaderBoard extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        Font title = new Font("Arial", 0, 22);
-        g.setFont(title);
-        g.drawImage(GetSprite("/Images/WIP Background.png"), Game.g.getWindowWidth(), 0, (Game.g.getWindowWidth() * -1), (Game.g.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/WIP Background.png"), Game.g.getScaledWidth(), 0, (Game.g.getScaledWidth() * -1), (Game.g.getScaledHeight()), null);
         float y = 0.3f;
         if (times.size() != 0) {
             g.setColor(new Color(55, 55, 55, 150));
-            g.fillRect((int) ((0.03f) * Game.g.getWindowWidth()), (int) ((0.285f) * Game.g.getWindowHeight()), (int) ((((times.size() / 20) * 0.13f) + 0.13f) * Game.g.getWindowWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getWindowHeight()));
+            g.fillRect((int) ((0.03f) * Game.g.getScaledWidth()), (int) ((0.285f) * Game.g.getScaledHeight()), (int) ((((times.size() / 20) * 0.13f) + 0.13f) * Game.g.getScaledWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getScaledHeight()));
             g.setColor(Color.WHITE);
-            Font mainText = new Font("Arial", 0, 13);
-            g.setFont(mainText);
 
             for (int i = 0; i < times.size(); i++) {
                 String s = times.get(i);
-                g.drawString("No " + (i + 1) + " Place with " + s + " secs", (((i / 20) * 0.13f) + 0.03f) * Game.g.getWindowWidth(), (((i % 20) * 0.03f) + 0.3f) * Game.g.getWindowHeight());
+                g.drawString("No " + (i + 1) + " Place with " + s + " secs", (((i / 20) * 0.13f) + 0.03f) * Game.g.getScaledWidth(), (((i % 20) * 0.03f) + 0.3f) * Game.g.getScaledHeight());
                 y += 0.03f;
             }
         }

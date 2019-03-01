@@ -7,6 +7,7 @@ package com.FuturePixels.levels.Menus;
 
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.Button;
+import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.HUDAbstract;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
@@ -34,7 +35,6 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends ILevel {
 
-    
     public MainMenu() {
         super();
         setStopAudioOnStart(false);
@@ -42,8 +42,8 @@ public class MainMenu extends ILevel {
 
     @Override
     public void init() {
-        
-        play("/sounds/music.wav", 0,Clip.LOOP_CONTINUOUSLY);
+
+        play("/sounds/music.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         AddObject(new Button(new Vector(0.15f, 0.2f), "Solo", new HUDAbstract() {
             @Override
@@ -51,13 +51,13 @@ public class MainMenu extends ILevel {
                 Game.SetLevelActive(new LevelSelectSolo());
             }
         }));
-         AddObject(new Button(new Vector(0.15f, 0.32f), "Coop", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.4f), "Coop", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectCoop());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.44f), "Leaderboard", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.6f), "Leaderboard", new HUDAbstract() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
@@ -77,7 +77,7 @@ public class MainMenu extends ILevel {
         })).GetSprite("/images/Quit.png");
         AddObject(new Mouse());
         AddObject(new HUD());
-        
+
         setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 
@@ -89,18 +89,16 @@ public class MainMenu extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
-        Font title = new Font("Arial", 0, 22);
+        Font title = new Font("Comic sans serif ms", 0, (int) (GamePreferences.ButtonDims().getY() * 30f));
         g.setFont(title);
-        
-//        for (int i = 0; i < Game.g.getWindowWidth(); i++) {
-//            for (int j = 0; j < Game.g.getWindowHeight(); j++) {
+//        for (int i = 0; i < Game.g.getScaledWidth(); i++) {
+//            for (int j = 0; j < Game.g.getScaledHeight(); j++) {
 //                if (m != null && m.getBounds().contains(i, j)) {
 //                    g.drawRect(i, j, 1, 1);
 //                }
 //            }
 //        }
 
-        Font f = new Font("Comic sans", 0, WIDTH);
 
     }
 

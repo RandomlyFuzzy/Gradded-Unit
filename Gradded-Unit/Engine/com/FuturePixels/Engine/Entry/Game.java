@@ -71,12 +71,20 @@ public class Game {
         return DeltaTime / 1000000000.0f;
     }
 
+    public int getScaledWidth() {
+        return (int) ((float) gameWindow.getWidth() * (1f / GamePreferences.WorldScale().getX()));
+    }
+
+    public int getScaledHeight() {
+        return (int) ((float) gameWindow.getHeight() * (1f / GamePreferences.WorldScale().getY()));
+    }
+
     public int getWindowWidth() {
-        return gameWindow.getWidth();
+        return (int) (gameWindow.getWidth() );
     }
 
     public int getWindowHeight() {
-        return gameWindow.getHeight();
+        return (int) ((gameWindow.getHeight()));
     }
 
     /**
@@ -94,6 +102,7 @@ public class Game {
     public Game() {
         this.g = this;
         InitWindow();
+        System.out.println("com.FuturePixels.Engine.Entry.Game.<init>() " + getScaledHeight() + ", " + getScaledWidth());
 //        FullScreen();
         Game.SetLevelActive(new MainMenu());
         toggleCursor();
@@ -108,8 +117,6 @@ public class Game {
         SetDimentions(WINDOW_WIDTH, WINDOW_HEIGHT);
         gameWindow.getContentPane().setLayout(new CardLayout());
         gameWindow.setTitle("Gradded unit");
-//        gameWindow.pack();
-
         gameWindow.setResizable(false);
         gameWindow.setVisible(true);
         FrameBounds = gameWindow.getBounds();

@@ -41,7 +41,7 @@ public class Cookie extends IDrawable {
 
     @Override
     public void init() {
-        this.setPosition(Game.g.getWindowWidth()/2,Game.g.getWindowHeight()/2);
+        this.setPosition(Game.g.getScaledWidth()/2,Game.g.getScaledHeight()/2);
     }
 
     @Override
@@ -74,15 +74,15 @@ public class Cookie extends IDrawable {
         if ((this.getPosition().getX() - getSpriteWidth() / 2 + acc.getX()) <= 0) {
             acc.setX(0);
             this.getPosition().setX(getSpriteWidth() / 2);
-        } else if ((this.getPosition().getX() + getSpriteWidth() + acc.getX()) >= (Game.g.getWindowWidth())) {
+        } else if ((this.getPosition().getX() + getSpriteWidth() + acc.getX()) >= (Game.g.getScaledWidth())) {
             acc.setX(0);
-            this.getPosition().setX((Game.g.getWindowWidth()) - getSpriteWidth());
+            this.getPosition().setX((Game.g.getScaledWidth()) - getSpriteWidth());
         } else if ((this.getPosition().getY() - getSpriteHeight() / 2 + acc.getY()) <= 0) {
             acc.setY(0);
             this.getPosition().setY(getSpriteHeight() / 2);
-        } else if ((this.getPosition().getY() + getSpriteHeight() * 1.75f + acc.getY()) >= (Game.g.getWindowHeight())) {
+        } else if ((this.getPosition().getY() + getSpriteHeight() * 1.75f + acc.getY()) >= (Game.g.getScaledHeight())) {
             acc.setY(0);
-            this.getPosition().setY(Game.g.getWindowHeight() - (getSpriteHeight() * 1.75f));
+            this.getPosition().setY(Game.g.getScaledHeight() - (getSpriteHeight() * 1.75f));
         }
 
         this.setPosition(this.getPosition().getX() + acc.getX(), this.getPosition().getY() + acc.getY());

@@ -51,7 +51,7 @@ public class Button extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(new Vector(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(((Game.g.getScaledWidth() ))* relpos.getX(), ((Game.g.getScaledHeight() ))* relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
         setScale(GamePreferences.ButtonDims());
     }
 

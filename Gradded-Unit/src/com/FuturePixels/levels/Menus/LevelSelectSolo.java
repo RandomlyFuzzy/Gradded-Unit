@@ -57,8 +57,6 @@ public class LevelSelectSolo extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
-        Font title = new Font("Arial", 0, 22);
-        g.setFont(title);
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
+import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Vector;
@@ -70,7 +71,7 @@ public class DropDownButton extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
+        setPosition(new Vector(((Game.g.getScaledWidth())) * relpos.getX(), ((Game.g.getScaledHeight())) * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 
         setScale(GamePreferences.ButtonDims());
 

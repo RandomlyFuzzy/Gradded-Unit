@@ -161,8 +161,8 @@ public class Player extends IDrawable {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
         Acc.mult(0);
-//        if (-getPosition().getX() != Cameraopos.getX() - Game.g.getWindowWidth() / 2) {
-//            Cameraopos.setX(-getPosition().getX() + Game.g.getWindowWidth() / 2);
+//        if (-getPosition().getX() != Cameraopos.getX() - Game.g.getScaledWidth() / 2) {
+//            Cameraopos.setX(-getPosition().getX() + Game.g.getScaledWidth() / 2);
 //        }
         if (-getPosition().getY() > Cameraopos.getY() - getScaledSpriteHeight()) {
             Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight());
@@ -171,7 +171,7 @@ public class Player extends IDrawable {
         if (!isLock() && !hasLost) {
             Cameraopos.setY(Cameraopos.getY() + Game.g.getDelta() * 30f);
         }
-//        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
+//        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Cameraopos.setX(Transform.getOffsetTranslation().getX());
         Transform.setOffsetTranslation(Cameraopos);
     }

@@ -55,16 +55,16 @@ public class Settings extends ILevel {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
-        AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDAbstract() {
-            @Override
-            public void OnChange(Slider s, float Value) {
-                System.out.println(".OnChange() " + Value);
-                ILevel.setFPS(30 + (int) (Value * 60f));
-//                MusicUtils.ChangeMasterVolume(Value);
-            }
-        }));
+//        AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDAbstract() {
+//            @Override
+//            public void OnChange(Slider s, float Value) {
+//                System.out.println(".OnChange() " + Value);
+//                ILevel.setFPS(30 + (int) (Value * 60f));
+////                MusicUtils.ChangeMasterVolume(Value);
+//            }
+//        }));
 
-        AddObject(new DropDownButton(new Vector(0.4f, 0.2f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
+        AddObject(new DropDownButton(new Vector(0.4f, 0.3f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDAbstract[]{
                     new HUDAbstract() {
                 @Override
@@ -119,7 +119,7 @@ public class Settings extends ILevel {
                 Game.SetLevelActive(new Controls());
             }
         }));
-//        GetObject(0).setScale(new Vector(0.5f, 0.7f));
+        GetObject(0).setScale(new Vector(0.5f, 0.7f));
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
@@ -131,8 +131,6 @@ public class Settings extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
-        Font title = new Font("Arial", 0, 22);
-        g.setFont(title);
         
     }
 

@@ -74,7 +74,7 @@ public class Level2Solo extends ILevel {
         AddObject(new HUD());
 
 //        AddObject(new ScrollingBackground());
-        Transform.setOffsetTranslation(new Vector((Game.g.getWindowWidth()) / 2, 0));
+        Transform.setOffsetTranslation(new Vector((Game.g.getScaledWidth()) / 2, 0));
 //        play("/sounds/soung.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }

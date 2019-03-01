@@ -154,13 +154,11 @@ public class Controls extends ILevel {
 
         //Player Text
         g.setColor(Color.WHITE);
-        Font title = new Font("Arial", 0, 22);
-        g.setFont(title);
-        g.setColor(new Color(55,55,55,150));
+        g.setColor(new Color(55,55,55,200));
         g.fillRect((int) ((0.222f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), (int)((200f/1280f)* Game.g.getWindowWidth()), (int)((390f/720f) * Game.g.getWindowHeight()));
         g.fillRect((int) ((0.622f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), (int)((200f/1280f)* Game.g.getWindowWidth()), (int)((390f/720f) * Game.g.getWindowHeight()));
         
-        //g.fillRect((int) ((0.03f) * Game.g.getWindowWidth()), (int) ((0.235f) * Game.g.getWindowHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getWindowWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getWindowHeight()));
+        //g.fillRect((int) ((0.03f) * Game.g.getScaledWidth()), (int) ((0.235f) * Game.g.getScaledHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getScaledWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getScaledHeight()));
         g.setColor(Color.WHITE);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString("Player 1 Controls", Game.g.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.g.getWindowHeight() * 0.23f);

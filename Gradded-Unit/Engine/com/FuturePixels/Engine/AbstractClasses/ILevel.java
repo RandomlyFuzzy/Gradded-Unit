@@ -11,6 +11,7 @@ import com.FuturePixels.Engine.Utils.imageUtils;
 import com.FuturePixels.Engine.Utils.MusicUtils;
 import com.FuturePixels.Components.*;
 import com.FuturePixels.Drawables.Levels.HUD;
+import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.levels.Menus.MainMenu;
 import java.awt.*;
@@ -206,8 +207,10 @@ public abstract class ILevel extends JPanel implements ActionListener {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         if (background != null) {
-            g.drawImage(background, 0, 0, (Game.g.getWindowWidth()), (Game.g.getWindowHeight()), null);
+            g.drawImage(background, 0, 0, (int) (Game.g.getWindowWidth()), (int) (Game.g.getWindowHeight()), null);
         }
+        Font title = new Font("Comic sans serif ms", 0, (int) (GamePreferences.ButtonDims().getY() * 30f));
+        g2d.setFont(title);
         Draw(g2d);
         if (DebugCollisons) {
             try {
@@ -217,8 +220,8 @@ public abstract class ILevel extends JPanel implements ActionListener {
             }
 
 //            int CWH = 6;
-//            for (int j = (int) -Transform.getOffsetTranslation().getX() - (int) Game.g.getWindowWidth() / 2; j < (int) -Transform.getOffsetTranslation().getX() + (int) Game.g.getWindowWidth(); j += CWH) {
-//                for (int k = (int) -Transform.getOffsetTranslation().getY() - (int) Game.g.getWindowHeight() / 2; k < (int) -Transform.getOffsetTranslation().getY() + (int) Game.g.getWindowHeight(); k += CWH) {
+//            for (int j = (int) -Transform.getOffsetTranslation().getX() - (int) Game.g.getScaledWidth() / 2; j < (int) -Transform.getOffsetTranslation().getX() + (int) Game.g.getScaledWidth(); j += CWH) {
+//                for (int k = (int) -Transform.getOffsetTranslation().getY() - (int) Game.g.getScaledHeight() / 2; k < (int) -Transform.getOffsetTranslation().getY() + (int) Game.g.getScaledHeight(); k += CWH) {
 //                    boolean draw = false;
 //                    for (int i = 0; i < gameObjs.size(); i++) {
 //                        if (gameObjs.get(i).getBounds().contains(j, k)) {
@@ -241,7 +244,7 @@ public abstract class ILevel extends JPanel implements ActionListener {
         if (gameObjs.get(index) != null) {
             return gameObjs.get(index);
         }
-        return null;      
+        return null;
 
     }
 

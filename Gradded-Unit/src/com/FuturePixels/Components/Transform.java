@@ -5,6 +5,7 @@
  */
 package com.FuturePixels.Components;
 
+import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Engine.AbstractClasses.IComponent;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Components.Vector;
@@ -55,9 +56,10 @@ public class Transform extends IComponent {
         Scale = getParent().getScale();
         Translation = getParent().getPosition();
         RotationZ = getParent().getRotation();
+        WorldScale = GamePreferences.WorldScale();
 
         old = g.getTransform();
-        g.translate((((int) Translation.getX())) + offsetTranslation.getX(), (((int) Translation.getY())) + offsetTranslation.getY());
+        g.translate(((((int) Translation.getX())) + offsetTranslation.getX())*WorldScale.getX(), ((((int) Translation.getY())) + offsetTranslation.getY())*WorldScale.getX());
         g.rotate((RotationZ) + getParent().getOffset());
         g.scale(Scale.getX() * WorldScale.getX(), Scale.getY() * WorldScale.getY());
         Scale = null;

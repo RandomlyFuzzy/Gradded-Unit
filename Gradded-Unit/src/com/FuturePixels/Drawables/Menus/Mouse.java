@@ -24,6 +24,7 @@ public class Mouse extends IDrawable {
 
     public Mouse() {
         super();
+//        UseTransforms(false);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class Mouse extends IDrawable {
 
         setScale(new Vector(GamePreferences.ButtonDims()).mult(1.5f));
 
-        setPosition(new Vector(Level().getMousePos()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f/GamePreferences.WorldScale().getX(),1f/GamePreferences.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        setRotation(Rad);
         clicked = clicked != !Level().isClicking() && clicked;
     }

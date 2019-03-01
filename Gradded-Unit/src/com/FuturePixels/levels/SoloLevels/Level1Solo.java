@@ -79,8 +79,8 @@ public class Level1Solo extends ILevel {
         AddObject(new Lava());
         AddObject(new Flag(new Level2Solo())).setPosition(new Vector(800, -5650));
 //        AddObject(new DebugObject());
-//        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
-        Transform.setOffsetTranslation(new Vector((Game.g.getWindowWidth() * .6f) / 2, 0));
+//        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
+        Transform.setOffsetTranslation(new Vector((Game.g.getScaledWidth() * .6f) / 2, 0));
         play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
