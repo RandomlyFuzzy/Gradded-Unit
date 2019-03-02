@@ -29,7 +29,7 @@ public class Level3Solo extends ILevel {
     public Level3Solo() {
         super();
         setSimpleCollison(false);
-        setStopAudioOnStart(false);
+        setStopAudioOnStart(true);
     }
 
     @Override
@@ -62,11 +62,9 @@ public class Level3Solo extends ILevel {
 //        AddObject(new DebugObject());
         AddObject(new HUD());
         AddObject(new Lava());
-//        AddObject(new ScrollingBackground());
-//        LeaderBoard.AddTime(System.nanoTime());
-//        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
-//        play("/sounds/soung.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/background.png"));
+        Transform.setOffsetTranslation(new Vector((Game.g.getScaledWidth() * 0.4f) / 2, 0));
     }
 
     @Override

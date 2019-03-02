@@ -27,7 +27,7 @@ public class Level2Solo extends ILevel {
     public Level2Solo() {
         super();
         setSimpleCollison(false);
-        setStopAudioOnStart(false);
+        setStopAudioOnStart(true);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Level2Solo extends ILevel {
 
 //        AddObject(new ScrollingBackground());
         Transform.setOffsetTranslation(new Vector((Game.g.getScaledWidth()) / 2, 0));
-//        play("/sounds/soung.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/WIP Background.png"));
     }
 

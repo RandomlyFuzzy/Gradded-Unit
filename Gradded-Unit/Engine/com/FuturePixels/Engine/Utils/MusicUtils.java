@@ -47,8 +47,8 @@ public class MusicUtils {
         if (!isPlaying) {
             MusicThread d = new MusicThread(soundResource);
             d.Search(time);
-            //d.Start();
             d.Loop(LoopAmt);
+//            d.Sstart();
             sounds.add(d);
         }
     }
@@ -79,14 +79,14 @@ public class MusicUtils {
 
         private Clip clip;
         private AudioInputStream ais;
-        private boolean finished = false, isLooping = true;
+        private boolean finished = false, isLooping = true,stoped = false;
         private Thread t = null;
 
         public boolean isFinished() {
             if (isLooping && finished) {
                 Start();
             }
-            return finished && !isLooping;
+            return finished && !isLooping&&!stoped;
         }
 
         public void setFinished(boolean finished) {
@@ -142,6 +142,7 @@ public class MusicUtils {
                 clip.stop();
                 clip.flush();
                 ais.close();
+                stoped = true;
             } catch (IOException ex) {
                 Logger.getLogger(MusicUtils.class.getName()).log(Level.SEVERE, null, ex);
             }
