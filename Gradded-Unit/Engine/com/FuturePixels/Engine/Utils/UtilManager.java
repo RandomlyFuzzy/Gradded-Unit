@@ -5,7 +5,6 @@
  */
 package com.FuturePixels.Engine.Utils;
 
-import com.FuturePixels.Engine.Utils.CalcUtils;
 import com.FuturePixels.Engine.Utils.imageUtils;
 import com.FuturePixels.Engine.Utils.MusicUtils;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
@@ -19,7 +18,6 @@ public class UtilManager {
     public UtilManager() {
         new imageUtils();
         new MusicUtils();
-        new CalcUtils();
         new GamePreferences();
     }
 

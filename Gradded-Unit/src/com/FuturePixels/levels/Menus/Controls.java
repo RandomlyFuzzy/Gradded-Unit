@@ -9,7 +9,7 @@ import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
-import com.FuturePixels.Drawables.Menus.HUDAbstract;
+import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Components.Vector;
@@ -29,7 +29,7 @@ import static java.awt.image.ImageObserver.WIDTH;
 public class Controls extends ILevel {
 
     Vector relataiveity = Vector.Zero();
-    public static BlackoutButton BB = new BlackoutButton("Press to get key", new HUDAbstract() {
+    public static BlackoutButton BB = new BlackoutButton("Press to get key", new HUDdelegate() {
         public void OnClick(BlackoutButton b) {
             if (Controls.val == 1) {
                 GamePreferences.gp.setKeyLeftP1(Controls.lastKey);
@@ -79,7 +79,7 @@ public class Controls extends ILevel {
     @Override
     public void init() {
 
-        AddObject(new Button(new Vector(0.1f, 0.1f), "Back", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.1f, 0.1f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
@@ -88,35 +88,35 @@ public class Controls extends ILevel {
         
         
         //PLAYER 1
-        AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = A", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = A", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(1);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.425f), "RIGHT = D", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.425f), "RIGHT = D", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(2);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.550f), "JUMP = SPACE", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.550f), "JUMP = SPACE", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(3);
             }
         }));
 
         //PLAYER 2
-        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = LEFT", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = LEFT", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(4);
             }
         }));
-        AddObject(new Button(new Vector(0.70f, 0.425f), "RIGHT = RIGHT", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.425f), "RIGHT = RIGHT", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(5);
             }
         
         }));
-        AddObject(new Button(new Vector(0.70f, 0.550f), "JUMP = NUMPAD 0", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.550f), "JUMP = NUMPAD 0", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(6);
             }
@@ -124,14 +124,14 @@ public class Controls extends ILevel {
         }));
         
         //Player 1 Drop
-        AddObject(new Button(new Vector(0.30f, 0.675f), "DROP = S", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.30f, 0.675f), "DROP = S", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(7);
             }
         }));
         
         //Player 2 Drop
-        AddObject(new Button(new Vector(0.70f, 0.675f), "DROP = DOWN", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.70f, 0.675f), "DROP = DOWN", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(8);
             }
@@ -155,14 +155,14 @@ public class Controls extends ILevel {
         //Player Text
         g.setColor(Color.WHITE);
         g.setColor(new Color(55,55,55,200));
-        g.fillRect((int) ((0.222f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), (int)((200f/1280f)* Game.g.getWindowWidth()), (int)((390f/720f) * Game.g.getWindowHeight()));
-        g.fillRect((int) ((0.622f) * Game.g.getWindowWidth()), (int) ((0.195f * Game.g.getWindowHeight())), (int)((200f/1280f)* Game.g.getWindowWidth()), (int)((390f/720f) * Game.g.getWindowHeight()));
+        g.fillRect((int) ((0.222f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int)((200f/1280f)* Game.getWindowWidth()), (int)((390f/720f) * Game.getWindowHeight()));
+        g.fillRect((int) ((0.622f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int)((200f/1280f)* Game.getWindowWidth()), (int)((390f/720f) * Game.getWindowHeight()));
         
         //g.fillRect((int) ((0.03f) * Game.g.getScaledWidth()), (int) ((0.235f) * Game.g.getScaledHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getScaledWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getScaledHeight()));
         g.setColor(Color.WHITE);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString("Player 1 Controls", Game.g.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
-        g.drawString("Player 2 Controls", Game.g.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.g.getWindowHeight() * 0.23f);
+        g.drawString("Player 1 Controls", Game.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.getWindowHeight() * 0.23f);
+        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f);
     }
 
     @Override

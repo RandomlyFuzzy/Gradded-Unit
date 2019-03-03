@@ -9,7 +9,7 @@ import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.Mouse;
-import com.FuturePixels.Drawables.Menus.HUDAbstract;
+import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Components.Vector;
@@ -45,31 +45,31 @@ public class MainMenu extends ILevel {
 
         play("/sounds/music.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
-        AddObject(new Button(new Vector(0.15f, 0.2f), "Solo", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.2f), "Solo", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectSolo());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.4f), "Coop", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.4f), "Coop", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectCoop());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.6f), "Leaderboard", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.15f, 0.6f), "Leaderboard", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
         })).GetSprite("/images/Settings.png");;
-        AddObject(new Button(new Vector(0.98f, 0.91f), "", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.98f, 0.91f), "", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);

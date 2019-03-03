@@ -1,12 +1,4 @@
-/*
-ASSESSMENT TASK 2 "Cookie Chaser"
 
-Liam Woolley 1748910
-
-30/1/2019
-
-I certify that this is my own work and I have not used code from any other source.
- */
 package com.FuturePixels.Engine.Entry;
 
 import com.FuturePixels.Drawables.Levels.Player;
@@ -57,7 +49,7 @@ public class Game {
     public static void setLastLevelName(String LastLevelName) {
         Game.LastLevelName = LastLevelName;
     }
-    private float DeltaTime = 0;
+    private static float DeltaTime = 0;
 
     public void SetDelta() {
         DeltaTime = System.nanoTime() - deltalong;
@@ -67,23 +59,23 @@ public class Game {
     /*
         this is the Delta time in milliseconds for each time the screen is drawn
      */
-    public float getDelta() {
+    public static float getDelta() {
         return DeltaTime / 1000000000.0f;
     }
 
-    public int getScaledWidth() {
+    public static int getScaledWidth() {
         return (int) ((float) gameWindow.getWidth() * (1f / GamePreferences.WorldScale().getX()));
     }
 
-    public int getScaledHeight() {
+    public static int getScaledHeight() {
         return (int) ((float) gameWindow.getHeight() * (1f / GamePreferences.WorldScale().getY()));
     }
 
-    public int getWindowWidth() {
+    public static int getWindowWidth() {
         return (int) (gameWindow.getWidth() );
     }
 
-    public int getWindowHeight() {
+    public static int getWindowHeight() {
         return (int) ((gameWindow.getHeight()));
     }
 
@@ -108,7 +100,7 @@ public class Game {
         toggleCursor();
     }
 
-    public void InitWindow() {
+    public static void InitWindow() {
         gameWindow = new JFrame();
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setLocationRelativeTo(null);
@@ -148,7 +140,7 @@ public class Game {
         isFullScreen = !isFullScreen;
     }
 
-    public JFrame GetFrame() {
+    public static JFrame GetFrame() {
         return gameWindow;
     }
 

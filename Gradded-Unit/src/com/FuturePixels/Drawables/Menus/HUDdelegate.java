@@ -9,7 +9,7 @@ package com.FuturePixels.Drawables.Menus;
  *
  * @author RandomlyFuzzy
  */
-public abstract class HUDAbstract {
+public abstract class HUDdelegate {
 
     
     //i had problems getting generics working and inheritence doesnt work with button object(makes everything defored) so this is the next best thing I could think of

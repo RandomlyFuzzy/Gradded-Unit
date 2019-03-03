@@ -23,7 +23,7 @@ public class Button extends IDrawable {
 
     private String Message = "";
     private Vector relpos = Vector.One();
-    private HUDAbstract buttonDelegate;
+    private HUDdelegate buttonDelegate;
 
     public Button() {
         super();
@@ -31,13 +31,13 @@ public class Button extends IDrawable {
 
     }
 
-    public Button(String Message, HUDAbstract Logic) {
+    public Button(String Message, HUDdelegate Logic) {
         super();
         this.Message = Message;
         buttonDelegate = Logic;
     }
 
-    public Button(Vector relpos, String Message, HUDAbstract Logic) {
+    public Button(Vector relpos, String Message, HUDdelegate Logic) {
         super();
         this.Message = Message;
         this.buttonDelegate = Logic;
@@ -51,7 +51,7 @@ public class Button extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(new Vector(((Game.g.getScaledWidth() ))* relpos.getX(), ((Game.g.getScaledHeight() ))* relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(((Game.getScaledWidth() ))* relpos.getX(), ((Game.getScaledHeight() ))* relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
         setScale(GamePreferences.ButtonDims());
     }
 

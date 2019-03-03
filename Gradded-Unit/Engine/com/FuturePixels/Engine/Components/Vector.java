@@ -32,6 +32,16 @@ public class Vector {
         }
     }
 
+    public Vector(float angle) {
+        this.x = (float) Math.sin(angle);
+        this.y = (float) -Math.cos(angle);
+    }
+
+    public Vector DirectionalVector(float angle, float Magnitude) {
+        Vector v = new Vector(angle).mult(Magnitude);
+        return v;
+    }
+
     public boolean isNaN(Vector v) {
         return Float.isNaN(v.getX()) || Float.isNaN(v.getY());
     }

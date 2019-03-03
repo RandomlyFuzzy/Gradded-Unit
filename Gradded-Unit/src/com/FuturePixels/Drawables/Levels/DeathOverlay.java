@@ -8,7 +8,7 @@ package com.FuturePixels.Drawables.Levels;
 import com.FuturePixels.Components.Transform;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
-import com.FuturePixels.Drawables.Menus.HUDAbstract;
+import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Components.Vector;
@@ -37,7 +37,7 @@ public class DeathOverlay extends IDrawable {
 
     @Override
     public void init() {
-        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "retry", new HUDAbstract() {
+        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "retry", new HUDdelegate() {
             public void OnClick(Button b) {
                 try {
                     new LevelLoader(b.Level().getClass().newInstance());
@@ -49,7 +49,7 @@ public class DeathOverlay extends IDrawable {
             }
         }));
 
-        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "MainMenu", new HUDAbstract() {
+        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "MainMenu", new HUDdelegate() {
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
                 new LevelLoader(new MainMenu());
@@ -63,15 +63,15 @@ public class DeathOverlay extends IDrawable {
     @Override
 
     public void doMove() {
-        setPosition(new Vector(Game.g.getWindowWidth() * .5f, Game.g.getWindowHeight() * 1.3f));
-        setSpriteWidth((int) (Game.g.getWindowWidth() * .5f));
-        setSpriteHeight((int) (Game.g.getWindowHeight() * .6f));
+        setPosition(new Vector(Game.getWindowWidth() * .5f, Game.getWindowHeight() * 1.3f));
+        setSpriteWidth((int) (Game.getWindowWidth() * .5f));
+        setSpriteHeight((int) (Game.getWindowHeight() * .6f));
     }
 
     @Override
     public void Update(Graphics2D g) {
-        float w = Game.g.getWindowWidth();
-        float h = Game.g.getWindowHeight();
+        float w = Game.getWindowWidth();
+        float h = Game.getWindowHeight();
         g.setColor(new Color(100, 100, 100, 100));
         g.fillRect((int) (0.05f * w), (int) (0.05f * w), (int) (0.9f * w), (int) (h - ((0.1f * w))));
         g.drawImage(getLastImage(), (int) (-(getSpriteWidth()) / 2 + (w * 0.5f)), (int) (-(getSpriteHeight()) / 2 + (h * 0.43f)), (int) (getSpriteWidth()), (int) (getSpriteHeight()), null);

@@ -10,7 +10,7 @@ import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Components.Vector;
 import com.FuturePixels.Drawables.Menus.Button;
-import com.FuturePixels.Drawables.Menus.HUDAbstract;
+import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.DropDownButton;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.Slider;
@@ -49,13 +49,13 @@ public class Settings extends ILevel {
         level = this;
 
         AddObject(new HUD());
-        AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
-//        AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDAbstract() {
+//        AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDdelegate() {
 //            @Override
 //            public void OnChange(Slider s, float Value) {
 //                System.out.println(".OnChange() " + Value);
@@ -65,36 +65,36 @@ public class Settings extends ILevel {
 //        }));
 
         AddObject(new DropDownButton(new Vector(0.4f, 0.3f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
-                new HUDAbstract[]{
-                    new HUDAbstract() {
+                new HUDdelegate[]{
+                    new HUDdelegate() {
                 @Override
                 public void OnClick(Button b) {
                     //1920 x 1080
                     Game.SetDimentions(1920, 1080);
                 }
             },
-                    new HUDAbstract() {
+                    new HUDdelegate() {
                 @Override
                 public void OnClick(Button b) {
                     //1600 x 900
                     Game.SetDimentions(1600, 900);
                 }
             },
-                    new HUDAbstract() {
+                    new HUDdelegate() {
                 @Override
                 public void OnClick(Button b) {
                     //1280 x 720
                     Game.SetDimentions(1280, 720);
                 }
             },
-                    new HUDAbstract() {
+                    new HUDdelegate() {
                 @Override
                 public void OnClick(Button b) {
                     //860 x 540
                     Game.SetDimentions(860, 540);
                 }
             },
-                    new HUDAbstract() {
+                    new HUDdelegate() {
                 @Override
                 public void OnClick(Button b) {
                     Rectangle bo = Game.g.GetFrame().getBounds();
@@ -105,7 +105,7 @@ public class Settings extends ILevel {
             }
                 }));
 
-        AddObject(new Button(new Vector(0.4f, 0.1f), "Fullscreen", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.4f, 0.1f), "Fullscreen", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.FullScreen();
@@ -113,7 +113,7 @@ public class Settings extends ILevel {
             }
 
         }));
-        AddObject(new Button(new Vector(0.8f, 0.1f), "Controls", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.8f, 0.1f), "Controls", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());

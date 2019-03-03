@@ -90,9 +90,9 @@ public class GamePreferences {
     private static Vector worldDims = Vector.One();
 
     public static void CalculateDims() {
-        float hypot = (float) Math.sqrt((Game.g.GetFrame().getWidth() * Game.g.GetFrame().getWidth()) + (Game.g.GetFrame().getHeight() * Game.g.GetFrame().getHeight()));
+        float hypot = (float) Math.sqrt((Game.GetFrame().getWidth() * Game.GetFrame().getWidth()) + (Game.GetFrame().getHeight() * Game.GetFrame().getHeight()));
         buttondims = new Vector(0.9f, 0.79f);
-        worldDims = new Vector((Game.g.GetFrame().getWidth() / hypot) * Game.g.GetFrame().getWidth() / 1250, ( Game.g.GetFrame().getWidth() / hypot) * Game.g.GetFrame().getWidth() / 1250);
+        worldDims = new Vector((Game.GetFrame().getWidth() / hypot) * Game.GetFrame().getWidth() / 1250, ( Game.GetFrame().getWidth() / hypot) * Game.GetFrame().getWidth() / 1250);
     }
 
     public static Vector ButtonDims() {

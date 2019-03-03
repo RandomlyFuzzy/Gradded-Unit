@@ -22,7 +22,7 @@ public class Slider extends IDrawable {
 
     private float length = 1, value = 0;
     private Vector relpos = Vector.One();
-    private HUDAbstract Delegate;
+    private HUDdelegate Delegate;
     private Vector MouseWhenPressed = new Vector(0, 0);
     private Vector MoveAmt = new Vector(0, 0);
 
@@ -30,7 +30,7 @@ public class Slider extends IDrawable {
 //        super();
     }
 
-    public Slider(Vector relpos, float Length, HUDAbstract Logic) {
+    public Slider(Vector relpos, float Length, HUDdelegate Logic) {
         super();
         this.length = Game.g.getWindowWidth()*Length;
         this.Delegate = Logic;

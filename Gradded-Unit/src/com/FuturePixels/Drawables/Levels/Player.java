@@ -152,7 +152,7 @@ public class Player extends IDrawable {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
             //mars gravity*2  
-            Acc.setY(Acc.getY() + (-3.711f * (float) Game.g.getDelta() * 2));
+            Acc.setY(Acc.getY() + (-3.711f * (float) Game.getDelta() * 2));
         }
         Velocity.add(Acc);
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));

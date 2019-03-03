@@ -6,7 +6,7 @@
 package com.FuturePixels.levels.Menus;
 
 import com.FuturePixels.Drawables.Menus.Button;
-import com.FuturePixels.Drawables.Menus.HUDAbstract;
+import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
@@ -33,13 +33,13 @@ public class LevelSelectCoop extends ILevel {
     @Override
     public void init() {
          for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1))+"Coop", new HUDAbstract() {
+            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1))+"Coop", new HUDdelegate() {
                 public void OnClick(Button b) {
                     new LevelLoader(b.getMessage());
                 }
             }));
         }
-        AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDAbstract() {
+        AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());

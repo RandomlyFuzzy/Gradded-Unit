@@ -22,13 +22,13 @@ public class BlackoutButton extends IDrawable {
 
     private String Message = "";
     private Vector relpos = Vector.One();
-    private HUDAbstract buttonDelegate;
+    private HUDdelegate buttonDelegate;
 
     public BlackoutButton() {
         super();
     }
 
-    public BlackoutButton(String Message, HUDAbstract Logic) {
+    public BlackoutButton(String Message, HUDdelegate Logic) {
         super();
         this.Message = Message;
         buttonDelegate = Logic;
@@ -41,9 +41,9 @@ public class BlackoutButton extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2);
-        setSpriteWidth(Game.g.getWindowWidth());
-        setSpriteHeight(Game.g.getWindowHeight());
+        setPosition(Game.getWindowWidth() / 2, Game.getWindowHeight() / 2);
+        setSpriteWidth(Game.getWindowWidth());
+        setSpriteHeight(Game.getWindowHeight());
     }
 
     @Override
