@@ -11,7 +11,7 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Utils.LevelLoader;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -36,7 +36,7 @@ public class LevelSelectSolo extends ILevel {
         for (int i = 0; i < 5; i++) {
             AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)) + "Solo", new HUDdelegate() {
                 public void OnClick(Button b) {
-                    new LevelLoader(b.getMessage());
+                    LevelLoader.LoadLevel(b.getMessage());
                 }
             }));
         }

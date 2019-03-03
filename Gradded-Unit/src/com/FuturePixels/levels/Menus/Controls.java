@@ -12,7 +12,7 @@ import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import com.FuturePixels.Engine.Entry.Game;
 import java.awt.Color;
 import java.awt.Font;
@@ -146,7 +146,7 @@ public class Controls extends ILevel {
 
     @Override
     public void Update(ActionEvent ae) {
-        relataiveity = GamePreferences.ButtonDims();
+        relataiveity = Game.ButtonDims();
     }
 
     @Override

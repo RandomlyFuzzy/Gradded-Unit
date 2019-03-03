@@ -5,13 +5,13 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Components.Transform;
+import com.FuturePixels.Engine.extraComponents.Transform;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.LevelLoader;
 import com.FuturePixels.Engine.Utils.MusicUtils;
@@ -40,7 +40,7 @@ public class DeathOverlay extends IDrawable {
         Level().AddObject(new Button(new Vector(0.3f, 0.8f), "retry", new HUDdelegate() {
             public void OnClick(Button b) {
                 try {
-                    new LevelLoader(b.Level().getClass().newInstance());
+                    LevelLoader.LoadLevel(b.Level().getClass().newInstance());
                 } catch (InstantiationException ex) {
                     Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
@@ -52,7 +52,7 @@ public class DeathOverlay extends IDrawable {
         Level().AddObject(new Button(new Vector(0.7f, 0.8f), "MainMenu", new HUDdelegate() {
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
-                new LevelLoader(new MainMenu());
+                LevelLoader.LoadLevel(new MainMenu());
                 
             }
         }));
@@ -76,7 +76,7 @@ public class DeathOverlay extends IDrawable {
         g.fillRect((int) (0.05f * w), (int) (0.05f * w), (int) (0.9f * w), (int) (h - ((0.1f * w))));
         g.drawImage(getLastImage(), (int) (-(getSpriteWidth()) / 2 + (w * 0.5f)), (int) (-(getSpriteHeight()) / 2 + (h * 0.43f)), (int) (getSpriteWidth()), (int) (getSpriteHeight()), null);
         Font pre = g.getFont();
-        Font title = new Font("Comic sans serif ms", 0, (int) (GamePreferences.ButtonDims().getY() * 30f));
+        Font title = new Font("Comic sans serif ms", 0, (int) (Game.ButtonDims().getY() * 30f));
         g.setFont(title);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         float wid = metrics.stringWidth("You loss but here's a cat to chear you up") / 2;

@@ -7,7 +7,7 @@ package com.FuturePixels.Drawables.Levels;
 
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 

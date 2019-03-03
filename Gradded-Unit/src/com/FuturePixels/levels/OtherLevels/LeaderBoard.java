@@ -13,7 +13,7 @@ import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.LevelLoader;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import com.FuturePixels.Engine.Utils.FileUtils;
 import java.awt.Color;
 import java.awt.Font;
@@ -103,11 +103,11 @@ public class LeaderBoard extends ILevel {
         g.drawImage(GetSprite("/Images/WIP Background.png"), Game.getWindowWidth(), 0, (Game.getWindowWidth() * -1), (Game.getWindowHeight()), null);
         float y = 0.3f;
         Font f = g.getFont();
-        Font f2 = f.deriveFont(1, GamePreferences.WorldScale().getY()*13);
+        Font f2 = f.deriveFont(1, Game.WorldScale().getY()*13);
         g.setFont(f2);
         if (times.size() != 0) {
             g.setColor(new Color(55, 55, 55, 150));
-            g.fillRect((int) ((0.03f) * Game.getWindowWidth()), (int) ((0.285f) * Game.getWindowHeight()), (int) (((((times.size()-1) / 20) * 0.13f) + 0.13f) * Game.getWindowWidth()), (int) (((((times.size() > 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getWindowHeight()));
+            g.fillRect((int) ((0.03f) * Game.getWindowWidth()), (int) ((0.285f) * Game.getWindowHeight()), (int) (((((times.size()-1) / 20) * 0.13f) + 0.13f) * Game.getWindowWidth()), (int) (((((times.size() > 20f ? 20f : times.size())) * 0.0295f)) * Game.getWindowHeight()));
             g.setColor(Color.WHITE);
 
             for (int i = 0; i < times.size(); i++) {

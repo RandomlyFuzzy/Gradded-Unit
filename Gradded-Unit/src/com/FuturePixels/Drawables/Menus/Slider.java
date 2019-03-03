@@ -7,7 +7,7 @@ package com.FuturePixels.Drawables.Menus;
 
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -32,7 +32,7 @@ public class Slider extends IDrawable {
 
     public Slider(Vector relpos, float Length, HUDdelegate Logic) {
         super();
-        this.length = Game.g.getWindowWidth()*Length;
+        this.length = Game.getWindowWidth()*Length;
         this.Delegate = Logic;
         this.relpos = relpos;
     }
@@ -44,8 +44,8 @@ public class Slider extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(Game.g.getWindowWidth() * relpos.getX(), Game.g.getWindowHeight() * relpos.getY());
-        setScale(GamePreferences.ButtonDims());
+        setPosition(Game.getWindowWidth() * relpos.getX(), Game.getWindowHeight() * relpos.getY());
+        setScale(Game.ButtonDims());
 
         if (Level().isClicking() && inside) {
             MouseWhenPressed = Level().getMousePos();
@@ -58,7 +58,7 @@ public class Slider extends IDrawable {
             value = (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX());
             Delegate.OnChange(this, GetValue());
         }
-        setPosition((Game.g.getWindowWidth() * relpos.getX()) - (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX()), (Game.g.getWindowHeight() * relpos.getY()));
+        setPosition((Game.getWindowWidth() * relpos.getX()) - (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX()), (Game.getWindowHeight() * relpos.getY()));
     }
 
     public float GetValue() {

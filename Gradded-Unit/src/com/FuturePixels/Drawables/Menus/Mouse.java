@@ -5,11 +5,11 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Components.Transform;
+import com.FuturePixels.Engine.extraComponents.Transform;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -43,9 +43,9 @@ public class Mouse extends IDrawable {
             ind = 0;
         }
 
-        setScale(new Vector(GamePreferences.ButtonDims()).mult(1.5f));
+        setScale(new Vector(Game.ButtonDims()).mult(1.5f));
 
-        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f/GamePreferences.WorldScale().getX(),1f/GamePreferences.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f/Game.WorldScale().getX(),1f/Game.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        setRotation(Rad);
         clicked = clicked != !Level().isClicking() && clicked;
     }

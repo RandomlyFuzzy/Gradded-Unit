@@ -5,10 +5,10 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Components.Transform;
+import com.FuturePixels.Engine.extraComponents.Transform;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -52,7 +52,7 @@ public class Button extends IDrawable {
     @Override
     public void doMove() {
         setPosition(new Vector(((Game.getScaledWidth() ))* relpos.getX(), ((Game.getScaledHeight() ))* relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
-        setScale(GamePreferences.ButtonDims());
+        setScale(Game.ButtonDims());
     }
 
     @Override

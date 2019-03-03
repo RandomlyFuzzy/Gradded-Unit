@@ -12,7 +12,7 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import com.FuturePixels.levels.OtherLevels.LeaderBoard;
 import java.awt.Color;
 import java.awt.Font;
@@ -89,7 +89,7 @@ public class MainMenu extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
-        Font title = new Font("Comic sans serif ms", 0, (int) (GamePreferences.ButtonDims().getY() * 30f));
+        Font title = new Font("Comic sans serif ms", 0, (int) (Game.ButtonDims().getY() * 30f));
         g.setFont(title);
 //        for (int i = 0; i < Game.g.getScaledWidth(); i++) {
 //            for (int j = 0; j < Game.g.getScaledHeight(); j++) {

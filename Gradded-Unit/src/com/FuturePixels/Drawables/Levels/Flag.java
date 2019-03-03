@@ -73,7 +73,7 @@ public class Flag extends IDrawable {
                 try {
                     Thread.sleep(2000);
                     MusicUtils.StopAllSounds();
-                    new LevelLoader(next.getClass().newInstance());
+                    LevelLoader.LoadLevel(next.getClass().newInstance());
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Flag.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {

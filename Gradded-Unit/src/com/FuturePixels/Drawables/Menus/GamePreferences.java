@@ -1,7 +1,7 @@
 package com.FuturePixels.Drawables.Menus;
 
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import java.awt.event.KeyEvent;
 
 /**
@@ -86,21 +86,6 @@ public class GamePreferences {
         this.KeyDropP2 = KeyDropP2;
     }
 
-    private static Vector buttondims = Vector.Zero();
-    private static Vector worldDims = Vector.One();
-
-    public static void CalculateDims() {
-        float hypot = (float) Math.sqrt((Game.GetFrame().getWidth() * Game.GetFrame().getWidth()) + (Game.GetFrame().getHeight() * Game.GetFrame().getHeight()));
-        buttondims = new Vector(0.9f, 0.79f);
-        worldDims = new Vector((Game.GetFrame().getWidth() / hypot) * Game.GetFrame().getWidth() / 1250, ( Game.GetFrame().getWidth() / hypot) * Game.GetFrame().getWidth() / 1250);
-    }
-
-    public static Vector ButtonDims() {
-        return new Vector(buttondims);
-    }
     
-     public static Vector WorldScale() {
-        return new Vector(worldDims);
-    }
 
 }

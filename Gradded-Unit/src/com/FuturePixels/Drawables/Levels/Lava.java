@@ -5,7 +5,7 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Components.Transform;
+import com.FuturePixels.Engine.extraComponents.Transform;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
 import com.FuturePixels.Engine.Utils.imageUtils;

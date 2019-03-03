@@ -5,12 +5,12 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.FuturePixels.Components.*;
+import com.FuturePixels.Engine.extraComponents.Transform;
 import com.FuturePixels.Engine.AbstractClasses.IDrawable;
 import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.Components.Collison;
+import com.FuturePixels.Engine.extraComponents.Collison;
 import com.FuturePixels.Engine.Utils.CollisonUtils;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import java.awt.Graphics2D;
 import java.util.Random;
 
@@ -169,7 +169,7 @@ public class Player extends IDrawable {
         }
         //screen scroller
         if (!isLock() && !hasLost) {
-            Cameraopos.setY(Cameraopos.getY() + Game.g.getDelta() * 30f);
+            Cameraopos.setY(Cameraopos.getY() + Game.getDelta() * 30f);
         }
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Cameraopos.setX(Transform.getOffsetTranslation().getX());

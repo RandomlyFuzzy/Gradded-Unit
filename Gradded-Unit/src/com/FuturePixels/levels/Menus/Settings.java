@@ -8,7 +8,7 @@ package com.FuturePixels.levels.Menus;
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.FuturePixels.Engine.AbstractClasses.ILevel;
-import com.FuturePixels.Engine.Components.Vector;
+import com.FuturePixels.Engine.extraComponents.Vector;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.DropDownButton;
@@ -97,10 +97,10 @@ public class Settings extends ILevel {
                     new HUDdelegate() {
                 @Override
                 public void OnClick(Button b) {
-                    Rectangle bo = Game.g.GetFrame().getBounds();
+                    Rectangle bo = Game.GetFrame().getBounds();
                     //640 x 360
                     Game.SetDimentions(640, 360);
-                    Game.g.GetFrame().setBounds(bo.x, bo.y, 640, 360);
+                    Game.GetFrame().setBounds(bo.x, bo.y, 640, 360);
                 }
             }
                 }));
