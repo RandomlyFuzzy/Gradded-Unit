@@ -6,9 +6,9 @@
 package com.FuturePixels;
 
 import com.FuturePixels.Drawables.Menus.GamePreferences;
-import com.FuturePixels.Engine.AbstractClasses.ILevel;
-import com.FuturePixels.Engine.Utils.LevelLoader;
-import com.FuturePixels.Engine.Entry.Game;
+import com.Liamengine.Engine.AbstractClasses.ILevel;
+import com.Liamengine.Engine.Utils.LevelLoader;
+import com.Liamengine.Engine.Entry.Game;
 import com.FuturePixels.levels.CoopLevels.Level1Coop;
 import com.FuturePixels.levels.CoopLevels.Level2Coop;
 import com.FuturePixels.levels.CoopLevels.Level3Coop;
@@ -30,6 +30,7 @@ public class Entry {
         ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level1Coop(), new Level2Coop(), new Level3Coop()};
         LevelLoader.LL.SetLevels(arr);
         new GamePreferences();
+        Game.setDefualtLevel(new MainMenu());
         new Game(new MainMenu());
 
     }

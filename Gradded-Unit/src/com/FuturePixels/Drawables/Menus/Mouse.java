@@ -5,11 +5,11 @@
  */
 package com.FuturePixels.Drawables.Menus;
 
-import com.FuturePixels.Engine.extraComponents.Transform;
+import com.Liamengine.Engine.Components.Transform;
 import com.FuturePixels.Drawables.Levels.HUD;
-import com.FuturePixels.Engine.AbstractClasses.IDrawable;
-import com.FuturePixels.Engine.Entry.Game;
-import com.FuturePixels.Engine.extraComponents.Vector;
+import com.Liamengine.Engine.AbstractClasses.IDrawable;
+import com.Liamengine.Engine.Entry.Game;
+import com.Liamengine.Engine.Components.Vector;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -29,6 +29,7 @@ public class Mouse extends IDrawable {
 
     @Override
     public void init() {
+        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f / Game.WorldScale().getX(), 1f / Game.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        GetSprite("/Images/Cursor.png");
     }
     float ind = 0;
@@ -45,7 +46,7 @@ public class Mouse extends IDrawable {
 
         setScale(new Vector(Game.ButtonDims()).mult(1.5f));
 
-        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f/Game.WorldScale().getX(),1f/Game.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f / Game.WorldScale().getX(), 1f / Game.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        setRotation(Rad);
         clicked = clicked != !Level().isClicking() && clicked;
     }
