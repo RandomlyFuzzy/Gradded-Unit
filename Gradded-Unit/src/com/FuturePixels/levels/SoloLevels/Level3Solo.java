@@ -55,6 +55,27 @@ public class Level3Solo extends ILevel {
         AddObject(new DestroyingPlatForm(new Vector(601, -850), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
         AddObject(new DestroyingPlatForm(new Vector(400, -1050), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
         AddObject(new PlatForm(new Vector(200, -1200), 0.35)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(300, -1400), -0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(600, -1600), -0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(500, -1800), 0.30)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(250, -2000), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(600, -2050), -0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(500, -2250), 0.30)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(225, -2450), 0.30)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(350, -2650), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(550, -2850), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(450, -3000), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(200, -3150), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(500, -3300), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(150, -3450), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(600, -3600), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
+        AddObject(new PlatForm(new Vector(500, -3800), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
+        AddObject(new PlatForm(new Vector(300, -4000), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
+        AddObject(new PlatForm(new Vector(600, -4100), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
+        AddObject(new PlatForm(new Vector(400, -4300), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
+        AddObject(new PlatForm(new Vector(200, -4400), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        
+        
 
         //AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
         //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
