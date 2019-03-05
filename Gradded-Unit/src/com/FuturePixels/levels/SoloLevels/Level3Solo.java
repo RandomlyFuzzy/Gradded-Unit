@@ -72,7 +72,7 @@ public class Level3Solo extends ILevel {
         AddObject(new PlatForm(new Vector(500, -3800), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(300, -4000), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(600, -4100), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(400, -4300), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
+        AddObject(new PlatForm(new Vector(400, -4200), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(200, -4400), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         
         

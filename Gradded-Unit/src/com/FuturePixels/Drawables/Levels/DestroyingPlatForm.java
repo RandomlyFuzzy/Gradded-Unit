@@ -39,6 +39,7 @@ public class DestroyingPlatForm extends IDrawable {
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
         if (haslanded && !isColliding()) {
+            Level().play("/Sounds/PlatformBreak_01.wav");
             setEnabled(false);
         }
     }
