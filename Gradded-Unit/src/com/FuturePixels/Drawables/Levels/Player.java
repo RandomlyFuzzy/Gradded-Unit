@@ -164,8 +164,8 @@ public class Player extends IDrawable {
 //        if (-getPosition().getX() != Cameraopos.getX() - Game.g.getScaledWidth() / 2) {
 //            Cameraopos.setX(-getPosition().getX() + Game.g.getScaledWidth() / 2);
 //        }
-        if (-getPosition().getY() > Cameraopos.getY() - getScaledSpriteHeight()) {
-            Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight());
+        if (-getPosition().getY() > Cameraopos.getY() - getScaledSpriteHeight()*2) {
+            Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight()*2);
         }
         //screen scroller
         if (!isLock() && !hasLost) {

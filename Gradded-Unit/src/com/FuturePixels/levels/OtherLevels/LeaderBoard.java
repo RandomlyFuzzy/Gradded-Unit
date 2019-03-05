@@ -105,7 +105,7 @@ public class LeaderBoard extends ILevel {
         Font f = g.getFont();
         Font f2 = f.deriveFont(1, Game.WorldScale().getY()*13);
         g.setFont(f2);
-        if (times.size() != 0) {
+        if((times.size()==1&&!times.get(0).equals(new String()) && !Double.isNaN(Double.parseDouble(times.get(0))))||times.size()>1){
             g.setColor(new Color(55, 55, 55, 150));
             g.fillRect((int) ((0.03f) * Game.getWindowWidth()), (int) ((0.285f) * Game.getWindowHeight()), (int) (((((times.size()-1) / 20) * 0.13f) + 0.13f) * Game.getWindowWidth()), (int) (((((times.size() > 20f ? 20f : times.size())) * 0.0295f)) * Game.getWindowHeight()));
             g.setColor(Color.WHITE);
