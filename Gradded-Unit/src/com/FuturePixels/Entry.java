@@ -12,6 +12,7 @@ import com.Liamengine.Engine.Entry.Game;
 import com.FuturePixels.levels.CoopLevels.Level1Coop;
 import com.FuturePixels.levels.CoopLevels.Level2Coop;
 import com.FuturePixels.levels.CoopLevels.Level3Coop;
+import com.FuturePixels.levels.Menus.DebugLevel;
 import com.FuturePixels.levels.Menus.LevelSelectSolo;
 import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.levels.Menus.Settings;
@@ -32,7 +33,8 @@ public class Entry {
         LevelLoader.LL.SetLevels(arr);
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu());
+//        new Game(new DebugLevel());
         new Game(new MainMenu());
-
+        Game.GetFrame().setTitle("Graded Unit");
     }
 }

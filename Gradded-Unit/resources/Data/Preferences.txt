@@ -1,8 +1,8 @@
-A
-D
-Space
-Enter
-Right
-W
-S
-DOWN
+65
+68
+32
+37
+39
+38
+83
+40

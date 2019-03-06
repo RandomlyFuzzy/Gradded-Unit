@@ -36,44 +36,39 @@ public class Controls extends ILevel {
                 GamePreferences.gp.setKeyLeftP1(Controls.lastKey);
             } else if (Controls.val == 2) {
                 GamePreferences.gp.setKeyRightP1(Controls.lastKey);
-
             } else if (Controls.val == 3) {
                 GamePreferences.gp.setKeyJumpP1(Controls.lastKey);
-
             } else if (Controls.val == 4) {
                 GamePreferences.gp.setKeyLeftP2(Controls.lastKey);
-
             } else if (Controls.val == 5) {
                 GamePreferences.gp.setKeyRightP2(Controls.lastKey);
-
             } else if (Controls.val == 6) {
                 GamePreferences.gp.setKeyJumpP2(Controls.lastKey);
-
             } else if (Controls.val == 7) {
                 GamePreferences.gp.setKeyDropP1(Controls.lastKey);
-
             } else if (Controls.val == 8) {
                 GamePreferences.gp.setKeyDropP2(Controls.lastKey);
-
             }
+            String vals = "";
+            vals += "" + GamePreferences.gp.getKeyLeftP1() + "\n";
+            vals += "" + GamePreferences.gp.getKeyRightP1() + "\n";
+            vals += "" + GamePreferences.gp.getKeyJumpP1() + "\n";
+            vals += "" + GamePreferences.gp.getKeyLeftP2() + "\n";
+            vals += "" + GamePreferences.gp.getKeyRightP2() + "\n";
+            vals += "" + GamePreferences.gp.getKeyJumpP2() + "\n";
+            vals += "" + GamePreferences.gp.getKeyDropP1() + "\n";
+            vals += "" + GamePreferences.gp.getKeyDropP2();
+
             ((Button) b.Level().GetObject(val)).setMessage(b.getMessage());
 
-
-
-            String replace = "";
-            for (int i = 1; i < 9; i++) {
-                String text = ((Button) b.Level().GetObject(i)).getMessage();
-                replace += text.substring(text.indexOf("=") + 2) + "\n";
-            }
-            System.out.println(replace);
-            FileUtils.SetFileContence("resources/data/Preferences.txt", replace);
+            FileUtils.SetFileContence("resources/data/Preferences.txt", vals);
             b.Level().GetObject(9).setEnabled(false);
             b.setMessage("Press to get key");
         }
     }
     );
-    private static int val = -1;
-    private static int lastKey = -1;
+    private static int val = 1;
+    private static int lastKey = 1;
 
     public Controls() {
         super();
@@ -147,9 +142,16 @@ public class Controls extends ILevel {
             }
         }));
 
-        String[] Values = FileUtils.GetFileSplit("resources/data/Preferences.txt", "\n");
+        String[] Values = FileUtils.GetFileSplit("resources/Data/Preferences.txt", "\n");
+        System.out.println("com.FuturePixels.levels.Menus.Controls.init() "+Values.length);
+        for(String s : Values){
+            System.out.println(""+Integer.parseInt(s.trim()));
+        }
         for (int i = 1; i < 9; i++) {
-            ((Button) GetObject(i)).setMessage(((Button) GetObject(i)).getMessage() + Values[i - 1]);
+            String text = "";
+            text += ((Button) GetObject(i)).getMessage();
+            text += KeyEvent.getKeyText((int)Integer.parseInt(Values[i - 1].trim()));
+            ((Button) GetObject(i)).setMessage(text);
         }
 
         BB.setEnabled(false);
@@ -184,16 +186,9 @@ public class Controls extends ILevel {
         if (BB.isEnabled()) {
             String buttontext = ((Button) GetObject(val)).getMessage();
             buttontext = buttontext.substring(0, buttontext.indexOf("=") + 2);
-            String text = e.paramString();
-            System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + text);
-            text = text.substring(text.indexOf("keyText") + 8);
-            System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + text);
-            text = text.substring(0, text.indexOf(","));
-            System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + text);
-
+            String text = KeyEvent.getKeyText(e.getKeyCode());
             BB.setMessage(buttontext + text);
             lastKey = e.getKeyCode();
-//            B.setMessage(B.getMessage().substring(0,B.getMessage().length()-2)+e.getKeyChar());
         }
     }
 
