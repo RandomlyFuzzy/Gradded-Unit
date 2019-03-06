@@ -37,7 +37,7 @@ public class DeathOverlay extends IDrawable {
 
     @Override
     public void init() {
-        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "retry", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "Retry", new HUDdelegate() {
             public void OnClick(Button b) {
                 try {
                     LevelLoader.LoadLevel(b.Level().getClass().newInstance());
@@ -49,7 +49,7 @@ public class DeathOverlay extends IDrawable {
             }
         }));
 
-        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "MainMenu", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "Main Menu", new HUDdelegate() {
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
                 LevelLoader.LoadLevel(new MainMenu());

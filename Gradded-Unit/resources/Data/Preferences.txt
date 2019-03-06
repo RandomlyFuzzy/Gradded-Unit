@@ -2,7 +2,7 @@ A
 D
 Space
 LEFT
-RIGHT
+Right
 W
 S
 DOWN
