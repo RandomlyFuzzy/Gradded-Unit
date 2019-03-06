@@ -2,7 +2,7 @@ A
 D
 Space
 LEFT
-RIGHT
+NumPad-5
 W
 S
 DOWN
