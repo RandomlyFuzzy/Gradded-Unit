@@ -43,9 +43,11 @@ public class Level4Solo extends ILevel {
         player1 = new Player();
 
         AddObject(player1).setPosition(100, 0);
-        AddObject(new Flag(new MainMenu())).setPosition(new Vector(100, -100));
+//        AddObject(new Flag(new MainMenu())).setPosition(new Vector(100, -100));
         //Adding Platforms
-        AddObject(new MovingPlatoform(new Vector(100, 100), 0,new Vector[]{new Vector(0,100),new Vector(200,100)},2)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(100, 100), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new DestroyingPlatForm(new Vector(300, 0), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
+        AddObject(new MovingPlatoform(new Vector(100, 100), 0,new Vector[]{new Vector(0,100),new Vector(200,-300)},2)).GetSprite("/images/Platform/rock_platform_clean_01.png");
      
         
         

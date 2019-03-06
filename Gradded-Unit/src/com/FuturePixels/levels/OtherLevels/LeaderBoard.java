@@ -90,6 +90,12 @@ public class LeaderBoard extends ILevel {
             times.sort(new Comparator<String>() {
                 @Override
                 public int compare(String o1, String o2) {
+                    if(o2.equals(new String())){
+                        return -1;
+                    }
+                    if(o1.equals(new String())){
+                        return 1;
+                    }
                     return Double.parseDouble(o1) > Double.parseDouble(o2) ? 1 : -1;
                 }
             });
