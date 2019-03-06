@@ -67,6 +67,7 @@ public class Flag extends IDrawable {
         if (im instanceof Player && !ran) {
             String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".") + 1);
             FileUtils.AppendToFile("resources/Savedata/" + Slim + ".txt", "" + String.format("%.2f", Level().getTime()) + "\n");
+            Level().play("/Sounds/win1.wav");
             Level().play("/sounds/LevelCompleate.wav");
             Player.setLock(true);
             new Thread(() -> {

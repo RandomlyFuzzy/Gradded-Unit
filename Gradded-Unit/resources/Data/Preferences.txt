@@ -1,0 +1,8 @@
+A
+D
+Space
+LEFT
+RIGHT
+W
+S
+DOWN

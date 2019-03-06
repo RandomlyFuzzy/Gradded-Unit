@@ -18,6 +18,7 @@ public class MovingPlatoform extends IDrawable {
     private Vector[] Cycle;
     private float Speed;
     private int ind = 0;
+    private Vector Add = Vector.Zero();
 
     public MovingPlatoform() {
         super();
@@ -37,6 +38,7 @@ public class MovingPlatoform extends IDrawable {
         GetSprite("/images/Platform/rock_platform_moss_01.png");
     }
 
+    
     @Override
     public void doMove() {
         Vector dist = getPosition().add(new Vector(Cycle[ind]).mult(-1));
@@ -45,7 +47,8 @@ public class MovingPlatoform extends IDrawable {
             ind++;
             ind = ind % Cycle.length;
         }
-        Vector newpos = getPosition().add(dist.Normalized().mult(-Speed));
+        Add = dist.Normalized().mult(-Speed);
+        Vector newpos = getPosition().add(Add);
         DebugObject.AddCirles(Cycle[ind]);
         setPosition(newpos);
         UpdateBounds();
@@ -58,6 +61,9 @@ public class MovingPlatoform extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
+        if(im instanceof Player){
+            im.addPosition(Add);
+        }
 //        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");
     }
 }

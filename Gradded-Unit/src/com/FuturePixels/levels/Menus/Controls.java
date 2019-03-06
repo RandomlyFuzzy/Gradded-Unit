@@ -14,6 +14,7 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Entry.Game;
+import com.Liamengine.Engine.Utils.FileUtils;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -57,7 +58,17 @@ public class Controls extends ILevel {
             }
             ((Button) b.Level().GetObject(val)).setMessage(b.getMessage());
 
-            b.Level().GetObject(10).setEnabled(false);
+
+
+            String replace = "";
+            for (int i = 1; i < 9; i++) {
+                String text = ((Button) b.Level().GetObject(i)).getMessage();
+                replace += text.substring(text.indexOf("=") + 2) + "\n";
+            }
+            System.out.println(replace);
+            FileUtils.SetFileContence("resources/data/Preferences.txt", replace);
+            b.Level().GetObject(9).setEnabled(false);
+            b.setMessage("Press to get key");
         }
     }
     );
@@ -85,59 +96,62 @@ public class Controls extends ILevel {
                 Game.SetLevelActive(new Settings());
             }
         }));
-        
-        
+
         //PLAYER 1
-        AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = A", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(1);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.425f), "RIGHT = D", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.30f, 0.425f), "RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(2);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.550f), "JUMP = SPACE", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.30f, 0.550f), "JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(3);
             }
         }));
 
         //PLAYER 2
-        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = LEFT", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(4);
             }
         }));
-        AddObject(new Button(new Vector(0.70f, 0.425f), "RIGHT = RIGHT", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.70f, 0.425f), "RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(5);
             }
-        
+
         }));
-        AddObject(new Button(new Vector(0.70f, 0.550f), "JUMP = NUMPAD 0", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.70f, 0.550f), "JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(6);
             }
-        
+
         }));
-        
+
         //Player 1 Drop
-        AddObject(new Button(new Vector(0.30f, 0.675f), "DROP = S", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.30f, 0.675f), "DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(7);
             }
         }));
-        
+
         //Player 2 Drop
-        AddObject(new Button(new Vector(0.70f, 0.675f), "DROP = DOWN", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.70f, 0.675f), "DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 Controls.ReadyForKeyChange(8);
             }
         }));
-    
-        AddObject(new HUD());
+
+        String[] Values = FileUtils.GetFileSplit("resources/data/Preferences.txt", "\n");
+        for (int i = 1; i < 9; i++) {
+            ((Button) GetObject(i)).setMessage(((Button) GetObject(i)).getMessage() + Values[i - 1]);
+        }
+
         BB.setEnabled(false);
         AddObject(BB);
         AddObject(new Mouse());
@@ -154,10 +168,10 @@ public class Controls extends ILevel {
 
         //Player Text
         g.setColor(Color.WHITE);
-        g.setColor(new Color(55,55,55,200));
-        g.fillRect((int) ((0.222f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int)((200f/1280f)* Game.getWindowWidth()), (int)((390f/720f) * Game.getWindowHeight()));
-        g.fillRect((int) ((0.622f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int)((200f/1280f)* Game.getWindowWidth()), (int)((390f/720f) * Game.getWindowHeight()));
-        
+        g.setColor(new Color(55, 55, 55, 200));
+        g.fillRect((int) ((0.222f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int) ((200f / 1280f) * Game.getWindowWidth()), (int) ((390f / 720f) * Game.getWindowHeight()));
+        g.fillRect((int) ((0.622f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int) ((200f / 1280f) * Game.getWindowWidth()), (int) ((390f / 720f) * Game.getWindowHeight()));
+
         //g.fillRect((int) ((0.03f) * Game.g.getScaledWidth()), (int) ((0.235f) * Game.g.getScaledHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getScaledWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getScaledHeight()));
         g.setColor(Color.WHITE);
         FontMetrics metrics = g.getFontMetrics(g.getFont());

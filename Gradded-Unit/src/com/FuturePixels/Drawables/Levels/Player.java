@@ -183,8 +183,10 @@ public class Player extends IDrawable {
 //            Acc.setY(0.01f);
             if (isColliding() && !IsPlayer) {
                 Acc.setY(8f);
-                int r = new Random().nextInt(3) + 1;
-                Level().play("/Sounds/Jump" + r + ".wav");
+                int r = new Random().nextInt(3);
+                int r2 = new Random().nextInt(2)+1;
+                String Prefix = r==0?"Low":r==1?"":"High";
+                Level().play("/Sounds/"+Prefix+"Jump" + r2 + ".wav");
             }
             canJump = false;
         } else if (down) {

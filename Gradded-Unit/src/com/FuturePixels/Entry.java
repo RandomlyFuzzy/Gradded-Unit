@@ -19,6 +19,7 @@ import com.FuturePixels.levels.OtherLevels.LeaderBoard;
 import com.FuturePixels.levels.SoloLevels.Level1Solo;
 import com.FuturePixels.levels.SoloLevels.Level2Solo;
 import com.FuturePixels.levels.SoloLevels.Level3Solo;
+import com.FuturePixels.levels.SoloLevels.Level4Solo;
 
 /**
  *
@@ -27,7 +28,7 @@ import com.FuturePixels.levels.SoloLevels.Level3Solo;
 public class Entry {
 
     public static void main(String[] args) {
-        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level1Coop(), new Level2Coop(), new Level3Coop()};
+        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(),new Level4Solo(), new Level1Coop(), new Level2Coop(), new Level3Coop()};
         LevelLoader.LL.SetLevels(arr);
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu());
