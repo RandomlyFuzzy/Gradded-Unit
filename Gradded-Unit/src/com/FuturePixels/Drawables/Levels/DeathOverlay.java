@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
@@ -37,7 +38,7 @@ public class DeathOverlay extends IDrawable {
 
     @Override
     public void init() {
-        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "Retry", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "[R]etry", new HUDdelegate() {
             public void OnClick(Button b) {
                 try {
                     LevelLoader.LoadLevel(b.Level().getClass().newInstance());
@@ -49,11 +50,10 @@ public class DeathOverlay extends IDrawable {
             }
         }));
 
-        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "Main Menu", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "[M]ain Menu", new HUDdelegate() {
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
                 LevelLoader.LoadLevel(new MainMenu());
-                
             }
         }));
         Level().AddObject(new Mouse());
@@ -82,10 +82,17 @@ public class DeathOverlay extends IDrawable {
         float wid = metrics.stringWidth("You loss but here's a cat to chear you up") / 2;
         float hei = g.getFont().getSize();
         g.setColor(new Color(100, 100, 100, 200));
-        g.fillRect((int) ((0.5f * w) - wid), (int) ((h * 0.13f)-hei), (int) (wid * 2), (int)hei);
-        g.setColor(new Color(128,0,128));
+        g.fillRect((int) ((0.5f * w) - wid), (int) ((h * 0.13f) - hei), (int) (wid * 2), (int) hei);
+        g.setColor(new Color(128, 0, 128));
         g.drawString("You loss but here's a cat to chear you up", (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
+
+        if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
+            LevelLoader.LoadLevel(Level().getClass().getName());
+        }
+        if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_M) {
+            LevelLoader.LoadLevel(Game.getDefualtLevel());
+        }
     }
 
     @Override

@@ -143,10 +143,6 @@ public class Controls extends ILevel {
         }));
 
         String[] Values = FileUtils.GetFileSplit("resources/Data/Preferences.txt", "\n");
-        System.out.println("com.FuturePixels.levels.Menus.Controls.init() "+Values.length);
-        for(String s : Values){
-            System.out.println(""+Integer.parseInt(s.trim()));
-        }
         for (int i = 1; i < 9; i++) {
             String text = "";
             text += ((Button) GetObject(i)).getMessage();
