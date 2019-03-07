@@ -30,7 +30,8 @@ hs_err_pid*
 /Gradded-Unit/nbproject/private/
 /Gradded-Unit/PhpProject1/nbproject/private/
 /Engine/nbproject/private/
-Gradded-Unit/resources/Savedata/*.txt
-Gradded-Unit/resources/Savedata/Level3Solo.txt
-Gradded-Unit/resources/Savedata/Level4Solo.txt
-Gradded-Unit/resources/Savedata/Level3Solo.txt
+/resources/Savedata/*.txt
+/resources/Savedata/Level1Solo.txt
+/resources/Savedata/Level2Solo.txt
+/resources/Savedata/Level3Solo.txt
+/resources/Savedata/Level5Solo.txt
