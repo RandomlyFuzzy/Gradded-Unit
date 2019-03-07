@@ -107,7 +107,7 @@ public class Player extends IDrawable {
     public void Update(Graphics2D g) {
         ind += !canJump ? 0.3f : Stop ? -ind : 0.3f;
         setScale(new Vector(Scale, 1));
-
+//       
         if (hasLost) {
             //insert death sprite here
             GetSprite("/Images/defualt.png");
@@ -169,17 +169,24 @@ public class Player extends IDrawable {
         if (!isLock() && !hasLost) {
             Cameraopos.setY(Cameraopos.getY() + Game.getDelta() * 30f);
         }
-        if (getPosition().getX() <= -Game.getScaledWidth() / 2 + Transform.getOffsetTranslation().getX() / 2) {
-            setPosition(new Vector(Game.getScaledWidth() / 2 + Transform.getOffsetTranslation().getX() / 2, getPosition().getY()));
+
+        if (getPosition().getX() <= -Transform.getOffsetTranslation().getX()) {
+            addPosition(new Vector(Game.getScaledWidth(),0));
             System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
         }
-        if (getPosition().getX() >= Game.getWindowWidth()/ 2 + Transform.getOffsetTranslation().getX() *1f) {
-            setPosition(new Vector(-Game.getScaledWidth() / 2 + Transform.getOffsetTranslation().getX() , getPosition().getY()));
+        if (getPosition().getX() >= -Transform.getOffsetTranslation().getX() + Game.getScaledWidth()) {
+            setPosition(new Vector(-Transform.getOffsetTranslation().getX(), getPosition().getY()));
             System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
         }
+        // centers on the player 
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Cameraopos.setX(Transform.getOffsetTranslation().getX());
         Transform.setOffsetTranslation(Cameraopos);
+        DebugObject.AddLine(new Vector(-Transform.getOffsetTranslation().getX() , -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2),
+                 new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth(), -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2)
+        );
+        DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() , -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2));
+        DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth()-5, -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2));
     }
 
     private void movePlayer() {
