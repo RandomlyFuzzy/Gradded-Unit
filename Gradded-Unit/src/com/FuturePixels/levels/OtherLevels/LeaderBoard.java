@@ -106,7 +106,7 @@ public class LeaderBoard extends ILevel {
 
     @Override
     public void Draw(Graphics2D g) {
-        g.drawImage(GetSprite("/Images/WIP Background.png"), Game.getWindowWidth(), 0, (Game.getWindowWidth() * -1), (Game.getWindowHeight()), null);
+        g.drawImage(GetSprite("/Images/backgrounds/background1.png"), Game.getWindowWidth(), 0, (Game.getWindowWidth() * -1), (Game.getWindowHeight()), null);
         float y = 0.3f;
         Font f = g.getFont();
         Font f2 = f.deriveFont(1, Game.WorldScale().getY()*13);
