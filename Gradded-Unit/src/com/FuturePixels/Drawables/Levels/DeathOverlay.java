@@ -87,6 +87,10 @@ public class DeathOverlay extends IDrawable {
         g.drawString("You lost but here's a cat to cheer you up!", (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
 
+        if (Level().getLastKeyPress() == null) {
+            return;
+        }
+
         if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
             LevelLoader.LoadLevel(Level().getClass().getName());
         }
