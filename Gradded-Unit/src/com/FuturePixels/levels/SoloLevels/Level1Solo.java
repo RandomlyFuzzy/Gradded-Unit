@@ -87,9 +87,7 @@ public class Level1Solo extends ILevel {
     @Override
     public void Update(ActionEvent ae) {
 
-        if (player1 == null) {
-            return;
-        }
+        
 
     }
 
@@ -100,7 +98,6 @@ public class Level1Solo extends ILevel {
 
     @Override
     public void keyPress(KeyEvent e) {
-        System.out.println("com.FuturePixels.levels.SoloLevels.Level1Solo.keyPress()");
         try {
             int code = e.getKeyCode();
             if (code == GamePreferences.gp.getKeyRightP1()) {

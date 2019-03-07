@@ -11,6 +11,7 @@ import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Collison;
 import com.Liamengine.Engine.Utils.CollisonUtils;
 import com.Liamengine.Engine.Components.Vector;
+import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.Graphics2D;
 import java.util.Random;
 
@@ -89,9 +90,6 @@ public class Player extends IDrawable {
         setPosition(100, 100);
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
-        for (int i = 0; i < 7; i++) {
-            GetSprite("/Images/Player/sprite_" + i + ".png");
-        }
 //        AddComponent(new RigidBody(this));
 //        AddComponent(new BackgroundDrawer(this));
     }
@@ -150,7 +148,7 @@ public class Player extends IDrawable {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
             //mars gravity*2  
-            Acc.setY(Acc.getY() + (-3.711f * (float) Game.getDelta() * 2));
+            Acc.addY((-3.711f * (float) Game.getDelta() * 2));
         }
         Velocity.add(Acc);
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
@@ -191,7 +189,7 @@ public class Player extends IDrawable {
 
     private void movePlayer() {
         boolean one = true, two = true;
-
+        
         if (up && canJump) {
 //            Acc.setY(0.01f);
             if (isColliding() && !IsPlayer) {
