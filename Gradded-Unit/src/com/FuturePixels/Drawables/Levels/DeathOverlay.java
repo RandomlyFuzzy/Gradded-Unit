@@ -38,7 +38,7 @@ public class DeathOverlay extends IDrawable {
 
     @Override
     public void init() {
-        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "[R]etry", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "[R] Retry", new HUDdelegate() {
             public void OnClick(Button b) {
                 try {
                     LevelLoader.LoadLevel(b.Level().getClass().newInstance());
@@ -50,7 +50,7 @@ public class DeathOverlay extends IDrawable {
             }
         }));
 
-        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "[M]ain Menu", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "[M] Main Menu", new HUDdelegate() {
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
                 LevelLoader.LoadLevel(new MainMenu());
@@ -79,12 +79,12 @@ public class DeathOverlay extends IDrawable {
         Font title = new Font("Comic sans serif ms", 0, (int) (Game.ButtonDims().getY() * 30f));
         g.setFont(title);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        float wid = metrics.stringWidth("You loss but here's a cat to chear you up") / 2;
+        float wid = metrics.stringWidth("You lost but here's a cat to cheer you up!") / 2;
         float hei = g.getFont().getSize();
         g.setColor(new Color(100, 100, 100, 200));
         g.fillRect((int) ((0.5f * w) - wid), (int) ((h * 0.13f) - hei), (int) (wid * 2), (int) hei);
         g.setColor(new Color(128, 0, 128));
-        g.drawString("You loss but here's a cat to chear you up", (0.5f * w) - wid, (h * 0.125f));
+        g.drawString("You lost but here's a cat to cheer you up!", (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
 
         if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
