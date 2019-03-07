@@ -60,7 +60,7 @@ public class LeaderBoard extends ILevel {
 
     @Override
     public void init() {
-        GetSprite("/Images/background.png");
+        GetSprite("/Images/backgrounds/background1.png");
 
         for (int i = 0; i < 10; i++) {
             AddObject(new Button(new Vector(((0.15f * (i % 5)) + 0.1f), ((0.1f * (i / 5)) + 0.1f)), ("Level" + ((i % 5) + 1)) + ((i >= 5) ? "Coop" : "Solo"), new HUDdelegate() {

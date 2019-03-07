@@ -73,7 +73,7 @@ public class Level2Coop extends ILevel {
 //        AddObject(new ScrollingBackground());
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth()) / 2, 0));
         play("/sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background2.png"));
     }
 
     @Override

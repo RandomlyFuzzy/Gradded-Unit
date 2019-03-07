@@ -48,7 +48,7 @@ public class Level3Coop extends ILevel {
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getWindowWidth() / 2, Game.g.getWindowHeight() / 2));
         play("/sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background.png"));
     }
 
     @Override
