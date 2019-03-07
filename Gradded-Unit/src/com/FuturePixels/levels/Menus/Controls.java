@@ -153,7 +153,7 @@ public class Controls extends ILevel {
         BB.setEnabled(false);
         AddObject(BB);
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
     @Override

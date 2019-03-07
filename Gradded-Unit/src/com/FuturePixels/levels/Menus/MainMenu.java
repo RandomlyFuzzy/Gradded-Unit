@@ -78,7 +78,7 @@ public class MainMenu extends ILevel {
         AddObject(new Mouse());
         AddObject(new HUD());
 
-        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
     @Override

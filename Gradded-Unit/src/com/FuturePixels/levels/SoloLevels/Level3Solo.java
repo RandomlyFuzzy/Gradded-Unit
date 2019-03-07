@@ -83,7 +83,7 @@ public class Level3Solo extends ILevel {
         AddObject(new HUD());
         AddObject(new Lava());
         play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background.png"));
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * 0.4f) / 2, 0));
     }
 

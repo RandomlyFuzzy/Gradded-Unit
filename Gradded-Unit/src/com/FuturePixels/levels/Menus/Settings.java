@@ -121,7 +121,7 @@ public class Settings extends ILevel {
         }));
         GetObject(0).setScale(new Vector(0.5f, 0.7f));
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
     @Override

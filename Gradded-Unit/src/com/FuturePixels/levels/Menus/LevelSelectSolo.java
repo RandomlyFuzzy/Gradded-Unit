@@ -47,7 +47,7 @@ public class LevelSelectSolo extends ILevel {
             }
         }));
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/WIP Background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
     @Override
