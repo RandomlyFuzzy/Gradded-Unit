@@ -16,7 +16,7 @@ import java.awt.Toolkit;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class BlackoutButton extends IDrawable {
 

@@ -12,7 +12,7 @@ import java.awt.Graphics2D;
 
 /**
  *drawddraw
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class PlatForm extends IDrawable {
 

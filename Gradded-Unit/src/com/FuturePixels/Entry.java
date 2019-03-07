@@ -24,7 +24,7 @@ import com.FuturePixels.levels.SoloLevels.Level4Solo;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class Entry {
 

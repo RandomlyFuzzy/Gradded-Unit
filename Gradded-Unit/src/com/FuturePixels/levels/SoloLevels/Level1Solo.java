@@ -17,7 +17,6 @@ import javax.sound.sampled.Clip;
 
 /**
  *
- * @author Liam Woolley 1748910
  * @author Liam Rickman
  */
 public class Level1Solo extends ILevel {

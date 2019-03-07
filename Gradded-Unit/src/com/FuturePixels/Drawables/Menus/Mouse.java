@@ -16,7 +16,7 @@ import java.awt.geom.AffineTransform;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class Mouse extends IDrawable {
 

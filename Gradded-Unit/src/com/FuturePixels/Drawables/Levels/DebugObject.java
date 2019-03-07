@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class DebugObject extends IDrawable {
 

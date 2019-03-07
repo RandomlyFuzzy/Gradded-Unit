@@ -7,7 +7,7 @@ package com.FuturePixels.Drawables.Menus;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public abstract class HUDdelegate {
 

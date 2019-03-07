@@ -17,7 +17,7 @@ import java.awt.Toolkit;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class Button extends IDrawable {
 

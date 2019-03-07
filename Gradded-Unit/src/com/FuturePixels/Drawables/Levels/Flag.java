@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class Flag extends IDrawable {
 

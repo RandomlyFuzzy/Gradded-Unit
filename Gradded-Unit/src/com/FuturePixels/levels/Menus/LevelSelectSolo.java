@@ -21,7 +21,7 @@ import static java.awt.image.ImageObserver.WIDTH;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class LevelSelectSolo extends ILevel {
 

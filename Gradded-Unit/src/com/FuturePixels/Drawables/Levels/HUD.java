@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class HUD extends IDrawable {
 

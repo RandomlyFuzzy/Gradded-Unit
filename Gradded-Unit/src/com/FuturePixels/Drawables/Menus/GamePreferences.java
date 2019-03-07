@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
  * cross level like that of audio and display settings(aspect ration resolution
  * and other things)
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class GamePreferences {
 

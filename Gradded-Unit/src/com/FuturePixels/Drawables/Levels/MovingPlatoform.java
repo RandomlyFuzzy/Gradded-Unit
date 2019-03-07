@@ -11,7 +11,7 @@ import java.awt.Graphics2D;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class MovingPlatoform extends IDrawable {
 

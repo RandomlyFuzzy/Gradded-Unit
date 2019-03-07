@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 RandomlyFuzzy
+ * Copyright (C) 2019 Liam Woolley 1748910
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ import java.awt.image.WritableRaster;
 
 /**
  *
- * @author RandomlyFuzzy
+ * @author Liam Woolley 1748910
  */
 public class ScrollingBackground extends IDrawable {
 
