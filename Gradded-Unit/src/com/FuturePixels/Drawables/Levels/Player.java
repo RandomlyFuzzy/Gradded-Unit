@@ -136,8 +136,6 @@ public class Player extends IDrawable {
 //        setRotation(getRotation()+(float)(Math.PI/180));
     }
 
-   
-
     public void doMove() {
         if (!isColliding()) {
             setRotation((getRotation() * 0.98f));
@@ -164,12 +162,20 @@ public class Player extends IDrawable {
 //        if (-getPosition().getX() != Cameraopos.getX() - Game.g.getScaledWidth() / 2) {
 //            Cameraopos.setX(-getPosition().getX() + Game.g.getScaledWidth() / 2);
 //        }
-        if (-getPosition().getY() > Cameraopos.getY() - getScaledSpriteHeight()*2) {
-            Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight()*2);
+        if (-getPosition().getY() > Cameraopos.getY() - getScaledSpriteHeight() * 2) {
+            Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight() * 2);
         }
         //screen scroller
         if (!isLock() && !hasLost) {
             Cameraopos.setY(Cameraopos.getY() + Game.getDelta() * 30f);
+        }
+        if (getPosition().getX() <= -Game.getScaledWidth() / 2 + Transform.getOffsetTranslation().getX() / 2) {
+            setPosition(new Vector(Game.getScaledWidth() / 2 + Transform.getOffsetTranslation().getX() / 2, getPosition().getY()));
+            System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
+        }
+        if (getPosition().getX() >= Game.getWindowWidth()/ 2 + Transform.getOffsetTranslation().getX() *1f) {
+            setPosition(new Vector(-Game.getScaledWidth() / 2 + Transform.getOffsetTranslation().getX() , getPosition().getY()));
+            System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
         }
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Cameraopos.setX(Transform.getOffsetTranslation().getX());
@@ -184,9 +190,9 @@ public class Player extends IDrawable {
             if (isColliding() && !IsPlayer) {
                 Acc.setY(8f);
                 int r = new Random().nextInt(3);
-                int r2 = new Random().nextInt(2)+1;
-                String Prefix = r==0?"Low":r==1?"":"High";
-                Level().play("/Sounds/"+Prefix+"Jump" + r2 + ".wav");
+                int r2 = new Random().nextInt(2) + 1;
+                String Prefix = r == 0 ? "Low" : r == 1 ? "" : "High";
+                Level().play("/Sounds/" + Prefix + "Jump" + r2 + ".wav");
             }
             canJump = false;
         } else if (down) {
@@ -243,7 +249,7 @@ public class Player extends IDrawable {
         if (hasLost) {
             Velocity.setY(6.5f);
         }
-        if (im instanceof PlatForm || im instanceof MovingPlatoform||im instanceof DestroyingPlatForm) {
+        if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;
