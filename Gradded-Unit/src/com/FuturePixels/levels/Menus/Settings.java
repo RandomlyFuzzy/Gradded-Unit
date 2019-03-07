@@ -55,14 +55,13 @@ public class Settings extends ILevel {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
-//        AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDdelegate() {
-//            @Override
-//            public void OnChange(Slider s, float Value) {
-//                System.out.println(".OnChange() " + Value);
+        AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDdelegate() {
+            @Override
+            public void OnChange(Slider s, float Value) {
 //                ILevel.setFPS(30 + (int) (Value * 60f));
-////                MusicUtils.ChangeMasterVolume(Value);
-//            }
-//        }));
+                MusicUtils.SetVolume(Value);
+            }
+        }));
 
         AddObject(new DropDownButton(new Vector(0.4f, 0.3f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDdelegate[]{
@@ -105,7 +104,7 @@ public class Settings extends ILevel {
             }
                 }));
 
-        AddObject(new Button(new Vector(0.4f, 0.1f), "Fullscreen", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.35f, 0.1f), "Fullscreen", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.FullScreen();

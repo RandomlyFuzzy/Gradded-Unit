@@ -51,6 +51,8 @@ public class Lava extends IDrawable {
             Player.setHasLost(true);
             //add overLay
             Level().AddObject(new DeathOverlay());
+            Level().play("/Sounds/LevelFail.wav");
+            Level().play("/Sounds/Scream1.wav");
         }
     }
 }

@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.Writer;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -68,7 +69,7 @@ public class Flag extends IDrawable {
             String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".") + 1);
             FileUtils.AppendToFile("resources/Savedata/" + Slim + ".txt", "" + String.format("%.2f", Level().getTime()) + "\n");
             Level().play("/Sounds/win1.wav");
-            Level().play("/sounds/LevelCompleate.wav");
+            Level().play("/sounds/LevelCompleate_"+new Random().nextInt(4)+".wav");
             Player.setLock(true);
             new Thread(() -> {
                 try {

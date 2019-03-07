@@ -25,6 +25,7 @@ public class Player extends IDrawable {
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, IsPlayer = false;
     public Vector Velocity = new Vector(0, 0), Acc = new Vector(0, 0);
     public Vector Cameraopos = Vector.Zero();
+    private Random forsounds = new Random();
 
     private static boolean Lock = false;
     private static boolean hasLost = false;
@@ -194,8 +195,8 @@ public class Player extends IDrawable {
 //            Acc.setY(0.01f);
             if (isColliding() && !IsPlayer) {
                 Acc.setY(8f);
-                int r = new Random().nextInt(3);
-                int r2 = new Random().nextInt(2) + 1;
+                int r = forsounds.nextInt(3);
+                int r2 = forsounds.nextInt(2) + 1;
                 String Prefix = r == 0 ? "Low" : r == 1 ? "" : "High";
                 Level().play("/Sounds/" + Prefix + "Jump" + r2 + ".wav");
             }
@@ -286,6 +287,9 @@ public class Player extends IDrawable {
             }
 
             if (col2.IsHit && Velocity.getY() > 0) {
+                
+                Level().play("/sounds/Hit"+forsounds.nextInt(7)+".wav");
+                
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
                         y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();

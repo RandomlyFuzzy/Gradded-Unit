@@ -9,6 +9,7 @@ import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.imageUtils;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
@@ -86,13 +87,14 @@ public class Level1Solo extends ILevel {
 
     @Override
     public void Update(ActionEvent ae) {
-
+        
         
 
     }
 
     @Override
     public void Draw(Graphics2D g) {
+       
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 
