@@ -74,17 +74,21 @@ public class DeathOverlay extends IDrawable {
         float h = Game.getWindowHeight();
         g.setColor(new Color(100, 100, 100, 100));
         g.fillRect((int) (0.05f * w), (int) (0.05f * w), (int) (0.9f * w), (int) (h - ((0.1f * w))));
-        g.drawImage(getLastImage(), (int) (-(getSpriteWidth()) / 2 + (w * 0.5f)), (int) (-(getSpriteHeight()) / 2 + (h * 0.43f)), (int) (getSpriteWidth()), (int) (getSpriteHeight()), null);
+        String show = "You lost";
+        if (getLastImage() != imageUtils.T.GetImage("/images/defualt.png")) {
+            g.drawImage(getLastImage(), (int) (-(getSpriteWidth()) / 2 + (w * 0.5f)), (int) (-(getSpriteHeight()) / 2 + (h * 0.43f)), getSpriteWidth(), getSpriteHeight(), null);
+            show += " but here's a cat to cheer you up!";
+        }
         Font pre = g.getFont();
         Font title = new Font("Comic sans serif ms", 0, (int) (Game.ButtonDims().getY() * 30f));
         g.setFont(title);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        float wid = metrics.stringWidth("You lost but here's a cat to cheer you up!") / 2;
+        float wid = metrics.stringWidth(show) / 2;
         float hei = g.getFont().getSize();
         g.setColor(new Color(100, 100, 100, 200));
         g.fillRect((int) ((0.5f * w) - wid), (int) ((h * 0.13f) - hei), (int) (wid * 2), (int) hei);
         g.setColor(new Color(128, 0, 128));
-        g.drawString("You lost but here's a cat to cheer you up!", (0.5f * w) - wid, (h * 0.125f));
+        g.drawString(show, (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
 
         if (Level().getLastKeyPress() == null) {

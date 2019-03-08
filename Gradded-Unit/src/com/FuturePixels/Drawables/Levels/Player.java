@@ -170,7 +170,7 @@ public class Player extends IDrawable {
         }
 
         if (getPosition().getX() <= -Transform.getOffsetTranslation().getX()) {
-            addPosition(new Vector(Game.getScaledWidth(),0));
+            addPosition(new Vector(Game.getScaledWidth(), 0));
             System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
         }
         if (getPosition().getX() >= -Transform.getOffsetTranslation().getX() + Game.getScaledWidth()) {
@@ -181,16 +181,16 @@ public class Player extends IDrawable {
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Cameraopos.setX(Transform.getOffsetTranslation().getX());
         Transform.setOffsetTranslation(Cameraopos);
-        DebugObject.AddLine(new Vector(-Transform.getOffsetTranslation().getX() , -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2),
-                 new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth(), -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2)
+        DebugObject.AddLine(new Vector(-Transform.getOffsetTranslation().getX(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2),
+                new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2)
         );
-        DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() , -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2));
-        DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth()-5, -Transform.getOffsetTranslation().getY()+Game.getScaledHeight()/2));
+        DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
+        DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() - 5, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
     }
 
     private void movePlayer() {
         boolean one = true, two = true;
-        
+
         if (up && canJump) {
 //            Acc.setY(0.01f);
             if (isColliding() && !IsPlayer) {
@@ -254,6 +254,9 @@ public class Player extends IDrawable {
         }
         if (hasLost) {
             Velocity.setY(6.5f);
+            for (int i = 0; i < Level().AmountOfObjects() - 3; i++) {
+                Level().GetObject(i).setIsCollidable(false);
+            }
         }
         if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
@@ -273,7 +276,6 @@ public class Player extends IDrawable {
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_Top[0], _Top[1]);
                 _hit = col.hitLocation;
-
                 float x = (GetUp().mult(getSpriteHeight() * 0.5f)).getX(),
                         y = (GetUp().mult(getSpriteHeight() * 0.5f)).getY();
                 DebugObject.AddCirles(new Vector(col.hitLocation.getX(), col.hitLocation.getY()));
@@ -287,9 +289,7 @@ public class Player extends IDrawable {
             }
 
             if (col2.IsHit && Velocity.getY() > 0) {
-                
-                Level().play("/sounds/Hit"+forsounds.nextInt(7)+".wav");
-                
+                Level().play("/sounds/Hit" + forsounds.nextInt(7) + ".wav");
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
                         y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();

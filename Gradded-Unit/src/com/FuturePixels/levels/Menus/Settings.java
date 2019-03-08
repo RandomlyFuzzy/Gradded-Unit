@@ -58,6 +58,7 @@ public class Settings extends ILevel {
         AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDdelegate() {
             @Override
             public void OnChange(Slider s, float Value) {
+                System.out.println(""+Value);
 //                ILevel.setFPS(30 + (int) (Value * 60f));
                 MusicUtils.SetVolume(Value);
             }
