@@ -13,6 +13,7 @@ import com.Liamengine.Engine.Entry.Game;
 import com.FuturePixels.levels.CoopLevels.Level1Coop;
 import com.FuturePixels.levels.CoopLevels.Level2Coop;
 import com.FuturePixels.levels.CoopLevels.Level3Coop;
+import com.FuturePixels.levels.Menus.Credits;
 import com.FuturePixels.levels.Menus.DebugLevel;
 import com.FuturePixels.levels.Menus.LevelSelectSolo;
 import com.FuturePixels.levels.Menus.MainMenu;
@@ -31,7 +32,7 @@ import com.Liamengine.Engine.Utils.FileUtils;
 public class Entry {
 
     public static void main(String[] args) {
-        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(), new Level1Coop(), new Level2Coop(), new Level3Coop()};
+        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(), new Level1Coop(), new Level2Coop(), new Level3Coop(),new Credits()};
         LevelLoader.LL.SetLevels(arr);
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu());

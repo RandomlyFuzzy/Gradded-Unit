@@ -33,9 +33,6 @@ import javax.swing.Timer;
  */
 public class Settings extends ILevel {
 
-    private static BlackoutButton BB = null;
-    private static ILevel level;
-    private Button B = null;
 
     public Settings() {
         super();
@@ -46,7 +43,6 @@ public class Settings extends ILevel {
 
     @Override
     public void init() {
-        level = this;
 
         AddObject(new HUD());
         AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDdelegate() {
@@ -117,6 +113,12 @@ public class Settings extends ILevel {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());
+            }
+        }));
+         AddObject(new Button(new Vector(0.8f, 0.3f), "credit", new HUDdelegate() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new Credits());
             }
         }));
         GetObject(0).setScale(new Vector(0.5f, 0.7f));
