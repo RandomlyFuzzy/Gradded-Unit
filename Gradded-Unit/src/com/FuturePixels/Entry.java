@@ -14,7 +14,7 @@ import com.FuturePixels.levels.CoopLevels.Level1Coop;
 import com.FuturePixels.levels.CoopLevels.Level2Coop;
 import com.FuturePixels.levels.CoopLevels.Level3Coop;
 import com.FuturePixels.levels.Menus.Credits;
-import com.FuturePixels.levels.Menus.DebugLevel;
+import testing.DebugLevel;
 import com.FuturePixels.levels.Menus.LevelSelectSolo;
 import com.FuturePixels.levels.Menus.MainMenu;
 import com.FuturePixels.levels.Menus.Settings;
@@ -32,12 +32,12 @@ import com.Liamengine.Engine.Utils.FileUtils;
 public class Entry {
 
     public static void main(String[] args) {
-        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(), new Level1Coop(), new Level2Coop(), new Level3Coop(),new Credits()};
+        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(), new Level1Coop(), new Level2Coop(), new Level3Coop(), new Credits()};
         LevelLoader.LL.SetLevels(arr);
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu());
 
-        String[] preferences =  FileUtils.GetFileSplit("resources/data/Preferences.txt", "\n");
+        String[] preferences = FileUtils.GetFileSplit("resources/data/Preferences.txt", "\n");
         GamePreferences.gp.setKeyLeftP1(Integer.parseInt(preferences[0].trim()));
         GamePreferences.gp.setKeyRightP1(Integer.parseInt(preferences[1].trim()));
         GamePreferences.gp.setKeyJumpP1(Integer.parseInt(preferences[2].trim()));
@@ -47,7 +47,9 @@ public class Entry {
         GamePreferences.gp.setKeyDropP1(Integer.parseInt(preferences[6].trim()));
         GamePreferences.gp.setKeyDropP2(Integer.parseInt(preferences[7].trim()));
 
-        new Game(new MainMenu());
+//        new Game(new MainMenu());
+        new Game(new DebugLevel());
+        Game.toggleCursor();
         Game.GetFrame().setTitle("Graded Unit");
     }
 }

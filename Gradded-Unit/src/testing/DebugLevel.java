@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.levels.Menus;
+package testing;
 
 import com.FuturePixels.Drawables.Levels.HUD;
 import com.FuturePixels.Drawables.Menus.BlackoutButton;
@@ -31,7 +31,7 @@ public class DebugLevel extends ILevel {
 
     @Override
     public void init() {
-
+        AddObject(new testObject());
     }
 
     @Override
@@ -44,15 +44,7 @@ public class DebugLevel extends ILevel {
 
     @Override
     public void keyPress(KeyEvent ke) {
-        System.out.println("com.FuturePixels.levels.Menus.DebugLevel.init()");
-        String file = "";
-        for (int i = 0; i < 0xFFFF; i++) {
-            if (!KeyEvent.getKeyText(i).contains("Unknown keyCode")) {
-                file += ""   + KeyEvent.getKeyText(i) + ":" + i + "\n";
-                System.out.println("" + KeyEvent.getKeyText(i) + ":" + i);
-            }
-        }
-        FileUtils.SetFileContence("resources/data/keys.txt", file);
+        
     }
 
     @Override
