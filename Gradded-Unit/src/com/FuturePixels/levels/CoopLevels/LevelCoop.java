@@ -57,7 +57,7 @@ public class LevelCoop extends ILevel {
         AddObject(new PlatForm(new Vector(start, 0), 0));
 
         for (i = 200; i < 1000; i += 200) {
-            AddObject(new PlatForm(new Vector(((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100, -i), 0));
+            AddObject(new PlatForm(new Vector(((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100, -i), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
         }
 
         int last = ((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100;

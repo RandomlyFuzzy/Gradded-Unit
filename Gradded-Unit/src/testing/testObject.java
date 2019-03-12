@@ -21,7 +21,7 @@ public class testObject extends IDrawable {
 
     @Override
     public void init() {
-        GetSprite("/Images/player/player.png");
+        GetSprite("/Images/player/player_00.png");
         setPosition(new Vector(Game.getScaledWidth() / 2, Game.getWindowHeight() / 2));
         she.inputImage(getLastImage());
         setScale(new Vector(2, 2));
