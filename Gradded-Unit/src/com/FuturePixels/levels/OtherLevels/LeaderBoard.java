@@ -62,8 +62,8 @@ public class LeaderBoard extends ILevel {
     public void init() {
         GetSprite("/Images/backgrounds/background1.png");
 
-        for (int i = 0; i < 10; i++) {
-            AddObject(new Button(new Vector(((0.15f * (i % 5)) + 0.1f), ((0.1f * (i / 5)) + 0.1f)), ("Level" + ((i % 5) + 1)) + ((i >= 5) ? "Coop" : "Solo"), new HUDdelegate() {
+        for (int i = 0; i < 5; i++) {
+            AddObject(new Button(new Vector(((0.2f * (i % 5)) + 0.1f), ((0.1f * (i / 5)) + 0.1f)), ("Level" + ((i % 5) + 1)) + ((i >= 5) ? "Coop" : "Solo"), new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage());
                 }

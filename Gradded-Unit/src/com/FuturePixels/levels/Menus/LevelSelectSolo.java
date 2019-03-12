@@ -34,7 +34,7 @@ public class LevelSelectSolo extends ILevel {
     @Override
     public void init() {
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f * (i % 6)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)) + "Solo", new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.2f * (i % 5)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)) + "Solo", new HUDdelegate() {
                 public void OnClick(Button b) {
                     LevelLoader.LoadLevel(b.getMessage());
                 }

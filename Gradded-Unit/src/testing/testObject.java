@@ -25,7 +25,6 @@ public class testObject extends IDrawable {
         setPosition(new Vector(Game.getScaledWidth() / 2, Game.getWindowHeight() / 2));
         she.inputImage(getLastImage());
         setScale(new Vector(2, 2));
-
     }
 
     @Override

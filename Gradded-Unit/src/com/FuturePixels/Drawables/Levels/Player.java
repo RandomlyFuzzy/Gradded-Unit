@@ -135,8 +135,10 @@ public class Player extends IDrawable {
 //        setRotation(getRotation()+(float)(Math.PI/180));
     }
 
+    boolean hasupdated = true;
+
     public void doMove() {
-        if (!isColliding()) {
+        if (!isColliding() || IsPlayer) {
             setRotation((getRotation() * 0.98f));
             canJump = false;
             once = true;
@@ -145,7 +147,7 @@ public class Player extends IDrawable {
         if (!Lock && !hasLost) {
             movePlayer();
         }
-        if (!isColliding()) {
+        if (!isColliding() || IsPlayer) {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
             //mars gravity*2  
@@ -172,15 +174,20 @@ public class Player extends IDrawable {
         if (getPosition().getX() <= -Transform.getOffsetTranslation().getX()) {
             addPosition(new Vector(Game.getScaledWidth(), 0));
             System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
+            hasupdated = true;
         }
         if (getPosition().getX() >= -Transform.getOffsetTranslation().getX() + Game.getScaledWidth()) {
             setPosition(new Vector(-Transform.getOffsetTranslation().getX(), getPosition().getY()));
             System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
+            hasupdated = true;
         }
         // centers on the player 
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Cameraopos.setX(Transform.getOffsetTranslation().getX());
-        Transform.setOffsetTranslation(Cameraopos);
+        if (hasupdated) {
+            Transform.setOffsetTranslation(Cameraopos);
+            hasupdated = false;
+        }
         DebugObject.AddLine(new Vector(-Transform.getOffsetTranslation().getX(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2),
                 new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2)
         );
@@ -241,7 +248,6 @@ public class Player extends IDrawable {
         }
 
         if (im instanceof Player) {
-            setIsColliding(false);
             IsPlayer = true;
 //            Velocity.add(new Vector(getPosition()).add(new Vector(im.getPosition()).mult(-1)).mult(3f));
             return;

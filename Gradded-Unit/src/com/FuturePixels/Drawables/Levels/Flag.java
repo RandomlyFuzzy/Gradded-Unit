@@ -35,10 +35,17 @@ public class Flag extends IDrawable {
 
     private float ind = 0;
     private ILevel next;
+    private String seed = "";
 
     public Flag(ILevel nextLevel) {
         super();
         next = nextLevel;
+    }
+
+    public Flag(ILevel nextLevel, int seed) {
+        super();
+        next = nextLevel;
+        this.seed = "" + seed;
     }
 
     @Override
@@ -67,9 +74,13 @@ public class Flag extends IDrawable {
 
         if (im instanceof Player && !ran) {
             String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".") + 1);
-            FileUtils.AppendToFile("resources/Savedata/" + Slim + ".txt", "" + String.format("%.2f", Level().getTime()) + "\n");
+            if (!seed.equals("")) {
+                FileUtils.AppendToFile("resources/Savedata/Coop/" + seed + ".txt", "" + String.format("%.2f", Level().getTime()) + "\n");
+            } else {
+                FileUtils.AppendToFile("resources/Savedata/" + Slim + ".txt", "" + String.format("%.2f", Level().getTime()) + "\n");
+            }
             Level().play("/Sounds/win1.wav");
-            Level().play("/sounds/LevelCompleate_"+new Random().nextInt(4)+".wav");
+            Level().play("/sounds/LevelCompleate_" + new Random().nextInt(4) + ".wav");
             Player.setLock(true);
             new Thread(() -> {
                 try {
