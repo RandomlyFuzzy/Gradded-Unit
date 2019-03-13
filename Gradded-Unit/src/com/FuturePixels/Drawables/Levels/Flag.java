@@ -12,6 +12,7 @@ import com.Liamengine.Engine.Utils.FileUtils;
 import com.Liamengine.Engine.Utils.LevelLoader;
 import com.Liamengine.Engine.Utils.MusicUtils;
 import com.FuturePixels.levels.Menus.MainMenu;
+import com.Liamengine.Engine.Components.SpriteSheet;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,6 +34,7 @@ import java.util.logging.Logger;
  */
 public class Flag extends IDrawable {
 
+    private SpriteSheet flag = new SpriteSheet(0, 0, 75, 75);
     private float ind = 0;
     private ILevel next;
     private String seed = "";
@@ -50,21 +52,18 @@ public class Flag extends IDrawable {
 
     @Override
     public void init() {
-        for (int i = 1; i < 8; i++) {
-            GetSprite("/images/flagAniamtion/Flag" + i + ".png");
-        }
+        GetSprite("/images/FlagA.png");
+        flag.inputImage(getLastImage());
     }
 
     @Override
     public void doMove() {
-        ind += 0.25f;
-        ind = ind % 8;
+        flag.IncrementX(0.1f);
     }
 
     @Override
     public void Update(Graphics2D g) {
-        GetSprite("/images/flagAniamtion/Flag" + (1 + (int) ind) + ".png");
-        DrawLastLoadedImage(g);
+        DrawLastLoadedImageAsSpriteSheet(g,flag);
     }
 
     boolean ran = false;
