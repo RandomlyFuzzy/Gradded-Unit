@@ -95,7 +95,6 @@ public class Level1Solo extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
        
-//        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 
     @Override
