@@ -120,7 +120,7 @@ public class Player extends IDrawable {
         }
         Velocity.add(Acc);
         //adds the relative "right" vector and "up" vector 
-        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())));
+        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float)getRotation()*2f)));
 
         if (isColliding() && !IsPlayer) {
             Velocity.mult(new Vector(0.8f, 0.995f));
