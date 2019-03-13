@@ -53,8 +53,8 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(-300, -800), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(-150, -800), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(-00, -1000), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(-200, -1200), 0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(-450, -1250), 0.45)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-200, -1200), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
+        AddObject(new PlatForm(new Vector(-450, -1250), 0.30)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-300, -1450), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-100, -1550), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(-250, -1750), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
@@ -66,7 +66,7 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(-450, -2700), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(-350, -2850), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(-200, -3000), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(-50, -3150), 0)).GetSprite("/images/Platform/rock_platform_cleans_00.png");
+        AddObject(new PlatForm(new Vector(-50, -3150), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(100, -3300), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(250, -3450), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(500, -3500), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");

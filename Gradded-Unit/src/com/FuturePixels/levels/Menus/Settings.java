@@ -60,7 +60,7 @@ public class Settings extends ILevel {
             }
         }));
 
-        AddObject(new DropDownButton(new Vector(0.4f, 0.3f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
+        AddObject(new DropDownButton(new Vector(0.35f, 0.3f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDdelegate[]{
                     new HUDdelegate() {
                 @Override
@@ -115,7 +115,7 @@ public class Settings extends ILevel {
                 Game.SetLevelActive(new Controls());
             }
         }));
-         AddObject(new Button(new Vector(0.8f, 0.3f), "credit", new HUDdelegate() {
+         AddObject(new Button(new Vector(0.8f, 0.3f), "Credit", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Credits());
