@@ -44,7 +44,7 @@ public class Slider extends IDrawable {
 
     @Override
     public void doMove() {
-        setPosition(Game.getWindowWidth() * relpos.getX(), Game.getWindowHeight() * relpos.getY());
+        setPosition(Game.getScaledWidth()* relpos.getX(), Game.getScaledHeight()* relpos.getY());
         setScale(Game.ButtonDims());
 
         if (Level().isClicking() && inside) {
@@ -58,7 +58,7 @@ public class Slider extends IDrawable {
             value = (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX());
             Delegate.OnChange(this, GetValue());
         }
-        setPosition((Game.getWindowWidth() * relpos.getX()) - (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX()), (Game.getWindowHeight() * relpos.getY()));
+        setPosition((Game.getScaledWidth() * relpos.getX()) - value, (Game.getScaledHeight() * relpos.getY()));
     }
 
     public float GetValue() {

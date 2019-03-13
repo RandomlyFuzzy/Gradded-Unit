@@ -117,13 +117,15 @@ public class LeaderBoard extends ILevel {
             g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() * ((int) Math.pow(15 - 0, 2) / 10))));
             String s = times.get(0);
             String str = "No " + (0 + 1) + " Place with " + s + " secs";
-            int w = (int)(g.getFontMetrics().stringWidth(str)*1.05f);
+            int w = (int) (g.getFontMetrics().stringWidth(str) * 1.05f);
             g.fillRect(
-                    (int) ((Game.getWindowWidth()/2)-w/2),
-                    (int) ((0.245f) * Game.getWindowHeight()),
+                    (int) ((Game.getWindowWidth() / 2) - w / 2),
+                    (int) ((0.225f) * Game.getWindowHeight()),
                     (int) (w),
                     (int) (0.620f * Game.getWindowHeight()));
-            
+            w = (int) (g.getFontMetrics().stringWidth(Currentind) * 1.05f);
+            g.drawString(Currentind, (Game.getWindowWidth()/2-(w/2)), y);
+
             g.setColor(Color.WHITE);
             int inc = 0;
             for (int i = 0; i < 10; i++) {

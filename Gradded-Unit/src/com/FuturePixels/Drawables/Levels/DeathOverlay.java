@@ -91,15 +91,19 @@ public class DeathOverlay extends IDrawable {
         g.drawString(show, (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
 
-        if (Level().getLastKeyPress() == null) {
-            return;
-        }
-
-        if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
-            LevelLoader.LoadLevel(Level().getClass().getName());
-        }
-        if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_M) {
-            LevelLoader.LoadLevel(Game.getDefualtLevel());
+        if (Level().getLastKeyPress().getKeyCode() != KeyEvent.CHAR_UNDEFINED) {
+            if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
+                try {
+                    LevelLoader.LoadLevel(Level().getClass().newInstance());
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }else
+            if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_M) {
+                LevelLoader.LoadLevel(new MainMenu());
+            }
         }
     }
 
