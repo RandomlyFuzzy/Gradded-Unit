@@ -57,19 +57,18 @@ public class Credits extends ILevel {
 
     @Override
     public void Update(ActionEvent ae) {
-        i += 1 *Game.getDelta();
+        i += 1f * Game.getDelta();
     }
-
     @Override
     public void Draw(Graphics2D g) {
 
-        int val = (int) ((Math.sin(i ) + 1f) * 127.5f);
+        int val = (int) ((Math.sin(i ) + 1f) * 127)+1;
         int val2 = (int) ((Math.cos(i ) + 1f) * 100f);
-        if (val == 255) {
+        if (val >= 250) {
             ind++;
             ind %= 2;
             changed = true;
-        }
+        }else
         if (changed) {
             setBackgroundimage(GetSprite("/Images/backgrounds/background" + (ind + 1) + ".png"));
             changed = false;

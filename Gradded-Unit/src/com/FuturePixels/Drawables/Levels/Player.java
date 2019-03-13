@@ -81,7 +81,7 @@ public class Player extends IDrawable {
             if (!(left || right)) {
                 she.setMaxX(1);
             }
-            she.IncrementX(1);
+            she.IncrementX(0.5f);
         } else if (Velocity.getY() < 0) {
             ind = ind % 3f;
             GetSprite("/Images/Player/reggie FALL_0" + playerind + ".png");
@@ -219,13 +219,14 @@ public class Player extends IDrawable {
 
         if (isLock()) {
             Velocity.addY(0.1f);
-        }
+            return;
+        }else
         if (hasLost) {
             Velocity.setY(6.5f);
             for (int i = 0; i < Level().AmountOfObjects() - 3; i++) {
                 Level().GetObject(i).setIsCollidable(false);
             }
-        }
+        }else
         if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;

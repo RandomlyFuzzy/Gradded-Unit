@@ -24,7 +24,7 @@ public class Lava extends IDrawable {
     @Override
     public void init() {
 //        UseTransforms(false);
-        GetSprite("/images/platform/Platform.png");
+        GetSprite("/images/lava.png");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Lava extends IDrawable {
 
     @Override
     public void onCollison(IDrawable im) {
-        if (im instanceof Player) {
+        if (im instanceof Player&&!Player.isLock()) {
             System.out.println("Playercollider");
             //play you loss ui
             hasCollided = true;
