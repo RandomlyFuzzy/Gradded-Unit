@@ -71,6 +71,7 @@ public class Button extends IDrawable {
 
     public void DoAction() {
         if (buttonDelegate != null) {
+            Level().play("/Sounds/UiClick.wav");
             buttonDelegate.OnClick(this);
         } else {
             System.err.println("error no delegate in this button");

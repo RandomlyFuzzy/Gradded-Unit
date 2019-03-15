@@ -12,6 +12,7 @@ import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.Graphics2D;
 import java.util.logging.Logger;
+import java.util.Random;
 
 /**
  *
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 public class Lava extends IDrawable {
 
     private boolean hasCollided = false;
+    private Random forsounds = new Random();
 
     @Override
     public void init() {
@@ -53,10 +55,16 @@ public class Lava extends IDrawable {
             Player.setHasLost(true);
             //add overLay
   
+            
+            
+            
+            int r = forsounds.nextInt(4) + 1;
+                
+            
            
             Level().AddObject(new DeathOverlay());
             Level().play("/Sounds/LevelFail.wav");
-            Level().play("/Sounds/Scream1.wav");
+            Level().play("/Sounds/Scream" + r + ".wav");
         }
     }
 }

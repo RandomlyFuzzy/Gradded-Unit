@@ -171,8 +171,8 @@ public class Player extends IDrawable {
             if (isColliding() && !IsPlayer) {
                 Acc.setY(8f);
                 int r = forsounds.nextInt(3);
-                int r2 = forsounds.nextInt(2) + 1;
-                String Prefix = r == 0 ? "Low" : r == 1 ? "" : "High";
+                int r2 = forsounds.nextInt(3) + 1;
+                String Prefix = r == 0 ? "High" : "High";
                 Level().play("/Sounds/" + Prefix + "Jump" + r2 + ".wav");
             }
             canJump = false;
@@ -261,6 +261,7 @@ public class Player extends IDrawable {
 
             if (col2.IsHit && Velocity.getY() > 0) {
                 Level().play("/sounds/Hit" + forsounds.nextInt(7) + ".wav");
+                Level().play("/sounds/HighOuch1.wav");
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
                         y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();

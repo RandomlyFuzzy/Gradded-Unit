@@ -9,6 +9,7 @@ package com.FuturePixels.Drawables.Levels;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Components.Vector;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 /**
  *
@@ -17,6 +18,7 @@ import java.awt.Graphics2D;
 public class DestroyingPlatForm extends IDrawable {
 
     boolean haslanded = false;
+    private Random forsounds = new Random();
 
     public DestroyingPlatForm() {
         super();
@@ -35,11 +37,16 @@ public class DestroyingPlatForm extends IDrawable {
         
     }
 
+    
+                int r2 = forsounds.nextInt(2) + 1;
+                
+                
+                           
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
         if (haslanded && !isColliding()) {
-            Level().play("/Sounds/PlatformBreak_01.wav");
+            Level().play("/Sounds/Break" + r2 + ".wav");
             setEnabled(false);
         }
     }
