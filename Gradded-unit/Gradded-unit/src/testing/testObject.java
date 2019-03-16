@@ -19,6 +19,9 @@ public class testObject extends IDrawable {
 
     SpriteSheet she = new SpriteSheet(0, 0, 60, 90);
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/Images/player/player_00.png");
@@ -27,16 +30,27 @@ public class testObject extends IDrawable {
         setScale(new Vector(2, 2));
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
         she.IncrementX(0.1f);
     }
 
+    /**
+     *
+     * @param gd
+     */
     @Override
     public void Update(Graphics2D gd) {
         DrawLastLoadedImageAsSpriteSheet(gd, she);
     }
 
+    /**
+     *
+     * @param id
+     */
     @Override
     public void onCollison(IDrawable id) {
     }

@@ -44,20 +44,34 @@ public class LeaderBoard extends ILevel {
     private static String Currentind = "Level1Solo";
     private ArrayList<String> times = new ArrayList<String>();
 
+    /**
+     *
+     * @return
+     */
     public static String getCurrentind() {
         return Currentind;
     }
 
+    /**
+     *
+     * @param Currentind
+     */
     public static void setCurrentind(String Currentind) {
         LeaderBoard.Currentind = Currentind;
     }
 
+    /**
+     *
+     */
     public LeaderBoard() {
         super();
         System.out.println("com.game.levels.LeaderBoard.<init>()");
         setStopAudioOnStart(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/Images/backgrounds/background1.png");
@@ -78,6 +92,10 @@ public class LeaderBoard extends ILevel {
         AddObject(new Mouse());
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
         if (previousind != Currentind) {
@@ -104,6 +122,10 @@ public class LeaderBoard extends ILevel {
         previousind = Currentind;
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
         g.drawImage(GetSprite("/Images/backgrounds/background1.png"), Game.getWindowWidth(), 0, (Game.getWindowWidth() * -1), (Game.getWindowHeight()), null);
@@ -142,16 +164,27 @@ public class LeaderBoard extends ILevel {
         g.setFont(f);
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
 
     }
 
+    /**
+     *
+     */
     public void dispose() {
         super.dispose();
         Currentind = "Level2Solo";

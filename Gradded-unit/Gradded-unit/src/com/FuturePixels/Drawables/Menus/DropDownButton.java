@@ -24,16 +24,31 @@ public class DropDownButton extends IDrawable {
     private String Message = "";
     private Vector relpos = Vector.One();
     private HUDdelegate buttonDelegate;
+
+    /**
+     *
+     */
     public final int[] indexOfSubbuttons;
     private String[] SubMessage;
     private HUDdelegate[] LogicForSubButtons;
     private Vector AddVector;
 
+    /**
+     *
+     */
     public DropDownButton() {
         super();
         indexOfSubbuttons = new int[0];
     }
 
+    /**
+     *
+     * @param relpos
+     * @param Message
+     * @param AddPerButton
+     * @param SubMessage
+     * @param LogicForSubButtons
+     */
     public DropDownButton(Vector relpos, String Message, Vector AddPerButton, String[] SubMessage, HUDdelegate[] LogicForSubButtons) {
         super();
         this.Message = Message;
@@ -62,6 +77,9 @@ public class DropDownButton extends IDrawable {
         };
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/Images/DropButton.png");
@@ -69,6 +87,9 @@ public class DropDownButton extends IDrawable {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
         setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
@@ -77,6 +98,10 @@ public class DropDownButton extends IDrawable {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
 //        System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.Update() "+getPosition().toString());
@@ -92,6 +117,9 @@ public class DropDownButton extends IDrawable {
         }
     }
 
+    /**
+     *
+     */
     public void DoAction() {
         if (buttonDelegate != null) {
             buttonDelegate.OnClick(this);
@@ -100,15 +128,27 @@ public class DropDownButton extends IDrawable {
         }
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessage() {
         return Message;
     }
 
+    /**
+     *
+     * @param Message
+     */
     public void setMessage(String Message) {
         this.Message = Message;
     }

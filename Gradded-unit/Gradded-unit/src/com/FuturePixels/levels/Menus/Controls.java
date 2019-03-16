@@ -30,6 +30,10 @@ import static java.awt.image.ImageObserver.WIDTH;
 public class Controls extends ILevel {
 
     Vector relataiveity = Vector.Zero();
+
+    /**
+     *
+     */
     public static BlackoutButton BB = new BlackoutButton("Press to get key", new HUDdelegate() {
         public void OnClick(BlackoutButton b) {
             if (Controls.val == 1) {
@@ -70,6 +74,9 @@ public class Controls extends ILevel {
     private static int val = 1;
     private static int lastKey = 1;
 
+    /**
+     *
+     */
     public Controls() {
         super();
         setStopAudioOnStart(false);
@@ -77,11 +84,18 @@ public class Controls extends ILevel {
 
     }
 
+    /**
+     *
+     * @param change
+     */
     public static void ReadyForKeyChange(int change) {
         BB.setEnabled(true);
         val = change;
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
 
@@ -156,11 +170,19 @@ public class Controls extends ILevel {
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
         relataiveity = Game.ButtonDims();
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
 
@@ -177,6 +199,10 @@ public class Controls extends ILevel {
         g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f);
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
         if (BB.isEnabled()) {
@@ -188,6 +214,10 @@ public class Controls extends ILevel {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
 

@@ -39,28 +39,47 @@ public class Flag extends IDrawable {
     private ILevel next;
     private String seed = "";
 
+    /**
+     *
+     * @param nextLevel
+     */
     public Flag(ILevel nextLevel) {
         super();
         next = nextLevel;
     }
 
+    /**
+     *
+     * @param nextLevel
+     * @param seed
+     */
     public Flag(ILevel nextLevel, int seed) {
         super();
         next = nextLevel;
         this.seed = "" + seed;
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/images/FlagA.png");
         flag.inputImage(getLastImage());
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
         flag.IncrementX(0.1f);
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImageAsSpriteSheet(g,flag);
@@ -68,6 +87,10 @@ public class Flag extends IDrawable {
 
     boolean ran = false;
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
 

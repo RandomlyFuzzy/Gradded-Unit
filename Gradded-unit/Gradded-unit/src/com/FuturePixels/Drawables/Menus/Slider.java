@@ -26,10 +26,19 @@ public class Slider extends IDrawable {
     private Vector MouseWhenPressed = new Vector(0, 0);
     private Vector MoveAmt = new Vector(0, 0);
 
+    /**
+     *
+     */
     public Slider() {
 //        super();
     }
 
+    /**
+     *
+     * @param relpos
+     * @param Length
+     * @param Logic
+     */
     public Slider(Vector relpos, float Length, HUDdelegate Logic) {
         super();
         this.length = Game.getWindowWidth()*Length;
@@ -37,11 +46,17 @@ public class Slider extends IDrawable {
         this.relpos = relpos;
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
         setPosition(Game.getScaledWidth()* relpos.getX(), Game.getScaledHeight()* relpos.getY());
@@ -61,10 +76,18 @@ public class Slider extends IDrawable {
         setPosition((Game.getScaledWidth() * relpos.getX()) - value, (Game.getScaledHeight() * relpos.getY()));
     }
 
+    /**
+     *
+     * @return
+     */
     public float GetValue() {
         return 1 - ((value + length) / length) / 2;
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
 //        GetSprite("/Images/Slider_Back.png");
@@ -82,6 +105,10 @@ public class Slider extends IDrawable {
 
     private boolean inside = false;
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
         if (im instanceof Mouse) {

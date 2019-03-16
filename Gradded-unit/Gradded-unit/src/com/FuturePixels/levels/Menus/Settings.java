@@ -33,7 +33,9 @@ import javax.swing.Timer;
  */
 public class Settings extends ILevel {
 
-
+    /**
+     *
+     */
     public Settings() {
         super();
         System.out.println("com.game.levels.Settings.<init>()");
@@ -41,6 +43,9 @@ public class Settings extends ILevel {
         setSimpleCollison(true);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
 
@@ -126,21 +131,37 @@ public class Settings extends ILevel {
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
         
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
 

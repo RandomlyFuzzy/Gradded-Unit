@@ -24,21 +24,35 @@ public class BlackoutButton extends IDrawable {
     private Vector relpos = Vector.One();
     private HUDdelegate buttonDelegate;
 
+    /**
+     *
+     */
     public BlackoutButton() {
         super();
     }
 
+    /**
+     *
+     * @param Message
+     * @param Logic
+     */
     public BlackoutButton(String Message, HUDdelegate Logic) {
         super();
         this.Message = Message;
         buttonDelegate = Logic;
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/Images/Button_0.png");
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
         setPosition(Game.getScaledWidth() / 2, Game.getScaledHeight() / 2);
@@ -46,6 +60,10 @@ public class BlackoutButton extends IDrawable {
         setSpriteHeight(Game.getScaledHeight());
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
 //        DrawLastLoadedImage(g);
@@ -57,6 +75,9 @@ public class BlackoutButton extends IDrawable {
         g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
     }
 
+    /**
+     *
+     */
     public void DoAction() {
         if (buttonDelegate != null) {
             buttonDelegate.OnClick(this);
@@ -65,15 +86,27 @@ public class BlackoutButton extends IDrawable {
         }
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessage() {
         return Message;
     }
 
+    /**
+     *
+     * @param Message
+     */
     public void setMessage(String Message) {
         this.Message = Message;
     }

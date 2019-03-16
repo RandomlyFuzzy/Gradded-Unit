@@ -20,16 +20,30 @@ public class HUD extends IDrawable {
     private static ArrayList<String> texts = new ArrayList<String>();
     private static ArrayList<Vector> textsPos = new ArrayList<Vector>();
 
+    /**
+     *
+     */
     public HUD() {
         super();
     }
 
+    /**
+     *
+     * @param text
+     * @param position
+     * @return
+     */
     public static int AddText(String text, Vector position) {
         texts.add(text);
         textsPos.add(position);
         return texts.size() - 1;
     }
 
+    /**
+     *
+     * @param ind
+     * @param Text
+     */
     public static void EditText(int ind, String Text) {
         if (texts.size() <= ind || ind < 0) {
             return;
@@ -37,20 +51,35 @@ public class HUD extends IDrawable {
         texts.set(ind, Text);
     }
 
+    /**
+     *
+     * @param ind
+     * @param pos
+     */
     public static void EditText(int ind, Vector pos) {
         textsPos.set(ind, pos);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         setIsCollidable(false);
         UseTransforms(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
 
@@ -62,11 +91,18 @@ public class HUD extends IDrawable {
         
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
 
     }
 
+    /**
+     *
+     */
     @Override
     public void dispose() {
         super.dispose();

@@ -23,15 +23,27 @@ public class DebugObject extends IDrawable {
     private static ArrayList<Vector> Lines = new ArrayList<Vector>();
     private static ArrayList<Vector> Cirles = new ArrayList<Vector>();
 
+    /**
+     *
+     * @param v1
+     * @param v2
+     */
     public static void AddLine(Vector v1, Vector v2) {
         Lines.add(v1);
         Lines.add(v2);
     }
 
+    /**
+     *
+     * @param v1
+     */
     public static void AddCirles(Vector v1) {
         Cirles.add(v1);
     }
 
+    /**
+     *
+     */
     public DebugObject() {
         super();
         Lines = new ArrayList<Vector>();
@@ -43,6 +55,10 @@ public class DebugObject extends IDrawable {
         Cirles = new ArrayList<Vector>();
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         g.setColor(new Color(255, 255, 150, 155));
@@ -59,14 +75,24 @@ public class DebugObject extends IDrawable {
         Reset();
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
     }

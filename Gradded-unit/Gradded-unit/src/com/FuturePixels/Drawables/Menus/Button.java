@@ -25,18 +25,32 @@ public class Button extends IDrawable {
     private Vector relpos = Vector.One();
     private HUDdelegate buttonDelegate;
 
+    /**
+     *
+     */
     public Button() {
         super();
         UseTransforms(false);
 
     }
 
+    /**
+     *
+     * @param Message
+     * @param Logic
+     */
     public Button(String Message, HUDdelegate Logic) {
         super();
         this.Message = Message;
         buttonDelegate = Logic;
     }
 
+    /**
+     *
+     * @param relpos
+     * @param Message
+     * @param Logic
+     */
     public Button(Vector relpos, String Message, HUDdelegate Logic) {
         super();
         this.Message = Message;
@@ -44,17 +58,27 @@ public class Button extends IDrawable {
         this.relpos = relpos;
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/Images/Button_0.png");
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
         setPosition(new Vector(((Game.getScaledWidth() ))* relpos.getX(), ((Game.getScaledHeight() ))* relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
         setScale(Game.ButtonDims());
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
@@ -69,6 +93,9 @@ public class Button extends IDrawable {
         }
     }
 
+    /**
+     *
+     */
     public void DoAction() {
         if (buttonDelegate != null) {
             buttonDelegate.OnClick(this);
@@ -77,6 +104,10 @@ public class Button extends IDrawable {
         }
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
         if (im instanceof Button) {
@@ -84,10 +115,18 @@ public class Button extends IDrawable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMessage() {
         return Message;
     }
 
+    /**
+     *
+     * @param Message
+     */
     public void setMessage(String Message) {
         this.Message = Message;
     }

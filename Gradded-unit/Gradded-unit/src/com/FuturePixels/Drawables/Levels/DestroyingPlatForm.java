@@ -18,10 +18,18 @@ public class DestroyingPlatForm extends IDrawable {
 
     boolean haslanded = false;
 
+    /**
+     *
+     */
     public DestroyingPlatForm() {
         super();
     }
 
+    /**
+     *
+     * @param position
+     * @param RadianRotation
+     */
     public DestroyingPlatForm(Vector position, double RadianRotation) {
         super();
         GetSprite("/images/platform/Platform.png");
@@ -29,12 +37,19 @@ public class DestroyingPlatForm extends IDrawable {
         setRotation(RadianRotation);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/images/platform/Platform.png");
         
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
@@ -44,11 +59,18 @@ public class DestroyingPlatForm extends IDrawable {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void doMove() {
 
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
         if (im instanceof Player&&(((Player)im).Velocity.getY()==0)) {

@@ -24,11 +24,17 @@ public class Level1Solo extends ILevel {
 
     private Player player1;
 
+    /**
+     *
+     */
     public Level1Solo() {
         super();
         setSimpleCollison(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         new Thread(new Runnable() {
@@ -85,6 +91,10 @@ public class Level1Solo extends ILevel {
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
         
@@ -92,11 +102,19 @@ public class Level1Solo extends ILevel {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
        
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
         try {
@@ -118,6 +136,10 @@ public class Level1Solo extends ILevel {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
         try {

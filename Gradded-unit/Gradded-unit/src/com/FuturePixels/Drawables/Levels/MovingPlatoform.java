@@ -20,10 +20,20 @@ public class MovingPlatoform extends IDrawable {
     private int ind = 0;
     private Vector Add = Vector.Zero();
 
+    /**
+     *
+     */
     public MovingPlatoform() {
         super();
     }
 
+    /**
+     *
+     * @param position
+     * @param RadianRotation
+     * @param cycle
+     * @param Speed
+     */
     public MovingPlatoform(Vector position, double RadianRotation, Vector[] cycle, float Speed) {
         super();
 //        GetSprite("/images/platform/Platform.png");
@@ -33,12 +43,17 @@ public class MovingPlatoform extends IDrawable {
         this.Speed = Speed;
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         GetSprite("/images/Platform/rock_platform_moss_01.png");
     }
 
-    
+    /**
+     *
+     */
     @Override
     public void doMove() {
         Vector dist = getPosition().add(new Vector(Cycle[ind]).mult(-1));
@@ -54,11 +69,19 @@ public class MovingPlatoform extends IDrawable {
         UpdateBounds();
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
         if(im instanceof Player){

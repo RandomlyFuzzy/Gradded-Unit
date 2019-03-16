@@ -21,12 +21,18 @@ public class Lava extends IDrawable {
 
     private boolean hasCollided = false;
 
+    /**
+     *
+     */
     @Override
     public void init() {
 //        UseTransforms(false);
         GetSprite("/images/lava.png");
     }
 
+    /**
+     *
+     */
     @Override
 
     public void doMove() {
@@ -36,11 +42,19 @@ public class Lava extends IDrawable {
         setPosition(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() / 2, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight());
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
         if (im instanceof Player&&!Player.isLock()) {

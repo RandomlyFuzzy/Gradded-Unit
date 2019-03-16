@@ -29,6 +29,10 @@ import com.Liamengine.Engine.Utils.FileUtils;
  */
 public class Entry {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(), new LevelCoop(), new Credits()};
         LevelLoader.LL.SetLevels(arr);

@@ -2,33 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/resources/images/backgrounds/background2.png</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/resources/Savedata/coop/1.txt</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/Menus/LevelSelectSolo.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/CoopLevels/LevelCoop.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/OtherLevels/LeaderBoard.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/Drawables/Levels/DebugObject.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/Drawables/Levels/Flag.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/Drawables/Levels/Player.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/testing/DebugLevel.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/Menus/LevelSelectCoop.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/Entry.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/SoloLevels/Level4Solo.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/resources/images/backgrounds/background.png</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/Menus/Settings.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/Drawables/Levels/DeathOverlay.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/resources/Savedata/Level1Solo.txt</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/resources/images/backgrounds/background1.png</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/SoloLevels/Level1Solo.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/Drawables/Menus/Slider.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/Menus/Controls.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/Menus/MainMenu.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/testing/testObject.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/levels/SoloLevels/Level2Solo.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/resources/Data/CoopSeed</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/src/com/FuturePixels/Drawables/Levels/Lava.java</file>
-            <file>file:/C:/Users/RandomlyFuzzy/Desktop/Study/_Still%20doing/Gradded%20Unit/Production/Game/Gradded-Unit/Gradded-Unit/resources/Data/Credits.txt</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

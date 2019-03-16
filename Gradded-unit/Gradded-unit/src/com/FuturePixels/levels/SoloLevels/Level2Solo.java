@@ -25,12 +25,18 @@ public class Level2Solo extends ILevel {
     private Player player1;
     private Vector Cameraopos = Vector.Zero();
 
+    /**
+     *
+     */
     public Level2Solo() {
         super();
         setSimpleCollison(false);
         setStopAudioOnStart(true);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         new Thread(new Runnable() {
@@ -80,6 +86,10 @@ public class Level2Solo extends ILevel {
         setBackgroundimage(GetSprite("/Images/backgrounds/background2.png"));
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
 
@@ -89,6 +99,10 @@ public class Level2Solo extends ILevel {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
         Color c = g.getColor();
@@ -98,6 +112,10 @@ public class Level2Solo extends ILevel {
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
         try {
@@ -135,6 +153,10 @@ public class Level2Solo extends ILevel {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
         try {

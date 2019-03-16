@@ -25,8 +25,20 @@ public class Player extends IDrawable {
     private float ind = 0, Scale = 1;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, IsPlayer = false;
     private boolean once = true;
+
+    /**
+     *
+     */
     public Vector Velocity = new Vector(0, 0);
+
+    /**
+     *
+     */
     public Vector Acc = new Vector(0, 0);
+
+    /**
+     *
+     */
     public Vector Cameraopos = Vector.Zero();
     private Random forsounds = new Random();
     private SpriteSheet she = new SpriteSheet(0, 0, 60, 90);
@@ -37,12 +49,18 @@ public class Player extends IDrawable {
     private static boolean hasLost = false;
     private int playerind = 0;
 
+    /**
+     *
+     */
     public Player() {
         super();
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
     }
 
+    /**
+     *
+     */
     public void init() {
         Player.setLock(false);
         hasLost = false;
@@ -53,6 +71,13 @@ public class Player extends IDrawable {
         playerind = PlayerCount++;
     }
 
+    /**
+     *
+     * @param left
+     * @param right
+     * @param up
+     * @param down
+     */
     public void move(boolean left, boolean right, boolean up, boolean down) {
         this.left = left;
         this.right = right;
@@ -60,6 +85,10 @@ public class Player extends IDrawable {
         this.down = down;
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         ind += !canJump ? 0.3f : Stop ? -ind : 0.3f;
@@ -102,6 +131,9 @@ public class Player extends IDrawable {
 //        setRotation(getRotation()+(float)(Math.PI/180));
     }
 
+    /**
+     *
+     */
     public void doMove() {
         if (!isColliding() || IsPlayer) {
             setRotation((getRotation() * 0.98f));
@@ -204,6 +236,10 @@ public class Player extends IDrawable {
         Stop = !one && !two;
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
         if (im == null) {
@@ -281,54 +317,105 @@ public class Player extends IDrawable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static boolean isHasLost() {
         return hasLost;
     }
 
+    /**
+     *
+     * @param hasLost
+     */
     public static void setHasLost(boolean hasLost) {
         Player.hasLost = hasLost;
     }
 
+    /**
+     *
+     * @return
+     */
     public static boolean isLock() {
         return Lock;
     }
 
+    /**
+     *
+     * @param Lock
+     */
     public static void setLock(boolean Lock) {
         Player.Lock = Lock;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isLeft() {
         return left;
     }
 
+    /**
+     *
+     * @param left
+     */
     public void setLeft(boolean left) {
         this.left = left;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isRight() {
         return right;
     }
 
+    /**
+     *
+     * @param right
+     */
     public void setRight(boolean right) {
         this.right = right;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isUp() {
         return up;
     }
 
+    /**
+     *
+     * @param up
+     */
     public void setUp(boolean up) {
         this.up = up;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isDown() {
         return down;
     }
 
+    /**
+     *
+     * @param down
+     */
     public void setDown(boolean down) {
         this.down = down;
     }
 
+    /**
+     *
+     */
     @Override
     public void dispose() {
         super.dispose();

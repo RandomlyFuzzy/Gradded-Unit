@@ -25,12 +25,18 @@ public class Level3Solo extends ILevel {
     private Player player1;
     private Vector Cameraopos = Vector.Zero();
 
+    /**
+     *
+     */
     public Level3Solo() {
         super();
         setSimpleCollison(false);
         setStopAudioOnStart(true);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         new Thread(new Runnable() {
@@ -83,10 +89,14 @@ public class Level3Solo extends ILevel {
         AddObject(new HUD());
         AddObject(new Lava());
         play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/backgrounds/background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background3.png"));
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * 0.4f) / 2, 0));
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
 
@@ -96,11 +106,19 @@ public class Level3Solo extends ILevel {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
         try {
@@ -138,6 +156,10 @@ public class Level3Solo extends ILevel {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
         try {

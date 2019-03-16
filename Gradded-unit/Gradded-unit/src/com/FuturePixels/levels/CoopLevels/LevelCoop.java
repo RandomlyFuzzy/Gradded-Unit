@@ -27,10 +27,16 @@ public class LevelCoop extends ILevel {
     private Player player1;
     private Player player2;
 
+    /**
+     *
+     */
     public LevelCoop() {
         super();
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         new Thread(new Runnable() {
@@ -57,12 +63,12 @@ public class LevelCoop extends ILevel {
         
         AddObject(new PlatForm(new Vector(start, 0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
 
-        for (i = 200; i < 1000; i += 200) {
+        for (i = 200; i < 10000; i += 200) {
             AddObject(new PlatForm(new Vector(((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100, -i), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
         }
 
         int last = ((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100;
-        AddObject(new PlatForm(new Vector(last, -(i)), 0));
+        AddObject(new PlatForm(new Vector(last, -(i)), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
         AddObject(new Flag(new MainMenu(), seed)).setPosition(new Vector(last, -(i + 50)));
 
         AddObject(new DebugObject());
@@ -77,6 +83,10 @@ public class LevelCoop extends ILevel {
 
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
 
@@ -86,11 +96,19 @@ public class LevelCoop extends ILevel {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
         try {
@@ -123,6 +141,10 @@ public class LevelCoop extends ILevel {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
         try {

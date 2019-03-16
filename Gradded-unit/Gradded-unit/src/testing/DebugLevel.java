@@ -29,24 +29,43 @@ import static java.awt.image.ImageObserver.WIDTH;
  */
 public class DebugLevel extends ILevel {
 
+    /**
+     *
+     */
     @Override
     public void init() {
         AddObject(new testObject());
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
     }
 
+    /**
+     *
+     * @param gd
+     */
     @Override
     public void Draw(Graphics2D gd) {
     }
 
+    /**
+     *
+     * @param ke
+     */
     @Override
     public void keyPress(KeyEvent ke) {
         
     }
 
+    /**
+     *
+     * @param ke
+     */
     @Override
     public void keyRelease(KeyEvent ke) {
     }

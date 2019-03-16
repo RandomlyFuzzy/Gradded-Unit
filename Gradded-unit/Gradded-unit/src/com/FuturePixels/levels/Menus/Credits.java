@@ -41,6 +41,9 @@ public class Credits extends ILevel {
     boolean changed = false;
     String[] credits;
 
+    /**
+     *
+     */
     public Credits() {
         super();
         System.out.println("com.game.levels.Settings.<init>()");
@@ -48,6 +51,9 @@ public class Credits extends ILevel {
         setSimpleCollison(true);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         AddObject(new Mouse());
@@ -55,10 +61,19 @@ public class Credits extends ILevel {
         credits = FileUtils.GetFileSplit("resources/data/Credits.txt", "\n");
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
         i += 1f * Game.getDelta();
     }
+
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
 
@@ -84,11 +99,19 @@ public class Credits extends ILevel {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
 

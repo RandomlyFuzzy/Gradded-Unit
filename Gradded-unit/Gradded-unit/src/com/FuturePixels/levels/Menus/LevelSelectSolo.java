@@ -25,12 +25,17 @@ import static java.awt.image.ImageObserver.WIDTH;
  */
 public class LevelSelectSolo extends ILevel {
 
-
+    /**
+     *
+     */
     public LevelSelectSolo() {
         super();
         setStopAudioOnStart(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         for (int i = 0; i < 5; i++) {
@@ -50,19 +55,35 @@ public class LevelSelectSolo extends ILevel {
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
     }

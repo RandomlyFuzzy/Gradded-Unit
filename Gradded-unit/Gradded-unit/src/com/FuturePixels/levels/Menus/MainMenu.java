@@ -35,11 +35,17 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends ILevel {
 
+    /**
+     *
+     */
     public MainMenu() {
         super();
         setStopAudioOnStart(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
 
@@ -81,11 +87,19 @@ public class MainMenu extends ILevel {
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
+    /**
+     *
+     * @param ae
+     */
     @Override
     public void Update(ActionEvent ae) {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
@@ -102,10 +116,18 @@ public class MainMenu extends ILevel {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPress(KeyEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyRelease(KeyEvent e) {
 //        if (e.getKeyCode() == KeyEvent.VK_P) {

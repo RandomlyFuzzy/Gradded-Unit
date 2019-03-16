@@ -31,11 +31,17 @@ import java.util.logging.Logger;
  */
 public class DeathOverlay extends IDrawable {
 
+    /**
+     *
+     */
     public DeathOverlay() {
         super();
         UseTransforms(false);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         Level().AddObject(new Button(new Vector(0.3f, 0.8f), "[R] Retry", new HUDdelegate() {
@@ -60,6 +66,9 @@ public class DeathOverlay extends IDrawable {
         GetSprite("API/cat");
     }
 
+    /**
+     *
+     */
     @Override
 
     public void doMove() {
@@ -68,6 +77,10 @@ public class DeathOverlay extends IDrawable {
         setSpriteHeight((int) (Game.getWindowHeight() * .6f));
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         float w = Game.getWindowWidth();
@@ -107,6 +120,10 @@ public class DeathOverlay extends IDrawable {
         }
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
     }
