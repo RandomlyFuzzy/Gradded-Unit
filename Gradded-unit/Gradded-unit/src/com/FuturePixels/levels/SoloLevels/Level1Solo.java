@@ -87,7 +87,7 @@ public class Level1Solo extends ILevel {
 //        AddObject(new DebugObject());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * .6f) / 2, 0));
-        play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/Sounds/Lvl1Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
 
