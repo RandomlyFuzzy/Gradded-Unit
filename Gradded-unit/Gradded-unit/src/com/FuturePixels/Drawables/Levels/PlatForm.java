@@ -33,6 +33,7 @@ public class PlatForm extends IDrawable {
         GetSprite("/images/platform/Platform.png");
         setPosition(position);
         setRotation(RadianRotation);
+        
     }
 
     /**

@@ -15,6 +15,7 @@ import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.Graphics2D;
 import java.util.Random;
+import java.util.Timer;
 
 /**
  *
@@ -152,8 +153,20 @@ public class Player extends IDrawable {
         }
         Velocity.add(Acc);
         //adds the relative "right" vector and "up" vector 
-        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float)getRotation()*2f)));
-
+        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float)getRotation()*2f  )));
+        
+        
+        
+        if((float)getRotation() < -0.3 && canJump == true)
+        {
+            Level().play("/Sounds/Slide.wav");  
+        }
+        
+        if((float)getRotation() > 0.3 && canJump == true)
+        {
+            Level().play("/Sounds/Slide.wav"); 
+        }
+        
         if (isColliding() && !IsPlayer) {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
