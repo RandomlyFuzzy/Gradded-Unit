@@ -102,7 +102,7 @@ public class Flag extends IDrawable {
                 FileUtils.AppendToFile("resources/Savedata/" + Slim + ".txt", "" + String.format("%.2f", Level().getTime()) + "\n");
             }
             Level().play("/Sounds/win1.wav");
-            Level().play("/sounds/LevelCompleate_" + new Random().nextInt(4) + ".wav");
+            Level().play("/sounds/LevelCompleate_" + new Random().nextInt(3) + ".wav");
             Player.setLock(true);
             new Thread(() -> {
                 try {
