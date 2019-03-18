@@ -164,14 +164,11 @@ public class Player extends IDrawable {
             Velocity.mult(new Vector(0.985f * 0.985f, 1f));
 
         }
-        if ((float) getRotation() < -0.3 && canJump) {
+        if ((float) getRotation() != 0 && canJump) {
             Level().play("/Sounds/Slide.wav");
         }
 
-        if ((float) getRotation() > 0.3 && canJump) {
-            Level().play("/Sounds/Slide.wav");
-        }
-
+       
         if (isColliding() && !IsPlayer) {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
@@ -179,7 +176,7 @@ public class Player extends IDrawable {
 
         //screen scroller
         if (!isLock() && !hasLost) {
-            Cameraopos.setY(Cameraopos.getY() + Game.getDelta() * 30f);
+            Cameraopos.setY(Cameraopos.getY() + Level().getDelta() * 60f);
         }
 
         if (getPosition().getX() <= -Transform.getOffsetTranslation().getX()) {
