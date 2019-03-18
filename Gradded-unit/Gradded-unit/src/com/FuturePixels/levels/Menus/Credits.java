@@ -47,7 +47,7 @@ public class Credits extends ILevel {
     public Credits() {
         super();
         System.out.println("com.game.levels.Settings.<init>()");
-        setStopAudioOnStart(false);
+        setStopAudioOnStart(true);
         setSimpleCollison(true);
     }
 

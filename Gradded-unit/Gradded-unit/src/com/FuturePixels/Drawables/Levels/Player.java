@@ -15,7 +15,6 @@ import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.Graphics2D;
 import java.util.Random;
-import java.util.Timer;
 
 /**
  *
@@ -26,20 +25,8 @@ public class Player extends IDrawable {
     private float ind = 0, Scale = 1;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, IsPlayer = false;
     private boolean once = true;
-
-    /**
-     *
-     */
     public Vector Velocity = new Vector(0, 0);
-
-    /**
-     *
-     */
     public Vector Acc = new Vector(0, 0);
-
-    /**
-     *
-     */
     public Vector Cameraopos = Vector.Zero();
     private Random forsounds = new Random();
     private SpriteSheet she = new SpriteSheet(0, 0, 60, 90);
@@ -50,18 +37,12 @@ public class Player extends IDrawable {
     private static boolean hasLost = false;
     private int playerind = 0;
 
-    /**
-     *
-     */
     public Player() {
         super();
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
     }
 
-    /**
-     *
-     */
     public void init() {
         Player.setLock(false);
         hasLost = false;
@@ -72,13 +53,6 @@ public class Player extends IDrawable {
         playerind = PlayerCount++;
     }
 
-    /**
-     *
-     * @param left
-     * @param right
-     * @param up
-     * @param down
-     */
     public void move(boolean left, boolean right, boolean up, boolean down) {
         this.left = left;
         this.right = right;
@@ -86,10 +60,6 @@ public class Player extends IDrawable {
         this.down = down;
     }
 
-    /**
-     *
-     * @param g
-     */
     @Override
     public void Update(Graphics2D g) {
         ind += !canJump ? 0.3f : Stop ? -ind : 0.3f;
@@ -132,15 +102,12 @@ public class Player extends IDrawable {
 //        setRotation(getRotation()+(float)(Math.PI/180));
     }
 
-    /**
-     *
-     */
     public void doMove() {
         if (!isColliding() || IsPlayer) {
             setRotation((getRotation() * 0.98f));
-//            canJump = false;
+            canJump = false;
             once = true;
-            Velocity.mult(new Vector(0.99f, 0.99f));
+            Velocity.mult(new Vector(0.985f, 0.995f));
         }
         if (!Lock && !hasLost) {
             movePlayer();
@@ -149,34 +116,26 @@ public class Player extends IDrawable {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
             //mars gravity*2  
-            Acc.addY((-3.711f * (float) Level().getDelta() * 4));
+            Acc.addY((-3.711f * (float) Game.getDelta() * 2));
         }
         Velocity.add(Acc);
         //adds the relative "right" vector and "up" vector 
-        addPosition(Vector.Zero()
-                .add(GetRight().mult(Velocity.getX()))
-                .add(GetUp().mult(Velocity.getY() * 2))
-                .add(GetRight().mult((float) getRotation() * 2f)));
+        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float)getRotation()*2f)));
 
-        if (!(left || right) && canJump) {
-            Velocity.mult(new Vector(0.8f * 0.8f, 0.995f));
-        } else {
-            Velocity.mult(new Vector(0.985f * 0.985f, 1f));
-
-        }
-        if ((float) getRotation() != 0 && canJump) {
-            Level().play("/Sounds/Slide.wav");
-        }
-
-       
         if (isColliding() && !IsPlayer) {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
         Acc.mult(0);
 
+        if((float)getRotation() != 0 && canJump)
+        {
+            Level().play("/Sounds/Slide.wav");  
+        }
+        
+        
         //screen scroller
         if (!isLock() && !hasLost) {
-            Cameraopos.setY(Cameraopos.getY() + Level().getDelta() * 60f);
+            Cameraopos.setY(Cameraopos.getY() + Game.getDelta() * 30f);
         }
 
         if (getPosition().getX() <= -Transform.getOffsetTranslation().getX()) {
@@ -208,7 +167,6 @@ public class Player extends IDrawable {
         );
         DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
         DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() - 5, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
-
     }
 
     private void movePlayer() {
@@ -216,8 +174,8 @@ public class Player extends IDrawable {
 
         if (up && canJump) {
 //            Acc.setY(0.01f);
-            Acc.setY(8f);
             if (isColliding() && !IsPlayer) {
+                Acc.setY(8f);
                 int r = forsounds.nextInt(3);
                 int r2 = forsounds.nextInt(3) + 1;
                 String Prefix = r == 0 ? "High" : "High";
@@ -246,16 +204,12 @@ public class Player extends IDrawable {
             two = false;
             Acc.setX(0);
         }
-        float Clamp = canJump ? 1f : 0.2f;
+        float Clamp = canJump ? 1f : 0.1f;
         Acc.setX(Acc.getX() > Clamp ? Clamp : Acc.getX() < -Clamp ? -Clamp : Acc.getX());
 
         Stop = !one && !two;
     }
 
-    /**
-     *
-     * @param im
-     */
     @Override
     public void onCollison(IDrawable im) {
         if (im == null) {
@@ -270,19 +224,20 @@ public class Player extends IDrawable {
         }
 
         if (isLock()) {
-            Velocity.addY(6.5f);
+            Velocity.addY(0.1f);
             return;
-        } else if (hasLost) {
+        }else
+        if (hasLost) {
             Velocity.setY(6.5f);
             for (int i = 0; i < Level().AmountOfObjects() - 3; i++) {
-                try {
-                    Level().GetObject(i)
-                            .setIsCollidable(false);
-                } catch (Exception ex) {
-
+                try{
+                Level().GetObject(i).setIsCollidable(false);
+                }catch(Exception e){
+                
                 }
             }
-        } else if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
+        }else
+        if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;
@@ -337,105 +292,54 @@ public class Player extends IDrawable {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     public static boolean isHasLost() {
         return hasLost;
     }
 
-    /**
-     *
-     * @param hasLost
-     */
     public static void setHasLost(boolean hasLost) {
         Player.hasLost = hasLost;
     }
 
-    /**
-     *
-     * @return
-     */
     public static boolean isLock() {
         return Lock;
     }
 
-    /**
-     *
-     * @param Lock
-     */
     public static void setLock(boolean Lock) {
         Player.Lock = Lock;
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isLeft() {
         return left;
     }
 
-    /**
-     *
-     * @param left
-     */
     public void setLeft(boolean left) {
         this.left = left;
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isRight() {
         return right;
     }
 
-    /**
-     *
-     * @param right
-     */
     public void setRight(boolean right) {
         this.right = right;
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isUp() {
         return up;
     }
 
-    /**
-     *
-     * @param up
-     */
     public void setUp(boolean up) {
         this.up = up;
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isDown() {
         return down;
     }
 
-    /**
-     *
-     * @param down
-     */
     public void setDown(boolean down) {
         this.down = down;
     }
 
-    /**
-     *
-     */
     @Override
     public void dispose() {
         super.dispose();
