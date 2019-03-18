@@ -67,7 +67,7 @@ public class Credits extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
-        i += 1f * Game.getDelta();
+        i += 1f * ILevel.getDelta();
     }
 
     /**
