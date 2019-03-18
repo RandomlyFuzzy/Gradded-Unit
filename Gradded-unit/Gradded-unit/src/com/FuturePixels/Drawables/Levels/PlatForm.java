@@ -35,6 +35,7 @@ public class PlatForm extends IDrawable {
         super();
         setPosition(position);
         setRotation(RadianRotation);
+        
     }
 
     /**

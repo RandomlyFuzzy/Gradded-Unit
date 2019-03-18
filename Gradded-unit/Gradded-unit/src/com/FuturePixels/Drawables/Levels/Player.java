@@ -15,6 +15,7 @@ import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.Graphics2D;
 import java.util.Random;
+import java.util.Timer;
 
 /**
  *
@@ -161,6 +162,19 @@ public class Player extends IDrawable {
             Velocity.mult(new Vector(0.8f * 0.8f, 0.995f));
         } else {
             Velocity.mult(new Vector(0.985f * 0.985f, 1f));
+        
+        if((float)getRotation() < -0.3 && canJump)
+        {
+            Level().play("/Sounds/Slide.wav");  
+        }
+        
+        if((float)getRotation() > 0.3 && canJump)
+        {
+            Level().play("/Sounds/Slide.wav"); 
+        }
+        
+        if (isColliding() && !IsPlayer) {
+            Velocity.mult(new Vector(0.8f, 0.995f));
         }
         Acc.mult(0);
 
