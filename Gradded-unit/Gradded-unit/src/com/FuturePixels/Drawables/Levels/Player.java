@@ -158,21 +158,20 @@ public class Player extends IDrawable {
                 .add(GetUp().mult(Velocity.getY() * 2))
                 .add(GetRight().mult((float) getRotation() * 2f)));
 
-        if (!(left||right)&&canJump) {
+        if (!(left || right) && canJump) {
             Velocity.mult(new Vector(0.8f * 0.8f, 0.995f));
         } else {
             Velocity.mult(new Vector(0.985f * 0.985f, 1f));
-        
-        if((float)getRotation() < -0.3 && canJump)
-        {
-            Level().play("/Sounds/Slide.wav");  
+
         }
-        
-        if((float)getRotation() > 0.3 && canJump)
-        {
-            Level().play("/Sounds/Slide.wav"); 
+        if ((float) getRotation() < -0.3 && canJump) {
+            Level().play("/Sounds/Slide.wav");
         }
-        
+
+        if ((float) getRotation() > 0.3 && canJump) {
+            Level().play("/Sounds/Slide.wav");
+        }
+
         if (isColliding() && !IsPlayer) {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
@@ -212,6 +211,7 @@ public class Player extends IDrawable {
         );
         DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
         DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() - 5, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
+
     }
 
     private void movePlayer() {
