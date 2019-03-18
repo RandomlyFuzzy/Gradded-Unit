@@ -137,9 +137,9 @@ public class Player extends IDrawable {
     public void doMove() {
         if (!isColliding() || IsPlayer) {
             setRotation((getRotation() * 0.98f));
-            canJump = false;
+//            canJump = false;
             once = true;
-            Velocity.mult(new Vector(0.985f, 0.995f));
+            Velocity.mult(new Vector(0.99f, 0.99f));
         }
         if (!Lock && !hasLost) {
             movePlayer();
@@ -148,14 +148,19 @@ public class Player extends IDrawable {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
             //mars gravity*2  
-            Acc.addY((-3.711f * (float) Game.getDelta() * 2));
+            Acc.addY((-3.711f * (float) Game.getDelta() * 4));
         }
         Velocity.add(Acc);
         //adds the relative "right" vector and "up" vector 
-        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float)getRotation()*2f)));
+        addPosition(Vector.Zero()
+                .add(GetRight().mult(Velocity.getX()))
+                .add(GetUp().mult(Velocity.getY() * 2))
+                .add(GetRight().mult((float) getRotation() * 2f)));
 
-        if (isColliding() && !IsPlayer) {
-            Velocity.mult(new Vector(0.8f, 0.995f));
+        if (!(left||right)&&canJump) {
+            Velocity.mult(new Vector(0.8f * 0.8f, 0.995f));
+        } else {
+            Velocity.mult(new Vector(0.985f * 0.985f, 1f));
         }
         Acc.mult(0);
 
@@ -200,8 +205,8 @@ public class Player extends IDrawable {
 
         if (up && canJump) {
 //            Acc.setY(0.01f);
+            Acc.setY(8f);
             if (isColliding() && !IsPlayer) {
-                Acc.setY(8f);
                 int r = forsounds.nextInt(3);
                 int r2 = forsounds.nextInt(3) + 1;
                 String Prefix = r == 0 ? "High" : "High";
@@ -230,7 +235,7 @@ public class Player extends IDrawable {
             two = false;
             Acc.setX(0);
         }
-        float Clamp = canJump ? 1f : 0.1f;
+        float Clamp = canJump ? 1f : 0.2f;
         Acc.setX(Acc.getX() > Clamp ? Clamp : Acc.getX() < -Clamp ? -Clamp : Acc.getX());
 
         Stop = !one && !two;
@@ -254,16 +259,19 @@ public class Player extends IDrawable {
         }
 
         if (isLock()) {
-            Velocity.addY(0.1f);
+            Velocity.addY(6.5f);
             return;
-        }else
-        if (hasLost) {
+        } else if (hasLost) {
             Velocity.setY(6.5f);
             for (int i = 0; i < Level().AmountOfObjects() - 3; i++) {
-                Level().GetObject(i).setIsCollidable(false);
+                try {
+                    Level().GetObject(i)
+                            .setIsCollidable(false);
+                } catch (Exception ex) {
+
+                }
             }
-        }else
-        if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
+        } else if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;

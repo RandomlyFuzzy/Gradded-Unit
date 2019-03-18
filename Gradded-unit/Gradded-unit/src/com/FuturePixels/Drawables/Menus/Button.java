@@ -121,7 +121,7 @@ public class Button extends IDrawable {
      * @return
      */
     public String getMessage() {
-        return Message;
+        return this.Message;
     }
 
     /**

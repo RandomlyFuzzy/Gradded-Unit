@@ -89,6 +89,7 @@ public class LeaderBoard extends ILevel {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
+
         AddObject(new Mouse());
     }
 
@@ -105,21 +106,29 @@ public class LeaderBoard extends ILevel {
             );
 
             System.out.println("com.FuturePixels.levels.OtherLevels.LeaderBoard.Update() " + times.size());
-            times.sort(new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    if (o2.equals(new String())) {
-                        return -1;
+            if (times.size() > 0) {
+                times.sort(new Comparator<String>() {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        if (o2.equals(new String())) {
+                            return -1;
+                        }
+                        if (o1.equals(new String())) {
+                            return 1;
+                        }
+                        return Double.parseDouble(o1) > Double.parseDouble(o2) ? 1 : -1;
                     }
-                    if (o1.equals(new String())) {
-                        return 1;
+                });
+                if (times.size() > 10) {
+                    String set = "";
+                    for (int i = 0; i < 10; i++) {
+                        set += times.get(i) + "\n";
                     }
-                    return Double.parseDouble(o1) > Double.parseDouble(o2) ? 1 : -1;
+                    FileUtils.SetFileContence("Resources/savedata/" + Currentind + ".txt", set);
                 }
-            });
-
+            }
+            previousind = Currentind;
         }
-        previousind = Currentind;
     }
 
     /**
@@ -146,7 +155,7 @@ public class LeaderBoard extends ILevel {
                     (int) (w),
                     (int) (0.620f * Game.getWindowHeight()));
             w = (int) (g.getFontMetrics().stringWidth(Currentind) * 1.05f);
-            g.drawString(Currentind, (Game.getWindowWidth()/2-(w/2)), y);
+            g.drawString(Currentind, (Game.getWindowWidth() / 2 - (w / 2)), y);
 
             g.setColor(Color.WHITE);
             int inc = 0;

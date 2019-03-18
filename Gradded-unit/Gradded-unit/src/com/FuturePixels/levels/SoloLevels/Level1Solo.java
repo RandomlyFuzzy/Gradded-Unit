@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import javax.sound.sampled.Clip;
 
 /**
@@ -41,6 +42,9 @@ public class Level1Solo extends ILevel {
             @Override
             public void run() {
                 imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+                Thread
+                        .currentThread()
+                        .stop();
             }
         }).start();
         // (float) Math.PI * -0.25f / 3f));
@@ -49,41 +53,43 @@ public class Level1Solo extends ILevel {
         player1 = new Player();
 //        player1.setScale(new Vector(0.3f,0.5f));
         AddObject(player1).setPosition(0, -50);
-        AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(100, -350), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(400, -500), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -650), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(375, -850), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(385, -1000), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(250, -1150), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(150, -1325), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(350, -1475), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -1650), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(500, -1650), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(350, -1850), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(450, -2000), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(325, -2200), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(450, -2400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -2600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(250, -2800), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(300, -3000), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(500, -3200), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -3400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(450, -3600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(200, -3800), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(300, -4000), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(400, -4200), 0)).GetSprite("/images/platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(200, -4400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(300, -4600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(400, -4800), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(500, -5000), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(50, -5200), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(550, -5400), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
-        AddObject(new PlatForm(new Vector(700, -5600), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
+        BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
+        BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
+        AddObject(new PlatForm(new Vector(0, 0), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(200, -150), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(100, -350), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(400, -500), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(200, -650), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(375, -850), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(385, -1000), 0)).setLastimage(clean0);
+        AddObject(new PlatForm(new Vector(250, -1150), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(150, -1325), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(350, -1475), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(200, -1650), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(500, -1650), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(350, -1850), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(450, -2000), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(325, -2200), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(450, -2400), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(200, -2600), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(250, -2800), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(300, -3000), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(500, -3200), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(200, -3400), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(450, -3600), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(200, -3800), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(300, -4000), 0)).setLastimage(clean0);
+        AddObject(new PlatForm(new Vector(400, -4200), 0)).setLastimage(clean0);
+        AddObject(new PlatForm(new Vector(200, -4400), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(300, -4600), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(400, -4800), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(500, -5000), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(50, -5200), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(500, -5400), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(650, -5600), 0)).setLastimage(clean1);
         AddObject(new HUD());
         AddObject(new Lava());
-        AddObject(new Flag(new Level2Solo())).setPosition(new Vector(800, -5650));
+        AddObject(new Flag(new Level2Solo())).setPosition(new Vector(650, -5650));
 //        AddObject(new DebugObject());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * .6f) / 2, 0));
@@ -97,9 +103,13 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
-        
-        
+        if (GetMouseButtonDown(3)) {
+            System.out.println("com.FuturePixels.levels.SoloLevels.Level1Solo.Update() 0");
+        }
 
+        if (GetMouseButtonDown(1)) {
+            System.out.println("com.FuturePixels.levels.SoloLevels.Level1Solo.Update() 1");
+        }
     }
 
     /**
@@ -108,7 +118,7 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-       
+
     }
 
     /**

@@ -11,6 +11,7 @@ import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
+import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Entry.Game;
@@ -22,6 +23,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,45 +37,10 @@ public class Controls extends ILevel {
     /**
      *
      */
-    public static BlackoutButton BB = new BlackoutButton("Press to get key", new HUDdelegate() {
-        public void OnClick(BlackoutButton b) {
-            if (Controls.val == 1) {
-                GamePreferences.gp.setKeyLeftP1(Controls.lastKey);
-            } else if (Controls.val == 2) {
-                GamePreferences.gp.setKeyRightP1(Controls.lastKey);
-            } else if (Controls.val == 3) {
-                GamePreferences.gp.setKeyJumpP1(Controls.lastKey);
-            } else if (Controls.val == 4) {
-                GamePreferences.gp.setKeyLeftP2(Controls.lastKey);
-            } else if (Controls.val == 5) {
-                GamePreferences.gp.setKeyRightP2(Controls.lastKey);
-            } else if (Controls.val == 6) {
-                GamePreferences.gp.setKeyJumpP2(Controls.lastKey);
-            } else if (Controls.val == 7) {
-                GamePreferences.gp.setKeyDropP1(Controls.lastKey);
-            } else if (Controls.val == 8) {
-                GamePreferences.gp.setKeyDropP2(Controls.lastKey);
-            }
-            String vals = "";
-            vals += "" + GamePreferences.gp.getKeyLeftP1() + "\n";
-            vals += "" + GamePreferences.gp.getKeyRightP1() + "\n";
-            vals += "" + GamePreferences.gp.getKeyJumpP1() + "\n";
-            vals += "" + GamePreferences.gp.getKeyLeftP2() + "\n";
-            vals += "" + GamePreferences.gp.getKeyRightP2() + "\n";
-            vals += "" + GamePreferences.gp.getKeyJumpP2() + "\n";
-            vals += "" + GamePreferences.gp.getKeyDropP1() + "\n";
-            vals += "" + GamePreferences.gp.getKeyDropP2();
-
-            ((Button) b.Level().GetObject(val)).setMessage(b.getMessage());
-
-            FileUtils.SetFileContence("resources/data/Preferences.txt", vals);
-            b.Level().GetObject(9).setEnabled(false);
-            b.setMessage("Press to get key");
-        }
-    }
-    );
-    private static int val = 1;
-    private static int lastKey = 1;
+    public BlackoutButton BB;
+    public Button[] but = new Button[8];
+    private int val = 1;
+    private int lastKey = 1;
 
     /**
      *
@@ -88,7 +56,7 @@ public class Controls extends ILevel {
      *
      * @param change
      */
-    public static void ReadyForKeyChange(int change) {
+    public void ReadyForKeyChange(int change) {
         BB.setEnabled(true);
         val = change;
     }
@@ -107,63 +75,112 @@ public class Controls extends ILevel {
         }));
 
         //PLAYER 1
-        AddObject(new Button(new Vector(0.30f, 0.3f), "LEFT = ", new HUDdelegate() {
+        but[0] = (new Button(new Vector(0.30f, 0.3f), "LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(1);
+                ReadyForKeyChange(1);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.425f), "RIGHT = ", new HUDdelegate() {
+        but[01] = (new Button(new Vector(0.30f, 0.425f), "RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(2);
+                ReadyForKeyChange(2);
             }
         }));
-        AddObject(new Button(new Vector(0.30f, 0.550f), "JUMP = ", new HUDdelegate() {
+        but[02] = (new Button(new Vector(0.30f, 0.550f), "JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(3);
+                ReadyForKeyChange(3);
             }
         }));
 
         //PLAYER 2
-        AddObject(new Button(new Vector(0.70f, 0.3f), "LEFT = ", new HUDdelegate() {
+        but[03] = (new Button(new Vector(0.70f, 0.3f), "LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(4);
+                ReadyForKeyChange(4);
             }
         }));
-        AddObject(new Button(new Vector(0.70f, 0.425f), "RIGHT = ", new HUDdelegate() {
+        but[04] = (new Button(new Vector(0.70f, 0.425f), "RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(5);
+                ReadyForKeyChange(5);
             }
 
         }));
-        AddObject(new Button(new Vector(0.70f, 0.550f), "JUMP = ", new HUDdelegate() {
+        but[05] = (new Button(new Vector(0.70f, 0.550f), "JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(6);
+                ReadyForKeyChange(6);
             }
 
         }));
 
         //Player 1 Drop
-        AddObject(new Button(new Vector(0.30f, 0.675f), "DROP = ", new HUDdelegate() {
+        but[6] = (new Button(new Vector(0.30f, 0.675f), "DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(7);
+                ReadyForKeyChange(7);
             }
         }));
 
         //Player 2 Drop
-        AddObject(new Button(new Vector(0.70f, 0.675f), "DROP = ", new HUDdelegate() {
+        but[7] = (new Button(new Vector(0.70f, 0.675f), "DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
-                Controls.ReadyForKeyChange(8);
+                ReadyForKeyChange(8);
             }
         }));
 
-        String[] Values = FileUtils.GetFileSplit("resources/Data/Preferences.txt", "\n");
-        for (int i = 1; i < 9; i++) {
-            String text = "";
-            text += ((Button) GetObject(i)).getMessage();
-            text += KeyEvent.getKeyText((int)Integer.parseInt(Values[i - 1].trim()));
-            ((Button) GetObject(i)).setMessage(text);
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Controls.class.getName()).log(Level.SEVERE, null, ex);
         }
+        String[] Values = FileUtils.GetFileSplit("resources/Data/Preferences.txt", "\n");
+        for (int i = 0; i < 8; i++) {
+            try {
+                String text = "";
+                Button id = (Button) but[(i)];
+                System.out.println("com.FuturePixels.levels.Menus.Controls.init() " + id.toString());
+                text += (id).getMessage();
+                text += KeyEvent.getKeyText((int) Integer.parseInt(Values[i].trim()));
+                (id).setMessage(text);
+            } catch (Exception ex) {
+                ex.printStackTrace(System.err);
+            }
+            AddObject(but[i]);
+        }
+        BB = new BlackoutButton("Press to get key", new HUDdelegate() {
+            public void OnClick(BlackoutButton b) {
+                System.out.println(".OnClick() " + lastKey);
+                if (val == 1) {
+                    GamePreferences.gp.setKeyLeftP1(lastKey);
+                } else if (val == 2) {
+                    GamePreferences.gp.setKeyRightP1(lastKey);
+                } else if (val == 3) {
+                    GamePreferences.gp.setKeyJumpP1(lastKey);
+                } else if (val == 4) {
+                    GamePreferences.gp.setKeyLeftP2(lastKey);
+                } else if (val == 5) {
+                    GamePreferences.gp.setKeyRightP2(lastKey);
+                } else if (val == 6) {
+                    GamePreferences.gp.setKeyJumpP2(lastKey);
+                } else if (val == 7) {
+                    GamePreferences.gp.setKeyDropP1(lastKey);
+                } else if (val == 8) {
+                    GamePreferences.gp.setKeyDropP2(lastKey);
+                }
+                String vals = "";
+                vals += "" + GamePreferences.gp.getKeyLeftP1() + "\n";
+                vals += "" + GamePreferences.gp.getKeyRightP1() + "\n";
+                vals += "" + GamePreferences.gp.getKeyJumpP1() + "\n";
+                vals += "" + GamePreferences.gp.getKeyLeftP2() + "\n";
+                vals += "" + GamePreferences.gp.getKeyRightP2() + "\n";
+                vals += "" + GamePreferences.gp.getKeyJumpP2() + "\n";
+                vals += "" + GamePreferences.gp.getKeyDropP1() + "\n";
+                vals += "" + GamePreferences.gp.getKeyDropP2();
 
+                but[val - 1].setMessage(b.getMessage());
+
+                FileUtils.SetFileContence("resources/data/Preferences.txt", vals);
+                b.setEnabled(false);
+                b.setMessage("Press to get key");
+            }
+        }
+        );
         BB.setEnabled(false);
         AddObject(BB);
         AddObject(new Mouse());
@@ -205,13 +222,13 @@ public class Controls extends ILevel {
      */
     @Override
     public void keyPress(KeyEvent e) {
-        if (BB.isEnabled()) {
-            String buttontext = ((Button) GetObject(val)).getMessage();
-            buttontext = buttontext.substring(0, buttontext.indexOf("=") + 2);
-            String text = KeyEvent.getKeyText(e.getKeyCode());
-            BB.setMessage(buttontext + text);
-            lastKey = e.getKeyCode();
-        }
+        System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + e.getKeyChar());
+        System.out.println("com.FuturePixels.levels.Menus.Controls.keyRelease() " + KeyEvent.getKeyText(e.getKeyCode()));
+        String buttontext =  but[val - 1].getMessage();
+        buttontext = buttontext.substring(0, buttontext.indexOf("=") + 2);
+        String text = KeyEvent.getKeyText(e.getKeyCode());
+        BB.setMessage(buttontext + text);
+        lastKey = e.getKeyCode();
     }
 
     /**
@@ -220,7 +237,6 @@ public class Controls extends ILevel {
      */
     @Override
     public void keyRelease(KeyEvent e) {
-
     }
 
 }

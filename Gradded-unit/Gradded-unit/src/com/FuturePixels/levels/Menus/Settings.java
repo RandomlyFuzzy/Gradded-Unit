@@ -49,7 +49,7 @@ public class Settings extends ILevel {
     @Override
     public void init() {
 
-        AddObject(new HUD());
+        AddObject(new HUD()).setScale(new Vector(0.5f, 0.7f));;
         AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
@@ -59,7 +59,7 @@ public class Settings extends ILevel {
         AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDdelegate() {
             @Override
             public void OnChange(Slider s, float Value) {
-                System.out.println(""+Value);
+                System.out.println("" + Value);
 //                ILevel.setFPS(30 + (int) (Value * 60f));
                 MusicUtils.SetVolume(Value);
             }
@@ -110,7 +110,7 @@ public class Settings extends ILevel {
             @Override
             public void OnClick(Button b) {
                 Game.FullScreen();
-                
+
             }
 
         }));
@@ -120,13 +120,12 @@ public class Settings extends ILevel {
                 Game.SetLevelActive(new Controls());
             }
         }));
-         AddObject(new Button(new Vector(0.8f, 0.3f), "Credit", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.8f, 0.3f), "Credit", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Credits());
             }
         }));
-        GetObject(0).setScale(new Vector(0.5f, 0.7f));
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }
@@ -146,7 +145,7 @@ public class Settings extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
-        
+
     }
 
     /**
