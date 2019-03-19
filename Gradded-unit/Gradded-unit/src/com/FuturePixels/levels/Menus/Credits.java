@@ -39,6 +39,7 @@ public class Credits extends ILevel {
     double i = 0;
     int ind = 0;
     boolean changed = false;
+    boolean once = true;
     String[] credits;
 
     /**
@@ -77,24 +78,27 @@ public class Credits extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
 
-        int val = (int) ((Math.sin(i ) + 1f) * 127)+1;
-        int val2 = (int) ((Math.cos(i ) + 1f) * 100f);
-        if (val >= 250) {
+        int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
+        int val2 = (int) ((Math.cos(i) + 1f) * 100f);
+        if (val >= 245 && once) {
             ind++;
-            ind %= 2;
+            ind %= 3;
             changed = true;
-        }else
-        if (changed) {
+            once = false;
+            System.out.println("com.FuturePixels.levels.Menus.Credits.Draw() "+ind + " ,  "+getTime());
+        } else if (val >= 245) {
+        } else if (changed) {
             setBackgroundimage(GetSprite("/Images/backgrounds/background" + (ind + 1) + ".png"));
             changed = false;
+            once = true;
         }
         g.setColor(new Color(0, 0, 0, val));
         g.fillRect(0, 0, Game.getWindowWidth(), Game.getWindowHeight());
-        g.setColor(new Color(55+val2, 55+val2, 55+val2));
+        g.setColor(new Color(55 + val2, 55 + val2, 55 + val2));
 
         for (int j = 0; j < credits.length; j++) {
             int offset = g.getFontMetrics().stringWidth(credits[j]);
-            g.drawString(credits[j], Game.getWindowWidth()/2-offset/2, (int)((Game.getWindowHeight()+(int) (j * g.getFont().getSize()))-(i*50)));
+            g.drawString(credits[j], Game.getWindowWidth() / 2 - offset / 2, (int) ((Game.getWindowHeight() + (int) (j * g.getFont().getSize())) - (i * 50)));
         }
 
     }

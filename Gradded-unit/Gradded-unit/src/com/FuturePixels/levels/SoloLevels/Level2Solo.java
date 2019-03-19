@@ -111,7 +111,7 @@ public class Level2Solo extends ILevel {
     public void Draw(Graphics2D g) {
         Color c = g.getColor();
         g.setColor(new Color(0, 0, 0, 75));
-        g.fillRect(0, 0, Game.getWindowWidth(), Game.getWindowHeight());
+//        g.fillRect(0, 0, Game.getWindowWidth(), Game.getWindowHeight());
         g.setColor(c);
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
     }
