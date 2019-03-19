@@ -26,6 +26,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import static java.awt.image.ImageObserver.WIDTH;
+import javax.sound.sampled.Clip;
 import javax.swing.Timer;
 
 /**
@@ -77,6 +78,8 @@ public class Credits extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
+        
+        play("/sounds/CreditSong.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
         int val2 = (int) ((Math.cos(i) + 1f) * 100f);
