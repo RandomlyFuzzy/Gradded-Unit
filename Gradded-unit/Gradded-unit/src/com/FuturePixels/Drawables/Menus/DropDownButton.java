@@ -66,15 +66,21 @@ public class DropDownButton extends IDrawable {
 
             }));
             indexOfSubbuttons[i] = Level().GetObjectCount() - 1;
+            System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.<init>() " + Level().GetObjectCount());
         }
         buttonDelegate = new HUDdelegate() {
             @Override
             public void OnClick(DropDownButton b) {
-                for (int i : b.indexOfSubbuttons) {
-                    b.Level().GetObject(i).setEnabled(!b.Level().GetObject(i).isEnabled());
+                System.out.println(".OnClick() "+b.indexOfSubbuttons.length);
+                for (int i =0 ;i<b.indexOfSubbuttons.length;i++) {
+                    System.out.println(".OnClick()");
+                    Button b2 =(Button) b.Level().GetObject(b.indexOfSubbuttons[i]);
+                    b2.setEnabled(!b2.isEnabled());
                 }
             }
         };
+        DoAction();
+
     }
 
     /**
@@ -93,9 +99,7 @@ public class DropDownButton extends IDrawable {
     @Override
     public void doMove() {
         setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
-
         setScale(Game.ButtonDims());
-
     }
 
     /**
@@ -123,13 +127,13 @@ public class DropDownButton extends IDrawable {
     public void DoAction() {
         try {
             if (buttonDelegate != null) {
-                Level().play("/Sounds/UiClick.wav");
                 buttonDelegate.OnClick(this);
+//      Level().play("/Sounds/UiClick.wav");
             } else {
                 System.err.println("error no delegate in this button");
             }
         } catch (Exception ex) {
-
+            System.err.println(ex.getMessage());
         }
     }
 

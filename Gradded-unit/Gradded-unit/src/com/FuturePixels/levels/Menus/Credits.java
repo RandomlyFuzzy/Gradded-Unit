@@ -83,13 +83,13 @@ public class Credits extends ILevel {
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
         int val2 = (int) ((Math.cos(i) + 1f) * 100f);
-        if (val >= 245 && once) {
+        if (val >= 250 && once) {
             ind++;
             ind %= 3;
             changed = true;
             once = false;
             System.out.println("com.FuturePixels.levels.Menus.Credits.Draw() "+ind + " ,  "+getTime());
-        } else if (val >= 245) {
+        } else if (val >= 250) {
         } else if (changed) {
             setBackgroundimage(GetSprite("/Images/backgrounds/background" + (ind + 1) + ".png"));
             changed = false;
