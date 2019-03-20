@@ -282,8 +282,8 @@ public class Player extends IDrawable {
                 DebugObject.AddLine(_bottom[0], _bottom[1]);
                 DebugObject.AddCirles(new Vector(col2.HITLOCATION.getX(), col2.HITLOCATION.getY()));
                 if (once) {
-                    Velocity.mult(new Vector(1, -.75f));
-                    Acc.mult(new Vector(1, -.75f));
+                    Velocity.mult(new Vector(1, -.40f));
+                    Acc.mult(new Vector(1, -.50f));
                     once = false;
                 }
                 col2 = null;
