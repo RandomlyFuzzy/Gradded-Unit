@@ -84,7 +84,7 @@ public class Button extends IDrawable {
         DrawLastLoadedImage(g);
         g.setColor(new Color(128,0,128));
         FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
+        g.drawString(Message, -metrics.stringWidth(Message) / 2,+g.getFont().getSize()/3);
         if (isColliding()) {
             Color c = g.getColor();
             g.setColor(new Color(200, 200, 200, 100));

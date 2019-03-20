@@ -67,7 +67,7 @@ public class Player extends IDrawable {
 //       
         if (hasLost) {
             //insert death sprite here
-            GetSprite("/Images/defualt.png");
+            GetSprite("/Images/Player/reggie DEATH_0"+playerind+".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
         } else if (isLock()) {

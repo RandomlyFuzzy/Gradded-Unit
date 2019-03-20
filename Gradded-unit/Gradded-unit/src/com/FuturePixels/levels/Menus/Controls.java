@@ -18,11 +18,13 @@ import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Utils.FileUtils;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -203,6 +205,17 @@ public class Controls extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
 
+        try {
+            Font title = new Font("comic sans ms", 1, 20);
+            title = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/font.ttf"));
+            title = title.deriveFont(Font.PLAIN, (Game.ButtonDims().getY() * 50f));
+            g.setFont(title);
+        } catch (FontFormatException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //Player Text
         g.setColor(Color.WHITE);
         g.setColor(new Color(55, 55, 55, 200));
@@ -213,7 +226,7 @@ public class Controls extends ILevel {
         g.setColor(Color.WHITE);
         FontMetrics metrics = g.getFontMetrics(g.getFont());
         g.drawString("Player 1 Controls", Game.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.getWindowHeight() * 0.23f);
-        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f);
+        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f); 
     }
 
     /**

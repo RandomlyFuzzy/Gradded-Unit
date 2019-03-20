@@ -162,7 +162,7 @@ public class LeaderBoard extends ILevel {
             for (int i = 0; i < 10; i++) {
                 g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() * ((int) Math.pow(15 - i, 2) / 10))));
                 s = times.get(i);
-                str = "No " + (i + 1) + " is Ricky in " + s + " secs";
+                str = "No. " + (i + 1) + ": " + s + " secs";
                 w = g.getFontMetrics().stringWidth(str);
                 g.drawString(str,
                         Game.getWindowWidth() / 2 - w / 2,
