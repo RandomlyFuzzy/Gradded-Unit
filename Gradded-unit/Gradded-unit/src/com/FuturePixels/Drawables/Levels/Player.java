@@ -250,37 +250,37 @@ public class Player extends IDrawable {
             Collison col = CollisonUtils.CheckForLineHits(getPosition(), bottom, _Top[0], _Top[1]);
             Collison col2 = CollisonUtils.CheckForLineHits(getPosition(), top, _bottom[0], _bottom[1]);
 
-            if (col.IsHit && !down) {
+            if (col.ISHIT && !down) {
                 canJump = true;
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_Top[0], _Top[1]);
-                _hit = col.hitLocation;
+                _hit = col.HITLOCATION;
                 float x = (GetUp().mult(getSpriteHeight() * 0.5f)).getX(),
                         y = (GetUp().mult(getSpriteHeight() * 0.5f)).getY();
-                DebugObject.AddCirles(new Vector(col.hitLocation.getX(), col.hitLocation.getY()));
+                DebugObject.AddCirles(new Vector(col.HITLOCATION.getX(), col.HITLOCATION.getY()));
 //                Acc.addY((-3.711f * (float) Game.g.getDelta() * -2));
                 if (once) {
                     Velocity.setY(0);
                     once = false;
                 }
-                setPosition(col.hitLocation.getX() + x, col.hitLocation.getY() + y);
+                setPosition(col.HITLOCATION.getX() + x, col.HITLOCATION.getY() + y);
                 col = null;
                 col2 = null;
                 return;
             }
 
-            if (col2.IsHit && Velocity.getY() > 0) {
+            if (col2.ISHIT && Velocity.getY() > 0) {
                 Level().play("/sounds/Hit" + forsounds.nextInt(7) + ".wav");
                 Level().play("/sounds/HighOuch1.wav");
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
                         y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();
 
-                setPosition(col2.hitLocation.getX() + x, col2.hitLocation.getY() + y);
+                setPosition(col2.HITLOCATION.getX() + x, col2.HITLOCATION.getY() + y);
 
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_bottom[0], _bottom[1]);
-                DebugObject.AddCirles(new Vector(col2.hitLocation.getX(), col2.hitLocation.getY()));
+                DebugObject.AddCirles(new Vector(col2.HITLOCATION.getX(), col2.HITLOCATION.getY()));
                 if (once) {
                     Velocity.mult(new Vector(1, -.75f));
                     Acc.mult(new Vector(1, -.75f));

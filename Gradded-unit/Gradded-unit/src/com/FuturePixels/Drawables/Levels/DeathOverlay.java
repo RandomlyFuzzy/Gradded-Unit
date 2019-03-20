@@ -125,7 +125,7 @@ public class DeathOverlay extends IDrawable {
      * @param im
      */
     @Override
-    public void onCollison(IDrawable im) {
+    public void onCollison(IDrawable im) { 
     }
 
 }

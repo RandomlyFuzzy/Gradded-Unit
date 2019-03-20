@@ -92,7 +92,7 @@ public class MovingPlatoform extends IDrawable {
     @Override
     public void onCollison(IDrawable im) {
         if(im instanceof Player){
-            im.addPosition(new Vector(Add).mult(1));
+            im.addPosition(new Vector(Add).mult(2));
         }
 //        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");
     }
