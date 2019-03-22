@@ -21,6 +21,7 @@ import com.FuturePixels.levels.SoloLevels.Level1Solo;
 import com.FuturePixels.levels.SoloLevels.Level2Solo;
 import com.FuturePixels.levels.SoloLevels.Level3Solo;
 import com.FuturePixels.levels.SoloLevels.Level4Solo;
+import com.FuturePixels.levels.SoloLevels.Level5Solo;
 import com.Liamengine.Engine.Utils.FileUtils;
 
 /**
@@ -34,7 +35,7 @@ public class Entry {
      * @param args
      */
     public static void main(String[] args) {
-        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(), new LevelCoop(), new Credits()};
+        ILevel[] arr = new ILevel[]{new MainMenu(), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(),new Level5Solo(), new LevelCoop(), new Credits()};
         LevelLoader.LL.SetLevels(arr);
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu());
