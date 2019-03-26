@@ -17,14 +17,18 @@ import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.FileUtils;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -137,6 +141,9 @@ public class LeaderBoard extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
+        
+        
+        
         g.drawImage(GetSprite("/Images/backgrounds/background1.png"), Game.getWindowWidth(), 0, (Game.getWindowWidth() * -1), (Game.getWindowHeight()), null);
         float y = 0.3f;
         Font f = g.getFont();

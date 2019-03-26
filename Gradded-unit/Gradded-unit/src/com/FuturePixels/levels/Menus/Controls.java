@@ -24,7 +24,10 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -205,17 +208,6 @@ public class Controls extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
 
-        try {
-            Font title = new Font("comic sans ms", 1, 20);
-            title = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/font.ttf"));
-            title = title.deriveFont(Font.PLAIN, (Game.ButtonDims().getY() * 50f));
-            g.setFont(title);
-        } catch (FontFormatException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         //Player Text
         g.setColor(Color.WHITE);
         g.setColor(new Color(55, 55, 55, 200));
@@ -224,9 +216,11 @@ public class Controls extends ILevel {
 
         //g.fillRect((int) ((0.03f) * Game.g.getScaledWidth()), (int) ((0.235f) * Game.g.getScaledHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getScaledWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getScaledHeight()));
         g.setColor(Color.WHITE);
-        FontMetrics metrics = g.getFontMetrics(g.getFont());
+        g.setFont(ILevel.getDefaultFont().deriveFont(ILevel.getDefaultFont().getSize() * Game.WorldScale().getY()*0.9f));
+        FontMetrics metrics = g.getFontMetrics();
         g.drawString("Player 1 Controls", Game.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.getWindowHeight() * 0.23f);
-        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f); 
+        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f);
+        g.setFont(ILevel.getDefaultFont());
     }
 
     /**
@@ -237,7 +231,7 @@ public class Controls extends ILevel {
     public void keyPress(KeyEvent e) {
         System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + e.getKeyChar());
         System.out.println("com.FuturePixels.levels.Menus.Controls.keyRelease() " + KeyEvent.getKeyText(e.getKeyCode()));
-        String buttontext =  but[val - 1].getMessage();
+        String buttontext = but[val - 1].getMessage();
         buttontext = buttontext.substring(0, buttontext.indexOf("=") + 2);
         String text = KeyEvent.getKeyText(e.getKeyCode());
         BB.setMessage(buttontext + text);

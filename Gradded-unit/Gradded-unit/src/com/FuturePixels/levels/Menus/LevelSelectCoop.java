@@ -20,7 +20,10 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,16 +80,7 @@ public class LevelSelectCoop extends ILevel {
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
         
-         try {
-            Font title = new Font("comic sans ms", 1, 20);
-            title = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/font.ttf"));
-            title = title.deriveFont(Font.PLAIN, (Game.ButtonDims().getY() * 50f));
-            g.setFont(title);
-        } catch (FontFormatException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     /**

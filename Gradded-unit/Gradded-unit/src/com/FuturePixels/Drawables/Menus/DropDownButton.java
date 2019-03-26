@@ -73,13 +73,11 @@ public class DropDownButton extends IDrawable {
             public void OnClick(DropDownButton b) {
                 System.out.println(".OnClick() "+b.indexOfSubbuttons.length);
                 for (int i =0 ;i<b.indexOfSubbuttons.length;i++) {
-                    System.out.println(".OnClick()");
                     Button b2 =(Button) b.Level().GetObject(b.indexOfSubbuttons[i]);
                     b2.setEnabled(!b2.isEnabled());
                 }
             }
         };
-        DoAction();
 
     }
 

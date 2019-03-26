@@ -10,10 +10,18 @@ import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.imageUtils;
 import com.FuturePixels.levels.Menus.MainMenu;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 
 /**
@@ -79,8 +87,6 @@ public class Level3Solo extends ILevel {
         AddObject(new PlatForm(new Vector(600, -4100), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(400, -4200), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
         AddObject(new PlatForm(new Vector(200, -4400), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
-        
-        
 
         //AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
         //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)

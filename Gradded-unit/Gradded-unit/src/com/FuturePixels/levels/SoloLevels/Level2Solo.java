@@ -5,16 +5,25 @@ import com.FuturePixels.Drawables.Levels.DebugObject;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
+import com.FuturePixels.levels.Menus.MainMenu;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 
 /**
@@ -114,6 +123,7 @@ public class Level2Solo extends ILevel {
 //        g.fillRect(0, 0, Game.getWindowWidth(), Game.getWindowHeight());
         g.setColor(c);
 //        System.out.println("com.game.levels.Level1Solo.paintComponent()");
+
     }
 
     /**

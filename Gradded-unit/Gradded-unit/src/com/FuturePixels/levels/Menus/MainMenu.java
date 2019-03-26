@@ -26,8 +26,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -53,8 +56,6 @@ public class MainMenu extends ILevel {
      */
     @Override
     public void init() {
-
-        play("/sounds/music.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         AddObject(new Button(new Vector(0.15f, 0.2f), "Solo", new HUDdelegate() {
             @Override
@@ -88,8 +89,21 @@ public class MainMenu extends ILevel {
         })).GetSprite("/images/Quit.png");
         AddObject(new Mouse());
         AddObject(new HUD());
-
+        play("/sounds/music.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
+        try {
+            InputStream myStream = new BufferedInputStream(new FileInputStream("resources/fonts/font.ttf"));
+            Font title = Font.createFont(Font.TRUETYPE_FONT, myStream);
+            title = title.deriveFont(Font.PLAIN, (Game.ButtonDims().getY() * 50f));
+            ILevel.setDefaultFont(title);
+        } catch (FontFormatException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
     }
 
     /**
@@ -109,16 +123,7 @@ public class MainMenu extends ILevel {
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
 
-        try {
-            Font title = new Font("comic sans ms", 1, 20);
-            title = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/font.ttf"));
-            title = title.deriveFont(Font.PLAIN, (Game.ButtonDims().getY() * 50f));
-            g.setFont(title);
-        } catch (FontFormatException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        
 
 //        for (int i = 0; i < Game.g.getScaledWidth(); i++) {
 //            for (int j = 0; j < Game.g.getScaledHeight(); j++) {

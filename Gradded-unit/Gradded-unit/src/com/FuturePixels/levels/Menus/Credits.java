@@ -27,7 +27,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
@@ -82,7 +85,7 @@ public class Credits extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-        
+       
         play("/sounds/CreditSong.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
@@ -92,7 +95,7 @@ public class Credits extends ILevel {
             ind %= 3;
             changed = true;
             once = false;
-            System.out.println("com.FuturePixels.levels.Menus.Credits.Draw() "+ind + " ,  "+getTime());
+            System.out.println("com.FuturePixels.levels.Menus.Credits.Draw() " + ind + " ,  " + getTime());
         } else if (val >= 250) {
         } else if (changed) {
             setBackgroundimage(GetSprite("/Images/backgrounds/background" + (ind + 1) + ".png"));
@@ -106,17 +109,6 @@ public class Credits extends ILevel {
         for (int j = 0; j < credits.length; j++) {
             int offset = g.getFontMetrics().stringWidth(credits[j]);
             g.drawString(credits[j], Game.getWindowWidth() / 2 - offset / 2, (int) ((Game.getWindowHeight() + (int) (j * g.getFont().getSize())) - (i * 50)));
-            
-        try {
-            Font title = new Font("comic sans ms", 1, 20);
-            title = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/font.ttf"));
-            title = title.deriveFont(Font.PLAIN, (Game.ButtonDims().getY() * 50f));
-            g.setFont(title);
-        } catch (FontFormatException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }
 
     }

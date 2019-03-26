@@ -51,6 +51,7 @@ public class Player extends IDrawable {
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
         playerind = PlayerCount++;
+
     }
 
     public void move(boolean left, boolean right, boolean up, boolean down) {
@@ -67,13 +68,17 @@ public class Player extends IDrawable {
 //       
         if (hasLost) {
             //insert death sprite here
-            GetSprite("/Images/Player/reggie DEATH_0"+playerind+".png");
+            GetSprite("/Images/Player/reggie DEATH_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
+            setSpriteWidth(60);
+            setSpriteHeight(90);
         } else if (isLock()) {
             GetSprite("/Images/Player/reggie WIN_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
+            setSpriteWidth(60);
+            setSpriteHeight(90);
         } else if ((canJump)) {
             ind = ind % 7f;
             GetSprite("/Images/Player/player_0" + playerind + ".png");
@@ -82,16 +87,22 @@ public class Player extends IDrawable {
                 she.setMaxX(1);
             }
             she.IncrementX(0.5f);
+            setSpriteWidth(60);
+            setSpriteHeight(90);
         } else if (Velocity.getY() < 0) {
             ind = ind % 3f;
             GetSprite("/Images/Player/reggie FALL_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
+            setSpriteWidth(60);
+            setSpriteHeight(90);
         } else if (Velocity.getY() > 0) {
             ind = ind % 3f;
             GetSprite("/Images/Player/reggie JUMP_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
+            setSpriteWidth(60);
+            setSpriteHeight(90);
         }
 
 //        if (canJump) {
@@ -120,19 +131,17 @@ public class Player extends IDrawable {
         }
         Velocity.add(Acc);
         //adds the relative "right" vector and "up" vector 
-        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float)getRotation()*2f)));
+        addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float) getRotation() * 2f)));
 
         if (isColliding() && !IsPlayer) {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
         Acc.mult(0);
 
-        if((float)getRotation() != 0 && canJump)
-        {
-            Level().play("/Sounds/Slide.wav");  
+        if ((float) getRotation() != 0 && canJump) {
+            Level().play("/Sounds/Slide.wav");
         }
-        
-        
+
         //screen scroller
         if (!isLock() && !hasLost) {
             Cameraopos.setY(Cameraopos.getY() + Game.getDelta() * 30f);
@@ -226,18 +235,16 @@ public class Player extends IDrawable {
         if (isLock()) {
             Velocity.addY(0.1f);
             return;
-        }else
-        if (hasLost) {
+        } else if (hasLost) {
             Velocity.setY(6.5f);
             for (int i = 0; i < Level().AmountOfObjects() - 3; i++) {
-                try{
-                Level().GetObject(i).setIsCollidable(false);
-                }catch(Exception e){
-                
+                try {
+                    Level().GetObject(i).setIsCollidable(false);
+                } catch (Exception e) {
+
                 }
             }
-        }else
-        if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
+        } else if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, _hit;
             Vector[] _Top, _bottom;

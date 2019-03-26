@@ -7,6 +7,7 @@ package com.FuturePixels.Drawables.Levels;
 
 import com.Liamengine.Engine.Components.Transform;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
+import com.Liamengine.Engine.Components.SpriteSheet;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Utils.imageUtils;
@@ -22,6 +23,7 @@ public class Lava extends IDrawable {
 
     private boolean hasCollided = false;
     private Random forsounds = new Random();
+    private SpriteSheet she = new SpriteSheet(0, 0, 200, 100);
 
     /**
      *
@@ -30,6 +32,8 @@ public class Lava extends IDrawable {
     public void init() {
 //        UseTransforms(false);
         GetSprite("/images/lava.png");
+        she.inputImage(getLastImage());
+
     }
 
     /**
@@ -38,10 +42,12 @@ public class Lava extends IDrawable {
     @Override
 
     public void doMove() {
-        setSpriteWidth(Game.getScaledWidth());
+        setSpriteWidth(Game.getScaledWidth()-2);
         setSpriteHeight(Game.getScaledHeight() / 4);
-        DebugObject.AddCirles(Transform.getOffsetTranslation());
-        setPosition(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() / 2, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight());
+//        setSpriteWidth(200);
+//        setSpriteHeight(100);
+//        DebugObject.AddCirles(Transform.getOffsetTranslation());
+        setPosition(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() / 2, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight()-getSpriteHeight()/2);
     }
 
     /**
@@ -50,7 +56,8 @@ public class Lava extends IDrawable {
      */
     @Override
     public void Update(Graphics2D g) {
-        DrawLastLoadedImage(g);
+        she.IncrementX(0.4f);
+        DrawLastLoadedImageAsSpriteSheet(g, she);
     }
 
     /**
@@ -59,7 +66,7 @@ public class Lava extends IDrawable {
      */
     @Override
     public void onCollison(IDrawable im) {
-        if (im instanceof Player&&!Player.isLock()) {
+        if (im instanceof Player && !Player.isLock()) {
             System.out.println("Playercollider");
             //play you loss ui
             hasCollided = true;
@@ -68,14 +75,9 @@ public class Lava extends IDrawable {
             }
             Player.setHasLost(true);
             //add overLay
-  
-            
-            
-            
+
             int r = forsounds.nextInt(4) + 1;
-                
-            
-           
+
             Level().AddObject(new DeathOverlay());
             Level().play("/Sounds/LevelFail.wav");
             Level().play("/Sounds/Scream" + r + ".wav");

@@ -35,7 +35,7 @@ public class Mouse extends IDrawable {
      */
     @Override
     public void init() {
-        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f / Game.WorldScale().getX(), 1f / Game.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f / Game.WorldScale().getX(), 1f / Game.WorldScale().getY())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        GetSprite("/Images/Cursor.png");
     }
     float ind = 0;
@@ -55,7 +55,7 @@ public class Mouse extends IDrawable {
 
         setScale(new Vector(Game.ButtonDims()).mult(1.5f));
 
-        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f / Game.WorldScale().getX(), 1f / Game.WorldScale().getX())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f / Game.WorldScale().getX(), 1f / Game.WorldScale().getY())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
 //        setRotation(Rad);
         clicked = clicked != !Level().isClicking() && clicked;
     }

@@ -66,6 +66,8 @@ public class Flag extends IDrawable {
     public void init() {
         GetSprite("/images/FlagA.png");
         flag.inputImage(getLastImage());
+        setSpriteWidth(75);
+        setSpriteHeight(75);
     }
 
     /**
