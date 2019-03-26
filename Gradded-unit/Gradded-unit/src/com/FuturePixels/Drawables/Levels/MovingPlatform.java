@@ -6,26 +6,31 @@
 package com.FuturePixels.Drawables.Levels;
 
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
+import com.Liamengine.Engine.Components.SpriteSheet;
 import com.Liamengine.Engine.Components.Transform;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Entry.Game;
+import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 /**
  *
  * @author Liam Woolley 1748910
  */
-public class MovingPlatoform extends IDrawable {
+public class MovingPlatform extends IDrawable {
 
     private Vector[] Cycle;
     private float Speed;
     private int ind = 0;
     private Vector Add = Vector.Zero();
+    private SpriteSheet she;
+    private boolean AsSpriteSheet = false;
 
     /**
      *
      */
-    public MovingPlatoform() {
+    public MovingPlatform() {
         super();
     }
 
@@ -36,7 +41,7 @@ public class MovingPlatoform extends IDrawable {
      * @param cycle
      * @param Speed
      */
-    public MovingPlatoform(Vector position, double RadianRotation, Vector[] cycle, float Speed) {
+    public MovingPlatform(Vector position, double RadianRotation, Vector[] cycle, float Speed) {
         super();
 //        GetSprite("/images/platform/Platform.png");
         setPosition(position);
@@ -45,12 +50,28 @@ public class MovingPlatoform extends IDrawable {
         this.Speed = Speed;
     }
 
+    public MovingPlatform(Vector position, double RadianRotation, Vector[] cycle, float Speed, boolean asSpriteSheet) {
+        this(position, RadianRotation, cycle, Speed);
+        AsSpriteSheet = asSpriteSheet;
+    }
+
     /**
      *
      */
     @Override
     public void init() {
         GetSprite("/images/Platform/rock_platform_moss_01.png");
+    }
+
+    public IDrawable GetSprite(String path, int width, int height) {
+        super.GetSprite(path);
+        if (AsSpriteSheet) {
+            she = new SpriteSheet(0, 0, width, height);
+            she.inputImage(imageUtils.T.GetImage(path));
+            setSpriteWidth(width);
+            setSpriteHeight(height);
+        }
+        return this;
     }
 
     /**
@@ -81,7 +102,12 @@ public class MovingPlatoform extends IDrawable {
                 && (-Transform.getOffsetTranslation().getX() + (Game.getScaledWidth())) > getPosition().getX()
                 && (-Transform.getOffsetTranslation().getY() - (Game.getScaledHeight())) < getPosition().getY()
                 && (-Transform.getOffsetTranslation().getY() + (Game.getScaledHeight())) > getPosition().getY()))) {
-            DrawLastLoadedImage(g);
+            if (AsSpriteSheet) {
+                she.IncrementX(0.3f);
+                DrawLastLoadedImageAsSpriteSheet(g, she);
+            } else {
+                DrawLastLoadedImage(g);
+            }
         }
     }
 
@@ -91,7 +117,7 @@ public class MovingPlatoform extends IDrawable {
      */
     @Override
     public void onCollison(IDrawable im) {
-        if(im instanceof Player){
+        if (im instanceof Player) {
             im.addPosition(new Vector(Add).mult(2));
         }
 //        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");

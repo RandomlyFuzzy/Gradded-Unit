@@ -244,7 +244,7 @@ public class Player extends IDrawable {
 
                 }
             }
-        } else if (im instanceof PlatForm || im instanceof MovingPlatoform || im instanceof DestroyingPlatForm) {
+        } else if (im instanceof PlatForm || im instanceof MovingPlatform || im instanceof DestroyingPlatForm) {
             setRotation(im.getRotation());
             Vector bottom, top, left, right, _hit;
             Vector[] _Top, _bottom, _left, _right;

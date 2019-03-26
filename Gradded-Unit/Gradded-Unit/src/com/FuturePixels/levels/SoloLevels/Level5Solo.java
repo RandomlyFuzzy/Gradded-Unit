@@ -49,7 +49,7 @@ public class Level5Solo extends ILevel {
 
         //Player and Flag Objects
         AddObject(player1).setPosition(850, -50);
-        AddObject(new Flag(new Level5Solo())).setPosition(new Vector(225, -6450));
+        AddObject(new Flag(new MainMenu())).setPosition(new Vector(225, -6450));
         
         //Adding Platforms
         AddObject(new PlatForm(new Vector(800, 0), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
@@ -64,22 +64,28 @@ public class Level5Solo extends ILevel {
         AddObject(new PlatForm(new Vector(150, -1750), 0.20)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new PlatForm(new Vector(550, -1900), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new DestroyingPlatForm(new Vector(750, -2100), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new MovingPlatoform(new Vector(300, -2250), 0,new Vector[]{new Vector(100,-2250),new Vector(600,-2250)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new MovingPlatform(new Vector(300, -2250), 0,new Vector[]{new Vector(100,-2250),new Vector(600,-2250)},1.5f,true))
+                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
         AddObject(new DestroyingPlatForm(new Vector(300, -2450), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
         AddObject(new bouncyPlatform(new Vector(0, -2650), 0,new Vector[]{new Vector(0, -2650),new Vector(0, -2650)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new bouncyPlatform(new Vector(250, -2975), 0,new Vector[]{new Vector(250, -2975),new Vector(250, -2975)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(500, -3275), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(200, -3475), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new MovingPlatoform(new Vector(0, -3625), 0,new Vector[]{new Vector(0, -3625),new Vector(1000,-3625)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
-        AddObject(new MovingPlatoform(new Vector(1000, -3775), 0,new Vector[]{new Vector(1000,-3775),new Vector(0,-3775)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
-        AddObject(new MovingPlatoform(new Vector(0, -3925), 0,new Vector[]{new Vector(0,-3925),new Vector(1000,-3925)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new MovingPlatform(new Vector(0, -3625), 0,new Vector[]{new Vector(0, -3625),new Vector(450,-3625)},1.5f,true))
+                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
+        AddObject(new MovingPlatform(new Vector(550, -3775), 0,new Vector[]{new Vector(550,-3775),new Vector(1000,-3775)},1.5f,true))
+                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
+        AddObject(new MovingPlatform(new Vector(450, -3925), 0,new Vector[]{new Vector(450,-3925),new Vector(0,-3925)},1.5f,true))
+                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
         AddObject(new bouncyPlatform(new Vector(200, -4075), 0,new Vector[]{new Vector(200, -4075),new Vector(200, -4075)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(400, -4400), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new MovingPlatoform(new Vector(600, -4400), 0,new Vector[]{new Vector(600,-4400),new Vector(600,-5000)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new MovingPlatform(new Vector(600, -4400), 0,new Vector[]{new Vector(600,-4400),new Vector(600,-5000)},1.5f,true))
+                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
         AddObject(new PlatForm(new Vector(300, -5000), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(100, -5200), 0.35)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new bouncyPlatform(new Vector(300,-5400), 0,new Vector[]{new Vector(300,-5400),new Vector(300,-5400)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
-        AddObject(new MovingPlatoform(new Vector(0, -5700), 0,new Vector[]{new Vector(0,-5700),new Vector(600,-5700)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new MovingPlatform(new Vector(0, -5700), 0,new Vector[]{new Vector(0,-5700),new Vector(600,-5700)},1.5f,true))
+                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
         AddObject(new PlatForm(new Vector(750, -5900), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
         AddObject(new bouncyPlatform(new Vector(500, -6100), 0,new Vector[]{new Vector(500, -6100),new Vector(500, -6100)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new PlatForm(new Vector(200, -6400), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
