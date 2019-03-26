@@ -72,6 +72,7 @@ public class Level4Solo extends ILevel {
         AddObject(new MovingPlatoform(new Vector(0, -3250), 0,new Vector[]{new Vector(0,-3250),new Vector(400,-3250)},1.5f)).GetSprite("/images/Platform/rock_platform_clean_01.png");
         AddObject(new DestroyingPlatForm(new Vector(600, -3450), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
         AddObject(new PlatForm(new Vector(900, -3250), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(795, -3340), 0)).GetSprite("/images/Platform/rock_platform_clean_02.png");
         
         //AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
         //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
@@ -79,7 +80,7 @@ public class Level4Solo extends ILevel {
 //        AddObject(new DebugObject());
         AddObject(new HUD());
         AddObject(new Lava());
-        play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/Sounds/Lvl4Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/backgrounds/background.png"));
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * 0.4f) / 2, 0));
     }
