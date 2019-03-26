@@ -47,7 +47,7 @@ public class Level4Solo extends ILevel {
         }).start();
         player1 = new Player();
 
-        AddObject(player1).setPosition(600, -3500);
+        AddObject(player1).setPosition(0, -50);
         AddObject(new Flag(new MainMenu())).setPosition(new Vector(950, -3300));
         //Adding Platforms
         AddObject(new PlatForm(new Vector(0, 0), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
@@ -77,7 +77,7 @@ public class Level4Solo extends ILevel {
         //AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
         //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
         //}, 1)).GetSprite("/images/Platform/rock_platform_moss_01.png").UpdateBounds();
-        AddObject(new DebugObject());
+//        AddObject(new DebugObject());
         AddObject(new HUD());
         AddObject(new Lava());
         play("/Sounds/Lvl4Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
