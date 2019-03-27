@@ -62,7 +62,7 @@ public class Level2Solo extends ILevel {
         BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
         BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
         AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3550));
-        AddObject(new PlatForm(new Vector(75, 0), 0)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(75, 0), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(-200, -75), 0.35)).setLastimage(moss1);
         AddObject(new PlatForm(new Vector(-425, -140), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(-90, -330), -0.25)).setLastimage(moss1);

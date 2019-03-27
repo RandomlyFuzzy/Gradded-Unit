@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -57,36 +58,42 @@ public class Level3Solo extends ILevel {
 
         AddObject(player1).setPosition(100, 0);
         AddObject(new Flag(new Level4Solo())).setPosition(new Vector(200, -4450));
+        //Setting platform sprites
+        BufferedImage moss1 = GetSprite("/images/platform/rock_platform_moss_01.png");
+        BufferedImage wood1 = GetSprite("/images/platform/wooden_platform_01.png");
+        BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
+        BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
+        
         //Adding Platforms
-        AddObject(new PlatForm(new Vector(100, 100), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(300, 0), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new PlatForm(new Vector(475, -150), -0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(600, -350), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new PlatForm(new Vector(425, -550), 0.25)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(150, -625), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(400, -850), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(601, -850), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(400, -1050), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new PlatForm(new Vector(200, -1200), 0.20)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(300, -1400), -0.30)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(600, -1600), -0.30)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(500, -1800), 0.15)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(250, -2000), 0.10)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(600, -2050), -0.30)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(500, -2250), 0.15)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(225, -2450), 0.15)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(350, -2650), -0.10)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new PlatForm(new Vector(550, -2850), -0.10)).GetSprite("/images/Platform/rock_platform_moss_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(450, -3000), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(200, -3150), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(500, -3300), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(150, -3450), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new DestroyingPlatForm(new Vector(600, -3600), 0)).GetSprite("/images/Platform/wooden_platform_01.png");
-        AddObject(new PlatForm(new Vector(500, -3800), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(300, -4000), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(600, -4100), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(400, -4200), 0)).GetSprite("/images/Platform/rock_platform_clean_00.png");
-        AddObject(new PlatForm(new Vector(200, -4400), 0)).GetSprite("/images/Platform/rock_platform_clean_01.png");
+        AddObject(new PlatForm(new Vector(100, 100), 0)).setLastimage(clean1);
+        AddObject(new DestroyingPlatForm(new Vector(300, 0), 0)).setLastimage(wood1);
+        AddObject(new PlatForm(new Vector(475, -150), -0.25)).setLastimage(moss1);
+        AddObject(new DestroyingPlatForm(new Vector(600, -350), 0)).setLastimage(wood1);
+        AddObject(new PlatForm(new Vector(425, -550), 0.25)).setLastimage(moss1);
+        AddObject(new DestroyingPlatForm(new Vector(150, -625), 0)).setLastimage(wood1);
+        AddObject(new DestroyingPlatForm(new Vector(400, -850), 0)).setLastimage(wood1);
+        AddObject(new DestroyingPlatForm(new Vector(601, -850), 0)).setLastimage(wood1);
+        AddObject(new DestroyingPlatForm(new Vector(400, -1050), 0)).setLastimage(wood1);
+        AddObject(new PlatForm(new Vector(200, -1200), 0.20)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(300, -1400), -0.30)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(600, -1600), -0.30)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(500, -1800), 0.15)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(250, -2000), 0.10)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(600, -2050), -0.30)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(500, -2250), 0.15)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(225, -2450), 0.15)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(350, -2650), -0.10)).setLastimage(moss1);
+        AddObject(new PlatForm(new Vector(550, -2850), -0.10)).setLastimage(moss1);
+        AddObject(new DestroyingPlatForm(new Vector(450, -3000), 0)).setLastimage(wood1);
+        AddObject(new DestroyingPlatForm(new Vector(200, -3150), 0)).setLastimage(wood1);
+        AddObject(new DestroyingPlatForm(new Vector(500, -3300), 0)).setLastimage(wood1);
+        AddObject(new DestroyingPlatForm(new Vector(150, -3450), 0)).setLastimage(wood1);
+        AddObject(new DestroyingPlatForm(new Vector(600, -3600), 0)).setLastimage(wood1);
+        AddObject(new PlatForm(new Vector(500, -3800), 0)).setLastimage(clean0);
+        AddObject(new PlatForm(new Vector(300, -4000), 0)).setLastimage(clean0);
+        AddObject(new PlatForm(new Vector(600, -4100), 0)).setLastimage(clean0);
+        AddObject(new PlatForm(new Vector(400, -4200), 0)).setLastimage(clean0);
+        AddObject(new PlatForm(new Vector(200, -4400), 0)).setLastimage(clean1);
 
         //AddObject(new MovingPlatoform(new Vector(75, 0), 0, new Vector[]{
         //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
