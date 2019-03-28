@@ -148,7 +148,7 @@ public class Controls extends ILevel {
             }
             AddObject(but[i]);
         }
-        BB = new BlackoutButton("Press to get key", new HUDdelegate() {
+        BB = new BlackoutButton("Enter a Key", new HUDdelegate() {
             public void OnClick(BlackoutButton b) {
                 System.out.println(".OnClick() " + lastKey);
                 if (val == 1) {
@@ -182,7 +182,7 @@ public class Controls extends ILevel {
 
                 FileUtils.SetFileContence("resources/data/Preferences.txt", vals);
                 b.setEnabled(false);
-                b.setMessage("Press to get key");
+                b.setMessage("Enter a Key");
             }
         }
         );
