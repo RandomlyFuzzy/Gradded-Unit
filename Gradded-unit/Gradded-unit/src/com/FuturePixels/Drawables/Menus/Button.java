@@ -10,6 +10,7 @@ import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -71,7 +72,7 @@ public class Button extends IDrawable {
      */
     @Override
     public void doMove() {
-        setPosition(new Vector(((Game.getScaledWidth() ))* relpos.getX(), ((Game.getScaledHeight() ))* relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
         setScale(Game.ButtonDims());
     }
 
@@ -82,9 +83,11 @@ public class Button extends IDrawable {
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
-        g.setColor(new Color(128,0,128));
-        FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString(Message, -metrics.stringWidth(Message) / 2,+g.getFont().getSize()/3);
+        
+        FontMetrics metrics = g.getFontMetrics();
+        g.setColor(Color.white);
+        g.drawString(Message, -metrics.stringWidth(Message) / 2, +g.getFont().getSize() / 2);
+
         if (isColliding()) {
             Color c = g.getColor();
             g.setColor(new Color(200, 200, 200, 100));

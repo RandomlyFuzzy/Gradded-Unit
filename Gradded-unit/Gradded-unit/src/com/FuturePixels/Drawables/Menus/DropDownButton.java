@@ -10,6 +10,7 @@ import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -71,9 +72,9 @@ public class DropDownButton extends IDrawable {
         buttonDelegate = new HUDdelegate() {
             @Override
             public void OnClick(DropDownButton b) {
-                System.out.println(".OnClick() "+b.indexOfSubbuttons.length);
-                for (int i =0 ;i<b.indexOfSubbuttons.length;i++) {
-                    Button b2 =(Button) b.Level().GetObject(b.indexOfSubbuttons[i]);
+                System.out.println(".OnClick() " + b.indexOfSubbuttons.length);
+                for (int i = 0; i < b.indexOfSubbuttons.length; i++) {
+                    Button b2 = (Button) b.Level().GetObject(b.indexOfSubbuttons[i]);
                     b2.setEnabled(!b2.isEnabled());
                 }
             }
@@ -107,10 +108,11 @@ public class DropDownButton extends IDrawable {
     @Override
     public void Update(Graphics2D g) {
 //        System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.Update() "+getPosition().toString());
+        FontMetrics metrics = g.getFontMetrics();
         DrawLastLoadedImage(g);
-        g.setColor(new Color(128, 0, 128));
-        FontMetrics metrics = g.getFontMetrics(g.getFont());
-        g.drawString(Message, -metrics.stringWidth(Message) / 2, 0);
+        g.setColor(Color.white);
+        g.drawString(Message, -metrics.stringWidth(Message) / 2, +g.getFont().getSize() / 3);
+
         if (isColliding()) {
             Color c = g.getColor();
             g.setColor(new Color(200, 200, 200, 100));
