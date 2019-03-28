@@ -72,7 +72,7 @@ public class Controls extends ILevel {
     @Override
     public void init() {
 
-        AddObject(new Button(new Vector(0.1f, 0.1f), "Back", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());

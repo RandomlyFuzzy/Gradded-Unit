@@ -54,14 +54,14 @@ public class DeathOverlay extends IDrawable {
                     Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
             }
-        }));
+        })).GetSprite("/images/Button_1.png");;
 
         Level().AddObject(new Button(new Vector(0.7f, 0.8f), "[M] Main Menu", new HUDdelegate() {
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
                 LevelLoader.LoadLevel(new MainMenu());
             }
-        }));
+        })).GetSprite("/images/Button_1.png");;
         Level().AddObject(new Mouse());
         GetSprite("API/cat");
     }

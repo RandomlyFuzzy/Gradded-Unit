@@ -83,11 +83,16 @@ public class Button extends IDrawable {
     @Override
     public void Update(Graphics2D g) {
         DrawLastLoadedImage(g);
-        
+
+        Font f = g.getFont();
         FontMetrics metrics = g.getFontMetrics();
         g.setColor(Color.white);
+        if (getSpriteWidth() < metrics.stringWidth(Message)) {
+            setSpriteWidth((int) (metrics.stringWidth(Message) * 1.05f));
+        }
         g.drawString(Message, -metrics.stringWidth(Message) / 2, +g.getFont().getSize() / 2);
 
+        g.setFont(f);
         if (isColliding()) {
             Color c = g.getColor();
             g.setColor(new Color(200, 200, 200, 100));

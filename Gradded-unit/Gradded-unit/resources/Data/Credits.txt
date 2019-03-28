@@ -1,7 +1,9 @@
 Breaking Through
 
+
 Created by: 
-Liam Woolley
-Liam Rickman
-Jack Teviotdale
-Ricky Swankie
+
+Producer: Liam Rickman
+Lead Programmer: Liam Woolley
+Lead Artist: Jack Teviotdale
+Lead Sound: Ricky Swankie
