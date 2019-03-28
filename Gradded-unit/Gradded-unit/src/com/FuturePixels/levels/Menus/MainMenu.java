@@ -90,7 +90,7 @@ public class MainMenu extends ILevel {
         AddObject(new Mouse());
         AddObject(new HUD());
         play("/sounds/music.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/mainmenu.png"));
         try {
             InputStream myStream = new BufferedInputStream(new FileInputStream("resources/fonts/font.ttf"));
             Font title = Font.createFont(Font.TRUETYPE_FONT, myStream);

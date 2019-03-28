@@ -43,11 +43,11 @@ public class Lava extends IDrawable {
 
     public void doMove() {
         setSpriteWidth(Game.getScaledWidth()-2);
-        setSpriteHeight(Game.getScaledHeight() / 4);
+        setSpriteHeight(Game.getScaledHeight() / 2);
 //        setSpriteWidth(200);
 //        setSpriteHeight(100);
 //        DebugObject.AddCirles(Transform.getOffsetTranslation());
-        setPosition(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() / 2, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight()-getSpriteHeight()/2);
+        setPosition(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() / 2, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight()-(getSpriteHeight()*-0.125f));
     }
 
     /**

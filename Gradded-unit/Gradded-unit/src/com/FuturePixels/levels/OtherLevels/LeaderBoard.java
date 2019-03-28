@@ -141,13 +141,16 @@ public class LeaderBoard extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-        
-        
-        
+
         g.drawImage(GetSprite("/Images/backgrounds/background1.png"), Game.getWindowWidth(), 0, (Game.getWindowWidth() * -1), (Game.getWindowHeight()), null);
         float y = 0.3f;
         Font f = g.getFont();
-        Font f2 = f.deriveFont(1, Game.WorldScale().getY() * 13);
+        Font f2 = f.deriveFont(1, Game.WorldScale().getY() * 55);
+        g.setFont(f2);
+        int w = (int) (g.getFontMetrics().stringWidth(Currentind) * 1.05f);
+        g.drawString(Currentind,(int) ((Game.getWindowWidth() / 2) - w / 2),
+                    (int) ((0.205f) * Game.getWindowHeight()));
+        f2 = f.deriveFont(1, Game.WorldScale().getY() * 13);
         g.setFont(f2);
         if ((times.size() == 1 && !times.get(0).equals(new String()) && !Double.isNaN(Double.parseDouble(times.get(0)))) || times.size() > 1) {
             g.setColor(new Color(55, 55, 55, 150));
@@ -155,18 +158,18 @@ public class LeaderBoard extends ILevel {
             g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() * ((int) Math.pow(15 - 0, 2) / 10))));
             String s = times.get(0);
             String str = "No " + (0 + 1) + " Place with " + s + " secs";
-            int w = (int) (g.getFontMetrics().stringWidth(str) * 1.05f);
+            w = (int) (g.getFontMetrics().stringWidth(str) * 1.05f);
             g.fillRect(
                     (int) ((Game.getWindowWidth() / 2) - w / 2),
                     (int) ((0.225f) * Game.getWindowHeight()),
                     (int) (w),
-                    (int) (0.620f * Game.getWindowHeight()));
+                    (int) ((0.650f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
             w = (int) (g.getFontMetrics().stringWidth(Currentind) * 1.05f);
             g.drawString(Currentind, (Game.getWindowWidth() / 2 - (w / 2)), y);
 
             g.setColor(Color.WHITE);
             int inc = 0;
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < (10 > times.size() ? times.size() : 10); i++) {
                 g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() * ((int) Math.pow(15 - i, 2) / 10))));
                 s = times.get(i);
                 str = "No. " + (i + 1) + ": " + s + " secs";
