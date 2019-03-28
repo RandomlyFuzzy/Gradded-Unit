@@ -46,12 +46,13 @@ public class LevelSelectSolo extends ILevel {
     @Override
     public void init() {
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.2f * (i % 5)) + 0.1f), ((0.1f * (i / 6)) + 0.1f)), ("Level" + (i + 1)) + "Solo", new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.15f)), ((0.15f * (i % 6)) + 0.2f)), ("Level " + (i + 1)), new HUDdelegate() {
                 public void OnClick(Button b) {
-                    LevelLoader.LoadLevel(b.getMessage());
+                    LevelLoader.LoadLevel(b.getMessage().replace(" ",""));
                 }
-            }));
+            })).GetSprite("/images/Button_2.png");
         }
+        
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {

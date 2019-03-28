@@ -56,37 +56,55 @@ public class MainMenu extends ILevel {
      */
     @Override
     public void init() {
+        Game.setWorldrelDims(new Vector(1,1));
 
-        AddObject(new Button(new Vector(0.15f, 0.4f), "Solo", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.2215f, 0.425f), "Solo", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectSolo());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.55f), "Coop", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.3575f, 0.425f), "Coop", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectCoop());
             }
         }));
-        AddObject(new Button(new Vector(0.15f, 0.70f), "Leaderboard", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.55f), "Leaderboard", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
         })).GetSprite("/images/Button_1.png");
-        AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDdelegate() {
+        
+        AddObject(new Button(new Vector(0.29f, 0.675f), "Settings", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
-        })).GetSprite("/images/Settings.png");
-        AddObject(new Button(new Vector(0.98f, 0.91f), "", new HUDdelegate() {
+        })).GetSprite("/images/Button_1.png");
+        
+        AddObject(new Button(new Vector(0.29f, 0.8f), "Exit Game", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);
             }
-        })).GetSprite("/images/Quit.png");
+        })).GetSprite("/images/Button_1.png");
+      
+        //OLD SETTINGS/QUIT ICON
+//        AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDdelegate() {
+//            @Override
+//            public void OnClick(Button b) {
+//                Game.SetLevelActive(new Settings());
+//            }
+//        })).GetSprite("/images/Settings.png");
+//        
+//        AddObject(new Button(new Vector(0.98f, 0.91f), "", new HUDdelegate() {
+//            @Override
+//            public void OnClick(Button b) {
+//                System.exit(0);
+//            }
+//        })).GetSprite("/images/Quit.png");
         AddObject(new Mouse());
         AddObject(new HUD());
         play("/sounds/music.wav", 0, Clip.LOOP_CONTINUOUSLY);

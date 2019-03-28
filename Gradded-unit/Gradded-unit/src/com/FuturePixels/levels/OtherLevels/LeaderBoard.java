@@ -42,10 +42,8 @@ import javax.swing.Timer;
  */
 public class LeaderBoard extends ILevel {
 
-    private static String FileURI = "resources/Savedata/Level";
-    private static String EndURI = "Solo.txt";
     private String previousind = "";
-    private static String Currentind = "Level1Solo";
+    private static String Currentind = "Level4";
     private ArrayList<String> times = new ArrayList<String>();
 
     /**
@@ -78,22 +76,22 @@ public class LeaderBoard extends ILevel {
      */
     @Override
     public void init() {
-        GetSprite("/Images/backgrounds/background1.png");
-
-        for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.2f * (i % 5)) + 0.1f), ((0.1f * (i / 5)) + 0.1f)), ("Level" + ((i % 5) + 1)) + ((i >= 5) ? "Coop" : "Solo"), new HUDdelegate() {
-                public void OnClick(Button b) {
-                    LeaderBoard.setCurrentind(b.getMessage());
-                }
-            }));
-        }
+        GetSprite("/images/backgrounds/leaderboard.png");
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
         }));
+        for (int i = 0; i < 5; i++) {
+            AddObject(new Button(new Vector(((0.15f)), ((0.15f * (i % 6)) + 0.15f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
+                public void OnClick(Button b) {
+                    LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
+                }
+            }));
+        }
 
+        setBackgroundimage(GetSprite("/Images/backgrounds/leaderboard.png"));
         AddObject(new Mouse());
     }
 
@@ -106,7 +104,7 @@ public class LeaderBoard extends ILevel {
         if (previousind != Currentind) {
             times = new ArrayList<String>();
             times.addAll(
-                    FileUtils.GetFileSplit("Resources/savedata/" + Currentind + ".txt", "\n", true)
+                    FileUtils.GetFileSplit("Resources/savedata/" + Currentind + "solo.txt", "\n", true)
             );
 
             System.out.println("com.FuturePixels.levels.OtherLevels.LeaderBoard.Update() " + times.size());
@@ -141,16 +139,14 @@ public class LeaderBoard extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-
-        g.drawImage(GetSprite("/Images/backgrounds/background1.png"), Game.getWindowWidth(), 0, (Game.getWindowWidth() * -1), (Game.getWindowHeight()), null);
         float y = 0.3f;
         Font f = g.getFont();
         Font f2 = f.deriveFont(1, Game.WorldScale().getY() * 55);
         g.setFont(f2);
-        int w = (int) (g.getFontMetrics().stringWidth(Currentind) * 1.05f);
-        g.drawString(Currentind,(int) ((Game.getWindowWidth() / 2) - w / 2),
-                    (int) ((0.205f) * Game.getWindowHeight()));
-        f2 = f.deriveFont(1, Game.WorldScale().getY() * 13);
+        int w = (int) (g.getFontMetrics().stringWidth(Currentind.replace("solo","")) * 1.05f);
+        g.drawString(Currentind.replace("solo",""), (int) ((Game.getWindowWidth() / 2) - w / 2),
+                (int) ((0.205f) * Game.getWindowHeight()));
+        f2 = f.deriveFont(1, Game.WorldScale().getY() * 10);
         g.setFont(f2);
         if ((times.size() == 1 && !times.get(0).equals(new String()) && !Double.isNaN(Double.parseDouble(times.get(0)))) || times.size() > 1) {
             g.setColor(new Color(55, 55, 55, 150));
@@ -175,7 +171,7 @@ public class LeaderBoard extends ILevel {
                 str = "No. " + (i + 1) + ": " + s + " secs";
                 w = g.getFontMetrics().stringWidth(str);
                 g.drawString(str,
-                        Game.getWindowWidth() / 2 - w / 2,
+                        Game.getWindowWidth() / 20,
                         (((i % 20) * 0.06f) + 0.3f) * Game.getWindowHeight());
                 y += 0.03f;
             }
@@ -206,8 +202,8 @@ public class LeaderBoard extends ILevel {
      */
     public void dispose() {
         super.dispose();
-        Currentind = "Level2Solo";
-        previousind = "Level1Solo";
+        Currentind = "Level2";
+        previousind = "Level1";
         times = new ArrayList<String>();
     }
 }
