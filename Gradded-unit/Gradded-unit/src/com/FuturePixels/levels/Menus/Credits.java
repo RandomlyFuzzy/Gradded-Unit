@@ -16,6 +16,7 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.Drawables.Menus.Slider;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Utils.FileUtils;
+import com.Liamengine.Engine.Utils.LevelLoader;
 import com.Liamengine.Engine.Utils.MusicUtils;
 import java.awt.Color;
 import java.awt.Font;
@@ -66,7 +67,7 @@ public class Credits extends ILevel {
     @Override
     public void init() {
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/background0.png"));
         credits = FileUtils.GetFileSplit("resources/data/Credits.txt", "\n");
     }
 
@@ -90,15 +91,15 @@ public class Credits extends ILevel {
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
         int val2 = (int) ((Math.cos(i) + 1f) * 100f);
-        if (val >= 250 && once) {
+        if (val >= 253 && once) {
             ind++;
-            ind %= 3;
+            ind %= 4;
             changed = true;
             once = false;
             System.out.println("com.FuturePixels.levels.Menus.Credits.Draw() " + ind + " ,  " + getTime());
-        } else if (val >= 250) {
+        } else if (val >= 253) {
         } else if (changed) {
-            setBackgroundimage(GetSprite("/Images/backgrounds/background" + (ind + 1) + ".png"));
+            setBackgroundimage(GetSprite("/Images/backgrounds/background" + (ind) + ".png"));
             changed = false;
             once = true;
         }
@@ -119,7 +120,10 @@ public class Credits extends ILevel {
      */
     @Override
     public void keyPress(KeyEvent e) {
-
+        if (e.getKeyCode()==KeyEvent.VK_ESCAPE){
+            LevelLoader.LoadLevel(new MainMenu());
+        
+        }
     }
 
     /**
