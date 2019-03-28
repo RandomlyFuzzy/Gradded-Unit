@@ -96,7 +96,7 @@ public class Level2Solo extends ILevel {
 //        AddObject(new ScrollingBackground());
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth()) / 2, 0));
         play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/backgrounds/background2.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/level1.png"));
     }
 
     /**

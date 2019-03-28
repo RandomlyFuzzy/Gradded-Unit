@@ -67,7 +67,7 @@ public class Credits extends ILevel {
     @Override
     public void init() {
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/background0.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/level0.png"));
         credits = FileUtils.GetFileSplit("resources/data/Credits.txt", "\n");
     }
 
@@ -99,7 +99,7 @@ public class Credits extends ILevel {
             System.out.println("com.FuturePixels.levels.Menus.Credits.Draw() " + ind + " ,  " + getTime());
         } else if (val >= 253) {
         } else if (changed) {
-            setBackgroundimage(GetSprite("/Images/backgrounds/background" + (ind) + ".png"));
+            setBackgroundimage(GetSprite("/Images/backgrounds/level" + (ind) + ".png"));
             changed = false;
             once = true;
         }
