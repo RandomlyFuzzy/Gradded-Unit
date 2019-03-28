@@ -57,7 +57,7 @@ public class Settings extends ILevel {
     public void init() {
 
         AddObject(new HUD()).setScale(new Vector(0.5f, 0.7f));;
-        AddObject(new Button(new Vector(0.2f, 0.1f), "Back", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.1f, 0.1f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
@@ -120,19 +120,19 @@ public class Settings extends ILevel {
 
             }
 
-        }));
+        })).GetSprite("/images/Button_1.png");
         AddObject(new Button(new Vector(0.8f, 0.1f), "Controls", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());
             }
-        }));
-        AddObject(new Button(new Vector(0.8f, 0.3f), "Credit", new HUDdelegate() {
+        })).GetSprite("/images/Button_2.png");
+        AddObject(new Button(new Vector(0.8f, 0.3f), "Credits", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Credits());
             }
-        }));
+        })).GetSprite("/images/Button_2.png");
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
     }

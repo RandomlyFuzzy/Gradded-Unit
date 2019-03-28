@@ -74,7 +74,7 @@ public class MainMenu extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
-        }));
+        })).GetSprite("/images/Button_1.png");
         AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
