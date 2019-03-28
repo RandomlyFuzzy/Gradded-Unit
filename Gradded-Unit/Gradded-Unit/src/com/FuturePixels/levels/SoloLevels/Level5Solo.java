@@ -104,7 +104,7 @@ public class Level5Solo extends ILevel {
         AddObject(new HUD());
         AddObject(new Lava());
 //        play("/Sounds/Lvl5Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/backgrounds/background.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/Level4.png"));
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * 0.4f) / 2, 0));
     }
 

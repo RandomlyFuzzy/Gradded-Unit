@@ -45,18 +45,18 @@ public class DeathOverlay extends IDrawable {
     @Override
     public void init() {
         Level().AddObject(new Button(new Vector(0.3f, 0.8f), "[R] Retry", new HUDdelegate() {
+            @Override
             public void OnClick(Button b) {
                 try {
                     LevelLoader.LoadLevel(b.Level().getClass().newInstance());
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
+                } catch (InstantiationException | IllegalAccessException ex) {
                     Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
             }
         }));
 
         Level().AddObject(new Button(new Vector(0.7f, 0.8f), "[M] Main Menu", new HUDdelegate() {
+            @Override
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
                 LevelLoader.LoadLevel(new MainMenu());
