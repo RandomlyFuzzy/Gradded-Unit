@@ -82,13 +82,13 @@ public class LeaderBoard extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
-        }));
+        })).GetSprite("/images/Button_0.png");
         for (int i = 0; i < 5; i++) {
             AddObject(new Button(new Vector(((0.15f)), ((0.15f * (i % 6)) + 0.15f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
                 }
-            }));
+            })).GetSprite("/images/Button_2.png");
         }
 
         setBackgroundimage(GetSprite("/Images/backgrounds/leaderboard.png"));

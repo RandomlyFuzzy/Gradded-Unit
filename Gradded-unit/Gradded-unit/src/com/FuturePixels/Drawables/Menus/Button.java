@@ -64,7 +64,7 @@ public class Button extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/Images/Button_0.png");
+        GetSprite("/Images/Button_1.png");
     }
 
     /**
