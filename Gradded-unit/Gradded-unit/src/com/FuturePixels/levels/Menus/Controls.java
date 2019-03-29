@@ -77,7 +77,7 @@ public class Controls extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
-        }));
+        })).GetSprite("/images/Button_0.png");
 
         //PLAYER 1
         but[0] = (new Button(new Vector(0.30f, 0.3f), "LEFT = ", new HUDdelegate() {
@@ -189,7 +189,7 @@ public class Controls extends ILevel {
         BB.setEnabled(false);
         AddObject(BB);
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/controls.png"));
     }
 
     /**
@@ -210,16 +210,16 @@ public class Controls extends ILevel {
 
         //Player Text
         g.setColor(Color.WHITE);
-        g.setColor(new Color(55, 55, 55, 200));
-        g.fillRect((int) ((0.222f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int) ((200f / 1280f) * Game.getWindowWidth()), (int) ((390f / 720f) * Game.getWindowHeight()));
-        g.fillRect((int) ((0.622f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int) ((200f / 1280f) * Game.getWindowWidth()), (int) ((390f / 720f) * Game.getWindowHeight()));
+//        g.setColor(new Color(55, 55, 55, 200));
+//        g.fillRect((int) ((0.222f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int) ((200f / 1280f) * Game.getWindowWidth()), (int) ((390f / 720f) * Game.getWindowHeight()));
+//        g.fillRect((int) ((0.622f) * Game.getWindowWidth()), (int) ((0.195f * Game.getWindowHeight())), (int) ((200f / 1280f) * Game.getWindowWidth()), (int) ((390f / 720f) * Game.getWindowHeight()));
 
         //g.fillRect((int) ((0.03f) * Game.g.getScaledWidth()), (int) ((0.235f) * Game.g.getScaledHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getScaledWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getScaledHeight()));
         g.setColor(Color.WHITE);
         g.setFont(ILevel.getDefaultFont().deriveFont(ILevel.getDefaultFont().getSize() * Game.WorldScale().getY()*0.9f));
         FontMetrics metrics = g.getFontMetrics();
-        g.drawString("Player 1 Controls", Game.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.getWindowHeight() * 0.23f);
-        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f);
+//        g.drawString("Player 1 Controls", Game.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.getWindowHeight() * 0.23f);
+//        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f);
         g.setFont(ILevel.getDefaultFont());
     }
 

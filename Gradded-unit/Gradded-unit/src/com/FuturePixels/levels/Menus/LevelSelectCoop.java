@@ -59,9 +59,9 @@ public class LevelSelectCoop extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
-        }));
+        })).GetSprite("/images/Button_0.png");
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/CoopLevels.png"));
     }
 
     /**

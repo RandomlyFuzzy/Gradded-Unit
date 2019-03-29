@@ -62,7 +62,7 @@ public class Settings extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
-        }));
+        })).GetSprite("/images/Button_0.png");
         AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDdelegate() {
             @Override
             public void OnChange(Slider s, float Value) {
@@ -120,13 +120,13 @@ public class Settings extends ILevel {
 
             }
 
-        })).GetSprite("/images/Button_1.png");
+        }));
         AddObject(new Button(new Vector(0.8f, 0.1f), "Controls", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());
             }
-        })).GetSprite("/images/Button_2.png");
+        }));
         AddObject(new Button(new Vector(0.8f, 0.3f), "Credits", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
@@ -134,7 +134,7 @@ public class Settings extends ILevel {
             }
         })).GetSprite("/images/Button_2.png");
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/Settings.png"));
     }
 
     /**

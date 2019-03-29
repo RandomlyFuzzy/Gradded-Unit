@@ -63,33 +63,33 @@ public class MainMenu extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectSolo());
             }
-        }));
+        })).GetSprite("/images/Button_0.png");
         AddObject(new Button(new Vector(0.3575f, 0.425f), "Coop", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectCoop());
             }
-        }));
+        })).GetSprite("/images/Button_0.png");
         AddObject(new Button(new Vector(0.29f, 0.55f), "Leaderboard", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
-        })).GetSprite("/images/Button_1.png");
+        }));
         
         AddObject(new Button(new Vector(0.29f, 0.675f), "Settings", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
-        })).GetSprite("/images/Button_1.png");
+        }));
         
         AddObject(new Button(new Vector(0.29f, 0.8f), "Exit Game", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);
             }
-        })).GetSprite("/images/Button_1.png");
+        }));
       
         //OLD SETTINGS/QUIT ICON
 //        AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDdelegate() {

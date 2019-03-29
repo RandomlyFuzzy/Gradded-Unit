@@ -46,7 +46,7 @@ public class LevelSelectSolo extends ILevel {
     @Override
     public void init() {
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f)), ((0.15f * (i % 6)) + 0.2f)), ("Level " + (i + 1)), new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.15f)), ((0.13f * (i % 6)) + 0.29f)), ("Level " + (i + 1)), new HUDdelegate() {
                 public void OnClick(Button b) {
                     LevelLoader.LoadLevel(b.getMessage().replace(" ",""));
                 }
@@ -58,9 +58,9 @@ public class LevelSelectSolo extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
-        }));
+        })).GetSprite("/images/Button_0.png");
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/background1.png"));
+        setBackgroundimage(GetSprite("/Images/backgrounds/SoloLevels.png"));
     }
 
     /**
