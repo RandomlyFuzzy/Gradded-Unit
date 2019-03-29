@@ -193,7 +193,6 @@ public class Player extends IDrawable {
             canJump = false;
         } else if (down) {
             Acc.setY(-0.01f);
-            canJump = true;
         } else {
             one = false;
         }

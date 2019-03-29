@@ -43,7 +43,7 @@ import javax.swing.Timer;
 public class LeaderBoard extends ILevel {
 
     private String previousind = "";
-    private static String Currentind = "Level4";
+    private static String Currentind = "Level1";
     private ArrayList<String> times = new ArrayList<String>();
 
     /**
@@ -84,7 +84,7 @@ public class LeaderBoard extends ILevel {
             }
         })).GetSprite("/images/Button_0.png");
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f)), ((0.13f * (i % 6)) + 0.29f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.175f)), ((0.1f * (i % 6)) + 0.405f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
                 }
@@ -141,25 +141,27 @@ public class LeaderBoard extends ILevel {
     public void Draw(Graphics2D g) {
         float y = 0.3f;
         Font f = g.getFont();
-        Font f2 = f.deriveFont(1, Game.WorldScale().getY() * 55);
+        Font f2 = f.deriveFont(1, Game.WorldScale().getY() * 50);
         g.setFont(f2);
+        g.setColor(new Color(55, 55, 55, 150));
+        g.fillRect(
+                    (int) ((Game.getWindowWidth() / 18)),
+                    (int) ((0.246f) * Game.getWindowHeight()),
+                    (int) (Game.getWindowWidth()*0.885f),
+                    (int) ((0.61f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
+        g.setColor(Color.white);
         int w = (int) (g.getFontMetrics().stringWidth(Currentind.replace("solo","")) * 1.05f);
-        g.drawString(Currentind.replace("solo",""), (int) ((Game.getWindowWidth() / 2) - w / 2),
-                (int) ((0.205f) * Game.getWindowHeight()));
+        g.drawString(Currentind.replace("solo",""), (int) ((Game.getWindowWidth() / 5.5) - w / 2),
+                (int) ((0.325f) * Game.getWindowHeight()));
         f2 = f.deriveFont(1, Game.WorldScale().getY() * 10);
         g.setFont(f2);
         if ((times.size() == 1 && !times.get(0).equals(new String()) && !Double.isNaN(Double.parseDouble(times.get(0)))) || times.size() > 1) {
-            g.setColor(new Color(55, 55, 55, 150));
 
             g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() * ((int) Math.pow(15 - 0, 2) / 10))));
             String s = times.get(0);
             String str = "No " + (0 + 1) + " Place with " + s + " secs";
             w = (int) (g.getFontMetrics().stringWidth(str) * 1.05f);
-            g.fillRect(
-                    (int) ((Game.getWindowWidth() / 4)),
-                    (int) ((0.245f) * Game.getWindowHeight()),
-                    (int) (Game.getWindowWidth()*0.7f),
-                    (int) ((0.61f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
+            
             w = (int) (g.getFontMetrics().stringWidth(Currentind) * 1.05f);
             g.drawString(Currentind, (Game.getWindowWidth() / 2 - (w / 2)), y);
 
