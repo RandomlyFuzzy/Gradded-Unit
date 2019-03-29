@@ -51,7 +51,9 @@ public class Level3Solo extends ILevel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+                imageUtils.T.setImage("/API/cat", Game.GetLevel().getOnlineImage("https://cataas.com/cat/says/better%20luck%20next%20time?size=50&color=blue"));
+                Thread.currentThread()
+                        .stop();
             }
         }).start();
         player1 = new Player();
@@ -63,7 +65,7 @@ public class Level3Solo extends ILevel {
         BufferedImage wood1 = GetSprite("/images/platform/wooden_platform_01.png");
         BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
         BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
-        
+
         //Adding Platforms
         AddObject(new PlatForm(new Vector(100, 100), 0)).setLastimage(clean1);
         AddObject(new DestroyingPlatForm(new Vector(300, 0), 0)).setLastimage(wood1);

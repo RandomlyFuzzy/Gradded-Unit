@@ -63,7 +63,7 @@ public class DeathOverlay extends IDrawable {
             }
         })).GetSprite("/images/Button_1.png");;
         Level().AddObject(new Mouse());
-        GetSprite("API/cat");
+        GetSprite("/API/cat");
     }
 
     /**
@@ -130,7 +130,7 @@ public class DeathOverlay extends IDrawable {
     
     @Override
     public void dispose(){
-        imageUtils.T.setImage("API/cat", null);
+        imageUtils.T.setImage("/API/cat", null);
     
     }
 

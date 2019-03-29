@@ -52,53 +52,88 @@ public class Level2Solo extends ILevel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+                imageUtils.T.setImage("/API/cat", Game.GetLevel().getOnlineImage("https://cataas.com/cat/says/better%20luck%20next%20time?size=50&color=blue"));
+                Thread.currentThread()
+                        .stop();
             }
         }).start();
         player1 = new Player();
         //Adding Platforms
-        AddObject(player1).setPosition(0, -50);
-        AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3650));
-        
+
+        AddObject(player1)
+                .setPosition(0, -50);
+        AddObject(
+                new Flag(new Level3Solo())).setPosition(new Vector(500, -3650));
+
         BufferedImage moss1 = GetSprite("/images/platform/rock_platform_moss_01.png");
         BufferedImage clean3 = GetSprite("/images/platform/rock_platform_clean_03.png");
         BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
         BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
-        
-        AddObject(new PlatForm(new Vector(75, 0), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-200, -75), 0.35)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-425, -140), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-90, -330), -0.25)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(150, -425), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-170, -600), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-400, -600), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-200, -800), 0)).setLastimage(clean3);
+
+        AddObject(
+                new PlatForm(new Vector(75, 0), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-200, -75), 0.35)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-425, -140), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-90, -330), -0.25)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(150, -425), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-170, -600), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-400, -600), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-200, -800), 0)).setLastimage(clean3);
 //        AddObject(new PlatForm(new Vector(-150, -800), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-00, -1000), -0.25)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-200, -1200), 0.25)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-450, -1250), 0.30)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-300, -1450), -0.25)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-100, -1550), -0.25)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-250, -1750), 0.25)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-500, -1800), 0.25)).setLastimage(moss1);
-        AddObject(new PlatForm(new Vector(-400, -2000), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-150, -2150), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-350, -2300), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-200, -2500), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-450, -2700), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-350, -2850), 0)).setLastimage(clean0);
-        AddObject(new PlatForm(new Vector(-200, -3000), 0)).setLastimage(clean0);
-        AddObject(new PlatForm(new Vector(-50, -3150), 0)).setLastimage(clean0);
-        AddObject(new PlatForm(new Vector(100, -3300), 0)).setLastimage(clean0);
-        AddObject(new PlatForm(new Vector(250, -3450), 0)).setLastimage(clean0);
-        AddObject(new PlatForm(new Vector(500, -3600), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-00, -1000), -0.25)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-200, -1200), 0.25)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-450, -1250), 0.30)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-300, -1450), -0.25)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-100, -1550), -0.25)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-250, -1750), 0.25)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-500, -1800), 0.25)).setLastimage(moss1);
+        AddObject(
+                new PlatForm(new Vector(-400, -2000), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-150, -2150), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-350, -2300), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-200, -2500), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-450, -2700), 0)).setLastimage(clean1);
+        AddObject(
+                new PlatForm(new Vector(-350, -2850), 0)).setLastimage(clean0);
+        AddObject(
+                new PlatForm(new Vector(-200, -3000), 0)).setLastimage(clean0);
+        AddObject(
+                new PlatForm(new Vector(-50, -3150), 0)).setLastimage(clean0);
+        AddObject(
+                new PlatForm(new Vector(100, -3300), 0)).setLastimage(clean0);
+        AddObject(
+                new PlatForm(new Vector(250, -3450), 0)).setLastimage(clean0);
+        AddObject(
+                new PlatForm(new Vector(500, -3600), 0)).setLastimage(clean1);
 //        AddObject(new DebugObject());
-        AddObject(new Lava());
-        AddObject(new HUD());
+        AddObject(
+                new Lava());
+        AddObject(
+                new HUD());
 
 //        AddObject(new ScrollingBackground());
-        Transform.setOffsetTranslation(new Vector((Game.getScaledWidth()) / 2, 0));
-        play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        Transform.setOffsetTranslation(
+                new Vector((Game.getScaledWidth()) / 2, 0));
+        play(
+                "/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/backgrounds/level1.png"));
     }
 

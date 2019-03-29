@@ -50,12 +50,12 @@ public class Level1Solo extends ILevel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
-                Thread
-                        .currentThread()
+                imageUtils.T.setImage("/API/cat", Game.GetLevel().getOnlineImage("https://cataas.com/cat/says/better%20luck%20next%20time?size=50&color=blue"));
+                Thread.currentThread()
                         .stop();
             }
         }).start();
+
         // (float) Math.PI * -0.25f / 3f));
         //Adding Platforms
         System.out.println("com.game.levels.level1.<init>()");
@@ -112,13 +112,7 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
-        if (GetMouseButtonDown(3)) {
-            System.out.println("com.FuturePixels.levels.SoloLevels.Level1Solo.Update() 0");
-        }
 
-        if (GetMouseButtonDown(1)) {
-            System.out.println("com.FuturePixels.levels.SoloLevels.Level1Solo.Update() 1");
-        }
     }
 
     /**
@@ -127,7 +121,7 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-        
+
     }
 
     /**

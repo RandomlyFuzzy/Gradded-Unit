@@ -42,7 +42,7 @@ public class LevelCoop extends ILevel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+                imageUtils.T.setImage("/API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
             }
         }).start();
 

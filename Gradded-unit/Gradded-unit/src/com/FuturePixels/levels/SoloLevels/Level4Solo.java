@@ -43,7 +43,9 @@ public class Level4Solo extends ILevel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                imageUtils.T.setImage("API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+                imageUtils.T.setImage("/API/cat", Game.GetLevel().getOnlineImage("https://cataas.com/cat/says/better%20luck%20next%20time?size=50&color=blue"));
+                Thread.currentThread()
+                        .stop();
             }
         }).start();
         player1 = new Player();
@@ -56,11 +58,11 @@ public class Level4Solo extends ILevel {
         BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
         BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
         BufferedImage clean2 = GetSprite("/images/platform/rock_platform_clean_02.png");
-        
+
         //Adding Platforms
         AddObject(new PlatForm(new Vector(0, 0), 0)).setLastimage(clean1);
-        AddObject(new MovingPlatform(new Vector(300, -150), 0,new Vector[]{new Vector(200,-150),new Vector(700,-150)},1.5f,true))
-                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
+        AddObject(new MovingPlatform(new Vector(300, -150), 0, new Vector[]{new Vector(200, -150), new Vector(700, -150)}, 1.5f, true))
+                .GetSprite("/images/Platform/floatingPlatform.png", 150, 150);
         AddObject(new PlatForm(new Vector(800, -300), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(400, -500), 0.25)).setLastimage(moss1);
         AddObject(new PlatForm(new Vector(700, -700), -0.30)).setLastimage(moss1);
@@ -69,25 +71,25 @@ public class Level4Solo extends ILevel {
         AddObject(new DestroyingPlatForm(new Vector(650, -1200), 0)).setLastimage(wood1);
         AddObject(new DestroyingPlatForm(new Vector(400, -1400), 0)).setLastimage(wood1);
         AddObject(new DestroyingPlatForm(new Vector(100, -1550), 0)).setLastimage(wood1);
-        AddObject(new MovingPlatform(new Vector(200, -1700), 0,new Vector[]{new Vector(200,-1700),new Vector(600,-1700)},1.5f,true))
-                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
-        AddObject(new MovingPlatform(new Vector(600, -1850), 0,new Vector[]{new Vector(600,-1850),new Vector(1000,-1850)},1,true))
-                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
-        AddObject(new MovingPlatform(new Vector(500, -2000), 0,new Vector[]{new Vector(500,-2000),new Vector(0,-2000)},2,true))
-                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
-        AddObject(new MovingPlatform(new Vector(1100, -2150), 0,new Vector[]{new Vector(600,-2150),new Vector(1100,-2150)},1.5f,true))
-                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
+        AddObject(new MovingPlatform(new Vector(200, -1700), 0, new Vector[]{new Vector(200, -1700), new Vector(600, -1700)}, 1.5f, true))
+                .GetSprite("/images/Platform/floatingPlatform.png", 150, 150);
+        AddObject(new MovingPlatform(new Vector(600, -1850), 0, new Vector[]{new Vector(600, -1850), new Vector(1000, -1850)}, 1, true))
+                .GetSprite("/images/Platform/floatingPlatform.png", 150, 150);
+        AddObject(new MovingPlatform(new Vector(500, -2000), 0, new Vector[]{new Vector(500, -2000), new Vector(0, -2000)}, 2, true))
+                .GetSprite("/images/Platform/floatingPlatform.png", 150, 150);
+        AddObject(new MovingPlatform(new Vector(1100, -2150), 0, new Vector[]{new Vector(600, -2150), new Vector(1100, -2150)}, 1.5f, true))
+                .GetSprite("/images/Platform/floatingPlatform.png", 150, 150);
         AddObject(new PlatForm(new Vector(500, -2300), 0)).setLastimage(clean0);
         AddObject(new PlatForm(new Vector(275, -2500), 0)).setLastimage(clean0);
         AddObject(new PlatForm(new Vector(100, -2700), 0)).setLastimage(clean0);
         AddObject(new PlatForm(new Vector(300, -2900), 0)).setLastimage(clean0);
         AddObject(new PlatForm(new Vector(600, -3100), -0.25)).setLastimage(clean1);
-        AddObject(new MovingPlatform(new Vector(0, -3250), 0,new Vector[]{new Vector(0,-3250),new Vector(400,-3250)},1.5f,true))
-                .GetSprite("/images/Platform/floatingPlatform.png",150,150);
+        AddObject(new MovingPlatform(new Vector(0, -3250), 0, new Vector[]{new Vector(0, -3250), new Vector(400, -3250)}, 1.5f, true))
+                .GetSprite("/images/Platform/floatingPlatform.png", 150, 150);
         AddObject(new DestroyingPlatForm(new Vector(600, -3450), 0)).setLastimage(wood1);
         AddObject(new PlatForm(new Vector(900, -3250), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(795, -3340), 0)).setLastimage(clean2);
-        
+
         //AddObject(new MovingPlatform(new Vector(75, 0), 0, new Vector[]{
         //new Vector(75, 0), new Vector(150, 0), new Vector(0, 0)
         //}, 1)).GetSprite("/images/Platform/rock_platform_moss_01.png").UpdateBounds();
