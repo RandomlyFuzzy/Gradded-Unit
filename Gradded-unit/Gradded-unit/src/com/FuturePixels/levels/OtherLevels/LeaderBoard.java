@@ -84,7 +84,7 @@ public class LeaderBoard extends ILevel {
             }
         })).GetSprite("/images/Button_0.png");
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.175f)), ((0.1f * (i % 6)) + 0.405f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.175f)), ((0.1f * (i % 6)) + 0.399f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
                 }
@@ -146,9 +146,9 @@ public class LeaderBoard extends ILevel {
         g.setColor(new Color(55, 55, 55, 150));
         g.fillRect(
                     (int) ((Game.getWindowWidth() / 18)),
-                    (int) ((0.246f) * Game.getWindowHeight()),
+                    (int) ((0.24f) * Game.getWindowHeight()),
                     (int) (Game.getWindowWidth()*0.885f),
-                    (int) ((0.61f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
+                    (int) ((0.615f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
         g.setColor(Color.white);
         int w = (int) (g.getFontMetrics().stringWidth(Currentind.replace("solo","")) * 1.05f);
         g.drawString(Currentind.replace("solo",""), (int) ((Game.getWindowWidth() / 5.5) - w / 2),
