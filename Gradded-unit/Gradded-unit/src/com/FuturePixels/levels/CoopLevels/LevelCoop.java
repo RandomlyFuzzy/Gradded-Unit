@@ -71,7 +71,7 @@ public class LevelCoop extends ILevel {
         AddObject(new PlatForm(new Vector(last, -(i)), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
         AddObject(new Flag(new MainMenu(), seed)).setPosition(new Vector(last, -(i + 50)));
 
-        AddObject(new DebugObject());
+//        AddObject(new DebugObject());
         AddObject(new HUD());
         AddObject(new Lava());
 //        AddObject(new ScrollingBackground());
