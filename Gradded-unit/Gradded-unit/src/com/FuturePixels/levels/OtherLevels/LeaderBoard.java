@@ -84,7 +84,7 @@ public class LeaderBoard extends ILevel {
             }
         })).GetSprite("/images/Button_0.png");
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f)), ((0.15f * (i % 6)) + 0.15f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.15f)), ((0.13f * (i % 6)) + 0.29f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
                 }
@@ -126,7 +126,7 @@ public class LeaderBoard extends ILevel {
                     for (int i = 0; i < 10; i++) {
                         set += times.get(i) + "\n";
                     }
-                    FileUtils.SetFileContence("Resources/savedata/" + Currentind + ".txt", set);
+                    FileUtils.SetFileContence("Resources/savedata/" + Currentind + "solo.txt", set);
                 }
             }
             previousind = Currentind;
@@ -156,23 +156,23 @@ public class LeaderBoard extends ILevel {
             String str = "No " + (0 + 1) + " Place with " + s + " secs";
             w = (int) (g.getFontMetrics().stringWidth(str) * 1.05f);
             g.fillRect(
-                    (int) ((Game.getWindowWidth() / 2) - w / 2),
-                    (int) ((0.225f) * Game.getWindowHeight()),
-                    (int) (w),
-                    (int) ((0.650f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
+                    (int) ((Game.getWindowWidth() / 4)),
+                    (int) ((0.245f) * Game.getWindowHeight()),
+                    (int) (Game.getWindowWidth()*0.7f),
+                    (int) ((0.61f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
             w = (int) (g.getFontMetrics().stringWidth(Currentind) * 1.05f);
             g.drawString(Currentind, (Game.getWindowWidth() / 2 - (w / 2)), y);
 
             g.setColor(Color.WHITE);
             int inc = 0;
             for (int i = 0; i < (10 > times.size() ? times.size() : 10); i++) {
-                g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() * ((int) Math.pow(15 - i, 2) / 10))));
+                g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() *(5f-i/2f)) * 1.8f));
                 s = times.get(i);
-                str = "No. " + (i + 1) + ": " + s + " secs";
+                str = "#" + (i + 1) + ": " + s + " secs";
                 w = g.getFontMetrics().stringWidth(str);
                 g.drawString(str,
-                        Game.getWindowWidth() / 20,
-                        (((i % 20) * 0.06f) + 0.3f) * Game.getWindowHeight());
+                        (Game.getWindowWidth() *0.6f) - (w/2),
+                        (((i % 20) * 0.06f) + 0.31f) * Game.getWindowHeight());
                 y += 0.03f;
             }
         }

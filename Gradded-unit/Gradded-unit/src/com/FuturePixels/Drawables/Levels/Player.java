@@ -236,7 +236,7 @@ public class Player extends IDrawable {
             Velocity.addY(0.1f);
             return;
         } else if (hasLost) {
-            Velocity.setY(6.5f);
+            Acc.setY(6.5f);
             for (int i = 0; i < Level().AmountOfObjects() - 3; i++) {
                 try {
                     Level().GetObject(i).setIsCollidable(false);

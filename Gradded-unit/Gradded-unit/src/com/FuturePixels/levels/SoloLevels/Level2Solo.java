@@ -58,10 +58,13 @@ public class Level2Solo extends ILevel {
         player1 = new Player();
         //Adding Platforms
         AddObject(player1).setPosition(0, -50);
+        AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3650));
+        
         BufferedImage moss1 = GetSprite("/images/platform/rock_platform_moss_01.png");
+        BufferedImage clean3 = GetSprite("/images/platform/rock_platform_clean_03.png");
         BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
         BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
-        AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3550));
+        
         AddObject(new PlatForm(new Vector(75, 0), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(-200, -75), 0.35)).setLastimage(moss1);
         AddObject(new PlatForm(new Vector(-425, -140), 0)).setLastimage(clean1);
@@ -69,8 +72,8 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(150, -425), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(-170, -600), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(-400, -600), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-300, -800), 0)).setLastimage(clean1);
-        AddObject(new PlatForm(new Vector(-150, -800), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(-200, -800), 0)).setLastimage(clean3);
+//        AddObject(new PlatForm(new Vector(-150, -800), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(-00, -1000), -0.25)).setLastimage(moss1);
         AddObject(new PlatForm(new Vector(-200, -1200), 0.25)).setLastimage(moss1);
         AddObject(new PlatForm(new Vector(-450, -1250), 0.30)).setLastimage(moss1);
@@ -88,7 +91,7 @@ public class Level2Solo extends ILevel {
         AddObject(new PlatForm(new Vector(-50, -3150), 0)).setLastimage(clean0);
         AddObject(new PlatForm(new Vector(100, -3300), 0)).setLastimage(clean0);
         AddObject(new PlatForm(new Vector(250, -3450), 0)).setLastimage(clean0);
-        AddObject(new PlatForm(new Vector(500, -3500), 0)).setLastimage(clean1);
+        AddObject(new PlatForm(new Vector(500, -3600), 0)).setLastimage(clean1);
 //        AddObject(new DebugObject());
         AddObject(new Lava());
         AddObject(new HUD());
