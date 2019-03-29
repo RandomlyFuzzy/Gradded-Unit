@@ -51,6 +51,6 @@ public class Entry {
 
         new Game(new MainMenu());
 //        Game.toggleCursor();
-        Game.GetFrame().setTitle("Graded Unit");
+        Game.GetFrame().setTitle("Breaking Through - FuturePixels");
     }
 }

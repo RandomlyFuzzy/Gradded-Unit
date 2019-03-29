@@ -48,7 +48,7 @@ public class LevelSelectCoop extends ILevel {
     public void init() {
 
 
-        AddObject(new Button(new Vector(0.5f,0.2f), ("play Level") + "Coop", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.5f,0.2f), ("Coop Level"), new HUDdelegate() {
             public void OnClick(Button b) {
                 LevelLoader.LoadLevel(new LevelCoop());
             }

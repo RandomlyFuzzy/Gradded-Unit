@@ -119,6 +119,7 @@ public class DropDownButton extends IDrawable {
             g.fillRect(-getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
             g.setColor(c);
         }
+        g.setColor(Color.white);
     }
 
     /**
