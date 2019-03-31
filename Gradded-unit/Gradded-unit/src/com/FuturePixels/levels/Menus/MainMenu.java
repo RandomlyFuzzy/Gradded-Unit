@@ -56,41 +56,48 @@ public class MainMenu extends ILevel {
      */
     @Override
     public void init() {
-        Game.setWorldrelDims(new Vector(1,1));
+        Game.setWorldrelDims(new Vector(1, 1));
 
-        AddObject(new Button(new Vector(0.2215f, 0.425f), "Solo", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.2215f, 0.415f), "Solo", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectSolo());
             }
         })).GetSprite("/images/Button_0.png");
-        AddObject(new Button(new Vector(0.3575f, 0.425f), "Coop", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.3575f, 0.415f), "Coop", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LevelSelectCoop());
             }
         })).GetSprite("/images/Button_0.png");
-        AddObject(new Button(new Vector(0.29f, 0.55f), "Leaderboard", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.53f), "Leaderboard", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
             }
         }));
-        
-        AddObject(new Button(new Vector(0.29f, 0.675f), "Settings", new HUDdelegate() {
+
+        AddObject(new Button(new Vector(0.29f, 0.645f), "Settings", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
         }));
-        
-        AddObject(new Button(new Vector(0.29f, 0.8f), "Exit Game", new HUDdelegate() {
+
+        AddObject(new Button(new Vector(0.29f, 0.76f), "Credits", new HUDdelegate() {
+            @Override
+            public void OnClick(Button b) {
+                Game.SetLevelActive(new Credits());
+            }
+        }));
+
+        AddObject(new Button(new Vector(0.29f, 0.875f), "Exit Game", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);
             }
         }));
-      
+
         //OLD SETTINGS/QUIT ICON
 //        AddObject(new Button(new Vector(0.85f, 0.9f), "", new HUDdelegate() {
 //            @Override
@@ -119,9 +126,7 @@ public class MainMenu extends ILevel {
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
     }
 
     /**
@@ -142,7 +147,6 @@ public class MainMenu extends ILevel {
         g.setColor(Color.WHITE);
 
 //        
-
 //        for (int i = 0; i < Game.g.getScaledWidth(); i++) {
 //            for (int j = 0; j < Game.g.getScaledHeight(); j++) {
 //                if (m != null && m.getBounds().contains(i, j)) {

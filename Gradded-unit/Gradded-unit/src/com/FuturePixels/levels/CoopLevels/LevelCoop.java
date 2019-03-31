@@ -39,10 +39,12 @@ public class LevelCoop extends ILevel {
      */
     @Override
     public void init() {
-        new Thread(new Runnable() {
+         new Thread(new Runnable() {
             @Override
             public void run() {
-                imageUtils.T.setImage("/API/cat", Game.GetLevel().getFromApi("http://aws.random.cat/meow"));
+                imageUtils.T.setImage("/API/cat", Game.GetLevel().getOnlineImage("https://cataas.com/cat/says/better%20luck%20next%20time?size=50&color=blue"));
+                Thread.currentThread()
+                        .stop();
             }
         }).start();
 
@@ -63,13 +65,13 @@ public class LevelCoop extends ILevel {
         
         AddObject(new PlatForm(new Vector(start-200, 0), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");
 
-        for (i = 200; i < 10000; i += 200) {
-            AddObject(new PlatForm(new Vector(((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100, -i), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
+        for (i = 1; i < 20; i += 1) {
+            AddObject(new PlatForm(new Vector(((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100, -i*200), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
         }
 
         int last = ((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100;
-        AddObject(new PlatForm(new Vector(last, -(i)), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
-        AddObject(new Flag(new MainMenu(), seed)).setPosition(new Vector(last, -(i + 50)));
+        AddObject(new PlatForm(new Vector(last, -(i*200)), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
+        AddObject(new Flag(new MainMenu(), seed)).setPosition(new Vector(last, -(i*200 + 50)));
 
 //        AddObject(new DebugObject());
         AddObject(new HUD());

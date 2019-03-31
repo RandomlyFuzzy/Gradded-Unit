@@ -55,15 +55,14 @@ public class Settings extends ILevel {
      */
     @Override
     public void init() {
-
-        AddObject(new HUD()).setScale(new Vector(0.5f, 0.7f));;
+        AddObject(new HUD()).setScale(new Vector(0.5f, 0.7f));
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu());
             }
         })).GetSprite("/images/Button_0.png");
-        AddObject(new Slider(new Vector(0.55f, 0.1f), 0.0465f, new HUDdelegate() {
+        AddObject(new Slider(new Vector(0.675f, 0.3f), 0.074f, new HUDdelegate() {
             @Override
             public void OnChange(Slider s, float Value) {
                 System.out.println("" + Value);
@@ -72,7 +71,8 @@ public class Settings extends ILevel {
             }
         }));
 
-        AddObject(new DropDownButton(new Vector(0.35f, 0.3f), "Resolution", new Vector(0.0f, 0.1f), new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
+        AddObject(new DropDownButton(new Vector(0.2f, 0.3f), "Resolution", new Vector(0.0f, 0.1f),
+                new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDdelegate[]{
                     new HUDdelegate() {
                 @Override
@@ -113,7 +113,7 @@ public class Settings extends ILevel {
             }
                 }));
 
-        AddObject(new Button(new Vector(0.35f, 0.1f), "Fullscreen", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.45f, 0.3f), "Fullscreen", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.FullScreen();
@@ -121,18 +121,12 @@ public class Settings extends ILevel {
             }
 
         }));
-        AddObject(new Button(new Vector(0.8f, 0.1f), "Controls", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.45f, 0.4f), "Controls", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());
             }
         }));
-        AddObject(new Button(new Vector(0.8f, 0.3f), "Credits", new HUDdelegate() {
-            @Override
-            public void OnClick(Button b) {
-                Game.SetLevelActive(new Credits());
-            }
-        })).GetSprite("/images/Button_2.png");
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/Settings.png"));
     }
@@ -153,7 +147,6 @@ public class Settings extends ILevel {
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
 
-       
     }
 
     /**

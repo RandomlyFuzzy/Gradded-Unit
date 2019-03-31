@@ -26,6 +26,7 @@ public class MovingPlatform extends IDrawable {
     private Vector Add = Vector.Zero();
     private SpriteSheet she;
     private boolean AsSpriteSheet = false;
+    private SpriteRenderer sr;
 
     /**
      *
@@ -64,12 +65,16 @@ public class MovingPlatform extends IDrawable {
     }
 
     public IDrawable GetSprite(String path, int width, int height) {
-        super.GetSprite(path);
         if (AsSpriteSheet) {
+            BufferedImage bi = imageUtils.T.GetImage(path);
             she = new SpriteSheet(0, 0, width, height);
-            she.inputImage(imageUtils.T.GetImage(path));
+            she.inputImage(bi);
+            sr = new SpriteRenderer(this, 0.3f);
+            sr.inputImage(bi, she);
             setSpriteWidth(width);
-            setSpriteHeight(height);
+            AddComponents(sr);
+        } else {
+            GetSprite(path);
         }
         return this;
     }
@@ -102,10 +107,7 @@ public class MovingPlatform extends IDrawable {
                 && (-Transform.getOffsetTranslation().getX() + (Game.getScaledWidth())) > getPosition().getX()
                 && (-Transform.getOffsetTranslation().getY() - (Game.getScaledHeight())) < getPosition().getY()
                 && (-Transform.getOffsetTranslation().getY() + (Game.getScaledHeight())) > getPosition().getY()))) {
-            if (AsSpriteSheet) {
-                she.IncrementX(0.3f);
-                DrawLastLoadedImageAsSpriteSheet(g, she);
-            } else {
+            if (!AsSpriteSheet) {
                 DrawLastLoadedImage(g);
             }
         }
@@ -120,6 +122,5 @@ public class MovingPlatform extends IDrawable {
         if (im instanceof Player) {
             im.addPosition(new Vector(Add).mult(2));
         }
-//        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");
     }
 }

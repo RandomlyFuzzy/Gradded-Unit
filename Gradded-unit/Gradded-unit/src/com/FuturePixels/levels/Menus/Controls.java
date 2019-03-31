@@ -62,10 +62,25 @@ public class Controls extends ILevel {
      * @param change
      */
     public void ReadyForKeyChange(int change) {
-        BB.setEnabled(true);
-        val = change;
+        if (!BB.isEnabled()) {
+            BB.setEnabled(true);
+            BB.setMessage(((Button)GetObject(change)).getMessage());
+            val = change;
+            InvertButtons();
+        }
     }
 
+    public void InvertButtons(){
+        for(Button b: but){
+            b.setEnabled(!b.isEnabled());
+        }
+        GetObject(0).setIsCollidable(!GetObject(0).IsCollidable());
+    }
+    
+    
+    
+    
+    
     /**
      *
      */
@@ -80,35 +95,35 @@ public class Controls extends ILevel {
         })).GetSprite("/images/Button_0.png");
 
         //PLAYER 1
-        but[0] = (new Button(new Vector(0.30f, 0.3f), "LEFT = ", new HUDdelegate() {
+        but[0] = (new Button(new Vector(0.25f, 0.425f), "LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(1);
             }
         }));
-        but[01] = (new Button(new Vector(0.30f, 0.425f), "RIGHT = ", new HUDdelegate() {
+        but[01] = (new Button(new Vector(0.25f, 0.55f), "RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(2);
             }
         }));
-        but[02] = (new Button(new Vector(0.30f, 0.550f), "JUMP = ", new HUDdelegate() {
+        but[02] = (new Button(new Vector(0.25f, 0.675f), "JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(3);
             }
         }));
 
         //PLAYER 2
-        but[03] = (new Button(new Vector(0.70f, 0.3f), "LEFT = ", new HUDdelegate() {
+        but[03] = (new Button(new Vector(0.70f, 0.425f), "P2:LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(4);
             }
         }));
-        but[04] = (new Button(new Vector(0.70f, 0.425f), "RIGHT = ", new HUDdelegate() {
+        but[04] = (new Button(new Vector(0.70f, 0.550f), "P2:RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(5);
             }
 
         }));
-        but[05] = (new Button(new Vector(0.70f, 0.550f), "JUMP = ", new HUDdelegate() {
+        but[05] = (new Button(new Vector(0.70f, 0.675f), "P2:JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(6);
             }
@@ -116,14 +131,14 @@ public class Controls extends ILevel {
         }));
 
         //Player 1 Drop
-        but[6] = (new Button(new Vector(0.30f, 0.675f), "DROP = ", new HUDdelegate() {
+        but[6] = (new Button(new Vector(0.25f, 0.8f), "DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(7);
             }
         }));
 
         //Player 2 Drop
-        but[7] = (new Button(new Vector(0.70f, 0.675f), "DROP = ", new HUDdelegate() {
+        but[7] = (new Button(new Vector(0.70f, 0.8f), "P2:DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(8);
             }
@@ -139,7 +154,6 @@ public class Controls extends ILevel {
             try {
                 String text = "";
                 Button id = (Button) but[(i)];
-                System.out.println("com.FuturePixels.levels.Menus.Controls.init() " + id.toString());
                 text += (id).getMessage();
                 text += KeyEvent.getKeyText((int) Integer.parseInt(Values[i].trim()));
                 (id).setMessage(text);
@@ -148,7 +162,7 @@ public class Controls extends ILevel {
             }
             AddObject(but[i]);
         }
-        BB = new BlackoutButton("Enter a Key", new HUDdelegate() {
+        BB = new BlackoutButton("", new HUDdelegate() {
             public void OnClick(BlackoutButton b) {
                 System.out.println(".OnClick() " + lastKey);
                 if (val == 1) {
@@ -182,11 +196,13 @@ public class Controls extends ILevel {
 
                 FileUtils.SetFileContence("resources/data/Preferences.txt", vals);
                 b.setEnabled(false);
-                b.setMessage("Enter a Key");
+//                b.setMessage("Enter a Key");
+                InvertButtons();
             }
         }
         );
         BB.setEnabled(false);
+        AddObject(new HUD());
         AddObject(BB);
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/controls.png"));
@@ -216,7 +232,7 @@ public class Controls extends ILevel {
 
         //g.fillRect((int) ((0.03f) * Game.g.getScaledWidth()), (int) ((0.235f) * Game.g.getScaledHeight()), (int) ((((times.size() / 20) * 0.13f)+0.13f) * Game.g.getScaledWidth()), (int) (((((times.size() >= 20f ? 20f : times.size())) * 0.0295f)) * Game.g.getScaledHeight()));
         g.setColor(Color.WHITE);
-        g.setFont(ILevel.getDefaultFont().deriveFont(ILevel.getDefaultFont().getSize() * Game.WorldScale().getY()*0.9f));
+        g.setFont(ILevel.getDefaultFont().deriveFont(ILevel.getDefaultFont().getSize() * Game.WorldScale().getY() * 0.9f));
         FontMetrics metrics = g.getFontMetrics();
 //        g.drawString("Player 1 Controls", Game.getWindowWidth() * 0.30f - metrics.stringWidth("Player 1 Controls") / 2, Game.getWindowHeight() * 0.23f);
 //        g.drawString("Player 2 Controls", Game.getWindowWidth() * 0.70f - metrics.stringWidth("Player 2 Controls") / 2, Game.getWindowHeight() * 0.23f);
