@@ -67,12 +67,12 @@ public class DropDownButton extends IDrawable {
 
             })).GetSprite("/images/Button_1.png");
             indexOfSubbuttons[i] = Level().GetObjectCount() - 1;
-            System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.<init>() " + Level().GetObjectCount());
+            
         }
         buttonDelegate = new HUDdelegate() {
             @Override
             public void OnClick(DropDownButton b) {
-                System.out.println(".OnClick() " + b.indexOfSubbuttons.length);
+                
                 for (int i = 0; i < b.indexOfSubbuttons.length; i++) {
                     Button b2 = (Button) b.Level().GetObject(b.indexOfSubbuttons[i]);
                     b2.setEnabled(!b2.isEnabled());
@@ -107,7 +107,7 @@ public class DropDownButton extends IDrawable {
      */
     @Override
     public void Update(Graphics2D g) {
-//        System.out.println("com.FuturePixels.Drawables.Menus.DropDownButton.Update() "+getPosition().toString());
+//        
         FontMetrics metrics = g.getFontMetrics();
         DrawLastLoadedImage(g);
         g.setColor(Color.white);

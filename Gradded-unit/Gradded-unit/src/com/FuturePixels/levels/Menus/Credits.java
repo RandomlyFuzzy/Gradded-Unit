@@ -56,7 +56,7 @@ public class Credits extends ILevel {
      */
     public Credits() {
         super();
-        System.out.println("com.game.levels.Settings.<init>()");
+        
         setStopAudioOnStart(true);
         setSimpleCollison(true);
     }
@@ -96,7 +96,7 @@ public class Credits extends ILevel {
             ind %= 4;
             changed = true;
             once = false;
-            System.out.println("com.FuturePixels.levels.Menus.Credits.Draw() " + ind + " ,  " + getTime());
+            
         } else if (val >= 253) {
         } else if (changed) {
             setBackgroundimage(GetSprite("/Images/backgrounds/level" + (ind) + ".png"));

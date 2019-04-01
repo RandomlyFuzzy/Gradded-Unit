@@ -20,7 +20,7 @@ import java.awt.Toolkit;
  */
 public class Slider extends IDrawable {
 
-    private float length = 1, value = 0;
+    private float length = 1, value = 0,lastval=0;
     private Vector relpos = Vector.One();
     private HUDdelegate Delegate;
     private Vector MouseWhenPressed = new Vector(0, 0);
@@ -67,13 +67,15 @@ public class Slider extends IDrawable {
         } else if (Level().isDragging() && inside) {
             MoveAmt = new Vector(MouseWhenPressed).add(new Vector(Level().getMousePos()).mult(-1));
         } else {
+//            lastval = value;
+//            value =0;
             inside = false;
         }
         if ((MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX()) != value) {
             value = (MoveAmt.getX() > length ? length : MoveAmt.getX() < -length ? -length : MoveAmt.getX());
             Delegate.OnChange(this, GetValue());
         }
-        setPosition((Game.getScaledWidth() * relpos.getX()) - value, (Game.getScaledHeight() * relpos.getY()));
+        setPosition((Game.getScaledWidth() * relpos.getX()) - (lastval+value), (Game.getScaledHeight() * relpos.getY()));
     }
 
     /**

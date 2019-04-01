@@ -164,7 +164,7 @@ public class Controls extends ILevel {
         }
         BB = new BlackoutButton("", new HUDdelegate() {
             public void OnClick(BlackoutButton b) {
-                System.out.println(".OnClick() " + lastKey);
+                
                 if (val == 1) {
                     GamePreferences.gp.setKeyLeftP1(lastKey);
                 } else if (val == 2) {
@@ -244,8 +244,8 @@ public class Controls extends ILevel {
      */
     @Override
     public void keyPress(KeyEvent e) {
-        System.out.println("com.FuturePixels.levels.Menus.Controls.keyPress() " + e.getKeyChar());
-        System.out.println("com.FuturePixels.levels.Menus.Controls.keyRelease() " + KeyEvent.getKeyText(e.getKeyCode()));
+        
+        
         String buttontext = but[val - 1].getMessage();
         buttontext = buttontext.substring(0, buttontext.indexOf("=") + 2);
         String text = KeyEvent.getKeyText(e.getKeyCode());

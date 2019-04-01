@@ -44,10 +44,9 @@ public class Lava extends IDrawable {
     public void doMove() {
         setSpriteWidth(Game.getScaledWidth()-2);
         setSpriteHeight(Game.getScaledHeight() / 2);
-//        setSpriteWidth(200);
-//        setSpriteHeight(100);
-//        DebugObject.AddCirles(Transform.getOffsetTranslation());
-        setPosition(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() / 2, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight()-(getSpriteHeight()*-0.125f));
+        setPosition(
+               -Transform.getOffsetTranslation().getX() + Game.getScaledWidth() / 2,
+               -Transform.getOffsetTranslation().getY() + Game.getScaledHeight()-(getSpriteHeight()*-0.125f));
     }
 
     /**
@@ -56,6 +55,10 @@ public class Lava extends IDrawable {
      */
     @Override
     public void Update(Graphics2D g) {
+        //stops the lava from jumping across the screen
+        if(Level().getTime()<=0.05f){
+            return;
+        }
         she.IncrementX(0.4f);
         DrawLastLoadedImageAsSpriteSheet(g, she);
     }
@@ -67,7 +70,6 @@ public class Lava extends IDrawable {
     @Override
     public void onCollison(IDrawable im) {
         if (im instanceof Player && !Player.isLock()) {
-            System.out.println("Playercollider");
             //play you loss ui
             hasCollided = true;
             if (Player.isHasLost()) {

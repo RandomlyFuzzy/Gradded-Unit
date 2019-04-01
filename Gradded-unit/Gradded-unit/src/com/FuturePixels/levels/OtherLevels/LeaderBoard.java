@@ -67,7 +67,7 @@ public class LeaderBoard extends ILevel {
      */
     public LeaderBoard() {
         super();
-        System.out.println("com.game.levels.LeaderBoard.<init>()");
+        
         setStopAudioOnStart(false);
     }
 
@@ -107,7 +107,7 @@ public class LeaderBoard extends ILevel {
                     FileUtils.GetFileSplit("Resources/savedata/" + Currentind + "solo.txt", "\n", true)
             );
 
-            System.out.println("com.FuturePixels.levels.OtherLevels.LeaderBoard.Update() " + times.size());
+            
             if (times.size() > 0) {
                 times.sort(new Comparator<String>() {
                     @Override

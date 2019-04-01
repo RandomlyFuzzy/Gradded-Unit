@@ -33,6 +33,10 @@ import javax.sound.sampled.Clip;
 public class Level1Solo extends ILevel {
 
     private Player player1;
+    private Vector StartingPosition;
+    
+    
+    
 
     /**
      *
@@ -56,14 +60,11 @@ public class Level1Solo extends ILevel {
             }
         }).start();
 
-        // (float) Math.PI * -0.25f / 3f));
-        //Adding Platforms
-        System.out.println("com.game.levels.level1.<init>()");
         player1 = new Player();
-//        player1.setScale(new Vector(0.3f,0.5f));
         AddObject(player1).setPosition(0, -50);
         BufferedImage clean1 = GetSprite("/images/platform/rock_platform_clean_01.png");
         BufferedImage clean0 = GetSprite("/images/platform/rock_platform_clean_00.png");
+        //Adding Platforms
         AddObject(new PlatForm(new Vector(0, 0), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(200, -150), 0)).setLastimage(clean1);
         AddObject(new PlatForm(new Vector(100, -350), 0)).setLastimage(clean1);
@@ -100,7 +101,8 @@ public class Level1Solo extends ILevel {
         AddObject(new Lava());
         AddObject(new Flag(new Level2Solo())).setPosition(new Vector(650, -5650));
 //        AddObject(new DebugObject());
-//        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
+
+        StartingPosition = new Vector((Game.getScaledWidth() * .6f) / 2, 0);
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * .6f) / 2, 0));
         play("/Sounds/Lvl1Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/backgrounds/level0.png"));
@@ -121,7 +123,11 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-
+        
+        Vector pos = Transform.getOffsetTranslation();
+        float xpos = (pos.getX()-Game.getWindowWidth()*1.3f/5)-StartingPosition.getX();
+        float ypos =(((pos.getY())/5)-Game.getWindowHeight()*1.3f)-StartingPosition.getY();
+        g.drawImage(getBackgroundimage(), (int)(xpos),(int)(ypos),(int)(Game.getWindowWidth()*1.3f),(int)(Game.getWindowWidth()*1.3f),null);
     }
 
     /**

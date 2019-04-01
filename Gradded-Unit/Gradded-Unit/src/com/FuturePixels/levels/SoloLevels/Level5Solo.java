@@ -25,6 +25,7 @@ public class Level5Solo extends ILevel {
 
     private Player player1;
     private Vector Cameraopos = Vector.Zero();
+    private Vector StartingPosition;
 
     /**
      *
@@ -106,9 +107,10 @@ public class Level5Solo extends ILevel {
 //        AddObject(new DebugObject());
         AddObject(new HUD());
         AddObject(new Lava());
-//        play("/Sounds/Lvl5Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/Sounds/Lvl5Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/backgrounds/level4.png"));
-        Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * 0.4f) / 2, 0));
+        StartingPosition=new Vector((Game.getScaledWidth() * 0.4f) / 2, 0);
+        Transform.setOffsetTranslation(StartingPosition);
     }
 
     /**
@@ -130,7 +132,12 @@ public class Level5Solo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-//        System.out.println("com.game.levels.Level1Solo.paintComponent()");
+        
+        Vector pos = Transform.getOffsetTranslation();
+        float xpos = (pos.getX() - Game.getWindowWidth() * 1.3f / 5) - StartingPosition.getX();
+        float ypos = (((pos.getY()) / 5) - Game.getWindowHeight() * 1.9f) - StartingPosition.getY();
+        g.drawImage(getBackgroundimage(), (int) (xpos), (int) (ypos), (int) (Game.getWindowWidth() * 1.3f), (int) (Game.getWindowHeight()* 2.8f), null);
+
     }
 
     /**

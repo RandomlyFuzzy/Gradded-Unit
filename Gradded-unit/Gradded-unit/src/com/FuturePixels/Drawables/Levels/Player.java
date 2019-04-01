@@ -25,9 +25,11 @@ public class Player extends IDrawable {
     private float ind = 0, Scale = 1;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, IsPlayer = false;
     private boolean once = true;
-    public Vector Velocity = new Vector(0, 0);
-    public Vector Acc = new Vector(0, 0);
-    public Vector Cameraopos = Vector.Zero();
+    private Vector Velocity = new Vector(0, 0);
+    private float firstX = 0;
+
+    private Vector Acc = new Vector(0, 0);
+    private Vector Cameraopos = Vector.Zero();
     private Random forsounds = new Random();
     private SpriteSheet she = new SpriteSheet(0, 0, 60, 90);
 
@@ -46,7 +48,7 @@ public class Player extends IDrawable {
     public void init() {
         Player.setLock(false);
         hasLost = false;
-        System.out.println("com.FuturePixels.Drawables.Levels.Player.init()");
+
         setPosition(100, 100);
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
@@ -150,23 +152,28 @@ public class Player extends IDrawable {
 
         if (getPosition().getX() <= -Transform.getOffsetTranslation().getX()) {
             addPosition(new Vector(Game.getScaledWidth(), 0));
-            System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
+
         }
         if (getPosition().getX() >= -Transform.getOffsetTranslation().getX() + Game.getScaledWidth()) {
             setPosition(new Vector(-Transform.getOffsetTranslation().getX(), getPosition().getY()));
-            System.out.println("com.FuturePixels.Drawables.Levels.Player.doMove()");
+
+        }
+        if (firstX == 0) {
+            firstX = Transform.getOffsetTranslation().getX();
+            hasupdated = true;
         }
 
-//        if (-getPosition().getX() != Transform.getOffsetTranslation().getX() - Game.g.getScaledWidth() / 2) {
-//            Cameraopos.setX(-getPosition().getX() + Game.g.getScaledWidth() / 2);
-//        }
+        if (-getPosition().getX() != Transform.getOffsetTranslation().getX() - Game.getScaledWidth() / 2) {
+            Cameraopos.setX((-getPosition().getX() + Game.getScaledWidth() / 2) / 5f + firstX);
+            hasupdated = true;
+        }
+
         if (-getPosition().getY() > Transform.getOffsetTranslation().getY() - getScaledSpriteHeight() * 2) {
             Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight() * 2);
             hasupdated = true;
         }
         // centers on the player 
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
-        Cameraopos.setX(Transform.getOffsetTranslation().getX());
         if (hasupdated) {
             Transform.setOffsetTranslation(Cameraopos);
             hasupdated = false;
@@ -251,8 +258,8 @@ public class Player extends IDrawable {
             //get platfor top line
             bottom = new Vector(getPosition()).add(GetUp().mult(getScaledSpriteHeight() * -0.5f));
             top = new Vector(bottom).mult(-1f).add(getPosition()).add(getPosition());
-            left = new Vector(getPosition()).add(new Vector(-getSpriteWidth()/2, 0));
-            right = new Vector(getPosition()).add(new Vector(getSpriteWidth()/2, 0));
+            left = new Vector(getPosition()).add(new Vector(-getSpriteWidth() / 2, 0));
+            right = new Vector(getPosition()).add(new Vector(getSpriteWidth() / 2, 0));
             _Top = im.sideUp();
             _bottom = im.sideDown();
             _left = im.sideLeft();
@@ -304,7 +311,7 @@ public class Player extends IDrawable {
 
             //left
             if (col3.ISHIT) {
-                System.out.println("com.FuturePixels.Drawables.Levels.Player.onCollison() left");
+
 //                if (Acc.getX() > 0 || Velocity.getX() > 0) {
 //                    this.right = false;
 //                    Acc.setX(0);
@@ -315,7 +322,7 @@ public class Player extends IDrawable {
             }
             //right
             if (col4.ISHIT) {
-                System.out.println("com.FuturePixels.Drawables.Levels.Player.onCollison() right");
+
 //                if (Acc.getX() < 0 || Velocity.getX() < 0) {
 //                    this.left = false;
 //                    Acc.setX(0);
@@ -386,6 +393,22 @@ public class Player extends IDrawable {
         Lock = false;
         hasLost = false;
         PlayerCount = 0;
+    }
+
+    public Vector getVelocity() {
+        return Velocity;
+    }
+
+    public void setVelocity(Vector Velocity) {
+        this.Velocity = Velocity;
+    }
+
+    public Vector getAcc() {
+        return Acc;
+    }
+
+    public void setAcc(Vector Acc) {
+        this.Acc = Acc;
     }
 
 }

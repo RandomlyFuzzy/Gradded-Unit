@@ -92,8 +92,11 @@ public class bouncyPlatform extends IDrawable {
     @Override
     public void onCollison(IDrawable im) {
         if(im instanceof Player){
-            ((Player) im).Velocity = (GetUp().mult(-10));
+            Player p = ((Player) im);
+            if(p.getVelocity().getY()<=0){
+                p.setVelocity(GetUp().mult(-10));
+            }
         }
-//        System.out.println("com.FuturePixels.characters.PlatForm.onCollison()");
+//        
     }
 }

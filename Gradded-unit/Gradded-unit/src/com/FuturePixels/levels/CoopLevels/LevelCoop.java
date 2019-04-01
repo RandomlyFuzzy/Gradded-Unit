@@ -54,7 +54,7 @@ public class LevelCoop extends ILevel {
         player2 = new Player();
 //        player1.setScale(new Vector(0.3f,0.5f));
         //Adding Platforms
-        System.out.println("com.game.levels.level1.<init>()");
+        
         int seed = Integer.parseInt(FileUtils.GetFileContence("resources/data/coopseed").trim());
         Random r = new Random(seed);
 
@@ -104,7 +104,7 @@ public class LevelCoop extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-//        System.out.println("com.game.levels.Level1Solo.paintComponent()");
+//        
     }
 
     /**
