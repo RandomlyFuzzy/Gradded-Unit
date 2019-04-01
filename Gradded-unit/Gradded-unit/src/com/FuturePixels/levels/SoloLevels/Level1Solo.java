@@ -33,7 +33,7 @@ import javax.sound.sampled.Clip;
 public class Level1Solo extends ILevel {
 
     private Player player1;
-    private Vector StartingPosition;
+       private Vector StartingPosition = Vector.Zero();
     
     
     
@@ -123,7 +123,6 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-        
         Vector pos = Transform.getOffsetTranslation();
         float xpos = (pos.getX()-Game.getWindowWidth()*1.3f/5)-StartingPosition.getX();
         float ypos =(((pos.getY())/5)-Game.getWindowHeight()*1.7f)-StartingPosition.getY();

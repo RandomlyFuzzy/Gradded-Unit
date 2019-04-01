@@ -11,6 +11,7 @@ import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.levels.CoopLevels.LevelCoop;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
+import com.Liamengine.Engine.Components.Transform;
 import com.Liamengine.Engine.Utils.LevelLoader;
 import com.Liamengine.Engine.Components.Vector;
 import java.awt.Color;
@@ -33,6 +34,8 @@ import java.util.logging.Logger;
  */
 public class LevelSelectCoop extends ILevel {
 
+    public Vector transpos = Vector.Zero();
+
     /**
      *
      */
@@ -46,9 +49,10 @@ public class LevelSelectCoop extends ILevel {
      */
     @Override
     public void init() {
+        Transform.setOffsetTranslation(new Vector(-Game.getWindowWidth(), 0));
+        setBackground(Color.BLACK);
 
-
-        AddObject(new Button(new Vector(0.5f,0.2f), ("Coop Level"), new HUDdelegate() {
+        AddObject(new Button(new Vector(0.5f, 0.2f), ("Coop Level"), new HUDdelegate() {
             public void OnClick(Button b) {
                 LevelLoader.LoadLevel(new LevelCoop());
             }
@@ -57,11 +61,20 @@ public class LevelSelectCoop extends ILevel {
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new MainMenu());
+                 transpos = (new Vector(-Game.getWindowWidth(), 0));
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(750);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Game.SetLevelActive(new MainMenu());
+                    Transform.setOffsetTranslation(new Vector(-Game.getWindowWidth(),0));
+                }).start();
             }
         })).GetSprite("/images/Button_0.png");
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/CoopLevels.png"));
+//        setBackgroundimage(GetSprite("/Images/backgrounds/CoopLevels.png"));
     }
 
     /**
@@ -79,8 +92,18 @@ public class LevelSelectCoop extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
-        
-        
+        float Time = 0.1f;
+        Vector transspos = Transform.getOffsetTranslation();
+        float x0 = (1 - Time) * transspos.getX() + Time * transpos.getX();
+        float y0 = (1 - Time) * transspos.getY() + Time * transpos.getY();
+        Transform.setOffsetTranslation(new Vector(x0, y0));
+
+        int x = (int) Transform.getOffsetTranslation().getX();
+        int y = (int) Transform.getOffsetTranslation().getY();
+
+        g.drawImage(GetSprite("/Images/backgrounds/CoopLevels.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient2.png"), x + Game.getWindowWidth(), y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+
     }
 
     /**

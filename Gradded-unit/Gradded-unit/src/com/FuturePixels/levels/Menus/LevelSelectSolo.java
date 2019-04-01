@@ -10,6 +10,7 @@ import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
+import com.Liamengine.Engine.Components.Transform;
 import com.Liamengine.Engine.Utils.LevelLoader;
 import com.Liamengine.Engine.Components.Vector;
 import java.awt.Color;
@@ -32,6 +33,8 @@ import java.util.logging.Logger;
  */
 public class LevelSelectSolo extends ILevel {
 
+    public Vector transpos = Vector.One();
+
     /**
      *
      */
@@ -45,18 +48,29 @@ public class LevelSelectSolo extends ILevel {
      */
     @Override
     public void init() {
+        Transform.setOffsetTranslation(new Vector(0, Game.getWindowHeight()));
+        setBackground(Color.BLACK);
         for (int i = 0; i < 5; i++) {
             AddObject(new Button(new Vector(((0.15f)), ((0.13f * (i % 6)) + 0.29f)), ("Level " + (i + 1)), new HUDdelegate() {
                 public void OnClick(Button b) {
-                    LevelLoader.LoadLevel(b.getMessage().replace(" ",""));
+                    LevelLoader.LoadLevel(b.getMessage().replace(" ", ""));
                 }
             })).GetSprite("/images/Button_2.png");
         }
-        
+
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new MainMenu());
+                transpos = (new Vector(0, Game.getWindowHeight()));
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(750);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Game.SetLevelActive(new MainMenu());
+                    Transform.setOffsetTranslation(new Vector(0, Game.getWindowHeight()));
+                }).start();
             }
         })).GetSprite("/images/Button_0.png");
         AddObject(new Mouse());
@@ -77,8 +91,17 @@ public class LevelSelectSolo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-        g.setColor(Color.WHITE);
-     
+        float Time = 0.075f;
+        Vector transspos = Transform.getOffsetTranslation();
+        float x0 = (1 - Time) * transspos.getX() + Time * transpos.getX();
+        float y0 = (1 - Time) * transspos.getY() + Time * transpos.getY();
+        Transform.setOffsetTranslation(new Vector(x0, y0));
+
+        int x = (int) Transform.getOffsetTranslation().getX();
+        int y = (int) Transform.getOffsetTranslation().getY();
+        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/Images/backgrounds/SoloLevels.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+
     }
 
     /**

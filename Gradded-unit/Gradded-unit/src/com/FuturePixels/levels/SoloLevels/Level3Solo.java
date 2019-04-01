@@ -33,7 +33,7 @@ public class Level3Solo extends ILevel {
 
     private Player player1;
     private Vector Cameraopos = Vector.Zero();
-    private Vector StartingPosition;
+        private Vector StartingPosition = Vector.Zero();
 
     /**
      *
