@@ -126,8 +126,8 @@ public class Level1Solo extends ILevel {
         
         Vector pos = Transform.getOffsetTranslation();
         float xpos = (pos.getX()-Game.getWindowWidth()*1.3f/5)-StartingPosition.getX();
-        float ypos =(((pos.getY())/5)-Game.getWindowHeight()*1.3f)-StartingPosition.getY();
-        g.drawImage(getBackgroundimage(), (int)(xpos),(int)(ypos),(int)(Game.getWindowWidth()*1.3f),(int)(Game.getWindowWidth()*1.3f),null);
+        float ypos =(((pos.getY())/5)-Game.getWindowHeight()*1.7f)-StartingPosition.getY();
+        g.drawImage(getBackgroundimage(), (int)(xpos),(int)(ypos),(int)(Game.getWindowWidth()*1.3f),(int)(Game.getWindowWidth()*1.7f),null);
     }
 
     /**
