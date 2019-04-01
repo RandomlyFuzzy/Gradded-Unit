@@ -8,6 +8,8 @@ package com.FuturePixels.Drawables.Levels;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Components.Vector;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -18,6 +20,8 @@ import java.util.ArrayList;
 public class HUD extends IDrawable {
 
     private static ArrayList<String> texts = new ArrayList<String>();
+    private static ArrayList<Color> Colours = new ArrayList<Color>();
+    private static ArrayList<Double> Scales = new ArrayList<Double>();
     private static ArrayList<Vector> textsPos = new ArrayList<Vector>();
 
     /**
@@ -36,6 +40,8 @@ public class HUD extends IDrawable {
     public static int AddText(String text, Vector position) {
         texts.add(text);
         textsPos.add(position);
+        Scales.add(20.0);
+        Colours.add(Color.white);
         return texts.size() - 1;
     }
 
@@ -62,6 +68,26 @@ public class HUD extends IDrawable {
 
     /**
      *
+     * @param ind
+     * @param colour
+     */
+    public static void EditText(int ind, Color colour) {
+        Colours.set(ind, colour);
+    }
+
+    /**
+     *
+     * @param ind
+     * @param val
+     */
+    public static void EditText(int ind, Double val) {
+        Scales.set(ind, val);
+    }
+    
+    
+    
+    /**
+     *
      */
     @Override
     public void init() {
@@ -82,13 +108,14 @@ public class HUD extends IDrawable {
      */
     @Override
     public void Update(Graphics2D g) {
-
-//        updateTime =  System.nanoTime();
+        Font f = g.getFont();
         for (int i = 0; i < texts.size(); i++) {
-            g.drawString(this.texts.get(i), this.textsPos.get(i).getX(),this.textsPos.get(i).getY());
+            g.setColor(Colours.get(i));
+            g.setFont(g.getFont().deriveFont((float)(Game.WorldScale().getY() * Scales.get(i))));
+            g.drawString(this.texts.get(i), this.textsPos.get(i).getX(), this.textsPos.get(i).getY());
         }
-        
-        
+        g.setFont(f);
+
     }
 
     /**

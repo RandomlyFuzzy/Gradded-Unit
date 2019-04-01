@@ -63,6 +63,7 @@ public class Player extends IDrawable {
 
     @Override
     public void Update(Graphics2D g) {
+        doMove();
         ind += !canJump ? 0.3f : Stop ? -ind : 0.3f;
         setScale(new Vector(Scale, 1));
 //       

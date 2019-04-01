@@ -44,11 +44,10 @@ public class MovingPlatform extends IDrawable {
      */
     public MovingPlatform(Vector position, double RadianRotation, Vector[] cycle, float Speed) {
         super();
-//        GetSprite("/images/platform/Platform.png");
         setPosition(position);
         setRotation(RadianRotation);
         this.Cycle = cycle;
-        this.Speed = Speed;
+        this.Speed = Speed*2;
     }
 
     public MovingPlatform(Vector position, double RadianRotation, Vector[] cycle, float Speed, boolean asSpriteSheet) {
@@ -120,7 +119,7 @@ public class MovingPlatform extends IDrawable {
     @Override
     public void onCollison(IDrawable im) {
         if (im instanceof Player) {
-            im.addPosition(new Vector(Add).mult(2));
+            im.addPosition(new Vector(Add).mult(1));
         }
     }
 }

@@ -30,13 +30,10 @@ public class SpriteRenderer extends IComponent {
     public void inputImage(BufferedImage im, SpriteSheet she) {
         bi = im;
         this.she = she;
-        System.out.println(she.GetSegHeight() + " " + she.GetSegWidth());
-        System.out.println(getParent().getSpriteWidth() + " " + getParent().getSpriteHeight());
     }
 
     @Override
     public void Init() {
-        System.out.println("com.FuturePixels.Drawables.Levels.SpriteRenderer.Init()");
     }
 
     @Override
@@ -45,10 +42,8 @@ public class SpriteRenderer extends IComponent {
         
         float w = id.getSpriteWidth();
         float h = id.getSpriteHeight();
-//        float w2 = she.GetSegWidth()/id.getSpriteWidth();
-//        float h2 = she.GetSegHeight()/id.getSpriteHeight();
         she.IncrementX(inc);
-        she.DrawFromGraphic(gd, bi, (int)(-w/2), (int) (- h / 2),(int)(w/2),(int)(she.GetSegHeight()));
+        she.DrawFromGraphic(gd, bi, (int)(-w/2), (int) (- h / 2),(int)(she.GetSegWidth()/2),(int)(she.GetSegHeight()));
     }
 
 }

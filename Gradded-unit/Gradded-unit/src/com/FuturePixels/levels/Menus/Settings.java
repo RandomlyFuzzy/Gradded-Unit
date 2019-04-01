@@ -62,12 +62,14 @@ public class Settings extends ILevel {
                 Game.SetLevelActive(new MainMenu());
             }
         })).GetSprite("/images/Button_0.png");
+        HUD.AddText("0.5", new Vector(0.775f * Game.getWindowWidth(), 0.25f * Game.getWindowHeight()));
+        HUD.AddText("Master", new Vector(0.775f * Game.getWindowWidth(), 0.20f * Game.getWindowHeight()));
         AddObject(new Slider(new Vector(0.675f, 0.3f), 0.074f, new HUDdelegate() {
             @Override
             public void OnChange(Slider s, float Value) {
-                System.out.println("" + Value);
 //                ILevel.setFPS(30 + (int) (Value * 60f));
                 MusicUtils.SetVolume(Value);
+                HUD.EditText(0, String.format("%.2f ", Value));
             }
         }));
 
@@ -108,7 +110,6 @@ public class Settings extends ILevel {
                     Rectangle bo = Game.GetFrame().getBounds();
                     //640 x 360
                     Game.SetDimentions(640, 360);
-                    Game.GetFrame().setBounds(bo.x, bo.y, 640, 360);
                 }
             }
                 }));
@@ -129,6 +130,7 @@ public class Settings extends ILevel {
         }));
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/Settings.png"));
+        System.out.println("com.FuturePixels.levels.Menus.Settings.init()");
     }
 
     /**
@@ -137,6 +139,9 @@ public class Settings extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
+        HUD.EditText(1, new Vector(0.765f * Game.getWindowWidth(), 0.25f * Game.getWindowHeight()+Game.WorldScale().getY()*10));
+        HUD.EditText(0, new Vector(0.765f * Game.getWindowWidth(), 0.3f * Game.getWindowHeight()+Game.WorldScale().getY()*10));
+
     }
 
     /**

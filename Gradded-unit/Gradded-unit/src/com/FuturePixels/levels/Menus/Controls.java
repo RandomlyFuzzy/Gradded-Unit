@@ -202,7 +202,6 @@ public class Controls extends ILevel {
         }
         );
         BB.setEnabled(false);
-        AddObject(new HUD());
         AddObject(BB);
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/controls.png"));
