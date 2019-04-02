@@ -55,7 +55,7 @@ public class LevelSelectSolo extends ILevel {
                 public void OnClick(Button b) {
                     LevelLoader.LoadLevel(b.getMessage().replace(" ", ""));
                 }
-            })).GetSprite("/images/Button_2.png");
+            },false)).GetSprite("/images/Button_2.png");
         }
 
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
@@ -68,11 +68,10 @@ public class LevelSelectSolo extends ILevel {
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    Game.SetLevelActive(new MainMenu());
-                    Transform.setOffsetTranslation(new Vector(0, Game.getWindowHeight()));
+                    Game.SetLevelActive(new MainMenu(new Vector(0, Game.getWindowHeight())));
                 }).start();
             }
-        })).GetSprite("/images/Button_0.png");
+        },false)).GetSprite("/images/Button_0.png");
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/SoloLevels.png"));
     }

@@ -44,18 +44,27 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends ILevel {
 
-    private static Vector transpos;
+    private static Vector transpos= Vector.Zero();
+    private static Vector StartPos= Vector.Zero();
 
     public static void setTranspos(Vector transpos) {
         MainMenu.transpos = transpos;
     }
 
-    /**
-     *
-     */
     public MainMenu() {
         super();
         setStopAudioOnStart(false);
+        StartPos= Vector.Zero();
+    }
+
+    /**
+     *
+     */
+    public MainMenu(Vector StartPos) {
+        super();
+        setStopAudioOnStart(false);
+        this.StartPos = StartPos;
+
     }
 
     /**
@@ -63,11 +72,11 @@ public class MainMenu extends ILevel {
      */
     @Override
     public void init() {
-        Transform.setOffsetTranslation(new Vector(0, Game.getWindowHeight()));
         setBackground(Color.BLACK);
         if (transpos == null) {
             transpos = Vector.Zero();
         }
+        Transform.setOffsetTranslation(StartPos);
         Game.setWorldrelDims(new Vector(1, 1));
 
         AddObject(new Button(new Vector(0.2215f, 0.415f), "Solo", new HUDdelegate() {

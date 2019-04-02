@@ -56,7 +56,7 @@ public class Credits extends ILevel {
      */
     public Credits() {
         super();
-        
+
         setStopAudioOnStart(true);
         setSimpleCollison(true);
     }
@@ -77,7 +77,7 @@ public class Credits extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
-        i += 1f * ILevel.getDelta();
+        i += Game.WorldScale().getY() * ILevel.getDelta();
     }
 
     /**
@@ -86,7 +86,7 @@ public class Credits extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-       
+
         play("/sounds/CreditSong.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
@@ -96,7 +96,7 @@ public class Credits extends ILevel {
             ind %= 4;
             changed = true;
             once = false;
-            
+
         } else if (val >= 253) {
         } else if (changed) {
             setBackgroundimage(GetSprite("/Images/backgrounds/level" + (ind) + ".png"));
@@ -110,8 +110,19 @@ public class Credits extends ILevel {
         for (int j = 0; j < credits.length; j++) {
             int offset = g.getFontMetrics().stringWidth(credits[j]);
             g.drawString(credits[j], Game.getWindowWidth() / 2 - offset / 2, (int) ((Game.getWindowHeight() + (int) (j * g.getFont().getSize())) - (i * 50)));
+
+            if (j != credits.length - 1) {
+                continue;
+            }
+            if ((int) ((Game.getWindowHeight() + (int) (j * g.getFont().getSize())) - (i * 50)) < -Game.getScaledHeight()/4) {
+                LevelLoader.LoadLevel(new MainMenu());
+            }
         }
 
+        Font f = g.getFont();
+        g.setFont(f.deriveFont(f.getSize() * 0.6f));
+        g.drawString("Esc to exit", 20, Game.getWindowHeight() - g.getFont().getSize() * 2);
+        g.setFont(f);
     }
 
     /**
@@ -120,9 +131,8 @@ public class Credits extends ILevel {
      */
     @Override
     public void keyPress(KeyEvent e) {
-        if (e.getKeyCode()==KeyEvent.VK_ESCAPE){
-            LevelLoader.LoadLevel(new MainMenu());
-        
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            LevelLoader.LoadLevel(new MainMenu(Vector.Zero()));
         }
     }
 

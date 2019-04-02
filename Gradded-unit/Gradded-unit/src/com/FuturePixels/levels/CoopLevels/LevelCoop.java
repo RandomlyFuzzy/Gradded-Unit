@@ -71,7 +71,7 @@ public class LevelCoop extends ILevel {
 
         int last = ((r.nextInt() % (Game.getWindowWidth() / 5)) - 200) + 100;
         AddObject(new PlatForm(new Vector(last, -(i*200)), 0)).GetSprite("/images/platform/rock_platform_clean_01.png");;
-        AddObject(new Flag(new MainMenu(), seed)).setPosition(new Vector(last, -(i*200 + 50)));
+        AddObject(new Flag(new MainMenu(new Vector(0, Game.getWindowHeight())), seed)).setPosition(new Vector(last, -(i*200 + 50)));
 
 //        AddObject(new DebugObject());
         AddObject(new HUD());
@@ -80,7 +80,7 @@ public class LevelCoop extends ILevel {
 //        LeaderBoard.AddTime(System.nanoTime());
 //        Cameraopos = new Vector(player1.getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         Transform.setOffsetTranslation(new Vector((Game.getWindowWidth() / 2f), 0));
-        play("/Sounds/song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/Sounds/Lvl4song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         setBackgroundimage(GetSprite("/Images/backgrounds/level"+(r.nextInt(5))+".png"));
 
     }

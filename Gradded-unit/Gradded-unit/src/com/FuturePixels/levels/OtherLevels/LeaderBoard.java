@@ -80,7 +80,7 @@ public class LeaderBoard extends ILevel {
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new MainMenu());
+                Game.SetLevelActive(new MainMenu(Vector.Zero()));
             }
         })).GetSprite("/images/Button_0.png");
         for (int i = 0; i < 5; i++) {

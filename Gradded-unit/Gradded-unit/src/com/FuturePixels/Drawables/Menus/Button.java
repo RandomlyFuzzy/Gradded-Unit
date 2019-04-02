@@ -25,13 +25,14 @@ public class Button extends IDrawable {
     private String Message = "";
     private Vector relpos = Vector.One();
     private HUDdelegate buttonDelegate;
-    private boolean Offset = false;
+    private boolean Offset = true;
 
     /**
      *
      */
     public Button() {
         super();
+        UseTransforms(false);
     }
 
     /**
@@ -65,9 +66,10 @@ public class Button extends IDrawable {
      */
     @Override
     public void doMove() {
-        setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         if (Offset) {
-            setPosition(getPoffset().add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+            setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+        } else {
+            setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         }
         setScale(Game.ButtonDims());
     }
@@ -78,7 +80,7 @@ public class Button extends IDrawable {
      */
     @Override
     public void Update(Graphics2D g) {
-        if (Level().getTime() < 0.05f) {
+        if (Level().getTime() < (1f / 50f)) {
             return;
         }
         DrawLastLoadedImage(g);

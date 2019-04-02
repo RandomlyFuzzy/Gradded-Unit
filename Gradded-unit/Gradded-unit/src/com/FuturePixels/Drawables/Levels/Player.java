@@ -25,6 +25,7 @@ public class Player extends IDrawable {
     private float ind = 0, Scale = 1;
     private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, IsPlayer = false;
     private boolean once = true;
+    private boolean once2 = true;
     private Vector Velocity = new Vector(0, 0);
     private float firstX = 0;
 
@@ -160,13 +161,16 @@ public class Player extends IDrawable {
         }
         if (firstX == 0) {
             firstX = Transform.getOffsetTranslation().getX();
-            hasupdated = true;
         }
 
-        if (-getPosition().getX() != Transform.getOffsetTranslation().getX() - Game.getScaledWidth() / 2) {
+//        if (Level().getClass().getName().indexOf("Coop") == -1) {
+            if (-getPosition().getX() != Transform.getOffsetTranslation().getX() - Game.getScaledWidth() / 2) {
             Cameraopos.setX((-getPosition().getX() + Game.getScaledWidth() / 2) / 5f + firstX);
             hasupdated = true;
-        }
+            }
+//        } else {
+//            Cameraopos.setX(Transform.getOffsetTranslation().getX());
+//        }
 
         if (-getPosition().getY() > Transform.getOffsetTranslation().getY() - getScaledSpriteHeight() * 2) {
             Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight() * 2);
@@ -174,7 +178,7 @@ public class Player extends IDrawable {
         }
         // centers on the player 
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
-        if (hasupdated) {
+        if (hasupdated&&!once2) {
             Transform.setOffsetTranslation(Cameraopos);
             hasupdated = false;
         }
@@ -184,6 +188,7 @@ public class Player extends IDrawable {
         );
         DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
         DebugObject.AddCirles(new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth() - 5, -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2));
+        once2 = false;
     }
 
     private void movePlayer() {

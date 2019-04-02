@@ -53,7 +53,7 @@ public class Level5Solo extends ILevel {
 
         //Player and Flag Objects
         AddObject(player1).setPosition(850, -50);
-        AddObject(new Flag(new MainMenu())).setPosition(new Vector(225, -6450));
+        AddObject(new Flag(new MainMenu(new Vector(0,Game.getWindowHeight())))).setPosition(new Vector(225, -6450));
         //Setting platform sprites
         BufferedImage moss1 = GetSprite("/images/platform/rock_platform_moss_01.png");
         BufferedImage wood1 = GetSprite("/images/platform/wooden_platform_01.png");

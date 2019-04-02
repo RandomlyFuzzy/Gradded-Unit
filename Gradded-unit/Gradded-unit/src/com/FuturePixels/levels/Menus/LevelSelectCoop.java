@@ -52,11 +52,11 @@ public class LevelSelectCoop extends ILevel {
         Transform.setOffsetTranslation(new Vector(-Game.getWindowWidth(), 0));
         setBackground(Color.BLACK);
 
-        AddObject(new Button(new Vector(0.5f, 0.2f), ("Coop Level"), new HUDdelegate() {
+        AddObject(new Button(new Vector(0.5f, 0.5f), ("Coop Level"), new HUDdelegate() {
             public void OnClick(Button b) {
                 LevelLoader.LoadLevel(new LevelCoop());
             }
-        }));
+        },false));
 
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
@@ -68,11 +68,10 @@ public class LevelSelectCoop extends ILevel {
                     } catch (InterruptedException ex) {
                         Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    Game.SetLevelActive(new MainMenu());
-                    Transform.setOffsetTranslation(new Vector(-Game.getWindowWidth(),0));
+                    Game.SetLevelActive(new MainMenu(new Vector(-Game.getWindowWidth(),0)));
                 }).start();
             }
-        })).GetSprite("/images/Button_0.png");
+        },false)).GetSprite("/images/Button_0.png");
         AddObject(new Mouse());
 //        setBackgroundimage(GetSprite("/Images/backgrounds/CoopLevels.png"));
     }

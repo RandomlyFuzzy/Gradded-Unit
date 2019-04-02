@@ -59,7 +59,7 @@ public class Settings extends ILevel {
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
-                Game.SetLevelActive(new MainMenu());
+                Game.SetLevelActive(new MainMenu(Vector.Zero()));
             }
         })).GetSprite("/images/Button_0.png");
         HUD.AddText(String.format("%.0f ", MusicUtils.GetVolume()*100), new Vector(0.775f * Game.getWindowWidth(), 0.25f * Game.getWindowHeight()));
