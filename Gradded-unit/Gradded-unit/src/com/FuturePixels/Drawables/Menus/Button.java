@@ -67,7 +67,8 @@ public class Button extends IDrawable {
     @Override
     public void doMove() {
         if (Offset) {
-            setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
+            setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY())
+                    .add(new Vector(Transform.getOffsetTranslation()).mult(1.5f/Game.WorldScale().getY()).mult(-1)));
         } else {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         }

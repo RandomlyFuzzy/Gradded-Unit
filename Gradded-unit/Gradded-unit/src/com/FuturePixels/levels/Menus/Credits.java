@@ -132,6 +132,7 @@ public class Credits extends ILevel {
     @Override
     public void keyPress(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            MusicUtils.StopAllSounds();
             LevelLoader.LoadLevel(new MainMenu(Vector.Zero()));
         }
     }

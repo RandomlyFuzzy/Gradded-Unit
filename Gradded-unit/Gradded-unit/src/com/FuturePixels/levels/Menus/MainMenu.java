@@ -44,8 +44,8 @@ import javax.swing.JPanel;
  */
 public class MainMenu extends ILevel {
 
-    private static Vector transpos= Vector.Zero();
-    private static Vector StartPos= Vector.Zero();
+    private static Vector transpos = Vector.Zero();
+    private static Vector StartPos = Vector.Zero();
 
     public static void setTranspos(Vector transpos) {
         MainMenu.transpos = transpos;
@@ -54,7 +54,7 @@ public class MainMenu extends ILevel {
     public MainMenu() {
         super();
         setStopAudioOnStart(false);
-        StartPos= Vector.Zero();
+        StartPos = Vector.Zero();
     }
 
     /**
@@ -170,6 +170,16 @@ public class MainMenu extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         g.setColor(Color.WHITE);
+        int x = (int) Transform.getOffsetTranslation().getX();
+        int y = (int) Transform.getOffsetTranslation().getY();
+        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient2.png"), x + Game.getWindowWidth(), y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/Images/backgrounds/mainmenu.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+
+    }
+
+    @Override
+    public void PostDraw(Graphics2D g) {
 
         float Time = 0.075f;
         Vector transspos = Transform.getOffsetTranslation();
@@ -177,21 +187,6 @@ public class MainMenu extends ILevel {
         float y0 = (1 - Time) * transspos.getY() + Time * transpos.getY();
         Transform.setOffsetTranslation(new Vector(x0, y0));
 
-        int x = (int) Transform.getOffsetTranslation().getX();
-        int y = (int) Transform.getOffsetTranslation().getY();
-
-        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
-        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient2.png"), x + Game.getWindowWidth(), y, Game.getWindowWidth(), Game.getWindowHeight(), this);
-        g.drawImage(GetSprite("/Images/backgrounds/mainmenu.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
-
-//        
-//        for (int i = 0; i < Game.g.getScaledWidth(); i++) {
-//            for (int j = 0; j < Game.g.getScaledHeight(); j++) {
-//                if (m != null && m.getBounds().contains(i, j)) {
-//                    g.drawRect(i, j, 1, 1);
-//                }
-//            }
-//        }
     }
 
     /**

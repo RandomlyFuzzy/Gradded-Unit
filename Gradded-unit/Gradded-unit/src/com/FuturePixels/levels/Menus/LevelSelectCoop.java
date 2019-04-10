@@ -90,12 +90,6 @@ public class LevelSelectCoop extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-        g.setColor(Color.WHITE);
-        float Time = 0.1f;
-        Vector transspos = Transform.getOffsetTranslation();
-        float x0 = (1 - Time) * transspos.getX() + Time * transpos.getX();
-        float y0 = (1 - Time) * transspos.getY() + Time * transpos.getY();
-        Transform.setOffsetTranslation(new Vector(x0, y0));
 
         int x = (int) Transform.getOffsetTranslation().getX();
         int y = (int) Transform.getOffsetTranslation().getY();
@@ -105,6 +99,16 @@ public class LevelSelectCoop extends ILevel {
 
     }
 
+    @Override
+    public void PostDraw(Graphics2D g) {
+
+        float Time = 0.075f;
+        Vector transspos = Transform.getOffsetTranslation();
+        float x0 = (1 - Time) * transspos.getX() + Time * transpos.getX();
+        float y0 = (1 - Time) * transspos.getY() + Time * transpos.getY();
+        Transform.setOffsetTranslation(new Vector(x0, y0));
+
+    }
     /**
      *
      * @param e

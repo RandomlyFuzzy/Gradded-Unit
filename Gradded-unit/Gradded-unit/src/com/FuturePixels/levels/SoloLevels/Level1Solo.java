@@ -123,10 +123,11 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
+   
         Vector pos = Transform.getOffsetTranslation();
-        float xpos = (pos.getX()-Game.getWindowWidth()*1.3f/5)-StartingPosition.getX();
-        float ypos =(((pos.getY())/5)-Game.getWindowHeight()*1.7f)-StartingPosition.getY();
-        g.drawImage(getBackgroundimage(), (int)(xpos),(int)(ypos),(int)(Game.getWindowWidth()*1.7f),(int)(Game.getWindowWidth()*1.7f),null);
+        float xpos = (pos.getX() - Game.getWindowWidth() * 1.3f / 5) - StartingPosition.getX();
+        float ypos = (((pos.getY()) / 5) - Game.getScaledHeight()* 1.4f) - StartingPosition.getY();
+        g.drawImage(getBackgroundimage(), (int) (xpos), (int) (ypos), (int) (Game.getWindowWidth()* 1.3f), (int) (Game.getScaledHeight() * 2.6f), null);
     }
 
     /**

@@ -55,7 +55,7 @@ public class LevelSelectSolo extends ILevel {
                 public void OnClick(Button b) {
                     LevelLoader.LoadLevel(b.getMessage().replace(" ", ""));
                 }
-            },false)).GetSprite("/images/Button_2.png");
+            }, false)).GetSprite("/images/Button_2.png");
         }
 
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
@@ -71,7 +71,7 @@ public class LevelSelectSolo extends ILevel {
                     Game.SetLevelActive(new MainMenu(new Vector(0, Game.getWindowHeight())));
                 }).start();
             }
-        },false)).GetSprite("/images/Button_0.png");
+        }, false)).GetSprite("/images/Button_0.png");
         AddObject(new Mouse());
         setBackgroundimage(GetSprite("/Images/backgrounds/SoloLevels.png"));
     }
@@ -90,16 +90,22 @@ public class LevelSelectSolo extends ILevel {
      */
     @Override
     public void Draw(Graphics2D g) {
-        float Time = 0.075f;
-        Vector transspos = Transform.getOffsetTranslation();
-        float x0 = (1 - Time) * transspos.getX() + Time * transpos.getX();
-        float y0 = (1 - Time) * transspos.getY() + Time * transpos.getY();
-        Transform.setOffsetTranslation(new Vector(x0, y0));
 
         int x = (int) Transform.getOffsetTranslation().getX();
         int y = (int) Transform.getOffsetTranslation().getY();
         g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
         g.drawImage(GetSprite("/Images/backgrounds/SoloLevels.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+
+    }
+
+    @Override
+    public void PostDraw(Graphics2D g) {
+
+        float Time = 0.075f;
+        Vector transspos = Transform.getOffsetTranslation();
+        float x0 = (1 - Time) * transspos.getX() + Time * transpos.getX();
+        float y0 = (1 - Time) * transspos.getY() + Time * transpos.getY();
+        Transform.setOffsetTranslation(new Vector(x0, y0));
 
     }
 

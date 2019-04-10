@@ -157,7 +157,7 @@ public class LeaderBoard extends ILevel {
         g.setFont(f2);
         if ((times.size() == 1 && !times.get(0).equals(new String()) && !Double.isNaN(Double.parseDouble(times.get(0)))) || times.size() > 1) {
 
-            g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() * ((int) Math.pow(15 - 0, 2) / 10))));
+            g.setFont(f2.deriveFont(1, f2.getSize() + ((int) Math.log(0.5f) / 10)));
             String s = times.get(0);
             String str = "No " + (0 + 1) + " Place with " + s + " secs";
             w = (int) (g.getFontMetrics().stringWidth(str) * 1.05f);
@@ -168,7 +168,7 @@ public class LeaderBoard extends ILevel {
             g.setColor(Color.WHITE);
             int inc = 0;
             for (int i = 0; i < (10 > times.size() ? times.size() : 10); i++) {
-                g.setFont(f.deriveFont(1, f.getSize() + (Game.WorldScale().getY() *(5f-i/2f)) * 1.8f));
+                g.setFont(f2.deriveFont(1, (int)( f2.getSize() +(Math.log10(1.5f+(10f-i))*20f*Game.WorldScale().getY()) )));
                 s = times.get(i);
                 str = "#" + (i + 1) + ": " + s + " secs";
                 w = g.getFontMetrics().stringWidth(str);
