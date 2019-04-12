@@ -61,7 +61,7 @@ public class Settings extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu(Vector.Zero()));
             }
-        })).GetSprite("/images/Button_0.png");
+        })).GetSprite("/images/button_0.png");
         HUD.AddText(String.format("%.0f ", MusicUtils.GetVolume()*100), new Vector(0.775f * Game.getWindowWidth(), 0.25f * Game.getWindowHeight()));
         HUD.AddText("Master", new Vector(0.775f * Game.getWindowWidth(), 0.20f * Game.getWindowHeight()));
         AddObject(new Slider(new Vector(0.675f, 0.3f), 0.074f, new HUDdelegate() {
@@ -73,7 +73,7 @@ public class Settings extends ILevel {
             }
         }));
 
-        AddObject(new DropDownButton(new Vector(0.2f, 0.3f), "Resolution", new Vector(0.0f, 0.1f),
+        AddObject(new DropDownButton(new Vector(0.15f, 0.3f), "Resolution", new Vector(0.0f, 0.115f),
                 new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDdelegate[]{
                     new HUDdelegate() {
@@ -114,7 +114,7 @@ public class Settings extends ILevel {
             }
                 }));
 
-        AddObject(new Button(new Vector(0.45f, 0.3f), "Fullscreen", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.425f, 0.3f), "Fullscreen", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.FullScreen();
@@ -122,14 +122,14 @@ public class Settings extends ILevel {
             }
 
         }));
-        AddObject(new Button(new Vector(0.45f, 0.4f), "Controls", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.425f, 0.415f), "Controls", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());
             }
         }));
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/Settings.png"));
+        setBackgroundimage(GetSprite("/images/backgrounds/settings.png"));
         
     }
 

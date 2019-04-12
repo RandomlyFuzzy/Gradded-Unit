@@ -93,7 +93,7 @@ public class MainMenu extends ILevel {
                     MainMenu.setTranspos(new Vector(0, 0));
                 }).start();
             }
-        }, false)).GetSprite("/images/Button_0.png");
+        }, false)).GetSprite("/images/button_0.png");
         AddObject(new Button(new Vector(0.3575f, 0.415f), "Coop", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
@@ -109,7 +109,7 @@ public class MainMenu extends ILevel {
                     MainMenu.setTranspos(new Vector(0, 0));
                 }).start();
             }
-        }, false)).GetSprite("/images/Button_0.png");
+        }, false)).GetSprite("/images/button_0.png");
         AddObject(new Button(new Vector(0.29f, 0.53f), "Leaderboard", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
@@ -141,7 +141,7 @@ public class MainMenu extends ILevel {
         AddObject(new Mouse());
         AddObject(new HUD());
         play("/sounds/music.wav", 0, Clip.LOOP_CONTINUOUSLY);
-//        setBackgroundimage(GetSprite("/Images/backgrounds/mainmenu.png"));
+//        setBackgroundimage(GetSprite("/images/backgrounds/mainmenu.png"));
         try {
             InputStream myStream = new BufferedInputStream(new FileInputStream("resources/fonts/maintext.ttf"));
             Font title = Font.createFont(Font.TRUETYPE_FONT, myStream);
@@ -172,9 +172,9 @@ public class MainMenu extends ILevel {
         g.setColor(Color.WHITE);
         int x = (int) Transform.getOffsetTranslation().getX();
         int y = (int) Transform.getOffsetTranslation().getY();
-        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
-        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient2.png"), x + Game.getWindowWidth(), y, Game.getWindowWidth(), Game.getWindowHeight(), this);
-        g.drawImage(GetSprite("/Images/backgrounds/mainmenu.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/images/backgrounds/brickbackgroundgradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/images/backgrounds/brickbackgroundgradient2.png"), x + Game.getWindowWidth(), y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/images/backgrounds/mainmenu.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
 
     }
 

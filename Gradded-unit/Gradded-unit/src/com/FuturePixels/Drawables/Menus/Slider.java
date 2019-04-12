@@ -92,9 +92,9 @@ public class Slider extends IDrawable {
      */
     @Override
     public void Update(Graphics2D g) {
-//        GetSprite("/Images/Slider_Back.png");
+//        GetSprite("/images/Slider_Back.png");
 //        g.drawImage(getLastImage(), (int) (-(getSpriteWidth()) / 2) , (int) (-(getSpriteHeight()) / 2) , (int) (getSpriteWidth()), (int) (getSpriteHeight()), null);
-        GetSprite("/Images/Slider_knob.png");
+        GetSprite("/images/slider_knob.png");
         DrawLastLoadedImage(g);
         g.setColor(Color.red);
         if (isColliding()) {

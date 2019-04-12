@@ -50,7 +50,7 @@ public class Button extends IDrawable {
 
     public Button(Vector relpos, String Message, HUDdelegate Logic, boolean usetras) {
         this(relpos, Message, Logic);
-        Offset = (usetras);
+        Offset = usetras;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Button extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/Images/Button_1.png");
+        GetSprite("/images/button_1.png");
     }
 
     /**
@@ -68,7 +68,7 @@ public class Button extends IDrawable {
     public void doMove() {
         if (Offset) {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY())
-                    .add(new Vector(Transform.getOffsetTranslation()).mult(1.5f/Game.WorldScale().getY()).mult(-1)));
+                    .add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
         } else {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         }
@@ -108,7 +108,7 @@ public class Button extends IDrawable {
      */
     public void DoAction() {
         if (buttonDelegate != null) {
-            Level().play("/Sounds/UiClick.wav");
+            Level().play("/sounds/uiclick.wav");
             buttonDelegate.OnClick(this);
         } else {
             System.err.println("error no delegate in this button");

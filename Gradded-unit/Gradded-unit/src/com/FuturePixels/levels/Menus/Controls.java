@@ -92,7 +92,7 @@ public class Controls extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
-        })).GetSprite("/images/Button_0.png");
+        })).GetSprite("/images/button_0.png");
 
         //PLAYER 1
         but[0] = (new Button(new Vector(0.25f, 0.425f), "LEFT = ", new HUDdelegate() {
@@ -204,7 +204,7 @@ public class Controls extends ILevel {
         BB.setEnabled(false);
         AddObject(BB);
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/controls.png"));
+        setBackgroundimage(GetSprite("/images/backgrounds/controls.png"));
     }
 
     /**

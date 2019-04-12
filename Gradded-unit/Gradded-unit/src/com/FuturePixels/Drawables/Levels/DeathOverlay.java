@@ -45,13 +45,8 @@ public class DeathOverlay extends IDrawable {
     @Override
     public void init() {
         
-        float x = 0;//(-Transform.getOffsetTranslation().getX())/Game.getWindowWidth();
-        float y = 0;//(-Transform.getOffsetTranslation().getY())/Game.getWindowHeight();
         
-        
-        
-        
-        Level().AddObject(new Button(new Vector(-x+0.3f,-y+ 0.8f), "[R] Retry", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.3f,0.8f), "[R] Retry", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 try {
@@ -60,15 +55,15 @@ public class DeathOverlay extends IDrawable {
                     Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
             }
-        })).GetSprite("/images/Button_1.png");;
+        })).GetSprite("/images/button_1.png");;
 
-        Level().AddObject(new Button(new Vector(-x+0.7f,-y+ 0.8f), "[M] Main Menu", new HUDdelegate() {
+        Level().AddObject(new Button(new Vector(0.7f, 0.8f), "[M] Main Menu", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 MusicUtils.StopAllSounds();
                 LevelLoader.LoadLevel(new MainMenu());
             }
-        })).GetSprite("/images/Button_1.png");;
+        })).GetSprite("/images/button_1.png");;
         Level().AddObject(new Mouse());
         GetSprite("/API/cat");
     }

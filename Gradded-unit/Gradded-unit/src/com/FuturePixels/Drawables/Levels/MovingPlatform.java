@@ -60,7 +60,7 @@ public class MovingPlatform extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/images/Platform/rock_platform_moss_01.png");
+        GetSprite("/images/platform/rock_platform_moss_01.png");
     }
 
     public IDrawable GetSprite(String path, int width, int height) {

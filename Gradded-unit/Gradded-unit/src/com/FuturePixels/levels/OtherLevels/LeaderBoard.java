@@ -6,35 +6,20 @@
 package com.FuturePixels.levels.OtherLevels;
 
 import com.FuturePixels.Drawables.Menus.Button;
-import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.FuturePixels.levels.Menus.MainMenu;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Entry.Game;
-import com.Liamengine.Engine.Utils.LevelLoader;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.FileUtils;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Timer;
 
 /**
  *
@@ -82,16 +67,16 @@ public class LeaderBoard extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu(Vector.Zero()));
             }
-        })).GetSprite("/images/Button_0.png");
+        })).GetSprite("/images/button_0.png");
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.175f)), ((0.1f * (i % 6)) + 0.399f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.175f)), ((0.115f * (i % 6)) + 0.399f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
                 }
-            })).GetSprite("/images/Button_2.png");
+            })).GetSprite("/images/button_2.png");
         }
 
-        setBackgroundimage(GetSprite("/Images/backgrounds/leaderboard.png"));
+        setBackgroundimage(GetSprite("/images/backgrounds/leaderboard.png"));
         AddObject(new Mouse());
     }
 
@@ -104,7 +89,7 @@ public class LeaderBoard extends ILevel {
         if (previousind != Currentind) {
             times = new ArrayList<String>();
             times.addAll(
-                    FileUtils.GetFileSplit("Resources/savedata/" + Currentind + "solo.txt", "\n", true)
+                    FileUtils.GetFileSplit("resources/savedata/" + Currentind + "Solo.txt", "\n", true)
             );
 
             
@@ -126,7 +111,7 @@ public class LeaderBoard extends ILevel {
                     for (int i = 0; i < 10; i++) {
                         set += times.get(i) + "\n";
                     }
-                    FileUtils.SetFileContence("Resources/savedata/" + Currentind + "solo.txt", set);
+                    FileUtils.SetFileContence("resources/savedata/" + Currentind + "Solo.txt", set);
                 }
             }
             previousind = Currentind;

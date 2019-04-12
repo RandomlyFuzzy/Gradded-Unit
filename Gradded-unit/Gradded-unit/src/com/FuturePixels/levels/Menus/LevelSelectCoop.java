@@ -71,9 +71,9 @@ public class LevelSelectCoop extends ILevel {
                     Game.SetLevelActive(new MainMenu(new Vector(-Game.getWindowWidth(),0)));
                 }).start();
             }
-        },false)).GetSprite("/images/Button_0.png");
+        },false)).GetSprite("/images/button_0.png");
         AddObject(new Mouse());
-//        setBackgroundimage(GetSprite("/Images/backgrounds/CoopLevels.png"));
+//        setBackgroundimage(GetSprite("/images/backgrounds/coopLevels.png"));
     }
 
     /**
@@ -94,8 +94,8 @@ public class LevelSelectCoop extends ILevel {
         int x = (int) Transform.getOffsetTranslation().getX();
         int y = (int) Transform.getOffsetTranslation().getY();
 
-        g.drawImage(GetSprite("/Images/backgrounds/CoopLevels.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
-        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient2.png"), x + Game.getWindowWidth(), y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/images/backgrounds/cooplevels.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/images/backgrounds/brickbackgroundgradient2.png"), x + Game.getWindowWidth(), y, Game.getWindowWidth(), Game.getWindowHeight(), this);
 
     }
 

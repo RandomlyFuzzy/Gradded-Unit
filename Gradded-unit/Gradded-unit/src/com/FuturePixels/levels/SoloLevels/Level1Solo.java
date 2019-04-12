@@ -104,8 +104,8 @@ public class Level1Solo extends ILevel {
 
         StartingPosition = new Vector((Game.getScaledWidth() * .6f) / 2, 0);
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * .6f) / 2, 0));
-        play("/Sounds/Lvl1Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/backgrounds/level0.png"));
+        play("/sounds/lvl1song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        setBackgroundimage(GetSprite("/images/backgrounds/level0.png"));
     }
 
     /**

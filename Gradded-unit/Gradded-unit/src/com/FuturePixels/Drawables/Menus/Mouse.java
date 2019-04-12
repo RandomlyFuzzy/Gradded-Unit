@@ -36,7 +36,7 @@ public class Mouse extends IDrawable {
     @Override
     public void init() {
         setPosition(new Vector(Level().getMousePos()).mult(new Vector(1f / Game.WorldScale().getX(), 1f / Game.WorldScale().getY())).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
-//        GetSprite("/Images/Cursor.png");
+//        GetSprite("/images/Cursor.png");
     }
     float ind = 0;
 
@@ -66,7 +66,7 @@ public class Mouse extends IDrawable {
      */
     @Override
     public void Update(Graphics2D g) {
-        GetSprite("/Images/cursor_" + (int) ind + ".png");
+        GetSprite("/images/cursor_" + (int) ind + ".png");
         DrawLastLoadedImage(g);
     }
 

@@ -47,7 +47,7 @@ public class BlackoutButton extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/Images/Button_0.png");
+        GetSprite("/images/button_0.png");
     }
 
     /**
@@ -80,7 +80,7 @@ public class BlackoutButton extends IDrawable {
      */
     public void DoAction() {
         if (buttonDelegate != null) {
-            Level().play("/Sounds/UiClick.wav");
+            Level().play("/sounds/uiclick.wav");
             buttonDelegate.OnClick(this);
         } else {
             System.err.println("error no delegate in this button");

@@ -67,8 +67,8 @@ public class Credits extends ILevel {
     @Override
     public void init() {
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/level0.png"));
-        credits = FileUtils.GetFileSplit("resources/data/Credits.txt", "\n");
+        setBackgroundimage(GetSprite("/images/backgrounds/level0.png"));
+        credits = FileUtils.GetFileSplit("resources/data/credits.txt", "\n");
     }
 
     /**
@@ -87,7 +87,7 @@ public class Credits extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
 
-        play("/sounds/CreditSong.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/sounds/creditsong.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
         int val2 = (int) ((Math.cos(i) + 1f) * 100f);
@@ -99,7 +99,7 @@ public class Credits extends ILevel {
 
         } else if (val >= 253) {
         } else if (changed) {
-            setBackgroundimage(GetSprite("/Images/backgrounds/level" + (ind) + ".png"));
+            setBackgroundimage(GetSprite("/images/backgrounds/level" + (ind) + ".png"));
             changed = false;
             once = true;
         }

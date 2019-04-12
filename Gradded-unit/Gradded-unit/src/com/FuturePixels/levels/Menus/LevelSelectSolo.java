@@ -55,7 +55,7 @@ public class LevelSelectSolo extends ILevel {
                 public void OnClick(Button b) {
                     LevelLoader.LoadLevel(b.getMessage().replace(" ", ""));
                 }
-            }, false)).GetSprite("/images/Button_2.png");
+            }, false)).GetSprite("/images/button_2.png");
         }
 
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
@@ -71,9 +71,9 @@ public class LevelSelectSolo extends ILevel {
                     Game.SetLevelActive(new MainMenu(new Vector(0, Game.getWindowHeight())));
                 }).start();
             }
-        }, false)).GetSprite("/images/Button_0.png");
+        }, false)).GetSprite("/images/button_0.png");
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/SoloLevels.png"));
+        setBackgroundimage(GetSprite("/images/backgrounds/sololevels.png"));
     }
 
     /**
@@ -93,8 +93,8 @@ public class LevelSelectSolo extends ILevel {
 
         int x = (int) Transform.getOffsetTranslation().getX();
         int y = (int) Transform.getOffsetTranslation().getY();
-        g.drawImage(GetSprite("/Images/backgrounds/BrickBackgroundGradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
-        g.drawImage(GetSprite("/Images/backgrounds/SoloLevels.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/images/backgrounds/brickbackgroundgradient.png"), x, y - Game.getWindowHeight(), Game.getWindowWidth(), Game.getWindowHeight(), this);
+        g.drawImage(GetSprite("/images/backgrounds/sololevels.png"), x, y, Game.getWindowWidth(), Game.getWindowHeight(), this);
 
     }
 

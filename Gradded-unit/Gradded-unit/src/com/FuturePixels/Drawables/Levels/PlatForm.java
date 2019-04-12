@@ -43,7 +43,7 @@ public class PlatForm extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/images//Platform/platform.png");
+        GetSprite("/images/platform/platform.png");
     }
 
     /**
