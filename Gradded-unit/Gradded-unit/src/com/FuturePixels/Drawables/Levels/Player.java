@@ -204,9 +204,8 @@ public class Player extends IDrawable {
             if (isColliding() && !Isplayer) {
                 Acc.setY(8f);
                 int r = forsounds.nextInt(3);
-                int r2 = forsounds.nextInt(3) + 1;
-                String Prefix = r == 0 ? "high" : r == 1 ? "low" : "";
-                Level().play("/sounds/" + Prefix + "jump" + r2 + ".wav");
+                int r2 = forsounds.nextInt(4) + 1;
+                Level().play("/sounds/high" + "jump" + r2 + ".wav");
             }
             canJump = false;
         } else if (down) {
