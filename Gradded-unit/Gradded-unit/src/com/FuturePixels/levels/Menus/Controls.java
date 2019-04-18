@@ -149,7 +149,7 @@ public class Controls extends ILevel {
         } catch (InterruptedException ex) {
             Logger.getLogger(Controls.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String[] Values = FileUtils.GetFileSplit("resources/Data/Preferences.txt", "\n");
+        String[] Values = FileUtils.GetFileSplit("resources/data/preferences.txt", "\n");
         for (int i = 0; i < 8; i++) {
             try {
                 String text = "";
