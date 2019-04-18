@@ -63,7 +63,7 @@ public class Settings extends ILevel {
             }
         })).GetSprite("/images/button_0.png");
         HUD.AddText(String.format("%.0f ", MusicUtils.GetVolume()*100), new Vector(0.775f * Game.getWindowWidth(), 0.25f * Game.getWindowHeight()));
-        HUD.AddText("Master", new Vector(0.775f * Game.getWindowWidth(), 0.20f * Game.getWindowHeight()));
+        HUD.AddText("Master Volume", new Vector(0.775f * Game.getWindowWidth(), 0.20f * Game.getWindowHeight()));
         AddObject(new Slider(new Vector(0.675f, 0.3f), 0.074f, new HUDdelegate() {
             @Override
             public void OnChange(Slider s, float Value) {
