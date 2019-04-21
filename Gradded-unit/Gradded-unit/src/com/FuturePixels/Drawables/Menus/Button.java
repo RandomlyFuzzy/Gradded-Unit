@@ -72,7 +72,8 @@ public class Button extends IDrawable {
         } else {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         }
-        setScale(Game.ButtonDims());
+        setScale(new Vector(1/Game.WorldScale().getX(),1/Game.WorldScale().getY())
+                .mult(Game.ButtonDims()));
     }
 
     /**
