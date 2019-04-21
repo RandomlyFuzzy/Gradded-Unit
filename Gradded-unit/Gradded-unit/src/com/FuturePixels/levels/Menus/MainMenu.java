@@ -79,7 +79,7 @@ public class MainMenu extends ILevel {
         Transform.setOffsetTranslation(StartPos);
         Game.setWorldrelDims(new Vector(1, 1));
 
-        AddObject(new Button(new Vector(0.2215f, 0.415f), "Solo", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.218f, 0.415f), "Solo", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 MainMenu.setTranspos(new Vector(0, Game.getWindowHeight()));
@@ -94,7 +94,7 @@ public class MainMenu extends ILevel {
                 }).start();
             }
         }, false)).GetSprite("/images/button_0.png");
-        AddObject(new Button(new Vector(0.3575f, 0.415f), "Coop", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.365f, 0.415f), "Coop", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
 
