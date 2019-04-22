@@ -57,6 +57,7 @@ public class PlatForm extends IDrawable {
                 && (-Transform.getOffsetTranslation().getY() - (Game.getScaledHeight())) < getPosition().getY()
                 && (-Transform.getOffsetTranslation().getY() + (Game.getScaledHeight())) > getPosition().getY()))) {
             DrawLastLoadedImage(g);
+            
         }
     }
 
