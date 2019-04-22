@@ -18,14 +18,17 @@ public class GamePreferences {
      */
     public static GamePreferences gp;
 
+    private int KeyLeftP1 = KeyEvent.VK_A, KeyRightP1 = KeyEvent.VK_D, KeyJumpP1 = KeyEvent.VK_SPACE, KeyDropP1 = KeyEvent.VK_S;
+    private int KeyLeftP2 = KeyEvent.VK_LEFT, KeyRightP2 = KeyEvent.VK_RIGHT, KeyJumpP2 = KeyEvent.VK_NUMPAD0, KeyDropP2 = KeyEvent.VK_DOWN;
+
+
     /**
      *
      */
     public GamePreferences() {
         gp = this;
     }
-    private int KeyLeftP1 = KeyEvent.VK_A, KeyRightP1 = KeyEvent.VK_D, KeyJumpP1 = KeyEvent.VK_SPACE, KeyDropP1 = KeyEvent.VK_S;
-    private int KeyLeftP2 = KeyEvent.VK_LEFT, KeyRightP2 = KeyEvent.VK_RIGHT, KeyJumpP2 = KeyEvent.VK_NUMPAD0, KeyDropP2 = KeyEvent.VK_DOWN;
+
 
     /**
      *

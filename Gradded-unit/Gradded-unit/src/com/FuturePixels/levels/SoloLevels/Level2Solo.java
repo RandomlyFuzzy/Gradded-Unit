@@ -33,7 +33,6 @@ import javax.sound.sampled.Clip;
 public class Level2Solo extends ILevel {
 
     private Player player1;
-    private Vector Cameraopos = Vector.Zero();
     private Vector StartingPosition = Vector.Zero();
 
     /**

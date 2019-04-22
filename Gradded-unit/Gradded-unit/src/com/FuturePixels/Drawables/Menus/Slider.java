@@ -25,7 +25,7 @@ public class Slider extends IDrawable {
     private HUDdelegate Delegate;
     private Vector MouseWhenPressed = new Vector(0, 0);
     private Vector MoveAmt = new Vector(0, 0);
-
+    private boolean inside = false;
     /**
      *
      */
@@ -105,7 +105,6 @@ public class Slider extends IDrawable {
         }
     }
 
-    private boolean inside = false;
 
     /**
      *

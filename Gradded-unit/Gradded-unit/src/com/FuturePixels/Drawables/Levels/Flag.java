@@ -38,6 +38,7 @@ public class Flag extends IDrawable {
     private float ind = 0;
     private ILevel next;
     private String seed = "";
+    private boolean ran = false;
 
     /**
      *
@@ -87,7 +88,6 @@ public class Flag extends IDrawable {
         DrawLastLoadedImageAsSpriteSheet(g,flag);
     }
 
-    boolean ran = false;
 
     /**
      *

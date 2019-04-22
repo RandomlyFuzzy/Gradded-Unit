@@ -43,13 +43,11 @@ import javax.swing.Timer;
  */
 public class Credits extends ILevel {
 
-    private static BlackoutButton BB = null;
-    private Button B = null;
-    double i = 0;
-    int ind = 0;
-    boolean changed = false;
-    boolean once = true;
-    String[] credits;
+    private double i = 0;
+    private int ind = 0;
+    private boolean changed = false;
+    private boolean once = true;
+    private String[] credits;
 
     /**
      *

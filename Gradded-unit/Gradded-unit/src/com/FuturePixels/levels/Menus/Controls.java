@@ -37,13 +37,9 @@ import java.util.logging.Logger;
  */
 public class Controls extends ILevel {
 
-    Vector relataiveity = Vector.Zero();
-
-    /**
-     *
-     */
-    public BlackoutButton BB;
-    public Button[] but = new Button[8];
+    private Vector relataiveity = Vector.Zero();
+    private BlackoutButton BB;
+    private Button[] but = new Button[8];
     private int val = 1;
     private int lastKey = 1;
 
