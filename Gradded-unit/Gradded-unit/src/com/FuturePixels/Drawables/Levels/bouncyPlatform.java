@@ -92,7 +92,7 @@ public class bouncyPlatform extends IDrawable {
     @Override
     public void onCollison(IDrawable im) {
         if(im instanceof Player){
-            Level().play("/sounds/bouncea.wav");
+            Level().play("/sounds/bounce.wav");
             Player p = ((Player) im);
             if(p.getVelocity().getY()<=0){
                 p.setVelocity(GetUp().mult(-10));
