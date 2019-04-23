@@ -5,27 +5,14 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Utils.FileUtils;
 import com.Liamengine.Engine.Utils.LevelLoader;
 import com.Liamengine.Engine.Utils.MusicUtils;
-import com.FuturePixels.levels.Menus.MainMenu;
 import com.Liamengine.Engine.Components.SpriteSheet;
 import java.awt.Graphics2D;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.io.Writer;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**

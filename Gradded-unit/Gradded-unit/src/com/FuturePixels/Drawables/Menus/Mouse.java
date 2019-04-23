@@ -6,13 +6,10 @@
 package com.FuturePixels.Drawables.Menus;
 
 import com.Liamengine.Engine.Components.Transform;
-import com.FuturePixels.Drawables.Levels.HUD;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 
 /**
  *

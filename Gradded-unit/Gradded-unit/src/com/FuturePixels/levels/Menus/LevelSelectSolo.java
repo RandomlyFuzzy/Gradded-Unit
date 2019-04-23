@@ -14,16 +14,9 @@ import com.Liamengine.Engine.Components.Transform;
 import com.Liamengine.Engine.Utils.LevelLoader;
 import com.Liamengine.Engine.Components.Vector;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import static java.awt.image.ImageObserver.WIDTH;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
