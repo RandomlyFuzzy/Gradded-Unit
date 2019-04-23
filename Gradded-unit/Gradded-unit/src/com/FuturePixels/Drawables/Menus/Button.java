@@ -50,7 +50,7 @@ public class Button extends IDrawable {
 
     public Button(Vector relpos, String Message, HUDdelegate Logic, boolean usetras) {
         this(relpos, Message, Logic);
-        Offset = (usetras);
+        Offset = usetras;
     }
 
     /**
@@ -68,7 +68,7 @@ public class Button extends IDrawable {
     public void doMove() {
         if (Offset) {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY())
-                    .add(new Vector(Transform.getOffsetTranslation()).mult(1.5f/Game.WorldScale().getY()).mult(-1)));
+                    .add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
         } else {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         }

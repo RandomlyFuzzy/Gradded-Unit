@@ -73,7 +73,7 @@ public class Settings extends ILevel {
             }
         }));
 
-        AddObject(new DropDownButton(new Vector(0.2f, 0.3f), "Resolution", new Vector(0.0f, 0.1f),
+        AddObject(new DropDownButton(new Vector(0.15f, 0.3f), "Resolution", new Vector(0.0f, 0.115f),
                 new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDdelegate[]{
                     new HUDdelegate() {
@@ -114,7 +114,7 @@ public class Settings extends ILevel {
             }
                 }));
 
-        AddObject(new Button(new Vector(0.45f, 0.3f), "Fullscreen", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.425f, 0.3f), "Fullscreen", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.FullScreen();
@@ -122,7 +122,7 @@ public class Settings extends ILevel {
             }
 
         }));
-        AddObject(new Button(new Vector(0.45f, 0.4f), "Controls", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.425f, 0.415f), "Controls", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());
