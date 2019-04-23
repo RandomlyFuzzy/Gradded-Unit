@@ -37,7 +37,7 @@ public class DestroyingPlatForm extends IDrawable {
      */
     public DestroyingPlatForm(Vector position, double RadianRotation) {
         super();
-        GetSprite("/images/platform/Platform.png");
+        GetSprite("/images/platform/platform.png");
         setPosition(position);
         setRotation(RadianRotation);
     }
@@ -47,7 +47,7 @@ public class DestroyingPlatForm extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/images/platform/Platform.png");
+        GetSprite("/images/platform/platform.png");
 
     }
 
@@ -60,7 +60,7 @@ public class DestroyingPlatForm extends IDrawable {
                 && (-Transform.getOffsetTranslation().getY() + (Game.getScaledHeight())) > getPosition().getY()))) {
             DrawLastLoadedImage(g);
             if (haslanded && !isColliding()) {
-                Level().play("/Sounds/Break" + r2 + ".wav");
+                Level().play("/sounds/break" + r2 + ".wav");
                 setEnabled(false);
             }
         }

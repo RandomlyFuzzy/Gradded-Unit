@@ -17,18 +17,18 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 /**
- * this does not implement movement relative to the time so any lag spike will 
- * cause the players movements to be less than expected I updated this but it 
- * it made the player seem different so the group decided to not implement that 
- * functionality 
- * 
- * 
+ * this does not implement movement relative to the time so any lag spike will
+ * cause the players movements to be less than expected I updated this but it it
+ * made the player seem different so the group decided to not implement that
+ * functionality
+ *
+ *
  * @author Liam Woolley 1748910
  */
 public class Player extends IDrawable {
 
     private float ind = 0, Scale = 1;
-    private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, IsPlayer = false;
+    private boolean left = false, right = false, up = false, down = false, Stop = false, canJump = true, Isplayer = false;
     private boolean once = true;
     private boolean once2 = true;
     private Vector Velocity = new Vector(0, 0);
@@ -39,7 +39,7 @@ public class Player extends IDrawable {
     private Random forsounds = new Random();
     private SpriteSheet she = new SpriteSheet(0, 0, 60, 90);
 
-    private static int PlayerCount = 0;
+    private static int playerCount = 0;
     private static boolean hasupdated = true;
     private static boolean Lock = false;
     private static boolean hasLost = false;
@@ -58,7 +58,7 @@ public class Player extends IDrawable {
         setPosition(100, 100);
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
-        playerind = PlayerCount++;
+        playerind = playerCount++;
 
     }
 
@@ -77,20 +77,20 @@ public class Player extends IDrawable {
 //       
         if (hasLost) {
             //insert death sprite here
-            GetSprite("/Images/Player/reggie DEATH_0" + playerind + ".png");
+            GetSprite("/images/player/reggie DEATH_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
             setSpriteWidth(60);
             setSpriteHeight(90);
         } else if (isLock()) {
-            GetSprite("/Images/Player/reggie WIN_0" + playerind + ".png");
+            GetSprite("/images/player/reggie WIN_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
             setSpriteWidth(60);
             setSpriteHeight(90);
         } else if ((canJump)) {
             ind = ind % 7f;
-            GetSprite("/Images/Player/player_0" + playerind + ".png");
+            GetSprite("/images/player/player_0" + playerind + ".png");
             she.inputImage(getLastImage());
             if (!(left || right)) {
                 she.setMaxX(1);
@@ -100,14 +100,14 @@ public class Player extends IDrawable {
             setSpriteHeight(90);
         } else if (Velocity.getY() < 0) {
             ind = ind % 3f;
-            GetSprite("/Images/Player/reggie FALL_0" + playerind + ".png");
+            GetSprite("/images/player/reggie FALL_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
             setSpriteWidth(60);
             setSpriteHeight(90);
         } else if (Velocity.getY() > 0) {
             ind = ind % 3f;
-            GetSprite("/Images/Player/reggie JUMP_0" + playerind + ".png");
+            GetSprite("/images/player/reggie JUMP_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
             setSpriteWidth(60);
@@ -123,16 +123,16 @@ public class Player extends IDrawable {
     }
 
     public void doMove() {
-        if (!isColliding() || IsPlayer) {
+        if (!isColliding() || Isplayer) {
             setRotation((getRotation() * 0.98f));
             canJump = false;
             once = true;
             Velocity.mult(new Vector(0.985f, 0.995f));
         }
         if (!Lock && !hasLost) {
-            movePlayer();
+            moveplayer();
         }
-        if (!isColliding() || IsPlayer) {
+        if (!isColliding() || Isplayer) {
             //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
 //            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
             //mars gravity*2  
@@ -142,13 +142,13 @@ public class Player extends IDrawable {
         //adds the relative "right" vector and "up" vector 
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float) getRotation() * 2f)));
 
-        if (isColliding() && !IsPlayer) {
+        if (isColliding() && !Isplayer) {
             Velocity.mult(new Vector(0.8f, 0.995f));
         }
         Acc.mult(0);
 
         if ((float) getRotation() != 0 && canJump) {
-            Level().play("/Sounds/Slide.wav");
+            Level().play("/sounds/slide.wav");
         }
 
         //screen scroller
@@ -168,14 +168,14 @@ public class Player extends IDrawable {
             firstX = Transform.getOffsetTranslation().getX();
         }
 
-//        if (Level().getClass().getName().indexOf("Coop") == -1) {
+        if (Level().getClass().getName().indexOf("Coop") == -1) {
             if (-getPosition().getX() != Transform.getOffsetTranslation().getX() - Game.getScaledWidth() / 2) {
-            Cameraopos.setX((-getPosition().getX() + Game.getScaledWidth() / 2) / 5f + firstX);
-            hasupdated = true;
+                Cameraopos.setX((-getPosition().getX() + Game.getScaledWidth() / 2) / 5f + firstX);
+                hasupdated = true;
             }
-//        } else {
-//            Cameraopos.setX(Transform.getOffsetTranslation().getX());
-//        }
+        } else {
+            Cameraopos.setX(Transform.getOffsetTranslation().getX());
+        }
 
         if (-getPosition().getY() > Transform.getOffsetTranslation().getY() - getScaledSpriteHeight() * 2) {
             Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight() * 2);
@@ -183,7 +183,7 @@ public class Player extends IDrawable {
         }
         // centers on the player 
 //        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
-        if (hasupdated&&!once2) {
+        if (hasupdated && !once2) {
             Transform.setOffsetTranslation(Cameraopos);
             hasupdated = false;
         }
@@ -196,17 +196,16 @@ public class Player extends IDrawable {
         once2 = false;
     }
 
-    private void movePlayer() {
+    private void moveplayer() {
         boolean one = true, two = true;
 
         if (up && canJump) {
 //            Acc.setY(0.01f);
-            if (isColliding() && !IsPlayer) {
+            if (isColliding() && !Isplayer) {
                 Acc.setY(8f);
                 int r = forsounds.nextInt(3);
-                int r2 = forsounds.nextInt(3) + 1;
-                String Prefix = r == 0 ? "High" : "High";
-                Level().play("/Sounds/" + Prefix + "Jump" + r2 + ".wav");
+                int r2 = forsounds.nextInt(4) + 1;
+                Level().play("/sounds/high" + "jump" + r2 + ".wav");
             }
             canJump = false;
         } else if (down) {
@@ -218,13 +217,13 @@ public class Player extends IDrawable {
             Scale = -1;
             Acc.addX(-100);
             if (canJump) {
-                Level().play("/Sounds/Footsteps.wav");
+                Level().play("/sounds/footsteps.wav");
             }
         } else if (right) {
             Scale = 1;
             Acc.addX(100);
             if (canJump) {
-                Level().play("/Sounds/Footsteps.wav");
+                Level().play("/sounds/footsteps.wav");
             }
         } else if (canJump) {
             two = false;
@@ -243,10 +242,10 @@ public class Player extends IDrawable {
         }
 
         if (im instanceof Player) {
-            IsPlayer = true;
+            Isplayer = true;
             return;
         } else {
-            IsPlayer = false;
+            Isplayer = false;
         }
 
         if (isLock()) {
@@ -402,7 +401,7 @@ public class Player extends IDrawable {
         hasupdated = true;
         Lock = false;
         hasLost = false;
-        PlayerCount = 0;
+        playerCount = 0;
     }
 
     public Vector getVelocity() {

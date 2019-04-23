@@ -37,13 +37,9 @@ import java.util.logging.Logger;
  */
 public class Controls extends ILevel {
 
-    Vector relataiveity = Vector.Zero();
-
-    /**
-     *
-     */
-    public BlackoutButton BB;
-    public Button[] but = new Button[8];
+    private Vector relataiveity = Vector.Zero();
+    private BlackoutButton BB;
+    private Button[] but = new Button[8];
     private int val = 1;
     private int lastKey = 1;
 
@@ -92,7 +88,7 @@ public class Controls extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
-        })).GetSprite("/images/Button_0.png");
+        })).GetSprite("/images/button_0.png");
 
         //PLAYER 1
         but[0] = (new Button(new Vector(0.25f, 0.425f), "LEFT = ", new HUDdelegate() {
@@ -149,7 +145,7 @@ public class Controls extends ILevel {
         } catch (InterruptedException ex) {
             Logger.getLogger(Controls.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String[] Values = FileUtils.GetFileSplit("resources/Data/Preferences.txt", "\n");
+        String[] Values = FileUtils.GetFileSplit("resources/data/preferences.txt", "\n");
         for (int i = 0; i < 8; i++) {
             try {
                 String text = "";
@@ -204,7 +200,7 @@ public class Controls extends ILevel {
         BB.setEnabled(false);
         AddObject(BB);
         AddObject(new Mouse());
-        setBackgroundimage(GetSprite("/Images/backgrounds/controls.png"));
+        setBackgroundimage(GetSprite("/images/backgrounds/controls.png"));
     }
 
     /**

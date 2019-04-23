@@ -43,7 +43,7 @@ public class PlatForm extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/images//Platform/platform.png");
+        GetSprite("/images/platform/platform.png");
     }
 
     /**
@@ -57,6 +57,7 @@ public class PlatForm extends IDrawable {
                 && (-Transform.getOffsetTranslation().getY() - (Game.getScaledHeight())) < getPosition().getY()
                 && (-Transform.getOffsetTranslation().getY() + (Game.getScaledHeight())) > getPosition().getY()))) {
             DrawLastLoadedImage(g);
+            
         }
     }
 

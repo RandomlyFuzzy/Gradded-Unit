@@ -81,8 +81,8 @@ public class Lava extends IDrawable {
             int r = forsounds.nextInt(4) + 1;
 
             Level().AddObject(new DeathOverlay());
-            Level().play("/Sounds/LevelFail.wav");
-            Level().play("/Sounds/Scream" + r + ".wav");
+            Level().play("/sounds/levelfail.wav");
+            Level().play("/sounds/scream" + r + ".wav");
         }
     }
 }

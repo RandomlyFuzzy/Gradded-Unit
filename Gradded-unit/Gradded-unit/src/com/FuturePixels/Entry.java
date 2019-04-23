@@ -40,7 +40,7 @@ public class Entry {
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu(Vector.Zero()));
 
-        String[] preferences = FileUtils.GetFileSplit("resources/data/Preferences.txt", "\n");
+        String[] preferences = FileUtils.GetFileSplit("resources/data/preferences.txt", "\n");
         GamePreferences.gp.setKeyLeftP1(Integer.parseInt(preferences[0].trim()));
         GamePreferences.gp.setKeyRightP1(Integer.parseInt(preferences[1].trim()));
         GamePreferences.gp.setKeyJumpP1(Integer.parseInt(preferences[2].trim()));

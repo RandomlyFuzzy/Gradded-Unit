@@ -33,7 +33,6 @@ import javax.sound.sampled.Clip;
 public class Level2Solo extends ILevel {
 
     private Player player1;
-    private Vector Cameraopos = Vector.Zero();
     private Vector StartingPosition = Vector.Zero();
 
     /**
@@ -135,8 +134,8 @@ public class Level2Solo extends ILevel {
         StartingPosition = new Vector((Game.getScaledWidth()) / 2, 0);
 
         Transform.setOffsetTranslation(StartingPosition);
-        play("/Sounds/Lvl2Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
-        setBackgroundimage(GetSprite("/Images/backgrounds/level1.png"));
+        play("/sounds/lvl2song.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        setBackgroundimage(GetSprite("/images/backgrounds/level1.png"));
     }
 
     /**

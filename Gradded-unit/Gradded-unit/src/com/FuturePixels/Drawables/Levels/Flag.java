@@ -38,6 +38,7 @@ public class Flag extends IDrawable {
     private float ind = 0;
     private ILevel next;
     private String seed = "";
+    private boolean ran = false;
 
     /**
      *
@@ -64,7 +65,7 @@ public class Flag extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/images/FlagA.png");
+        GetSprite("/images/flaga.png");
         flag.inputImage(getLastImage());
         setSpriteWidth(75);
         setSpriteHeight(75);
@@ -87,7 +88,6 @@ public class Flag extends IDrawable {
         DrawLastLoadedImageAsSpriteSheet(g,flag);
     }
 
-    boolean ran = false;
 
     /**
      *
@@ -99,12 +99,12 @@ public class Flag extends IDrawable {
         if (im instanceof Player && !ran) {
             String Slim = Level().getClass().toString().substring(Level().getClass().toString().lastIndexOf(".") + 1);
             if (!seed.equals("")) {
-                FileUtils.AppendToFile("resources/Savedata/Coop/" + seed + ".txt", "" + String.format("%.2f", (float)Level().getTime()) + "\n");
+                FileUtils.AppendToFile("resources/savedata/coop/" + seed + ".txt", "" + String.format("%.2f", (float)Level().getTime()) + "\n");
             } else {
-                FileUtils.AppendToFile("resources/Savedata/" + Slim + ".txt", "" + String.format("%.2f", (float)Level().getTime()) + "\n");
+                FileUtils.AppendToFile("resources/savedata/" + Slim + ".txt", "" + String.format("%.2f", (float)Level().getTime()) + "\n");
             }
-            Level().play("/Sounds/win1.wav");
-            Level().play("/sounds/LevelCompleate_" + new Random().nextInt(3) + ".wav");
+            Level().play("/sounds/win1.wav");
+            Level().play("/sounds/levelcompleate_" + new Random().nextInt(3) + ".wav");
             Player.setLock(true);
             new Thread(() -> {
                 try {

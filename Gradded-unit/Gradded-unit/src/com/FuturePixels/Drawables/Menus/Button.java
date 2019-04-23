@@ -58,7 +58,7 @@ public class Button extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/Images/Button_1.png");
+        GetSprite("/images/button_1.png");
     }
 
     /**
@@ -72,7 +72,8 @@ public class Button extends IDrawable {
         } else {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         }
-        setScale(Game.ButtonDims());
+        setScale(new Vector(1/Game.WorldScale().getX(),1/Game.WorldScale().getY())
+                .mult(Game.ButtonDims()));
     }
 
     /**
@@ -108,7 +109,7 @@ public class Button extends IDrawable {
      */
     public void DoAction() {
         if (buttonDelegate != null) {
-            Level().play("/Sounds/UiClick.wav");
+            Level().play("/sounds/uiclick.wav");
             buttonDelegate.OnClick(this);
         } else {
             System.err.println("error no delegate in this button");

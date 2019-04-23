@@ -67,16 +67,16 @@ public class LeaderBoard extends ILevel {
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu(Vector.Zero()));
             }
-        })).GetSprite("/images/Button_0.png");
+        })).GetSprite("/images/button_0.png");
         for (int i = 0; i < 5; i++) {
             AddObject(new Button(new Vector(((0.175f)), ((0.115f * (i % 6)) + 0.399f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
                 }
-            })).GetSprite("/images/Button_2.png");
+            })).GetSprite("/images/button_2.png");
         }
 
-        setBackgroundimage(GetSprite("/Images/backgrounds/leaderboard.png"));
+        setBackgroundimage(GetSprite("/images/backgrounds/leaderboard.png"));
         AddObject(new Mouse());
     }
 
@@ -89,7 +89,7 @@ public class LeaderBoard extends ILevel {
         if (previousind != Currentind) {
             times = new ArrayList<String>();
             times.addAll(
-                    FileUtils.GetFileSplit("Resources/savedata/" + Currentind + "solo.txt", "\n", true)
+                    FileUtils.GetFileSplit("resources/savedata/" + Currentind + "Solo.txt", "\n", true)
             );
 
             
@@ -111,7 +111,7 @@ public class LeaderBoard extends ILevel {
                     for (int i = 0; i < 10; i++) {
                         set += times.get(i) + "\n";
                     }
-                    FileUtils.SetFileContence("Resources/savedata/" + Currentind + "solo.txt", set);
+                    FileUtils.SetFileContence("resources/savedata/" + Currentind + "Solo.txt", set);
                 }
             }
             previousind = Currentind;

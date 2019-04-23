@@ -29,7 +29,7 @@ public class DropDownButton extends IDrawable {
     /**
      *
      */
-    public final int[] indexOfSubbuttons;
+    public final int[] INDEXOFSUBUTONS;
     private String[] SubMessage;
     private HUDdelegate[] LogicForSubButtons;
     private Vector AddVector;
@@ -39,7 +39,7 @@ public class DropDownButton extends IDrawable {
      */
     public DropDownButton() {
         super();
-        indexOfSubbuttons = new int[0];
+        INDEXOFSUBUTONS = new int[0];
     }
 
     /**
@@ -57,7 +57,7 @@ public class DropDownButton extends IDrawable {
         this.AddVector = AddPerButton;
         this.SubMessage = SubMessage;
         this.LogicForSubButtons = LogicForSubButtons;
-        indexOfSubbuttons = new int[this.SubMessage.length];
+        INDEXOFSUBUTONS = new int[this.SubMessage.length];
         for (int i = 0; i < SubMessage.length; i++) {
             Level().AddObject(new Button(new Vector(relpos).add(new Vector(AddVector).mult(i + 1)), SubMessage[i], i < LogicForSubButtons.length ? LogicForSubButtons[i] : new HUDdelegate() {
                 @Override
@@ -65,16 +65,16 @@ public class DropDownButton extends IDrawable {
                     b.setMessage("Button missing input");
                 }
 
-            })).GetSprite("/images/Button_1.png");
-            indexOfSubbuttons[i] = Level().GetObjectCount() - 1;
+            })).GetSprite("/images/button_1.png");
+            INDEXOFSUBUTONS[i] = Level().GetObjectCount() - 1;
             
         }
         buttonDelegate = new HUDdelegate() {
             @Override
             public void OnClick(DropDownButton b) {
                 
-                for (int i = 0; i < b.indexOfSubbuttons.length; i++) {
-                    Button b2 = (Button) b.Level().GetObject(b.indexOfSubbuttons[i]);
+                for (int i = 0; i < b.INDEXOFSUBUTONS.length; i++) {
+                    Button b2 = (Button) b.Level().GetObject(b.INDEXOFSUBUTONS[i]);
                     b2.setEnabled(!b2.isEnabled());
                 }
             }
@@ -87,7 +87,7 @@ public class DropDownButton extends IDrawable {
      */
     @Override
     public void init() {
-        GetSprite("/Images/DropButtonLong.png");
+        GetSprite("/images/dropbuttonlong.png");
         DoAction();
 
     }
@@ -129,7 +129,7 @@ public class DropDownButton extends IDrawable {
         try {
             if (buttonDelegate != null) {
                 buttonDelegate.OnClick(this);
-//      Level().play("/Sounds/UiClick.wav");
+//      Level().play("/sounds/uiclick.wav");
             } else {
                 System.err.println("error no delegate in this button");
             }
