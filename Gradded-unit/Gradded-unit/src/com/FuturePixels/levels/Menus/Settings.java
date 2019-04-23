@@ -6,7 +6,6 @@
 package com.FuturePixels.levels.Menus;
 
 import com.FuturePixels.Drawables.Levels.HUD;
-import com.FuturePixels.Drawables.Menus.BlackoutButton;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Components.Vector;
 import com.FuturePixels.Drawables.Menus.Button;
@@ -17,22 +16,10 @@ import com.FuturePixels.Drawables.Menus.Slider;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Utils.MusicUtils;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
-import static java.awt.image.ImageObserver.WIDTH;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Timer;
 
 /**
  *

@@ -8,7 +8,6 @@ package com.FuturePixels.Drawables.Levels;
 import com.Liamengine.Engine.AbstractClasses.IComponent;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Components.SpriteSheet;
-import com.Liamengine.Engine.Entry.Game;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 

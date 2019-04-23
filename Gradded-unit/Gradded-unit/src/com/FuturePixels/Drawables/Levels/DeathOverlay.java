@@ -5,9 +5,7 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.Liamengine.Engine.Components.Transform;
 import com.FuturePixels.Drawables.Menus.Button;
-import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
@@ -22,7 +20,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 
 /**

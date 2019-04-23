@@ -5,7 +5,6 @@
  */
 package com.FuturePixels;
 
-import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Utils.LevelLoader;

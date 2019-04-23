@@ -1,12 +1,10 @@
 package com.FuturePixels.levels.Playable.CoopLevels;
 
 import com.Liamengine.Engine.Components.Transform;
-import com.FuturePixels.Drawables.Levels.DebugObject;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.FuturePixels.Drawables.Levels.*;
 import com.FuturePixels.Drawables.Menus.GamePreferences;
 import com.FuturePixels.levels.Menus.MainMenu;
-import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
 import com.Liamengine.Engine.Utils.FileUtils;
@@ -14,7 +12,6 @@ import com.Liamengine.Engine.Utils.imageUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.util.Random;
 import javax.sound.sampled.Clip;
 

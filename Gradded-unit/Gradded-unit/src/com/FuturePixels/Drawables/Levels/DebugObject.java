@@ -5,13 +5,10 @@
  */
 package com.FuturePixels.Drawables.Levels;
 
-import com.Liamengine.Engine.AbstractClasses.IComponent;
 import com.Liamengine.Engine.AbstractClasses.IDrawable;
 import com.Liamengine.Engine.Components.Vector;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 /**
