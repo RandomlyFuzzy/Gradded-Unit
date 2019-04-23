@@ -18,7 +18,7 @@ import java.util.Random;
 
 /**
  * this does not implement movement relative to the time so any lag spike will
- * cause the players movements to be less than expected I updated this but it it
+ * cause the players movements to be less than expected I updated this but it 
  * made the player seem different so the group decided to not implement that
  * functionality
  *
