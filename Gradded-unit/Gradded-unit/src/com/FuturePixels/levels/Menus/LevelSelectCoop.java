@@ -8,7 +8,7 @@ package com.FuturePixels.levels.Menus;
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.FuturePixels.Drawables.Menus.Mouse;
-import com.FuturePixels.levels.CoopLevels.LevelCoop;
+import com.FuturePixels.levels.Playable.CoopLevels.LevelCoop;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Components.Transform;

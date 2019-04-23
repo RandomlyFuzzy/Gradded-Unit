@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.FuturePixels.levels.OtherLevels;
+package com.FuturePixels.levels.Menus;
 
 import com.FuturePixels.Drawables.Menus.Button;
 import com.FuturePixels.Drawables.Menus.HUDdelegate;

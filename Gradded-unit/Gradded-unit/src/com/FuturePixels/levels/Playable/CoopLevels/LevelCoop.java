@@ -1,4 +1,4 @@
-package com.FuturePixels.levels.CoopLevels;
+package com.FuturePixels.levels.Playable.CoopLevels;
 
 import com.Liamengine.Engine.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;

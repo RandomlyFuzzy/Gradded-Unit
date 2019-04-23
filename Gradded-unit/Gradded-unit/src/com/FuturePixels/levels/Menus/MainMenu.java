@@ -13,7 +13,6 @@ import com.FuturePixels.Drawables.Menus.HUDdelegate;
 import com.Liamengine.Engine.AbstractClasses.ILevel;
 import com.Liamengine.Engine.Entry.Game;
 import com.Liamengine.Engine.Components.Vector;
-import com.FuturePixels.levels.OtherLevels.LeaderBoard;
 import com.Liamengine.Engine.Components.Transform;
 import java.awt.Color;
 import java.awt.Font;

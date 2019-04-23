@@ -1,4 +1,4 @@
-package com.FuturePixels.levels.SoloLevels;
+package com.FuturePixels.levels.Playable.SoloLevels;
 
 import com.Liamengine.Engine.Components.Transform;
 import com.FuturePixels.Drawables.Levels.DebugObject;
