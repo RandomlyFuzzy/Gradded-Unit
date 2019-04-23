@@ -44,8 +44,9 @@ public class DeathOverlay extends IDrawable {
      */
     @Override
     public void init() {
-
-        Level().AddObject(new Button(new Vector(0.3f, 0.8f), "[R] Retry", new HUDdelegate() {
+        
+        
+        Level().AddObject(new Button(new Vector(0.3f,0.8f), "[R] Retry", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 try {
@@ -108,15 +109,14 @@ public class DeathOverlay extends IDrawable {
         if (Level().getLastKeyPress().getKeyCode() != KeyEvent.CHAR_UNDEFINED) {
             if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
                 try {
-                    MusicUtils.StopAllSounds();
                     LevelLoader.LoadLevel(Level().getClass().newInstance());
                 } catch (InstantiationException ex) {
                     Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
                     Logger.getLogger(DeathOverlay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
                 }
-            } else if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_M) {
-                MusicUtils.StopAllSounds();
+            }else
+            if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_M) {
                 LevelLoader.LoadLevel(new MainMenu());
             }
         }
@@ -127,13 +127,13 @@ public class DeathOverlay extends IDrawable {
      * @param im
      */
     @Override
-    public void onCollison(IDrawable im) {
+    public void onCollison(IDrawable im) { 
     }
-
+    
     @Override
-    public void dispose() {
+    public void dispose(){
         imageUtils.T.setImage("/API/cat", null);
-
+    
     }
 
 }
