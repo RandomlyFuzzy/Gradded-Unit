@@ -361,26 +361,18 @@ public class Player extends IDrawable {
                 col2 = null;
             }
 
-            //left
+            
             if (col3.ISHIT) {
 
-//                if (Acc.getX() > 0 || Velocity.getX() > 0) {
-//                    this.right = false;
-//                    Acc.setX(0);
-//                    Velocity.setX(0);
-//                }
+                //Update character position on collision
                 setPosition(new Vector(col3.HITLOCATION).add(new Vector(left).add(new Vector(getPosition()).mult(-1)).mult(-1)));
+                //Used for debugging
                 DebugObject.AddLine(_left[0], _left[1]);
             }
-            //right
+            
             if (col4.ISHIT) {
-
-//                if (Acc.getX() < 0 || Velocity.getX() < 0) {
-//                    this.left = false;
-//                    Acc.setX(0);
-//                    Velocity.setX(0);
-//                }
-//                addPosition(col4.HITLOCATION.add(new Vector(right).mult(1)));
+                
+                //Used for debugging
                 DebugObject.AddLine(left, right);
                 DebugObject.AddLine(_right[0], _right[1]);
             }
@@ -389,7 +381,7 @@ public class Player extends IDrawable {
     }
 
     /**
-     *
+     * 
      * @return
      */
     public static boolean isHasLost() {
@@ -397,7 +389,7 @@ public class Player extends IDrawable {
     }
 
     /**
-     *
+     * 
      * @param hasLost
      */
     public static void setHasLost(boolean hasLost) {
