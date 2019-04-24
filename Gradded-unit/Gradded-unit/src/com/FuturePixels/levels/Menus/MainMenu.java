@@ -75,8 +75,7 @@ public class MainMenu extends ILevel {
 
         //Creates a button that links to the solo level select when clicked
         AddObject(new Button(new Vector(0.218f, 0.415f), "Solo", new HUDdelegate() {
-            @Override
-            
+            @Override            
             public void OnClick(Button b) {
                 //Create a transition effect using by sliding the background 
                 MainMenu.setTranspos(new Vector(0, Game.getWindowHeight()));
