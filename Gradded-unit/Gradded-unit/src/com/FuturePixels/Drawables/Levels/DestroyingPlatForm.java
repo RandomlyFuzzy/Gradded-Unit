@@ -51,7 +51,10 @@ public class DestroyingPlatForm extends IDrawable {
 
     }
 
-
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         if (((-Transform.getOffsetTranslation().getX() - (Game.getScaledWidth()) < getPosition().getX()

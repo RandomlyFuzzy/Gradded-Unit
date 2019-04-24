@@ -15,6 +15,7 @@ import javax.sound.sampled.Clip;
 
 /**
  * @author Liam Rickman
+ * Level 4 class which adds a moving platform
  */
 
 //The class takes information from the ILevel class in the LiamEngine library in order to create the level
@@ -24,13 +25,19 @@ public class Level4Solo extends ILevel {
     private Player player1;
     private Vector StartingPosition = Vector.Zero();
 
+    /**
+     *
+     */
     public Level4Solo() {
-        //INSERT COMMENT
         super();
         setSimpleCollison(false);
+        //Stops any audio playing
         setStopAudioOnStart(true);
     }
     
+    /**
+     *
+     */
     @Override
     public void init() {
         new Thread(new Runnable() {
@@ -42,11 +49,10 @@ public class Level4Solo extends ILevel {
             }
         }).start();
         
+        //Creates a new player object and sets adds it to the level at the specified vector position.
         player1 = new Player();
         AddObject(player1).setPosition(0, -50);
-        
-        
-        
+
         //Sets sprite variables to more easily set each platform sprite
         BufferedImage moss1 = GetSprite("/images/platform/rock_platform_moss_01.png");
         BufferedImage wood1 = GetSprite("/images/platform/wooden_platform_01.png");
@@ -87,6 +93,9 @@ public class Level4Solo extends ILevel {
         //The flag creates the next Level and allows it to be loaded next.
         AddObject(new Flag(new Level5Solo())).setPosition(new Vector(950, -3300));
         
+        //We used the DebugObject to give a visual representation of collision boxes.
+//        AddObject(new DebugObject());
+        
         //Plays the level 4 music on repeat
         play("/sounds/lvl4song.wav", 0, Clip.LOOP_CONTINUOUSLY);
         
@@ -96,6 +105,7 @@ public class Level4Solo extends ILevel {
         //Gives the vector Starting Position a new value that will be used later for scaling the background image
         StartingPosition = new Vector((Game.getScaledWidth() * 0.4f) / 2, 0);
         
+        //Sets the camera position to half of the screen width
         Transform.setOffsetTranslation(StartingPosition);
     }
 
@@ -105,10 +115,6 @@ public class Level4Solo extends ILevel {
     @Override
 
     public void Update(ActionEvent ae) {
-
-        if (player1 == null) {
-            return;
-        }
 
     }
 
@@ -166,6 +172,7 @@ public class Level4Solo extends ILevel {
             int code = e.getKeyCode();
             //These statements check whether a Player1 Movement key has been released
             //If they have, the player will stop moving in the that direction.
+            //Gathers the player movement keys from the GamePreferences class
             if (code == GamePreferences.gp.getKeyRightP1()) {
                 player1.setRight(false);
             } else if (code == GamePreferences.gp.getKeyLeftP1()) {

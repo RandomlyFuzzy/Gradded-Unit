@@ -95,7 +95,7 @@ public class DropDownButton extends IDrawable {
     @Override
     public void doMove() {
         setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()).add(new Vector(Transform.getOffsetTranslation()).mult(-1)));
-        setScale(Game.ButtonDims());
+        setScale(new Vector(0.9f,0.9f));
     }
 
     /**

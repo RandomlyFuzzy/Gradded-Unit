@@ -57,7 +57,7 @@ public class Slider extends IDrawable {
     @Override
     public void doMove() {
         setPosition(Game.getScaledWidth()* relpos.getX(), Game.getScaledHeight()* relpos.getY());
-        setScale(Game.ButtonDims());
+        setScale(new Vector(0.9f,0.9f));
 
         if (Level().isClicking() && inside) {
             MouseWhenPressed = Level().getMousePos();

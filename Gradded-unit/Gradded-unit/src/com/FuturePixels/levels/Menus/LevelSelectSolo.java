@@ -26,6 +26,9 @@ import java.util.logging.Logger;
  */
 public class LevelSelectSolo extends ILevel {
 
+    /**
+     *
+     */
     public Vector transpos = Vector.One();
 
     /**
@@ -91,6 +94,10 @@ public class LevelSelectSolo extends ILevel {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void PostDraw(Graphics2D g) {
 
