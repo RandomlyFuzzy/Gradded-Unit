@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
- *
+ *This platform moves side to side and has a different image from the static platform
  * @author Liam Woolley 1748910
  */
 public class MovingPlatform extends IDrawable {
@@ -36,7 +36,7 @@ public class MovingPlatform extends IDrawable {
     }
 
     /**
-     *
+     *Sets position, rotation and movement speed of the platform
      * @param position
      * @param RadianRotation
      * @param cycle
@@ -56,7 +56,7 @@ public class MovingPlatform extends IDrawable {
     }
 
     /**
-     *
+     *Initialises image
      */
     @Override
     public void init() {
@@ -79,7 +79,7 @@ public class MovingPlatform extends IDrawable {
     }
 
     /**
-     *
+     *Updates the movement speed and position of the platform
      */
     @Override
     public void doMove() {
@@ -97,7 +97,7 @@ public class MovingPlatform extends IDrawable {
     }
 
     /**
-     *
+     *Updates the image every frame
      * @param g
      */
     @Override
@@ -113,7 +113,7 @@ public class MovingPlatform extends IDrawable {
     }
 
     /**
-     *
+     *Update image on collision
      * @param im
      */
     @Override

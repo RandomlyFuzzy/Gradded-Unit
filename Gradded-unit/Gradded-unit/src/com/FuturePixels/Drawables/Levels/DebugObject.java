@@ -21,7 +21,9 @@ public class DebugObject extends IDrawable {
     private static ArrayList<Vector> Cirles = new ArrayList<Vector>();
 
     /**
+     *
      * @param v1
+     * @param v2
      */
     public static void AddLine(Vector v1, Vector v2) {
         Lines.add(v1);
@@ -30,6 +32,7 @@ public class DebugObject extends IDrawable {
 
     /**
      *
+     * @param v1
      */
     public static void AddCirles(Vector v1) {
         Cirles.add(v1);
@@ -51,6 +54,7 @@ public class DebugObject extends IDrawable {
 
     /**
      *
+     * @param g
      */
     @Override
     public void Update(Graphics2D g) {
@@ -83,6 +87,7 @@ public class DebugObject extends IDrawable {
     }
 
     /**
+     *
      * @param im
      */
     @Override

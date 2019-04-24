@@ -30,16 +30,17 @@ import com.Liamengine.Engine.Utils.FileUtils;
 public class Entry {
 
     /**
-     *
-     * @param args 
+     *Entry method into application
+     * @param args
      */
     public static void main(String[] args) {
+        //Creates class objects
         ILevel[] arr = new ILevel[]{new MainMenu(Vector.Zero()), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(),new Level5Solo(), new LevelCoop(), new Credits()};
         LevelLoader.LL.SetLevels(arr);
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu(Vector.Zero()));
-
-        // Reads preferences from file and sets to controlls
+        
+        //Reads preference file and sets properties to controls
         String[] preferences = FileUtils.GetFileSplit("resources/data/preferences.txt", "\n");
         GamePreferences.gp.setKeyLeftP1(Integer.parseInt(preferences[0].trim()));
         GamePreferences.gp.setKeyRightP1(Integer.parseInt(preferences[1].trim()));
@@ -49,9 +50,10 @@ public class Entry {
         GamePreferences.gp.setKeyJumpP2(Integer.parseInt(preferences[5].trim()));
         GamePreferences.gp.setKeyDropP1(Integer.parseInt(preferences[6].trim()));
         GamePreferences.gp.setKeyDropP2(Integer.parseInt(preferences[7].trim()));
+
         new Game(new MainMenu(Vector.Zero()));
         
-        //Sets title of window
+        //Sets window title
         Game.GetFrame().setTitle("Breaking Through - FuturePixels");
     }
 }
