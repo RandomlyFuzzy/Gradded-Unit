@@ -355,8 +355,10 @@ public class Player extends IDrawable {
                     Acc.mult(new Vector(1, -.50f));
                     once = false;
                 int rHit = forsounds.nextInt(7);
+                int rOuch = forsounds.nextInt(2) + 1;
                 //Play sound upon collision
-                Level().play("/sounds/" + "hit" + rHit + ".wav");
+                Level().play("/sounds/hit" + rHit + ".wav");
+                Level().play("/sounds/ouch" + rOuch + ".wav");
                 }
                 col2 = null;
             }
