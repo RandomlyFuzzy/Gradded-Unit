@@ -21,8 +21,8 @@ import java.util.Random;
  * made the player seem different so the group decided to not implement that
  * functionality
  *
- * Everything relevant to the player is included here such as the movement,
- * camera position, sprite
+ * Everything relevant to the player is included here such as the movement, rotation
+ * camera position, if the player can jump, footstep sounds.
  * @author Liam Woolley 1748910
  */
 public class Player extends IDrawable {
@@ -45,12 +45,14 @@ public class Player extends IDrawable {
     private static boolean hasLost = false;
     private int playerind = 0;
 
+    // Player speed and acceleration
     public Player() {
         super();
         Velocity = new Vector(0, 0);
         Acc = new Vector(0, 0);
     }
 
+    // Initialises player properties
     public void init() {
         Player.setLock(false);
         hasLost = false;
@@ -62,6 +64,7 @@ public class Player extends IDrawable {
 
     }
 
+    // Checks movement direction
     public void move(boolean left, boolean right, boolean up, boolean down) {
         this.left = left;
         this.right = right;
@@ -69,26 +72,29 @@ public class Player extends IDrawable {
         this.down = down;
     }
 
+    // Updates character images
     @Override
     public void Update(Graphics2D g) {
         doMove();
         ind += !canJump ? 0.3f : Stop ? -ind : 0.3f;
         setScale(new Vector(Scale, 1));
-//       
+       
         if (hasLost) {
-            //insert death sprite here
+            // Displays death sprite upon death
             GetSprite("/images/player/reggie DEATH_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
             setSpriteWidth(60);
             setSpriteHeight(90);
         } else if (isLock()) {
+            //Dipplays cheer sprite upon win
             GetSprite("/images/player/reggie WIN_0" + playerind + ".png");
             she.inputImage(getLastImage());
             she.IncrementX(1);
             setSpriteWidth(60);
             setSpriteHeight(90);
         } else if ((canJump)) {
+            // Displays running character sprite when running
             ind = ind % 7f;
             GetSprite("/images/player/player_0" + playerind + ".png");
             she.inputImage(getLastImage());
@@ -99,6 +105,7 @@ public class Player extends IDrawable {
             setSpriteWidth(60);
             setSpriteHeight(90);
         } else if (Velocity.getY() < 0) {
+            // Displays falling character sprite when mid-air
             ind = ind % 3f;
             GetSprite("/images/player/reggie FALL_0" + playerind + ".png");
             she.inputImage(getLastImage());
@@ -106,6 +113,7 @@ public class Player extends IDrawable {
             setSpriteWidth(60);
             setSpriteHeight(90);
         } else if (Velocity.getY() > 0) {
+            // Displays jumping character sprite upon jump
             ind = ind % 3f;
             GetSprite("/images/player/reggie JUMP_0" + playerind + ".png");
             she.inputImage(getLastImage());
@@ -114,32 +122,28 @@ public class Player extends IDrawable {
             setSpriteHeight(90);
         }
 
-//        if (canJump) {
         DrawLastLoadedImageAsSpriteSheet(g, she);
-//        } else {
-//            DrawLastLoadedImage(g);
-//        }
-//        setRotation(getRotation()+(float)(Math.PI/180));
+
     }
 
     public void doMove() {
+        // Rotate player on tilted platform
         if (!isColliding() || Isplayer) {
             setRotation((getRotation() * 0.98f));
             canJump = false;
             once = true;
             Velocity.mult(new Vector(0.985f, 0.995f));
         }
+        // Make player slide
         if (!Lock && !hasLost) {
             moveplayer();
         }
         if (!isColliding() || Isplayer) {
-            //gravity is a bit too much for this so im going to make it less than gravity (maybe mars gravity*2)
-//            Acc.setY(Acc.getY() + (-9.81f * (float) Game.g.getDelta()));
-            //mars gravity*2  
+ 
             Acc.addY((-3.711f * (float) Game.getDelta() * 2));
         }
         Velocity.add(Acc);
-        //adds the relative "right" vector and "up" vector 
+        // adds the relative "right" vector and "up" vector 
         addPosition(Vector.Zero().add(GetRight().mult(Velocity.getX())).add(GetUp().mult(Velocity.getY())).add(GetRight().mult((float) getRotation() * 2f)));
 
         if (isColliding() && !Isplayer) {
@@ -147,11 +151,12 @@ public class Player extends IDrawable {
         }
         Acc.mult(0);
 
+        // Play slide sound when character is rotated
         if ((float) getRotation() != 0 && canJump) {
             Level().play("/sounds/slide.wav");
         }
 
-        //screen scroller
+        // Screen scroller
         if (!isLock() && !hasLost) {
             Cameraopos.setY(Cameraopos.getY() + Game.getDelta() * 30f);
         }
@@ -181,12 +186,13 @@ public class Player extends IDrawable {
             Cameraopos.setY(-getPosition().getY() + getScaledSpriteHeight() * 2);
             hasupdated = true;
         }
-        // centers on the player 
-//        Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
+        // Centers on the player 
+        // Cameraopos = new Vector(getPosition()).mult(-1).add(new Vector(Game.g.getScaledWidth() / 2, Game.g.getScaledHeight() / 2));
         if (hasupdated && !once2) {
             Transform.setOffsetTranslation(Cameraopos);
             hasupdated = false;
         }
+        // This was used for debugging
         DebugObject.AddLine(
                 new Vector(-Transform.getOffsetTranslation().getX(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2),
                 new Vector(-Transform.getOffsetTranslation().getX() + Game.getScaledWidth(), -Transform.getOffsetTranslation().getY() + Game.getScaledHeight() / 2)
@@ -200,7 +206,7 @@ public class Player extends IDrawable {
         boolean one = true, two = true;
 
         if (up && canJump) {
-//            Acc.setY(0.01f);
+        // Adds vertical acceleration of character on jump and plays random jump sound
             if (isColliding() && !Isplayer) {
                 Acc.setY(8f);
                 int r = forsounds.nextInt(3);
@@ -213,12 +219,14 @@ public class Player extends IDrawable {
         } else {
             one = false;
         }
+        //Moves player left if pressed and plays footsteps
         if (left) {
             Scale = -1;
             Acc.addX(-100);
             if (canJump) {
                 Level().play("/sounds/footsteps.wav");
             }
+        //Moves player right if pressed and plays footsteps
         } else if (right) {
             Scale = 1;
             Acc.addX(100);
@@ -248,6 +256,7 @@ public class Player extends IDrawable {
             Isplayer = false;
         }
 
+        //Sets movement of character when level is won
         if (isLock()) {
             Velocity.addY(0.1f);
             return;
@@ -264,7 +273,7 @@ public class Player extends IDrawable {
             setRotation(im.getRotation());
             Vector bottom, top, left, right, _hit;
             Vector[] _Top, _bottom, _left, _right;
-            //get platfor top line
+            //Updates character position based upon collosion with platform
             bottom = new Vector(getPosition()).add(GetUp().mult(getScaledSpriteHeight() * -0.5f));
             top = new Vector(bottom).mult(-1f).add(getPosition()).add(getPosition());
             left = new Vector(getPosition()).add(new Vector(-getSpriteWidth() / 2, 0));
@@ -273,48 +282,56 @@ public class Player extends IDrawable {
             _bottom = im.sideDown();
             _left = im.sideLeft();
             _right = im.sideRight();
+            //This was used for debugging
             DebugObject.AddLine(left, right);
 
+            //Checks for collision with platforms
             Collison col = CollisonUtils.CheckForLineHits(getPosition(), bottom, _Top[0], _Top[1]);
             Collison col2 = CollisonUtils.CheckForLineHits(getPosition(), top, _bottom[0], _bottom[1]);
             Collison col3 = CollisonUtils.CheckForLineHits(getPosition(), right, _left[0], _left[1]);
             Collison col4 = CollisonUtils.CheckForLineHits(getPosition(), left, _right[0], _right[1]);
 
-            //up
+            //Checks if bottom of player collides with platform
             if (col.ISHIT && !down) {
                 canJump = true;
+                //Used for debugging
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_Top[0], _Top[1]);
+                //Checks where player collides with platform
                 _hit = col.HITLOCATION;
                 float x = (GetUp().mult(getSpriteHeight() * 0.5f)).getX(),
                         y = (GetUp().mult(getSpriteHeight() * 0.5f)).getY();
                 DebugObject.AddCirles(new Vector(col.HITLOCATION.getX(), col.HITLOCATION.getY()));
-//                Acc.addY((-3.711f * (float) Game.g.getDelta() * -2));
                 if (once) {
                     Velocity.setY(0);
                     once = false;
                 }
+                //Set position of player after collision with plaftform
                 setPosition(col.HITLOCATION.getX() + x, col.HITLOCATION.getY() + y);
                 col = null;
                 col2 = null;
                 return;
             }
-            //down
+            //Checks if players head/top of player collides with platform
             if (col2.ISHIT && Velocity.getY() > 0) {
                 canJump = false;
                 float x = new Vector(bottom).mult(0f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getX(),
                         y = new Vector(bottom).mult(-0.00f).add(GetUp().mult(getSpriteHeight() * -0.7f)).getY();
-
+                
+                //Set position of player after collision with plaftform
                 setPosition(col2.HITLOCATION.getX() + x, col2.HITLOCATION.getY() + y);
 
+                //Used for debugging
                 DebugObject.AddLine(bottom, top);
                 DebugObject.AddLine(_bottom[0], _bottom[1]);
                 DebugObject.AddCirles(new Vector(col2.HITLOCATION.getX(), col2.HITLOCATION.getY()));
+                //Move player upon collision
                 if (once) {
                     Velocity.mult(new Vector(1, -.40f));
                     Acc.mult(new Vector(1, -.50f));
                     once = false;
                 int rHit = forsounds.nextInt(7);
+                //Play sound upon collision
                 Level().play("/sounds/" + "hit" + rHit + ".wav");
                 }
                 col2 = null;
