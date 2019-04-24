@@ -15,6 +15,7 @@ import javax.sound.sampled.Clip;
 
 /**
  * @author Liam Rickman 1748905
+ * Level 1 class which includes one basic platform that doesn't affect player movement
  */
 
 //The class takes information from the ILevel class in the LiamEngine library in order to create the level
@@ -24,6 +25,9 @@ public class Level1Solo extends ILevel {
     private Player player1;
     private Vector StartingPosition = Vector.Zero();
     
+    /**
+     *
+     */
     public Level1Solo() {
         super();
         setSimpleCollison(false);
@@ -31,6 +35,9 @@ public class Level1Solo extends ILevel {
         setStopAudioOnStart(true);
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         new Thread(new Runnable() {
@@ -93,9 +100,13 @@ public class Level1Solo extends ILevel {
         //The flag creates the next Level and allows it to be loaded next.
         AddObject(new Flag(new Level2Solo())).setPosition(new Vector(650, -5650));
         
+        //We used the DebugObject to give a visual representation of collision boxes.
+//        AddObject(new DebugObject());
+        
         //Gives the vector Starting Position a new value that will be used later for scaling the background image
         StartingPosition = new Vector((Game.getScaledWidth() * .6f) / 2, 0);
         
+        //Sets the camera position to half of the screen width
         Transform.setOffsetTranslation(new Vector((Game.getScaledWidth() * .6f) / 2, 0));
         
         //Plays the level 1 music on repeat
@@ -109,9 +120,7 @@ public class Level1Solo extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
-        if (player1 == null) {
-                    return;
-        }
+        
     }
 
     /**
@@ -138,7 +147,8 @@ public class Level1Solo extends ILevel {
             //Sets a variable for key inputs
             int code = e.getKeyCode();
             //These statements check whether a Player1 Movement key is being pressed.
-            //If they are, the player will move in the that direction.
+            //If they are, player 1 will move in that direction.
+            //Gathers the player movement keys from the GamePreferences class
             if (code == GamePreferences.gp.getKeyRightP1()) {
                 player1.setRight(true);
             } else if (code == GamePreferences.gp.getKeyLeftP1()) {

@@ -52,6 +52,10 @@ public class DestroyingPlatForm extends IDrawable {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     //Updates the platform every frame and plays sound when platform is destroyed
     @Override
     public void Update(Graphics2D g) {

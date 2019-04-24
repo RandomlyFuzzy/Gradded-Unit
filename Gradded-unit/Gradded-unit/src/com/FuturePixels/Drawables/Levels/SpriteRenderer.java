@@ -21,20 +21,37 @@ public class SpriteRenderer extends IComponent {
     private SpriteSheet she;
     private float inc = 0.3f;
 
+    /**
+     *
+     * @param parent
+     * @param inc
+     */
     public SpriteRenderer(IDrawable parent,float inc) {
         super(parent);
         this.inc = inc;
     }
 
+    /**
+     *
+     * @param im
+     * @param she
+     */
     public void inputImage(BufferedImage im, SpriteSheet she) {
         bi = im;
         this.she = she;
     }
 
+    /**
+     *
+     */
     @Override
     public void Init() {
     }
 
+    /**
+     *
+     * @param gd
+     */
     @Override
     public void Update(Graphics2D gd) {
         IDrawable id = getParent();

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- *
+ * Leaderboard menu shows the top 10 times for each levels completion.
  * @author Liam Woolley 1748910
  */
 public class LeaderBoard extends ILevel {
@@ -31,7 +31,6 @@ public class LeaderBoard extends ILevel {
     private ArrayList<String> times = new ArrayList<String>();
 
     /**
-     *
      * @return
      */
     public static String getCurrentind() {
@@ -39,19 +38,18 @@ public class LeaderBoard extends ILevel {
     }
 
     /**
-     *
      * @param Currentind
      */
     public static void setCurrentind(String Currentind) {
         LeaderBoard.Currentind = Currentind;
     }
-
+    
     /**
      *
      */
     public LeaderBoard() {
         super();
-        
+        //Stops any audio that is already playing
         setStopAudioOnStart(false);
     }
 
@@ -75,12 +73,14 @@ public class LeaderBoard extends ILevel {
             })).GetSprite("/images/button_2.png");
         }
 
+        //Loads the background image to the leaderboard background
         setBackgroundimage(GetSprite("/images/backgrounds/leaderboard.png"));
+        
+        //Adds the mouse object to the level so the user can see what they are pointing at
         AddObject(new Mouse());
     }
 
     /**
-     *
      * @param ae
      */
     @Override
@@ -118,7 +118,6 @@ public class LeaderBoard extends ILevel {
     }
 
     /**
-     *
      * @param g
      */
     @Override
@@ -166,7 +165,6 @@ public class LeaderBoard extends ILevel {
     }
 
     /**
-     *
      * @param e
      */
     @Override
@@ -175,7 +173,6 @@ public class LeaderBoard extends ILevel {
     }
 
     /**
-     *
      * @param e
      */
     @Override

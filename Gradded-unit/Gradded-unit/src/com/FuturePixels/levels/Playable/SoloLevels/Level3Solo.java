@@ -15,6 +15,7 @@ import javax.sound.sampled.Clip;
 
 /**
  * @author Liam Rickman
+ * Level 3 class which adds a breakable platform which breaks when the player leaves them
  */
 
 //The class takes information from the ILevel class in the LiamEngine library in order to create the level
@@ -24,6 +25,9 @@ public class Level3Solo extends ILevel {
     private Player player1;
     private Vector StartingPosition = Vector.Zero();
 
+    /**
+     *
+     */
     public Level3Solo() {
         super();
         setSimpleCollison(false);
@@ -31,6 +35,9 @@ public class Level3Solo extends ILevel {
         setStopAudioOnStart(true);
     }
     
+    /**
+     *
+     */
     @Override
     public void init() {
         new Thread(new Runnable() {
@@ -92,6 +99,9 @@ public class Level3Solo extends ILevel {
         //The flag creates the next Level and allows it to be loaded next.
         AddObject(new Flag(new Level4Solo())).setPosition(new Vector(200, -4450));
         
+        //We used the DebugObject to give a visual representation of collision boxes.
+//        AddObject(new DebugObject());
+        
         //Plays the level 3 music on repeat
         play("/Sounds/Lvl3Song.wav", 0, Clip.LOOP_CONTINUOUSLY);
        
@@ -101,6 +111,7 @@ public class Level3Solo extends ILevel {
         //Gives the vector Starting Position a new value that will be used later for scaling the background image
         StartingPosition = new Vector((Game.getScaledWidth() * 0.4f) / 2, 0);
         
+        //Sets the camera position to half of the screen width
         Transform.setOffsetTranslation(StartingPosition);
     }
 
@@ -109,10 +120,6 @@ public class Level3Solo extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
-
-        if (player1 == null) {
-            return;
-        }
 
     }
 
@@ -168,6 +175,7 @@ public class Level3Solo extends ILevel {
             int code = e.getKeyCode();
             //These statements check whether a Player1 Movement key has been released
             //If they have, the player will stop moving in the that direction.
+            //Gathers the player movement keys from the GamePreferences class
             if (code == GamePreferences.gp.getKeyRightP1()) {
                 player1.setRight(false);
             } else if (code == GamePreferences.gp.getKeyLeftP1()) {

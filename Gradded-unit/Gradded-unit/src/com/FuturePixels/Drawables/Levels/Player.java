@@ -46,6 +46,9 @@ public class Player extends IDrawable {
     private int playerind = 0;
 
     // Player speed and acceleration
+    /**
+     *
+     */
     public Player() {
         super();
         Velocity = new Vector(0, 0);
@@ -53,6 +56,9 @@ public class Player extends IDrawable {
     }
 
     // Initialises player properties
+    /**
+     *
+     */
     public void init() {
         Player.setLock(false);
         hasLost = false;
@@ -65,6 +71,13 @@ public class Player extends IDrawable {
     }
 
     // Checks movement direction
+    /**
+     *
+     * @param left
+     * @param right
+     * @param up
+     * @param down
+     */
     public void move(boolean left, boolean right, boolean up, boolean down) {
         this.left = left;
         this.right = right;
@@ -73,6 +86,10 @@ public class Player extends IDrawable {
     }
 
     // Updates character images
+    /**
+     *
+     * @param g
+     */
     @Override
     public void Update(Graphics2D g) {
         doMove();
@@ -126,6 +143,9 @@ public class Player extends IDrawable {
 
     }
 
+    /**
+     *
+     */
     public void doMove() {
         // Rotate player on tilted platform
         if (!isColliding() || Isplayer) {
@@ -243,6 +263,10 @@ public class Player extends IDrawable {
         Stop = !one && !two;
     }
 
+    /**
+     *
+     * @param im
+     */
     @Override
     public void onCollison(IDrawable im) {
         if (im == null) {
@@ -364,54 +388,105 @@ public class Player extends IDrawable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static boolean isHasLost() {
         return hasLost;
     }
 
+    /**
+     *
+     * @param hasLost
+     */
     public static void setHasLost(boolean hasLost) {
         Player.hasLost = hasLost;
     }
 
+    /**
+     *
+     * @return
+     */
     public static boolean isLock() {
         return Lock;
     }
 
+    /**
+     *
+     * @param Lock
+     */
     public static void setLock(boolean Lock) {
         Player.Lock = Lock;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isLeft() {
         return left;
     }
 
+    /**
+     *
+     * @param left
+     */
     public void setLeft(boolean left) {
         this.left = left;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isRight() {
         return right;
     }
 
+    /**
+     *
+     * @param right
+     */
     public void setRight(boolean right) {
         this.right = right;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isUp() {
         return up;
     }
 
+    /**
+     *
+     * @param up
+     */
     public void setUp(boolean up) {
         this.up = up;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isDown() {
         return down;
     }
 
+    /**
+     *
+     * @param down
+     */
     public void setDown(boolean down) {
         this.down = down;
     }
 
+    /**
+     *
+     */
     @Override
     public void dispose() {
         super.dispose();
@@ -423,18 +498,34 @@ public class Player extends IDrawable {
         playerCount = 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public Vector getVelocity() {
         return Velocity;
     }
 
+    /**
+     *
+     * @param Velocity
+     */
     public void setVelocity(Vector Velocity) {
         this.Velocity = Velocity;
     }
 
+    /**
+     *
+     * @return
+     */
     public Vector getAcc() {
         return Acc;
     }
 
+    /**
+     *
+     * @param Acc
+     */
     public void setAcc(Vector Acc) {
         this.Acc = Acc;
     }

@@ -50,6 +50,14 @@ public class MovingPlatform extends IDrawable {
         this.Speed = Speed*2;
     }
 
+    /**
+     *
+     * @param position
+     * @param RadianRotation
+     * @param cycle
+     * @param Speed
+     * @param asSpriteSheet
+     */
     public MovingPlatform(Vector position, double RadianRotation, Vector[] cycle, float Speed, boolean asSpriteSheet) {
         this(position, RadianRotation, cycle, Speed);
         AsSpriteSheet = asSpriteSheet;
@@ -63,6 +71,13 @@ public class MovingPlatform extends IDrawable {
         GetSprite("/images/platform/rock_platform_moss_01.png");
     }
 
+    /**
+     *
+     * @param path
+     * @param width
+     * @param height
+     * @return
+     */
     public IDrawable GetSprite(String path, int width, int height) {
         if (AsSpriteSheet) {
             BufferedImage bi = imageUtils.T.GetImage(path);

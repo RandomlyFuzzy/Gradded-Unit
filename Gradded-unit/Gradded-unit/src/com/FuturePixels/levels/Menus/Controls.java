@@ -57,6 +57,9 @@ public class Controls extends ILevel {
         }
     }
 
+    /**
+     *
+     */
     public void InvertButtons(){
         for(Button b: but){
             b.setEnabled(!b.isEnabled());

@@ -130,6 +130,9 @@ public class DeathOverlay extends IDrawable {
     public void onCollison(IDrawable im) {
     }
 
+    /**
+     *
+     */
     @Override
     public void dispose() {
         imageUtils.T.setImage("/API/cat", null);

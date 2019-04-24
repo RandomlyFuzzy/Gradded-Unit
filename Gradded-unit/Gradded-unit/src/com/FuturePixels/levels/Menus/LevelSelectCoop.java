@@ -27,6 +27,9 @@ import java.util.logging.Logger;
  */
 public class LevelSelectCoop extends ILevel {
 
+    /**
+     *
+     */
     public Vector transpos = Vector.Zero();
 
     /**
@@ -92,6 +95,10 @@ public class LevelSelectCoop extends ILevel {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void PostDraw(Graphics2D g) {
 

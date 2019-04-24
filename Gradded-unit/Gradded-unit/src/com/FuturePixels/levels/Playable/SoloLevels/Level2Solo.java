@@ -15,6 +15,7 @@ import javax.sound.sampled.Clip;
 
 /**
  * @author Liam Woolley 1748910
+ * Level 2 class that adds slanted platforms that slide the player down
  */
 
 //The class takes information from the ILevel class in the LiamEngine library in order to create the level
@@ -24,7 +25,9 @@ public class Level2Solo extends ILevel {
     private Player player1;
     private Vector StartingPosition = Vector.Zero();
 
-    
+    /**
+     *
+     */
     public Level2Solo() {
         super();
         setSimpleCollison(false);
@@ -91,9 +94,13 @@ public class Level2Solo extends ILevel {
         //The flag creates the next Level and allows it to be loaded next.
         AddObject(new Flag(new Level3Solo())).setPosition(new Vector(500, -3650));
         
+        //We used the DebugObject to give a visual representation of collision boxes.
+//        AddObject(new DebugObject());
+        
         //Gives the vector Starting Position a new value that will be used later for scaling the background image
         StartingPosition = new Vector((Game.getScaledWidth()) / 2, 0);
         
+        //Sets the camera position to half of the screen width
         Transform.setOffsetTranslation(StartingPosition);
         
         //Plays the level 2 music on repeat
@@ -107,9 +114,7 @@ public class Level2Solo extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
-        if (player1 == null) {
-            return;
-        }
+
     }
 
     /**
@@ -137,14 +142,13 @@ public class Level2Solo extends ILevel {
             int code = e.getKeyCode();
             //These statements check whether a Player1 Movement key is being pressed.
             //If they are, the player will move in the that direction.
+            //Gathers the player movement keys from the GamePreferences class
             if (code == GamePreferences.gp.getKeyRightP1()) {
                 player1.setRight(true);
             } else if (code == GamePreferences.gp.getKeyLeftP1()) {
                 player1.setLeft(true);
-
             } else if (code == GamePreferences.gp.getKeyJumpP1()) {
                 player1.setUp(true);
-
             } else if (code == GamePreferences.gp.getKeyDropP1()) {
                 player1.setDown(true);
             }
@@ -166,14 +170,13 @@ public class Level2Solo extends ILevel {
             int code = e.getKeyCode();
             //These statements check whether a Player1 Movement key has been released
             //If they have, the player will stop moving in the that direction.
+            //Gathers the player movement keys from the GamePreferences class
             if (code == GamePreferences.gp.getKeyRightP1()) {
                 player1.setRight(false);
             } else if (code == GamePreferences.gp.getKeyLeftP1()) {
                 player1.setLeft(false);
-
             } else if (code == GamePreferences.gp.getKeyJumpP1()) {
                 player1.setUp(false);
-
             } else if (code == GamePreferences.gp.getKeyDropP1()) {
                 player1.setDown(false);
             }

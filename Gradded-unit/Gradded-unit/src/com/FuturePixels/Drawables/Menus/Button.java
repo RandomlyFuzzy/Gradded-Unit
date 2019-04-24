@@ -46,6 +46,13 @@ public class Button extends IDrawable {
         this.relpos = relpos;
     }
 
+    /**
+     *
+     * @param relpos
+     * @param Message
+     * @param Logic
+     * @param usetras
+     */
     public Button(Vector relpos, String Message, HUDdelegate Logic, boolean usetras) {
         this(relpos, Message, Logic);
         Offset = usetras;
@@ -70,8 +77,7 @@ public class Button extends IDrawable {
         } else {
             setPosition(new Vector(((Game.getScaledWidth())) * relpos.getX(), ((Game.getScaledHeight())) * relpos.getY()));
         }
-        setScale(new Vector(1/Game.WorldScale().getX(),1/Game.WorldScale().getY())
-                .mult(Game.ButtonDims()));
+        setScale((new Vector(0.9f,0.9f)));
     }
 
     /**
