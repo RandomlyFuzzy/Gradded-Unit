@@ -12,7 +12,7 @@ import com.Liamengine.Engine.Entry.Game;
 import java.awt.Graphics2D;
 
 /**
- *
+ * This makes the player bounce up vertically upon collision
  * @author Liam Woolley 1748910
  */
 public class bouncyPlatform extends IDrawable {
@@ -30,7 +30,7 @@ public class bouncyPlatform extends IDrawable {
     }
 
     /**
-     *
+     * 
      * @param position
      * @param RadianRotation
      * @param cycle
@@ -38,7 +38,7 @@ public class bouncyPlatform extends IDrawable {
      */
     public bouncyPlatform(Vector position, double RadianRotation, Vector[] cycle, float Speed) {
         super();
-//        GetSprite("/images/platform/platform.png");
+
         setPosition(position);
         setRotation(RadianRotation);
         this.Cycle = cycle;
@@ -46,7 +46,7 @@ public class bouncyPlatform extends IDrawable {
     }
 
     /**
-     *
+     *Initialises platform image
      */
     @Override
     public void init() {
@@ -54,12 +54,13 @@ public class bouncyPlatform extends IDrawable {
     }
 
     /**
-     *
+     * 
      */
     @Override
     public void doMove() {
         Vector dist = getPosition().add(new Vector(Cycle[ind]).mult(-1));
 
+        //Sets position, rotation and bounce speed and updates
         if (dist.Length() <= Speed * 2) {
             ind++;
             ind = ind % Cycle.length;
@@ -72,7 +73,7 @@ public class bouncyPlatform extends IDrawable {
     }
 
     /**
-     *
+     * Updates platform image every frame
      * @param g
      */
     @Override
@@ -86,7 +87,7 @@ public class bouncyPlatform extends IDrawable {
     }
 
     /**
-     *
+     * Sets movement when player bounces and plays sound
      * @param im
      */
     @Override

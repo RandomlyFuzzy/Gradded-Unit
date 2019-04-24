@@ -21,8 +21,8 @@ import java.util.Random;
  * made the player seem different so the group decided to not implement that
  * functionality
  *
- * Everything relevant to the player is included here such as the movement, rotation
- * camera position, if the player can jump, footstep sounds.
+ * Everything relevant to the player is included here such as the position, movement, 
+ * rotation, acceleration, camera position, if the player can jump, footstep sounds.
  * @author Liam Woolley 1748910
  */
 public class Player extends IDrawable {
@@ -477,7 +477,7 @@ public class Player extends IDrawable {
     }
 
     /**
-     *
+     *Initialises speed, acceleration, movement allowed, player has lost etc attributes
      */
     @Override
     public void dispose() {
