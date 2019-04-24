@@ -49,7 +49,7 @@ public class SpriteRenderer extends IComponent {
     }
 
     /**
-     *
+     * Update sprite image every frame
      * @param gd
      */
     @Override

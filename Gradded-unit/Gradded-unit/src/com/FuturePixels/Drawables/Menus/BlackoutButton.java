@@ -13,7 +13,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 
 /**
- *
+ * Adds white to screen upon pressing particular buttons
  * @author Liam Woolley 1748910
  */
 public class BlackoutButton extends IDrawable {
@@ -41,7 +41,7 @@ public class BlackoutButton extends IDrawable {
     }
 
     /**
-     *
+     * Initialise button image
      */
     @Override
     public void init() {
@@ -49,7 +49,7 @@ public class BlackoutButton extends IDrawable {
     }
 
     /**
-     *
+     * Set attributes of button
      */
     @Override
     public void doMove() {
@@ -59,12 +59,13 @@ public class BlackoutButton extends IDrawable {
     }
 
     /**
-     *
+     *Update button image
      * @param g
      */
     @Override
     public void Update(Graphics2D g) {
-//        DrawLastLoadedImage(g);
+        
+        
         g.setColor(new Color(200,200,200,100));
         g.fillRect(-getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
         g.setColor(Color.red);
@@ -74,7 +75,7 @@ public class BlackoutButton extends IDrawable {
     }
 
     /**
-     *
+     * On click, play sound and perform action, print error msg if problem
      */
     public void DoAction() {
         if (buttonDelegate != null) {
