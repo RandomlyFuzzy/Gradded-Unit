@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.FuturePixels.levels.Menus;
 
 import com.Liamengine.Engine.AbstractClasses.ILevel;
@@ -20,7 +15,7 @@ import java.awt.Graphics2D;
 import javax.sound.sampled.Clip;
 
 /**
- *
+ * Credits show a scrolling menu with developer names and information about the game
  * @author Liam Woolley 1748910
  */
 public class Credits extends ILevel {
@@ -37,6 +32,7 @@ public class Credits extends ILevel {
     public Credits() {
         super();
 
+        //Stops any audio currently playing
         setStopAudioOnStart(true);
         setSimpleCollison(true);
     }
@@ -46,8 +42,11 @@ public class Credits extends ILevel {
      */
     @Override
     public void init() {
+        //Adds a mouse object
         AddObject(new Mouse());
+        //Sets the background image to level 1
         setBackgroundimage(GetSprite("/images/backgrounds/level0.png"));
+        //Loads the credits file from the resources folder and stores it in a variable
         credits = FileUtils.GetFileSplit("resources/data/credits.txt", "\n");
     }
 
@@ -57,16 +56,18 @@ public class Credits extends ILevel {
      */
     @Override
     public void Update(ActionEvent ae) {
+        //Scrolls the bcakground down constantly
         i += Game.WorldScale().getY() * ILevel.getDelta();
     }
 
     /**
-     *
+     * Draws the 
      * @param g
      */
     @Override
     public void Draw(Graphics2D g) {
 
+        //Plays the credit song on a loop
         play("/sounds/creditsong.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
@@ -99,14 +100,15 @@ public class Credits extends ILevel {
             }
         }
 
+        //Draws text telling the user how to exit the game
         Font f = g.getFont();
         g.setFont(f.deriveFont(f.getSize() * 0.6f));
         g.drawString("Esc to exit", 20, Game.getWindowHeight() - g.getFont().getSize() * 2);
         g.setFont(f);
     }
 
-    /**
-     *
+    /** 
+     * If the player presses ESCAPE the music will end and the main menu will be loaded
      * @param e
      */
     @Override
@@ -118,7 +120,6 @@ public class Credits extends ILevel {
     }
 
     /**
-     *
      * @param e
      */
     @Override

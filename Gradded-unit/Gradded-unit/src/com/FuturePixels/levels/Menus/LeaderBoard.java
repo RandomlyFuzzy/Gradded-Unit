@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.FuturePixels.levels.Menus;
 
 import com.FuturePixels.Drawables.Menus.Button;
@@ -27,7 +22,9 @@ import java.util.Comparator;
 public class LeaderBoard extends ILevel {
 
     private String previousind = "";
+    //Sets the default string that will be shown on the HUD (Level 1 times are loaded first)
     private static String Currentind = "Level1";
+    //Creates an array list that will be used to store the times later
     private ArrayList<String> times = new ArrayList<String>();
 
     /**
@@ -44,27 +41,24 @@ public class LeaderBoard extends ILevel {
         LeaderBoard.Currentind = Currentind;
     }
     
-    /**
-     *
-     */
     public LeaderBoard() {
         super();
         //Stops any audio that is already playing
         setStopAudioOnStart(false);
     }
 
-    /**
-     *
-     */
     @Override
     public void init() {
-        GetSprite("/images/backgrounds/leaderboard.png");
+        //Creates a button that links back to the main menu
         AddObject(new Button(new Vector(0.93f, 0.9f), "Back", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new MainMenu(Vector.Zero()));
             }
         })).GetSprite("/images/button_0.png");
+        
+        //Creates 5 buttons using a for loop for loading the level times
+        //When clicked they load the times for the appropriate level
         for (int i = 0; i < 5; i++) {
             AddObject(new Button(new Vector(((0.175f)), ((0.115f * (i % 6)) + 0.399f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
@@ -81,6 +75,7 @@ public class LeaderBoard extends ILevel {
     }
 
     /**
+     * Updates the times shown on the leaderboard when a button is clicked to show the new times
      * @param ae
      */
     @Override
@@ -123,16 +118,21 @@ public class LeaderBoard extends ILevel {
     @Override
     public void Draw(Graphics2D g) {
         float y = 0.3f;
+        //Loads the font 
         Font f = g.getFont();
         Font f2 = f.deriveFont(1, Game.WorldScale().getY() * 50);
         g.setFont(f2);
+        //Sets a colour for the background rectangle that is transparent
         g.setColor(new Color(55, 55, 55, 150));
+        //Creates the background rectangle for the times. The rectangle will scale vertically depending on how many times are currently stored.
+        //The rectangle will end just after the last time.
         g.fillRect(
                     (int) ((Game.getWindowWidth() / 18)),
                     (int) ((0.24f) * Game.getWindowHeight()),
                     (int) (Game.getWindowWidth()*0.885f),
                     (int) ((0.615f * Game.getWindowHeight()) * ((float) (10 > times.size() ? times.size() : 10f) / 10f)));
         g.setColor(Color.white);
+        //Creates the
         int w = (int) (g.getFontMetrics().stringWidth(Currentind.replace("solo","")) * 1.05f);
         g.drawString(Currentind.replace("solo",""), (int) ((Game.getWindowWidth() / 5.5) - w / 2),
                 (int) ((0.325f) * Game.getWindowHeight()));
@@ -185,6 +185,7 @@ public class LeaderBoard extends ILevel {
      */
     public void dispose() {
         super.dispose();
+        //Resets the variables
         Currentind = "Level2";
         previousind = "Level1";
         times = new ArrayList<String>();
