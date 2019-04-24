@@ -31,9 +31,7 @@ public class DestroyingPlatForm extends IDrawable {
     }
 
     /**
-     *
-     * @param position
-     * @param RadianRotation
+     *Loads platform position and calls method to set position
      */
     public DestroyingPlatForm(Vector position, double RadianRotation) {
         super();
@@ -43,7 +41,7 @@ public class DestroyingPlatForm extends IDrawable {
     }
 
     /**
-     *
+     *Initialises platform
      */
     @Override
     public void init() {

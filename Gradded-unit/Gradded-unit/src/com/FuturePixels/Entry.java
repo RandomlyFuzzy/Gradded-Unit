@@ -31,7 +31,7 @@ public class Entry {
 
     /**
      *
-     * @param args
+     * @param args 
      */
     public static void main(String[] args) {
         ILevel[] arr = new ILevel[]{new MainMenu(Vector.Zero()), new Settings(), new LevelSelectSolo(), new LeaderBoard(), new Level1Solo(), new Level2Solo(), new Level3Solo(), new Level4Solo(),new Level5Solo(), new LevelCoop(), new Credits()};
@@ -39,6 +39,7 @@ public class Entry {
         new GamePreferences();
         Game.setDefualtLevel(new MainMenu(Vector.Zero()));
 
+        // Reads preferences from file and sets to controlls
         String[] preferences = FileUtils.GetFileSplit("resources/data/preferences.txt", "\n");
         GamePreferences.gp.setKeyLeftP1(Integer.parseInt(preferences[0].trim()));
         GamePreferences.gp.setKeyRightP1(Integer.parseInt(preferences[1].trim()));
@@ -48,9 +49,9 @@ public class Entry {
         GamePreferences.gp.setKeyJumpP2(Integer.parseInt(preferences[5].trim()));
         GamePreferences.gp.setKeyDropP1(Integer.parseInt(preferences[6].trim()));
         GamePreferences.gp.setKeyDropP2(Integer.parseInt(preferences[7].trim()));
-
         new Game(new MainMenu(Vector.Zero()));
-//        Game.toggleCursor();
+        
+        //Sets title of window
         Game.GetFrame().setTitle("Breaking Through - FuturePixels");
     }
 }

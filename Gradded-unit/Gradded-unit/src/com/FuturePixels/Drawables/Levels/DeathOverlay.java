@@ -37,7 +37,8 @@ public class DeathOverlay extends IDrawable {
     }
 
     /**
-     *
+     *Initialises and displays buttons and displays an error in log if problem
+     *loading image.
      */
     @Override
     public void init() {
@@ -64,11 +65,11 @@ public class DeathOverlay extends IDrawable {
         GetSprite("/API/cat");
     }
 
-    /**
-     *
-     */
     @Override
-
+    
+    /**
+     *Sets size and position of the overlay that comes up when you die
+     */
     public void doMove() {
         setPosition(new Vector(Game.getWindowWidth() * .5f, Game.getWindowHeight() * 1.3f));
         setSpriteWidth((int) (Game.getWindowWidth() * .5f));
@@ -76,11 +77,11 @@ public class DeathOverlay extends IDrawable {
     }
 
     /**
-     *
-     * @param g
+     *Sets the properties and features of the death overlay
      */
     @Override
     public void Update(Graphics2D g) {
+        //Overlay window attributes
         float w = Game.getWindowWidth();
         float h = Game.getWindowHeight();
         g.setColor(new Color(100, 100, 100, 100));
@@ -102,6 +103,7 @@ public class DeathOverlay extends IDrawable {
         g.drawString(show, (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
 
+        //Restarts level if 'R' pressed, loads main menu if 'M' pressed
         if (Level().getLastKeyPress().getKeyCode() != KeyEvent.CHAR_UNDEFINED) {
             if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
                 try {
@@ -121,7 +123,6 @@ public class DeathOverlay extends IDrawable {
 
     /**
      *
-     * @param im
      */
     @Override
     public void onCollison(IDrawable im) {
