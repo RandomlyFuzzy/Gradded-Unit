@@ -15,7 +15,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 
 /**
- *
+ * Used throughout the game, on main menu and death overlay for navigation and 
+ * controls etc
  * @author Liam Woolley 1748910
  */
 public class Button extends IDrawable {
@@ -59,7 +60,7 @@ public class Button extends IDrawable {
     }
 
     /**
-     *
+     *Initialises button image
      */
     @Override
     public void init() {
@@ -67,7 +68,7 @@ public class Button extends IDrawable {
     }
 
     /**
-     *
+     * Sets position and size of button
      */
     @Override
     public void doMove() {
@@ -81,7 +82,7 @@ public class Button extends IDrawable {
     }
 
     /**
-     *
+     * Sets font attributes of button, rectangle/trigger size etc
      * @param g
      */
     @Override
@@ -101,6 +102,7 @@ public class Button extends IDrawable {
 
         g.setFont(f);
         if (isColliding()) {
+            //Change button appearance on hovering
             Color c = g.getColor();
             g.setColor(new Color(200, 200, 200, 100));
             g.fillRect(-getSpriteWidth() / 2, -getSpriteHeight() / 2, getSpriteWidth(), getSpriteHeight());
