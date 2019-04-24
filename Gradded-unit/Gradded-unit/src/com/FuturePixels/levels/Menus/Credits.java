@@ -68,7 +68,7 @@ public class Credits extends ILevel {
     public void Draw(Graphics2D g) {
 
         //Plays the credit song on a loop
-        play("/sounds/creditsong.wav", 0, Clip.LOOP_CONTINUOUSLY);
+        play("/sounds/creditSong.wav", 0, Clip.LOOP_CONTINUOUSLY);
 
         int val = (int) ((Math.sin(i) + 1f) * 127) + 1;
         int val2 = (int) ((Math.cos(i) + 1f) * 100f);
