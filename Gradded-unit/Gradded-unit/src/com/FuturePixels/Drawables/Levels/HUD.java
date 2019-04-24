@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
- *
+ *This class sets the properties of the HUD.
  * @author Liam Woolley 1748910
  */
 public class HUD extends IDrawable {
@@ -103,7 +103,7 @@ public class HUD extends IDrawable {
     }
 
     /**
-     *
+     *Updates text properties 
      * @param g
      */
     @Override

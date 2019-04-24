@@ -13,8 +13,7 @@ import com.Liamengine.Engine.Entry.Game;
 import java.awt.Graphics2D;
 
 /**
- * 
- *
+ *The platform is what the character walks on
  * @author Liam Woolley 1748910
  */
 public class PlatForm extends IDrawable {
@@ -27,7 +26,7 @@ public class PlatForm extends IDrawable {
     }
 
     /**
-     *
+     *Sets plaform properties
      * @param position
      * @param RadianRotation
      */
@@ -39,7 +38,7 @@ public class PlatForm extends IDrawable {
     }
 
     /**
-     *
+     *Initialises platform images
      */
     @Override
     public void init() {
@@ -47,7 +46,7 @@ public class PlatForm extends IDrawable {
     }
 
     /**
-     *
+     *Updates the image every frame
      * @param g
      */
     @Override

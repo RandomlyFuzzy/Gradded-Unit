@@ -13,7 +13,8 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 /**
- *
+ *Lava is displayed at the bottom of the screen and when the player collides with
+ *it, they lose and the death overlay window is called.
  * @author Liam Woolley 1748910
  */
 public class Lava extends IDrawable {
@@ -23,7 +24,7 @@ public class Lava extends IDrawable {
     private SpriteSheet she = new SpriteSheet(0, 0, 200, 100);
 
     /**
-     *
+     *Initialise lava image
      */
     @Override
     public void init() {
@@ -34,7 +35,7 @@ public class Lava extends IDrawable {
     }
 
     /**
-     *
+     *Sets lava size and position
      */
     @Override
 
@@ -61,7 +62,7 @@ public class Lava extends IDrawable {
     }
 
     /**
-     *
+     *Displays death overlay upon player colliding with lava and plays sounds
      * @param im
      */
     @Override
@@ -76,7 +77,8 @@ public class Lava extends IDrawable {
             //add overLay
 
             int r = forsounds.nextInt(4) + 1;
-
+            
+            
             Level().AddObject(new DeathOverlay());
             Level().play("/sounds/levelfail.wav");
             Level().play("/sounds/scream" + r + ".wav");

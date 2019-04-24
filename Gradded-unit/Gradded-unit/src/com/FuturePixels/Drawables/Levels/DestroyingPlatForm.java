@@ -14,7 +14,8 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 /**
- *
+ *The destroying platform is a platform which is destroyed after the player
+ *leaves the platform.
  * @author Liam Woolley 1748910
  */
 public class DestroyingPlatForm extends IDrawable {
@@ -31,7 +32,7 @@ public class DestroyingPlatForm extends IDrawable {
     }
 
     /**
-     *
+     *Sets position and rotation of platform and loads image
      * @param position
      * @param RadianRotation
      */
@@ -43,7 +44,7 @@ public class DestroyingPlatForm extends IDrawable {
     }
 
     /**
-     *
+     *Initialise platform
      */
     @Override
     public void init() {
@@ -55,6 +56,7 @@ public class DestroyingPlatForm extends IDrawable {
      *
      * @param g
      */
+    //Updates the platform every frame and plays sound when platform is destroyed
     @Override
     public void Update(Graphics2D g) {
         if (((-Transform.getOffsetTranslation().getX() - (Game.getScaledWidth()) < getPosition().getX()
@@ -78,7 +80,7 @@ public class DestroyingPlatForm extends IDrawable {
     }
 
     /**
-     *
+     *Checks to see if player is in the air or landed
      * @param im
      */
     @Override

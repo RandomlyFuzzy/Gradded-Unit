@@ -23,7 +23,8 @@ import java.awt.event.KeyEvent;
 import java.util.logging.Logger;
 
 /**
- *
+ *The death overlay displays a window upon character death, giving the player an
+ *option to restart the level or go to main menu. Also displays cats.
  * @author Liam Woolley 1748910
  */
 public class DeathOverlay extends IDrawable {
@@ -37,7 +38,8 @@ public class DeathOverlay extends IDrawable {
     }
 
     /**
-     *
+     *Initialises buttons and properties on death overlay, prints error to log
+     *if problem loading image
      */
     @Override
     public void init() {
@@ -65,7 +67,7 @@ public class DeathOverlay extends IDrawable {
     }
 
     /**
-     *
+     *Sets position and size of the overlay window
      */
     @Override
 
@@ -76,7 +78,7 @@ public class DeathOverlay extends IDrawable {
     }
 
     /**
-     *
+     *Updates the colours, size, text properties of the overlay every frame
      * @param g
      */
     @Override
@@ -102,6 +104,7 @@ public class DeathOverlay extends IDrawable {
         g.drawString(show, (0.5f * w) - wid, (h * 0.125f));
         g.setFont(pre);
 
+        //Restarts level and music if 'R' pressed, loads main menu if M pressed
         if (Level().getLastKeyPress().getKeyCode() != KeyEvent.CHAR_UNDEFINED) {
             if (Level().getLastKeyPress().getKeyCode() == KeyEvent.VK_R) {
                 try {

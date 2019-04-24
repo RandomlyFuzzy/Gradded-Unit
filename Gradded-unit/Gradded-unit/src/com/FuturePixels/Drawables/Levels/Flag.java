@@ -16,7 +16,8 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 /**
- *
+ *The flag is situated at the end of the level and when the player collides with
+ *it, the next level starts.
  * @author Liam Woolley 1748910
  */
 public class Flag extends IDrawable {
@@ -48,7 +49,7 @@ public class Flag extends IDrawable {
     }
 
     /**
-     *
+     *Initialises flag, image and size
      */
     @Override
     public void init() {
@@ -67,7 +68,7 @@ public class Flag extends IDrawable {
     }
 
     /**
-     *
+     *Updates image every frame
      * @param g
      */
     @Override
@@ -77,7 +78,8 @@ public class Flag extends IDrawable {
 
 
     /**
-     *
+     *When player has collided with flag, takes time taken for current level, 
+     *plays sounds, stops player movement, waits 2 seconds and then loads next level
      * @param im
      */
     @Override
@@ -90,11 +92,13 @@ public class Flag extends IDrawable {
             } else {
                 FileUtils.AppendToFile("resources/savedata/" + Slim + ".txt", "" + String.format("%.2f", (float)Level().getTime()) + "\n");
             }
+            //Play sounds, lock player movement
             Level().play("/sounds/win1.wav");
             Level().play("/sounds/levelcompleate_" + new Random().nextInt(3) + ".wav");
             Player.setLock(true);
             new Thread(() -> {
                 try {
+                    //Wait 2 seconds, stop current music, load next level
                     Thread.sleep(2000);
                     MusicUtils.StopAllSounds();
                     LevelLoader.LoadLevel(next.getClass().newInstance());

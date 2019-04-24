@@ -21,7 +21,8 @@ import java.util.Random;
  * made the player seem different so the group decided to not implement that
  * functionality
  *
- *
+ * Everything relevant to the player is included here such as the movement,
+ * camera position, sprite
  * @author Liam Woolley 1748910
  */
 public class Player extends IDrawable {
@@ -337,6 +338,8 @@ public class Player extends IDrawable {
                     Velocity.mult(new Vector(1, -.40f));
                     Acc.mult(new Vector(1, -.50f));
                     once = false;
+                int rHit = forsounds.nextInt(7);
+                Level().play("/sounds/" + "hit" + rHit + ".wav");
                 }
                 col2 = null;
             }
