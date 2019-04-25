@@ -26,7 +26,7 @@ public class PlatForm extends IDrawable {
     }
 
     /**
-     *Sets plaform properties
+     *Sets platform properties
      * @param position
      * @param RadianRotation
      */
