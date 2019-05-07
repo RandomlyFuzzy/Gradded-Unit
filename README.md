@@ -6,4 +6,4 @@ Created by Future pixels<br>
 &nbsp;&nbsp;&nbsp;&nbsp;      Jack Teviotdale<br>
 &nbsp;&nbsp;&nbsp;&nbsp;       Liam Rickman<br>
 &nbsp;&nbsp;&nbsp;&nbsp;       Ricky Swankie<br>
-Made forjava version "1.8.0_201"
+Made for java version "1.8.0_201"
