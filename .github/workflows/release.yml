@@ -158,7 +158,31 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Path package\windows | Out-Null
-          Move-Item -Path "gradded-unit-dist\*.jar" -Destination package\windows\game.jar
+          # move jar (fallback to local build if artifact missing)
+          if (Test-Path "gradded-unit-dist\*.jar") {
+            Move-Item -Path "gradded-unit-dist\*.jar" -Destination package\windows\game.jar
+          } else {
+            Write-Host "Downloaded artifact not found; attempting local Ant build"
+            # install choco/ant if necessary and run Ant
+            if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+              Write-Host "Chocolatey not found; attempting to install Chocolatey"
+              Set-ExecutionPolicy Bypass -Scope Process -Force
+              iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+            }
+            choco install ant -y
+            if (Test-Path "Gradded-unit\Gradded-unit\build.xml") {
+              & ant -f Gradded-unit\Gradded-unit\build.xml clean jar
+              if (Test-Path "Gradded-unit\Gradded-unit\dist\*.jar") {
+                Copy-Item -Path "Gradded-unit\Gradded-unit\dist\*.jar" -Destination package\windows\game.jar -Force
+              } else {
+                Write-Error "Local build did not produce a jar."
+                Exit 1
+              }
+            } else {
+              Write-Error "No artifact and no build.xml available; cannot obtain jar."
+              Exit 1
+            }
+          }
           Write-Host "Copying runtime from $env:JAVA_HOME"
           # copy library resources to package root
           Copy-Item -Recurse -Force "Gradded-unit\Gradded-unit\Libaries\*" package\windows\ -ErrorAction SilentlyContinue
