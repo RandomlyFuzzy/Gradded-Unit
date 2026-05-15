@@ -84,8 +84,24 @@ jobs:
         run: |
           set -e
           mkdir -p package/linux
-          # move jar
-          mv gradded-unit-dist/*.jar package/linux/game.jar
+          # move jar (fallback to local build if artifact missing)
+          if compgen -G "gradded-unit-dist/*.jar" > /dev/null; then
+            mv gradded-unit-dist/*.jar package/linux/game.jar
+          else
+            echo "Downloaded artifact not found; attempting local Ant build"
+            if [ -f Gradded-unit/Gradded-unit/build.xml ]; then
+              (cd Gradded-unit/Gradded-unit && ant -f build.xml clean jar)
+              if compgen -G "Gradded-unit/Gradded-unit/dist/*.jar" > /dev/null; then
+                cp Gradded-unit/Gradded-unit/dist/*.jar package/linux/game.jar
+              else
+                echo "Local build did not produce a jar." >&2
+                exit 1
+              fi
+            else
+              echo "No artifact and no build.xml available; cannot obtain jar." >&2
+              exit 1
+            fi
+          fi
           # copy library resources to package root
           cp -r Gradded-unit/Gradded-unit/Libaries/* package/linux/ || true
           # copy game resources and top-level launcher if present
