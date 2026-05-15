@@ -214,6 +214,24 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-dist
+          path: gradded-unit-dist
+
+      - name: Download Linux package
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-linux
+          path: gradded-unit-linux
+
+      - name: Download Windows package
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-windows
+          path: gradded-unit-windows
+
       - name: Create GitHub Release and attach artifacts
         uses: ncipollo/release-action@v1
         with:
@@ -222,7 +240,7 @@ jobs:
           draft: false
           prerelease: false
           artifacts: |
-            gradded-unit-dist
-            gradded-unit-linux
-            gradded-unit-windows
+            gradded-unit-dist/*.jar
+            gradded-unit-linux/*.zip
+            gradded-unit-windows/*.zip
 
