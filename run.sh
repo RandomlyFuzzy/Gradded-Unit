@@ -96,6 +96,10 @@ unset IFS
 # Main class
 MAIN_CLASS="com.FuturePixels.Entry"
 
+# JVM options: disable loading of platform Assistive Technology implementations
+# which can cause AWT to fail on some Linux setups (AtkWrapper missing).
+JVM_OPTS="-Djavax.accessibility.assistive_technologies="
+
 echo "Classpath: $CP"
 # Ensure working directory and required resource dirs exist (prevents FileUtils IO errors)
 WORK_DIR="$DIR/Gradded-unit/Gradded-unit"
@@ -106,4 +110,4 @@ mkdir -p "$WORK_DIR/resources" \
 
 cd "$WORK_DIR"
 
-exec "$JAVA_CMD" -Xmx512m -cp "$CP" "$MAIN_CLASS" "$@"
+exec "$JAVA_CMD" -Xmx512m $JVM_OPTS -cp "$CP" "$MAIN_CLASS" "$@"
