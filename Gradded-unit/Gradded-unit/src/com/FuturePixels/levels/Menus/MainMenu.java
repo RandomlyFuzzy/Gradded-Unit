@@ -121,7 +121,7 @@ public class MainMenu extends ILevel {
         }, false)).GetSprite("/images/button_0.png");
         
         //Creates a button object that loads the leaderboard menu when clicked
-        AddObject(new Button(new Vector(0.29f, 0.53f), "Leaderboard", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.55f), "Leaderboard", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
@@ -129,7 +129,7 @@ public class MainMenu extends ILevel {
         }, false));
 
         //Creates a button object that loads the settings menu when clicked
-        AddObject(new Button(new Vector(0.29f, 0.645f), "Settings", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.665f), "Settings", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
@@ -138,7 +138,7 @@ public class MainMenu extends ILevel {
 
         
         //Creates a button object that loads the credits screen when clicked
-        AddObject(new Button(new Vector(0.29f, 0.76f), "Credits", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.78f), "Credits", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Credits());
@@ -146,7 +146,7 @@ public class MainMenu extends ILevel {
         }, false));
 
         //Creates a button object that exits the game when clicked
-        AddObject(new Button(new Vector(0.29f, 0.875f), "Exit Game", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.895f), "Exit Game", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);
