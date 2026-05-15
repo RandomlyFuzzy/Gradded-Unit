@@ -85,35 +85,35 @@ public class Controls extends ILevel {
         })).GetSprite("/images/button_0.png");
 
         //PLAYER 1
-        but[0] = (new Button(new Vector(0.25f, 0.425f), "LEFT = ", new HUDdelegate() {
+        but[0] = (new Button(new Vector(0.25f, 0.35f), "LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(1);
             }
         }));
-        but[01] = (new Button(new Vector(0.25f, 0.58f), "RIGHT = ", new HUDdelegate() {
+        but[01] = (new Button(new Vector(0.25f, 0.52f), "RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(2);
             }
         }));
-        but[02] = (new Button(new Vector(0.25f, 0.71f), "JUMP = ", new HUDdelegate() {
+        but[02] = (new Button(new Vector(0.25f, 0.69f), "JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(3);
             }
         }));
 
         //PLAYER 2
-        but[03] = (new Button(new Vector(0.70f, 0.425f), "P2:LEFT = ", new HUDdelegate() {
+        but[03] = (new Button(new Vector(0.70f, 0.35f), "P2:LEFT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(4);
             }
         }));
-        but[04] = (new Button(new Vector(0.70f, 0.58f), "P2:RIGHT = ", new HUDdelegate() {
+        but[04] = (new Button(new Vector(0.70f, 0.52f), "P2:RIGHT = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(5);
             }
 
         }));
-        but[05] = (new Button(new Vector(0.70f, 0.71f), "P2:JUMP = ", new HUDdelegate() {
+        but[05] = (new Button(new Vector(0.70f, 0.69f), "P2:JUMP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(6);
             }
@@ -121,14 +121,14 @@ public class Controls extends ILevel {
         }));
 
         //Player 1 Drop
-        but[6] = (new Button(new Vector(0.25f, 0.85f), "DROP = ", new HUDdelegate() {
+        but[6] = (new Button(new Vector(0.25f, 0.86f), "DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(7);
             }
         }));
 
         //Player 2 Drop
-        but[7] = (new Button(new Vector(0.70f, 0.85f), "P2:DROP = ", new HUDdelegate() {
+        but[7] = (new Button(new Vector(0.70f, 0.86f), "P2:DROP = ", new HUDdelegate() {
             public void OnClick(Button b) {
                 ReadyForKeyChange(8);
             }

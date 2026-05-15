@@ -74,7 +74,7 @@ public class MainMenu extends ILevel {
         Game.setWorldrelDims(new Vector(1, 1));
 
         //Creates a button that links to the solo level select when clicked
-        AddObject(new Button(new Vector(0.218f, 0.415f), "Solo", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.218f, 0.35f), "Solo", new HUDdelegate() {
             @Override            
             public void OnClick(Button b) {
                 //Create a transition effect using by sliding the background 
@@ -121,7 +121,7 @@ public class MainMenu extends ILevel {
         }, false)).GetSprite("/images/button_0.png");
         
         //Creates a button object that loads the leaderboard menu when clicked
-        AddObject(new Button(new Vector(0.29f, 0.55f), "Leaderboard", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.57f), "Leaderboard", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new LeaderBoard());
@@ -129,16 +129,15 @@ public class MainMenu extends ILevel {
         }, false));
 
         //Creates a button object that loads the settings menu when clicked
-        AddObject(new Button(new Vector(0.29f, 0.665f), "Settings", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.695f), "Settings", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Settings());
             }
         }, false));
 
-        
         //Creates a button object that loads the credits screen when clicked
-        AddObject(new Button(new Vector(0.29f, 0.78f), "Credits", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.82f), "Credits", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Credits());
@@ -146,7 +145,7 @@ public class MainMenu extends ILevel {
         }, false));
 
         //Creates a button object that exits the game when clicked
-        AddObject(new Button(new Vector(0.29f, 0.895f), "Exit Game", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.29f, 0.95f), "Exit Game", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 System.exit(0);

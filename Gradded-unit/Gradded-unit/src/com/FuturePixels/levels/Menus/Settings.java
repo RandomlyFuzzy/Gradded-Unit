@@ -68,7 +68,7 @@ public class Settings extends ILevel {
             }
         }));
         //Creates a new drop down button for the resolutions. When clicked shows 5 new buttons
-        AddObject(new DropDownButton(new Vector(0.14f, 0.3f), "Resolution", new Vector(0.0f, 0.135f),
+        AddObject(new DropDownButton(new Vector(0.14f, 0.3f), "Resolution", new Vector(0.0f, 0.16f),
                 //String of the text that will be displayed on each button
                 new String[]{"1920X1080", " 1600X900", "1280X720", "860X540", "640X360"},
                 new HUDdelegate[]{
@@ -121,7 +121,7 @@ public class Settings extends ILevel {
 
         }));
         //Adds a button that links to the controls menu when clicked
-        AddObject(new Button(new Vector(0.425f, 0.435f), "Controls", new HUDdelegate() {
+        AddObject(new Button(new Vector(0.425f, 0.47f), "Controls", new HUDdelegate() {
             @Override
             public void OnClick(Button b) {
                 Game.SetLevelActive(new Controls());

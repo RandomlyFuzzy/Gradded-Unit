@@ -38,7 +38,7 @@ public class LevelSelectSolo extends ILevel {
         //Loops for the amount of levels in the game to add enough buttons
         //When the buttons are clicked it will load the appropriate level
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.15f)), ((0.15f * (i % 6)) + 0.29f)), ("Level " + (i + 1)), new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.15f)), ((0.18f * (i % 6)) + 0.29f)), ("Level " + (i + 1)), new HUDdelegate() {
                 public void OnClick(Button b) {
                     LevelLoader.LoadLevel(b.getMessage().replace(" ", ""));
                 }

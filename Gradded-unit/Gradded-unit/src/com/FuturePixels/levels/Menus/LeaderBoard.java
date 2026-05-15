@@ -60,7 +60,7 @@ public class LeaderBoard extends ILevel {
         //Creates 5 buttons using a for loop for loading the level times
         //When clicked they load the times for the appropriate level
         for (int i = 0; i < 5; i++) {
-            AddObject(new Button(new Vector(((0.175f)), ((0.135f * (i % 6)) + 0.399f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
+            AddObject(new Button(new Vector(((0.175f)), ((0.18f * (i % 6)) + 0.399f)), ("Level " + ((i % 5) + 1)) , new HUDdelegate() {
                 public void OnClick(Button b) {
                     LeaderBoard.setCurrentind(b.getMessage().replace(" ",""));
                 }
