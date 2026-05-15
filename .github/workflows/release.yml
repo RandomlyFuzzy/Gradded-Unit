@@ -3,9 +3,15 @@ name: Build and Release
 on:
   push:
     branches: [ main ]
-    tags:  # build release on tag push
-      - 'v*'
+    tags:  # build release on tag push (semantic versioning recommended)
+      - 'v*.*.*'
+  pull_request:
+    branches: [ main ]
   workflow_dispatch: {}
+
+permissions:
+  contents: write
+  packages: write
 
 jobs:
   build:
@@ -14,11 +20,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Java 1.8.0_201 (Zulu)
+      - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '8.0.201'
+          distribution: 'temurin'
+          java-version: '8'
+          java-package: 'jdk'
 
       - name: Ensure Ant is available
         run: |
@@ -161,9 +168,12 @@ jobs:
           Copy-Item -Recurse -Force "$env:JAVA_HOME" package\windows\jre
           $launcher = "@echo off`n%~dp0\\jre\\bin\\java.exe -Xmx512m -jar %~dp0\\game.jar %*"
           $launcher | Out-File -Encoding ASCII package\windows\run.bat
-          # include top-level run.sh if present
+          # include top-level run.sh/run.bat if present
           if (Test-Path "$env:GITHUB_WORKSPACE\\run.sh") {
             Copy-Item -Path "$env:GITHUB_WORKSPACE\\run.sh" -Destination package\windows\run.sh -ErrorAction SilentlyContinue
+          }
+          if (Test-Path "$env:GITHUB_WORKSPACE\\run.bat") {
+            Copy-Item -Path "$env:GITHUB_WORKSPACE\\run.bat" -Destination package\windows\run.bat -ErrorAction SilentlyContinue
           }
           # create zip
           Compress-Archive -Path package\windows -DestinationPath out\gradded-unit-windows-${{ github.ref_name }}.zip -Force
@@ -179,49 +189,15 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
+      - name: Create GitHub Release and attach artifacts
+        uses: ncipollo/release-action@v1
         with:
-          name: gradded-unit-dist
-
-      - name: Download Linux package
-        uses: actions/download-artifact@v4
-        with:
-          name: gradded-unit-linux
-
-      - name: Download Windows package
-        uses: actions/download-artifact@v4
-        with:
-          name: gradded-unit-windows
-
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
+          tag: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
           draft: false
           prerelease: false
-
-      - name: Upload release artifact
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./gradded-unit-dist/*.jar
-          asset_name: Gradded-Unit-${{ github.ref_name }}.jar
-          asset_content_type: application/java-archive
-      - name: Upload Linux release package
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./gradded-unit-linux/*.zip
-          asset_name: Gradded-Unit-${{ github.ref_name }}-linux-x86_64.zip
-          asset_content_type: application/zip
-      - name: Upload Windows release package
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./gradded-unit-windows/*.zip
-          asset_name: Gradded-Unit-${{ github.ref_name }}-windows-x86_64.zip
-          asset_content_type: application/zip
+          artifacts: |
+            gradded-unit-dist
+            gradded-unit-linux
+            gradded-unit-windows
 
