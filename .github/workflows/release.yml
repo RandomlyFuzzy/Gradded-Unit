@@ -1,0 +1,215 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ main ]
+    tags:  # build release on tag push
+      - 'v*'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 1.8.0_201 (Zulu)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '8.0.201'
+
+      - name: Ensure Ant is available
+        run: |
+          if ! command -v ant >/dev/null; then
+            sudo apt-get update && sudo apt-get install -y ant
+          fi
+
+      - name: Fetch latest LiamEngine (fallbacks included)
+        run: |
+          set -e
+          mkdir -p Gradded-unit/Gradded-unit/Libaries
+          ENGINE_URL="https://github.com/RandomlyFuzzy/LiamEngine/releases/latest/download/LiamEngine.jar"
+          echo "Attempting to download LiamEngine from ${ENGINE_URL}"
+          if curl --head --silent --fail "$ENGINE_URL" >/dev/null 2>&1; then
+            curl -L "$ENGINE_URL" -o Gradded-unit/Gradded-unit/Libaries/LiamEngine.jar
+          else
+            echo "Release download not available, cloning source and attempting to build"
+            git clone --depth 1 https://github.com/RandomlyFuzzy/LiamEngine tmp/LiamEngine
+            if [ -f tmp/LiamEngine/build.gradle ]; then
+              (cd tmp/LiamEngine && ./gradlew --no-daemon jar)
+              cp tmp/LiamEngine/build/libs/*.jar Gradded-unit/Gradded-unit/Libaries/LiamEngine.jar || true
+            elif [ -f tmp/LiamEngine/pom.xml ]; then
+              (cd tmp/LiamEngine && mvn -q package)
+              cp tmp/LiamEngine/target/*.jar Gradded-unit/Gradded-unit/Libaries/LiamEngine.jar || true
+            else
+              echo "Could not build LiamEngine automatically. Proceeding with repository's existing jar."
+            fi
+          fi
+
+      - name: Build with Ant
+        working-directory: Gradded-unit/Gradded-unit
+        run: |
+          ant -v -f build.xml clean jar
+
+      - name: Package artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradded-unit-dist
+          path: Gradded-unit/Gradded-unit/dist/*.jar
+
+  package-linux:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-dist
+
+      - name: Set up Java 1.8.0_201 (Zulu)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '8.0.201'
+
+      - name: Create Linux bundle
+        run: |
+          set -e
+          mkdir -p package/linux
+          # move jar
+          mv gradded-unit-dist/*.jar package/linux/game.jar
+          # copy library resources to package root
+          cp -r Gradded-unit/Gradded-unit/Libaries/* package/linux/ || true
+          # copy game resources and top-level launcher if present
+          cp -r Gradded-unit/Gradded-unit/resources package/linux/ || true
+          if [ -f "$GITHUB_WORKSPACE/run.sh" ]; then
+            cp "$GITHUB_WORKSPACE/run.sh" package/linux/ || true
+            chmod +x package/linux/run.sh || true
+          fi
+          # copy JDK/JRE
+          echo "Copying runtime from $JAVA_HOME"
+          cp -r "$JAVA_HOME" package/linux/jre
+          # create launcher
+          cat > package/linux/run.sh <<'EOF'
+#!/usr/bin/env bash
+DIR="$(cd "$(dirname "$0")" && pwd)"
+"$DIR/jre/bin/java" -Xmx512m -jar "$DIR/game.jar" "$@"
+EOF
+          chmod +x package/linux/run.sh
+          # create zip
+          mkdir -p out
+          zip -r out/gradded-unit-linux-${{ github.ref_name }}.zip package/linux
+
+      - name: Upload Linux package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradded-unit-linux
+          path: out/*.zip
+
+  package-windows:
+    needs: build
+    runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-dist
+
+      - name: Set up Java 1.8.0_201 (Zulu)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '8.0.201'
+
+      - name: Create Windows bundle
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Path package\windows | Out-Null
+          Move-Item -Path "gradded-unit-dist\*.jar" -Destination package\windows\game.jar
+          Write-Host "Copying runtime from $env:JAVA_HOME"
+          # copy library resources to package root
+          Copy-Item -Recurse -Force "Gradded-unit\Gradded-unit\Libaries\*" package\windows\ -ErrorAction SilentlyContinue
+          # copy resources
+          New-Item -ItemType Directory -Path package\windows\resources | Out-Null
+          Copy-Item -Recurse -Force "Gradded-unit\Gradded-unit\resources\*" package\windows\resources\ -ErrorAction SilentlyContinue
+          Copy-Item -Recurse -Force "$env:JAVA_HOME" package\windows\jre
+          $launcher = "@echo off`n%~dp0\\jre\\bin\\java.exe -Xmx512m -jar %~dp0\\game.jar %*"
+          $launcher | Out-File -Encoding ASCII package\windows\run.bat
+          # include top-level run.sh if present
+          if (Test-Path "$env:GITHUB_WORKSPACE\\run.sh") {
+            Copy-Item -Path "$env:GITHUB_WORKSPACE\\run.sh" -Destination package\windows\run.sh -ErrorAction SilentlyContinue
+          }
+          # create zip
+          Compress-Archive -Path package\windows -DestinationPath out\gradded-unit-windows-${{ github.ref_name }}.zip -Force
+
+      - name: Upload Windows package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradded-unit-windows
+          path: out/*.zip
+
+  release:
+    needs: [build, package-linux, package-windows]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-dist
+
+      - name: Download Linux package
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-linux
+
+      - name: Download Windows package
+        uses: actions/download-artifact@v4
+        with:
+          name: gradded-unit-windows
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release artifact
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gradded-unit-dist/*.jar
+          asset_name: Gradded-Unit-${{ github.ref_name }}.jar
+          asset_content_type: application/java-archive
+      - name: Upload Linux release package
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gradded-unit-linux/*.zip
+          asset_name: Gradded-Unit-${{ github.ref_name }}-linux-x86_64.zip
+          asset_content_type: application/zip
+      - name: Upload Windows release package
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gradded-unit-windows/*.zip
+          asset_name: Gradded-Unit-${{ github.ref_name }}-windows-x86_64.zip
+          asset_content_type: application/zip
+
