@@ -97,12 +97,8 @@ jobs:
           # copy JDK/JRE
           echo "Copying runtime from $JAVA_HOME"
           cp -r "$JAVA_HOME" package/linux/jre
-          # create launcher
-          cat > package/linux/run.sh <<'EOF'
-#!/usr/bin/env bash
-DIR="$(cd "$(dirname "$0")" && pwd)"
-"$DIR/jre/bin/java" -Xmx512m -jar "$DIR/game.jar" "$@"
-EOF
+          # create launcher (written with printf to avoid YAML indentation issues)
+          printf '%s\n' '#!/usr/bin/env bash' 'DIR="$(cd "$(dirname "$0")" && pwd)"' '"$DIR/jre/bin/java" -Xmx512m -jar "$DIR/game.jar" "$@"' > package/linux/run.sh
           chmod +x package/linux/run.sh
           # create zip
           mkdir -p out
